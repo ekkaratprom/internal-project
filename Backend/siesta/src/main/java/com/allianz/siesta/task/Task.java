@@ -1,14 +1,21 @@
 package com.allianz.siesta.task;
 
-import com.allianz.siesta.user.User;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
-import javax.persistence.*;
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.allianz.siesta.project.Project;
+import com.allianz.siesta.user.User;
+
 @Entity
-@Table(name = "Task")
+@Table(name = "task")
 public class Task {
 
     @Id
@@ -40,9 +47,13 @@ public class Task {
     @Column(nullable = false, name = "completed_status")
     private Boolean completedStatus;
 
-//    @ManyToOne
-//    @JoinColumn(name = "UserId", nullable = true)
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = true)
+    private User user;
+    
+    @ManyToOne
+    @JoinColumn(name = "project_id", nullable = true)
+    private Project project;
 
 
     public Long getId() {
@@ -116,4 +127,20 @@ public class Task {
     public void setCompletedStatus(Boolean completedStatus) {
         this.completedStatus = completedStatus;
     }
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
 }
