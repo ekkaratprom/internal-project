@@ -9,23 +9,22 @@
   />
 </div>
 
+<button (click)="addCard()" class="add-button">Add Card</button>
+
 <ul class="list-group list-group-flush">
-  <li
-    class="list-group-item"
-    *ngFor="let c of characters | appFilter: searchText"
-  >
-    <div class="card" style="width: 18rem">
+  <li class="list-group-item" *ngFor="let c of cards | appFilter: searchText">
+    <div class="card">
       <div class="card-body">
-        <h5 class="card-title">{{ c }}</h5>
+        <h5 class="card-title">{{ c.name }}</h5>
         <p class="card-text">
-          Some work description for explain things you have to do .
+          {{ c.taskName }}
         </p>
-        <h6>project name</h6>
+        <h6 class="project-name">project name: {{ c.projectName }}</h6>
         <hr class="solid" />
-        <h6>Jira Link :</h6>
-        <h6>Estimate Time :</h6>
-        <h6>Actual Time :</h6>
-        <h6>Billable Time :</h6>
+        <h6>Jira Link :{{ c.referenceLink }}</h6>
+        <h6>Estimate Time : {{ c.estimateTime }} Hrs</h6>
+        <h6>Actual Time : {{ c.actualTime }} Hrs</h6>
+        <h6>Billable Time : {{ c.billableTime }} Hrs</h6>
       </div>
     </div>
   </li>
