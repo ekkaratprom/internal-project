@@ -1,14 +1,32 @@
-<div class="card" style="width: 18rem">
-  <div class="card-body">
-    <h5 class="card-title">name</h5>
-    <p class="card-text">
-      Some work description for explain things you have to do .
-    </p>
-    <h6>project name</h6>
-    <hr class="solid" />
-    <h6>Jira Link :</h6>
-    <h6>Estimate Time :</h6>
-    <h6>Actual Time :</h6>
-    <h6>Billable Time :</h6>
-  </div>
+<div class="form-group">
+  <label for="search-text">Search Text</label>
+  <input
+    type="text"
+    class="form-control"
+    id="search-text"
+    [(ngModel)]="searchText"
+    placeholder="Enter text to search"
+  />
 </div>
+
+<ul class="list-group list-group-flush">
+  <li
+    class="list-group-item"
+    *ngFor="let c of characters | appFilter: searchText"
+  >
+    <div class="card" style="width: 18rem">
+      <div class="card-body">
+        <h5 class="card-title">{{ c }}</h5>
+        <p class="card-text">
+          Some work description for explain things you have to do .
+        </p>
+        <h6>project name</h6>
+        <hr class="solid" />
+        <h6>Jira Link :</h6>
+        <h6>Estimate Time :</h6>
+        <h6>Actual Time :</h6>
+        <h6>Billable Time :</h6>
+      </div>
+    </div>
+  </li>
+</ul>
