@@ -1,0 +1,78 @@
+<div class="card" style="width: 18rem">
+    <form class="form-inline" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <div class="card-body">
+            <div class="form-group mx-sm-3 mb-2">
+                <h6>Assignee</h6>
+                <input type="text" class="form-control" id="input_assignee" placeholder="assignee.."
+                    formControlName="assignee">
+                <div *ngIf="form.get('assignee').hasError('pattern')" class="error">
+                    Assignee has invalid characters
+                </div>
+            </div>
+
+            <div class="form-group mx-sm-3 mb-2">
+                <h6>Description</h6><input type="text" class="form-control" id="input_description"
+                    placeholder="description/task.." formControlName="description">
+                <div *ngIf="form.get('description').hasError('pattern')" class="error">
+                    Description has invalid characters
+                </div>
+            </div>
+
+            <div class="form-group mx-sm-3 mb-2">
+                <h6>Project name</h6>
+                <input type="text" class="form-control" id="input_project" placeholder="project name.."
+                    formControlName="project">
+                <div *ngIf="form.get('project').hasError('pattern')" class="error">
+                    Project name has invalid characters
+                </div>
+
+            </div>
+
+            <hr class="solid" />
+
+            <div class="form-group mx-sm-3 mb-2">
+                <h6>Jira Link :</h6> <input type="text" class="form-control" id="input_link" placeholder="link.."
+                    formControlName="link">
+                <div *ngIf="form.get('link').hasError('pattern')" class="error">
+                    Jira Link has invalid characters
+                </div>
+            </div>
+
+            <div class="form-group mx-sm-3 mb-2">
+                <h6>Estimate Time :</h6> <input type="text" class="form-control" id="input_estimate_time"
+                    placeholder="0" formControlName="estimate">
+                <div *ngIf="form.get('estimate').hasError('pattern')" class="error">
+                    Estimate Time should be number.
+                </div>
+
+            </div>
+
+            <div class="form-group mx-sm-3 mb-2">
+                <h6>Actual Time :</h6> <input type="text" class="form-control" id="input_actual_time" placeholder="0"
+                    formControlName="actual">
+                <div *ngIf="form.get('actual').hasError('pattern')" class="error">
+                    Actual Time should be number.
+                </div>
+            </div>
+
+            <div class="form-group mx-sm-3 mb-2">
+                <h6>Billable Time :</h6> <input type="text" class="form-control" id="input_billable_time"
+                    placeholder="0" formControlName="billable">
+                <div *ngIf="form.get('billable').hasError('pattern')" class="error">
+                    Billable Time should be number.
+                </div>
+            </div>
+
+            <button class="btn mb-2">Cancel</button>
+            <button [disabled]="form.status === 'INVALID'" type="submit" (onClick)="onSubmit()"
+                class="btn btn-primary mb-2">Submit</button>
+
+        </div>
+
+    </form>
+
+
+
+
+</div>
