@@ -34,13 +34,13 @@ export class CardFormComponent implements OnInit {
       ])),
       estimate: this.formBuilder.control('', Validators.compose([
         Validators.required,
-        Validators.pattern('^[0-9]+$')
+        Validators.pattern('^[0-9].*$')
       ])),
       actual: this.formBuilder.control('', Validators.compose([
-        Validators.pattern('^[0-9]+$')
+        Validators.pattern('^[0-9].*$')
       ])),
       billable: this.formBuilder.control('', Validators.compose([
-        Validators.pattern('^[0-9]+$')
+        Validators.pattern('^[0-9].*$')
       ])),
 
     });
