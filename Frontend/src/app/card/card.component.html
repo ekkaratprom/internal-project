@@ -1,16 +1,31 @@
-<div class="card" style="width: 18rem">
-  <div class="card-body">
-    <h5 class="card-title">name</h5>
-    <p class="card-text">
-      <input type="password" class="form-control" id="input_description"
-        placeholder="Some work description for explain things you have to do .">
-      Some work description for explain things you have to do .
-    </p>
-    <h6>project name</h6>
-    <hr class="solid" />
-    <h6>Jira Link :</h6>
-    <h6>Estimate Time :</h6>
-    <h6>Actual Time :</h6>
-    <h6>Billable Time :</h6>
-  </div>
+<div class="form-group">
+  <label for="search-text">Search Text</label>
+  <input
+    type="text"
+    class="form-control"
+    id="search-text"
+    [(ngModel)]="searchText"
+    placeholder="Enter text to search"
+  />
 </div>
+
+<button (click)="addCard()" class="add-button">Add Card</button>
+
+<ul class="list-group list-group-flush">
+  <li class="list-group-item" *ngFor="let c of cards | appFilter: searchText">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ c.name }}</h5>
+        <p class="card-text">
+          {{ c.taskName }}
+        </p>
+        <h6 class="project-name">project name: {{ c.projectName }}</h6>
+        <hr class="solid" />
+        <h6>Jira Link :{{ c.referenceLink }}</h6>
+        <h6>Estimate Time : {{ c.estimateTime }} Hrs</h6>
+        <h6>Actual Time : {{ c.actualTime }} Hrs</h6>
+        <h6>Billable Time : {{ c.billableTime }} Hrs</h6>
+      </div>
+    </div>
+  </li>
+</ul>
