@@ -4,7 +4,9 @@ import com.allianz.siesta.task.Task;
 import com.allianz.siesta.task.TaskRepository;
 import com.allianz.siesta.task.TaskRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TaskServiceImpl implements TaskService {
 
     @Autowired
@@ -13,6 +15,6 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Iterable<Task> findAllTasks() { return taskRepository.findAll();}
 
-//    @Override
-//    public Task saveTask(TaskRequest taskRequest) {return taskRepository.save();}
+    @Override
+    public Task saveTask(TaskRequest taskRequest) {return taskRepository.save(taskRequest.taskRequest());}
 }

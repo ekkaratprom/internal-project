@@ -10,8 +10,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api")
 public class TaskController {
+
     @Autowired
-    private TaskRepository taskRepository;
     private TaskService taskService;
 
     @CrossOrigin
@@ -37,5 +37,8 @@ public class TaskController {
     }
 
     @CrossOrigin
-    @PostMapping(value = "/v1/posttask")
+    @PostMapping(value = "/v1/addtask")
+    public Task saveAccount(@RequestBody TaskRequest taskRequest) {
+        return taskService.saveTask(taskRequest);}
+
 }

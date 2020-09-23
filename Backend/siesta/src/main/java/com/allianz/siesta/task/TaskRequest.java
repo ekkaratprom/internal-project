@@ -1,25 +1,20 @@
 package com.allianz.siesta.task;
 
+import com.allianz.siesta.project.Project;
+import com.allianz.siesta.user.User;
+
+import java.time.LocalDate;
+
 public class TaskRequest {
     private String taskName;
     private Double estimateTime;
     private Double actualTime;
     private String referenceLink;
-    private Double taskDate;
+    private LocalDate taskDate;
     private Boolean completedStatus;
-    private Long userId;
-    private Long projectId;
+    private User user;
+    private Project project;
 
-    public TaskRequest(String taskName, Double estimateTime, Double actualTime, String referenceLink, Double taskDate, Boolean completedStatus, Long userId, Long projectId) {
-        this.taskName = taskName;
-        this.estimateTime = estimateTime;
-        this.actualTime = actualTime;
-        this.referenceLink = referenceLink;
-        this.taskDate = taskDate;
-        this.completedStatus = completedStatus;
-        this.userId = userId;
-        this.projectId = projectId;
-    }
 
     public String getTaskName() {
         return taskName;
@@ -53,11 +48,11 @@ public class TaskRequest {
         this.referenceLink = referenceLink;
     }
 
-    public Double getTaskDate() {
+    public LocalDate getTaskDate() {
         return taskDate;
     }
 
-    public void setTaskDate(Double taskDate) {
+    public void setTaskDate(LocalDate taskDate) {
         this.taskDate = taskDate;
     }
 
@@ -69,22 +64,34 @@ public class TaskRequest {
         this.completedStatus = completedStatus;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Long getProjectId() {
-        return projectId;
+    public Project getProject() {
+        return project;
     }
 
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
+    public Task taskRequest() {
+        Task task = new Task();
+        task.setTaskName(taskName);
+        task.setEstimateTime(estimateTime);
+        task.setActualTime(actualTime);
+        task.setReferenceLink(referenceLink);
+        task.setTaskDate(taskDate);
+        task.setCompletedStatus(completedStatus);
+        task.setUser(user);
+        task.setProject(project);
+        return task;
+    }
 
 
 }
