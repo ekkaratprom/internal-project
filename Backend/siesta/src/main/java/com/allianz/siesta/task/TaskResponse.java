@@ -1,6 +1,6 @@
 package com.allianz.siesta.task;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class TaskResponse {
     private String taskName;
@@ -8,11 +8,11 @@ public class TaskResponse {
     private Double estimateTime;
     private Double actualTime;
     private String referenceLink;
-    private LocalDate taskDate;
-    private LocalDate createDate;
+    private Date taskDate;
+    private Date createDate;
     private Boolean completedStatus;
 
-    public TaskResponse(String taskName, String taskDescription, Double estimateTime, Double actualTime, String referenceLink, LocalDate taskDate, LocalDate createDate, Boolean completedStatus) {
+    public TaskResponse(String taskName, String taskDescription, Double estimateTime, Double actualTime, String referenceLink, Date taskDate, Date createDate, Boolean completedStatus) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.estimateTime = estimateTime;
@@ -55,11 +55,11 @@ public class TaskResponse {
         this.referenceLink = referenceLink;
     }
 
-    public LocalDate getTaskDate() {
+    public Date getTaskDate() {
         return taskDate;
     }
 
-    public void setTaskDate(LocalDate taskDate) {
+    public void setTaskDate(Date taskDate) {
         this.taskDate = taskDate;
     }
 
@@ -79,11 +79,11 @@ public class TaskResponse {
         this.taskDescription = taskDescription;
     }
 
-    public LocalDate getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDate createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 }

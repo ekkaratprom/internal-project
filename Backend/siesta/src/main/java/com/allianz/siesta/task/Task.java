@@ -1,6 +1,6 @@
 package com.allianz.siesta.task;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +26,7 @@ public class Task {
     @Column(nullable = false, name = "task_name")
     private String taskName;
 
-    @Column(nullable = false, name = "task_description")
+    @Column(nullable = true, name = "task_description")
     private String taskDescription;
 
     @Column(nullable = false, name = "estimate_time")
@@ -39,10 +39,10 @@ public class Task {
     private String referenceLink;
 
     @Column(nullable = false, name = "task_date")
-    private LocalDate taskDate;
+    private Date taskDate;
 
     @Column(nullable = false, name = "create_date")
-    private LocalDate createDate;
+    private Date createDate;
 
     @Column(nullable = false, name = "completed_status")
     private Boolean completedStatus;
@@ -104,19 +104,19 @@ public class Task {
         this.referenceLink = referenceLink;
     }
 
-    public LocalDate getTaskDate() {
+    public Date getTaskDate() {
         return taskDate;
     }
 
-    public void setTaskDate(LocalDate taskDate) {
+    public void setTaskDate(Date taskDate) {
         this.taskDate = taskDate;
     }
 
-    public LocalDate getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDate createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
