@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.allianz.siesta.task.Task;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "project")
@@ -28,6 +29,7 @@ public class Project {
     private String projectName;
 
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
+	@JsonBackReference
     private List<Task> tasks = new ArrayList<Task>();
 
 	public Long getId() {
@@ -54,4 +56,10 @@ public class Project {
 		this.tasks = tasks;
 	}
 
+	public Project() {
+	}
+
+	public Project(Long id) {
+		this.id = id;
+	}
 }

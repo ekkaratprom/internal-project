@@ -2,17 +2,11 @@ package com.allianz.siesta.task;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.allianz.siesta.project.Project;
 import com.allianz.siesta.user.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "task")
@@ -49,10 +43,12 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = true)
+    @JsonManagedReference
     private User user;
     
     @ManyToOne
     @JoinColumn(name = "project_id", nullable = true)
+    @JsonManagedReference
     private Project project;
 
 
