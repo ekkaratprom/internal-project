@@ -22,7 +22,7 @@ public class TaskServiceImpl implements TaskService {
     public Task saveTask(TaskRequest taskRequest) {
     	Task task = taskRequest.taskRequest();
     	task.setCreateDate(new Date());
-    	task.setTaskDate(new Date());
+//    	task.setTaskDate(new Date());
     	return taskRepository.save(task);
     }
 }

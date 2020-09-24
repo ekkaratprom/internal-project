@@ -1,5 +1,9 @@
 package com.allianz.siesta.task;
 
+import com.allianz.siesta.project.Project;
+import com.allianz.siesta.user.User;
+import liquibase.pro.packaged.U;
+
 import java.util.Date;
 
 public class TaskRequest {
@@ -85,6 +89,9 @@ public class TaskRequest {
         task.setReferenceLink(referenceLink);
         task.setTaskDate(taskDate);
         task.setCompletedStatus(completedStatus);
+        task.setUser(new User(userId));
+        task.setProject(new Project(projectId));
+
         return task;
     }
 

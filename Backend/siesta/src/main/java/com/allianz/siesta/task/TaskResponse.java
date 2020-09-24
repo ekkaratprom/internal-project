@@ -1,5 +1,8 @@
 package com.allianz.siesta.task;
 
+import com.allianz.siesta.project.Project;
+import com.allianz.siesta.user.User;
+
 import java.util.Date;
 
 public class TaskResponse {
@@ -11,8 +14,11 @@ public class TaskResponse {
     private Date taskDate;
     private Date createDate;
     private Boolean completedStatus;
+    private User user;
+    private Project project;
 
-    public TaskResponse(String taskName, String taskDescription, Double estimateTime, Double actualTime, String referenceLink, Date taskDate, Date createDate, Boolean completedStatus) {
+
+    public TaskResponse(String taskName, String taskDescription, Double estimateTime, Double actualTime, String referenceLink, Date taskDate, Date createDate, Boolean completedStatus, User user, Project project) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.estimateTime = estimateTime;
@@ -21,6 +27,8 @@ public class TaskResponse {
         this.taskDate = taskDate;
         this.createDate = createDate;
         this.completedStatus = completedStatus;
+        this.user = user;
+        this.project = project;
     }
 
     public String getTaskName() {
@@ -85,5 +93,21 @@ public class TaskResponse {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

@@ -29,7 +29,9 @@ public class TaskController {
                             task.getReferenceLink(),
                             task.getTaskDate(),
                             task.getCreateDate(),
-                            task.getCompletedStatus()
+                            task.getCompletedStatus(),
+                            task.getUser(),
+                            task.getProject()
                     )
             );
         }
