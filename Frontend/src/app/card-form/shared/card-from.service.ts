@@ -19,6 +19,11 @@ export class CardFormService {
 
   constructor(private http: HttpClient) { }
 
+  //POST
+  addForm(cardForm: any): Observable<HttpResponse<CardForm>> {
+    return this.http.post<CardForm>(this.url, cardForm, { observe: 'response' });
+  }
+
   // get(assignee: string) {
   //   const getOptions = {
   //     params: { assignee }
@@ -39,35 +44,31 @@ export class CardFormService {
   //     );
   // }
 
-  addForm(cardForm: any): Observable<HttpResponse<CardForm>> {
-    return this.http.post<CardForm>(this.url, cardForm, { observe: 'response' });
-  }
+  // delete(card: Card) {
+  //   return this.http.delete(`Cards/${card.userId}`)
+  //     .pipe(
+  //       catchError(this.handleError)
+  //     );
+  // }
 
-  delete(card: Card) {
-    return this.http.delete(`Cards/${card.userId}`)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    console.error(error.message);
-    return throwError('A data error occurred, please try again.');
-  }
+  // private handleError(error: HttpErrorResponse) {
+  //   console.error(error.message);
+  //   return throwError('A data error occurred, please try again.');
+  // }
 }
 
-interface CardsResponse {
-  Cards: Card[];
-}
+// interface CardsResponse {
+//   Cards: Card[];
+// }
 
-export interface Card {
-  userId: number;
-  taskName: string;
-  projectId: string;
-  referenceLink: string;
-  estimateTime: number;
-  actualTime: number;
-  billableTime: number;
-  taskDate: string;
-  completedStatus?: boolean;
-}
+// export interface Card {
+//   userId: number;
+//   taskName: string;
+//   projectId: string;
+//   referenceLink: string;
+//   estimateTime: number;
+//   actualTime: number;
+//   billableTime: number;
+//   taskDate: string;
+//   completedStatus?: boolean;
+// }
