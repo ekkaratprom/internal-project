@@ -1,3 +1,0 @@
-databaseChangeLog:
-  - include:
-      file: classpath:liquibase/changelog/schema/initialize_schema.xml
