@@ -9,18 +9,8 @@ import { Card } from './shared/card.model';
 })
 export class CardComponent {
   cards: Card[] = [];
+  referenceLink = '';
   searchText = '';
-  characters = [
-    'big',
-    'nine',
-    'p\' jum',
-    'p\' toh',
-    'p\' kwang',
-    'p\' joy',
-    'p\' view',
-    'year',
-  ];
-
   constructor() {
     this.cards.push({
       name: 'nine',
@@ -30,7 +20,7 @@ export class CardComponent {
       taskName: 'create card component',
       estimateTime: 6,
       actualTime: 12,
-      referenceLink: 'www.sdfsfsd.com',
+      referenceLink: 'https://www.facebook.com/',
       taskDate: '08/12/56',
       completedStatus: true,
       billableTime: 5
@@ -43,7 +33,7 @@ export class CardComponent {
         taskName: 'create NavBar component',
         estimateTime: 8,
         actualTime: 16,
-        referenceLink: 'www.asasfafasfasfas.com',
+        referenceLink: 'https://www.youtube.com/?gl=TH',
         taskDate: '15/12/56',
         completedStatus: true,
         billableTime: 5

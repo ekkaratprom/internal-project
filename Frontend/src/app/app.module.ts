@@ -10,11 +10,13 @@ import { CardComponent } from './card/card.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CardFormComponent } from './card-form/card-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, CardComponent, CardFormComponent, FilterPipe],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    NgbModule],
   providers: [],
   bootstrap: [AppComponent],
 })
