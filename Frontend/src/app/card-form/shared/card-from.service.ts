@@ -1,17 +1,27 @@
+import { CardForm } from './card-form.model';
+import { Form } from './card-form-test.model';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient, HttpErrorResponse,
+  HttpHeaders,
+  HttpResponse,
+  HttpParams,
+} from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardFormService {
+  url = `http://10.187.1.33:8080/MyGuild/account`;
+
   constructor(private http: HttpClient) { }
 
-  get(medium: string) {
+  get(assignee: string) {
     const getOptions = {
-      params: { medium }
+      params: { assignee }
     };
     return this.http.get<CardsResponse>('Cards', getOptions)
       .pipe(
@@ -27,6 +37,10 @@ export class CardFormService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  addForm(form: any): Observable<HttpResponse<Form>> {
+    return this.http.post<Form>(this.url, form, { observe: 'response' });
   }
 
   delete(Card: Card) {
@@ -47,12 +61,13 @@ interface CardsResponse {
 }
 
 export interface Card {
-  id: number;
-  projectId: number;
-  taskName: string;
+  id: string;
+  assignee: string;
+  description: string;
+  projectName: string;
+  referenceLink: string;
   estimateTime: number;
   actualTime: number;
-  referenceLink: string;
-  taskDate: string;
-  completedStatus: boolean;
+  billableTime: number;
+  timeStamp: string;
 }

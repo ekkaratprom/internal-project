@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { CardFormService } from './shared/card-from.service';
+import { CardForm } from './shared/card-form.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,45 +10,60 @@ import { Router } from '@angular/router';
   styleUrls: ['./card-form.component.css']
 })
 export class CardFormComponent implements OnInit {
+  card: CardForm;
   form: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
     private cardFormService: CardFormService,
     private router: Router) { }
 
-  ngOnInit() {
-    this.form = this.formBuilder.group({
-      assignee: this.formBuilder.control('', Validators.compose([
-        Validators.required,
-        Validators.pattern('[\\w\\-\\s\\/]+')
-      ])),
-      description: this.formBuilder.control('', Validators.compose([
-        Validators.required,
-      ])),
-      project: this.formBuilder.control('', Validators.compose([
-        Validators.required,
-        Validators.pattern('[\\w\\-\\s\\/]+')
-      ])),
-      link: this.formBuilder.control('', Validators.compose([
-        Validators.required,
+  public addForm = new FormGroup({
+    assignee: new FormControl('Ekkarat', Validators.compose([
+      Validators.required,
+      Validators.pattern('[\\w\\-\\s\\/]+')
+    ])),
+    description: new FormControl('write card component', Validators.compose([
+      Validators.required,
+    ])),
+    project: new FormControl('project01', Validators.compose([
+      Validators.required,
+      Validators.pattern('[\\w\\-\\s\\/]+')
+    ])),
+    link: new FormControl('gg.com', Validators.compose([
+      Validators.required,
 
-      ])),
-      estimate: this.formBuilder.control('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[0-9].*$')
-      ])),
-      actual: this.formBuilder.control('', Validators.compose([
-        Validators.pattern('^[0-9].*$')
-      ])),
-      billable: this.formBuilder.control('', Validators.compose([
-        Validators.pattern('^[0-9].*$')
-      ])),
+    ])),
+    estimate: new FormControl('4', Validators.compose([
+      Validators.required,
+      Validators.pattern('^[0-9].*$')
+    ])),
+    actual: new FormControl('3.5', Validators.compose([
+      Validators.pattern('^[0-9].*$')
+    ])),
+    billable: new FormControl('4', Validators.compose([
+      Validators.pattern('^[0-9].*$')
+    ])),
+  });
 
-    });
-  }
+  ngOnInit(): void { }
 
   onSubmit() {
-    console.log(this.form);
+    const currentDate = new Date();
+    this.card = new CardForm(
+      this.addForm.get('assignee').value,
+      this.addForm.get('description').value,
+      this.addForm.get('project').value,
+      this.addForm.get('link').value,
+      this.addForm.get('estimate').value,
+      this.addForm.get('actual').value,
+      this.addForm.get('billable').value,
+      currentDate.toUTCString(),
+    );
+    console.log(this.card);
+    this.cardFormService.addForm(this.card)
+      .subscribe(() => {
+        // this.router.navigateByUrl(['/',]);
+      });
 
   }
 
