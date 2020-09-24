@@ -18,29 +18,29 @@ export class CardFormComponent implements OnInit {
     private router: Router) { }
 
   public addForm = new FormGroup({
-    assignee: new FormControl('Ekkarat', Validators.compose([
+    userId: new FormControl('1', Validators.compose([
+      Validators.required,
+      Validators.pattern('^[0-9].*$')
+    ])),
+    taskName: new FormControl('write card component', Validators.compose([
+      Validators.required,
+    ])),
+    projectId: new FormControl('1', Validators.compose([
       Validators.required,
       Validators.pattern('[\\w\\-\\s\\/]+')
     ])),
-    description: new FormControl('write card component', Validators.compose([
-      Validators.required,
-    ])),
-    project: new FormControl('project01', Validators.compose([
-      Validators.required,
-      Validators.pattern('[\\w\\-\\s\\/]+')
-    ])),
-    link: new FormControl('gg.com', Validators.compose([
+    referenceLink: new FormControl('gg.com', Validators.compose([
       Validators.required,
 
     ])),
-    estimate: new FormControl('4', Validators.compose([
+    estimateTime: new FormControl('4', Validators.compose([
       Validators.required,
       Validators.pattern('^[0-9].*$')
     ])),
-    actual: new FormControl('3.5', Validators.compose([
+    actualTime: new FormControl('3.5', Validators.compose([
       Validators.pattern('^[0-9].*$')
     ])),
-    billable: new FormControl('4', Validators.compose([
+    billableTime: new FormControl('4', Validators.compose([
       Validators.pattern('^[0-9].*$')
     ])),
   });
@@ -49,19 +49,22 @@ export class CardFormComponent implements OnInit {
 
   onSubmit() {
     const currentDate = new Date();
-    this.card = new CardForm(
-      this.addForm.get('assignee').value,
-      this.addForm.get('description').value,
-      this.addForm.get('project').value,
-      this.addForm.get('link').value,
-      this.addForm.get('estimate').value,
-      this.addForm.get('actual').value,
-      this.addForm.get('billable').value,
-      currentDate.toUTCString(),
-    );
+    this.card = {
+      actualTime: parseInt(this.addForm.get('actualTime').value),
+      completedStatus: true,
+      estimateTime: parseInt(this.addForm.get('estimateTime').value),
+      projectId: parseInt(this.addForm.get('projectId').value),
+      referenceLink: this.addForm.get('referenceLink').value,
+      taskDate: currentDate.toUTCString(),
+      taskName: this.addForm.get('taskName').value,
+      userId: parseInt(this.addForm.get('userId').value),
+      billableTime: parseInt(this.addForm.get('billableTime').value)
+    }
+
     console.log(this.card);
     this.cardFormService.addForm(this.card)
-      .subscribe(() => {
+      .subscribe((res) => {
+        console.log(res)
         // this.router.navigateByUrl(['/',]);
       });
 

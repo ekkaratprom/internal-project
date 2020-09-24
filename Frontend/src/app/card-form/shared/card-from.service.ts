@@ -15,36 +15,36 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class CardFormService {
-  url = `http://10.187.1.33:8080/MyGuild/account`;
+  url = `http://localhost:8080/api/v1/addtask`;
 
   constructor(private http: HttpClient) { }
 
-  get(assignee: string) {
-    const getOptions = {
-      params: { assignee }
-    };
-    return this.http.get<CardsResponse>('Cards', getOptions)
-      .pipe(
-        map((response: CardsResponse) => {
-          return response.Cards;
-        }),
-        catchError(this.handleError)
-      );
+  // get(assignee: string) {
+  //   const getOptions = {
+  //     params: { assignee }
+  //   };
+  //   return this.http.get<CardsResponse>('Cards', getOptions)
+  //     .pipe(
+  //       map((response: CardsResponse) => {
+  //         return response.Cards;
+  //       }),
+  //       catchError(this.handleError)
+  //     );
+  // }
+
+  // add(card: Card) {
+  //   return this.http.post('Cards', card)
+  //     .pipe(
+  //       catchError(this.handleError)
+  //     );
+  // }
+
+  addForm(cardForm: any): Observable<HttpResponse<CardForm>> {
+    return this.http.post<CardForm>(this.url, cardForm, { observe: 'response' });
   }
 
-  add(Card: Card) {
-    return this.http.post('Cards', Card)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  addForm(form: any): Observable<HttpResponse<Form>> {
-    return this.http.post<Form>(this.url, form, { observe: 'response' });
-  }
-
-  delete(Card: Card) {
-    return this.http.delete(`Cards/${Card.id}`)
+  delete(card: Card) {
+    return this.http.delete(`Cards/${card.userId}`)
       .pipe(
         catchError(this.handleError)
       );
@@ -61,13 +61,13 @@ interface CardsResponse {
 }
 
 export interface Card {
-  id: string;
-  assignee: string;
-  description: string;
-  projectName: string;
+  userId: number;
+  taskName: string;
+  projectId: string;
   referenceLink: string;
   estimateTime: number;
   actualTime: number;
   billableTime: number;
-  timeStamp: string;
+  taskDate: string;
+  completedStatus?: boolean;
 }
