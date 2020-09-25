@@ -7,5 +7,15 @@ button.calendar:active {
   background-position: center;
 }
 .calendar {
-  width: 100vw;
+  align-items: center;
+}
+.btn-outline-secondary {
+  height: 30px;
+}
+.header {
+  font-size: large;
+}
+.day {
+  display: flex;
+  flex-wrap: wrap;
 }

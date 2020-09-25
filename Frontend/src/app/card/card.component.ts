@@ -41,8 +41,6 @@ export class CardComponent {
     );
   }
 
-
-
   addCard(): void {
     const newperson = 'new person';
     this.cards.push({
