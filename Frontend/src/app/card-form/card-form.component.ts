@@ -55,7 +55,7 @@ export class CardFormComponent implements OnInit {
       estimateTime: parseInt(this.addForm.get('estimateTime').value),
       projectId: parseInt(this.addForm.get('projectId').value),
       referenceLink: this.addForm.get('referenceLink').value,
-      taskDate: currentDate.toUTCString(),
+      taskDate: currentDate.toISOString().split('T')[0],
       taskName: this.addForm.get('taskName').value,
       userId: parseInt(this.addForm.get('userId').value),
       billableTime: parseInt(this.addForm.get('billableTime').value)
