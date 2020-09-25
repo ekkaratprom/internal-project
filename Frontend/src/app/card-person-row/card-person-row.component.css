@@ -1,5 +1,24 @@
 .row-container {
     display: grid;
-    grid-template-columns: 20vw 20vw 20vw 20vw 20vw;
-    grid-template-rows: 25vh 100px auto;
+    /* grid-template-columns: 16.7vw 16.7vw 16.7vw 16.7vw 16.7vw 16.7vw; */
+    grid-template-rows: 100vh;
+    grid-template-columns: repeat(6,1fr);
+    background-color: aquamarine;
+    column-gap: 5px;
+    
+}
+
+.card-container {
+    display: grid;
+    /* grid-template-columns: 16.7vw 16.7vw 16.7vw 16.7vw 16.7vw 16.7vw; */
+    grid-template-rows: auto;
+    background-color: #444444;
+    padding-top: 35px;
+    padding-left: 10px;
+    padding-right: 10px;
+    grid-column-gap: 5px;
+}
+
+.my-card {
+    /* width: 100%; */
 }
