@@ -1,4 +1,4 @@
-<div class="form-group">
+<!-- <div class="form-group">
   <label for="search-text">Search Text</label>
   <input
     type="text"
@@ -7,44 +7,41 @@
     [(ngModel)]="searchText"
     placeholder="Enter text to search"
   />
-</div>
+</div> -->
 
-<button (click)="addCard()" class="add-button">Add Card</button>
+<!-- <button (click)="addCard()" class="add-button">Add Card</button> -->
 
-<ul class="list-group list-group-flush">
-  <li class="list-group-item" *ngFor="let c of cards | appFilter: searchText">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">
-          <i class="material-icons">person_pin</i>
-          {{ c.name }}
-        </h5>
-        <p class="card-text">
-          {{ c.taskName }}
-        </p>
-        <h6 class="project-name">project name: {{ c.projectName }}</h6>
-        <hr class="solid" />
+<!-- <div class="list-group list-group-flush"></div> -->
+<div *ngFor="let c of cards | appFilter: searchText">
+  <div class="card">
+    <div class="card-body">
+      <p class="card-title">
+        <i class="material-icons">ic_account_circle</i>
+        {{ c.name }}
+      </p>
+      <p class="card-text">
+        {{ c.taskName }}
+      </p>
+      <p class="project-name">project name: {{ c.projectName }}</p>
+      <hr class="solid" />
 
-        <h6>
-          <i class="fa fa-chain"></i>Jira Link :<a
-            target="_blank"
-            [href]="c.referenceLink"
-            >Link
-          </a>
-        </h6>
-        <h6>
-          <i class="fa fa-clock-o"></i>
-          Estimate Time : {{ c.estimateTime }} Hrs
-        </h6>
-        <h6>
-          <i class="far fa-check-circle"></i>Actual Time :
-          {{ c.actualTime }} Hrs
-        </h6>
-        <h6>
-          <i class="fas fa-money-bill-wave"></i>
-          Billable Time : {{ c.billableTime }} Hrs
-        </h6>
-      </div>
+      <p>
+        <i class="material-icons">ic_insert_link</i>Jira Link :<a target="_blank" [href]="c.referenceLink">Link
+        </a>
+      </p>
+      <p>
+        <i class="fa fa-clock-o"></i>
+        Estimate Time : {{ c.estimateTime }} Hrs
+      </p>
+      <p>
+        <i class="far fa-check-circle"></i>Actual Time :
+        {{ c.actualTime }} Hrs
+      </p>
+      <p>
+        <i class="fas fa-money-bill-wave"></i>
+        Billable Time : {{ c.billableTime }} Hrs
+      </p>
     </div>
-  </li>
-</ul>
+  </div>
+</div>
+<!-- </div> -->
