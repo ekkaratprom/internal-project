@@ -2,10 +2,9 @@ package com.allianz.siesta.task;
 
 import com.allianz.siesta.task.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -14,33 +13,20 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @CrossOrigin
-    @GetMapping(path = "/v1/task")
-    public List<TaskResponse> findAllTasks(){
-        List<TaskResponse> taskResponsesList = new ArrayList<>();
-        Iterable<Task> tasks = taskService.findAllTasks();
-        for (Task task : tasks) {
-            taskResponsesList.add(
-                    new TaskResponse(
-                            task.getTaskName(),
-                            task.getTaskDescription(),
-                            task.getEstimateTime(),
-                            task.getActualTime(),
-                            task.getReferenceLink(),
-                            task.getTaskDate(),
-                            task.getCreateDate(),
-                            task.getCompletedStatus(),
-                            task.getUser(),
-                            task.getProject()
-                    )
-            );
-        }
-        return taskResponsesList;
-    }
 
     @CrossOrigin
     @PostMapping(value = "/v1/addtask")
-    public Task saveAccount(@RequestBody TaskRequest taskRequest) {
-        return taskService.saveTask(taskRequest);}
+    public Task saveTask(@RequestBody TaskRequest taskRequest) {
+        return taskService.saveTask(taskRequest);
+    }
+
+    @CrossOrigin
+    @GetMapping(path = "/v2/task")
+    @ResponseBody
+    public
+    Iterable<TaskResponse> getAllTasks() {
+        return taskService.getAllTasks();
+    }
+
 
 }

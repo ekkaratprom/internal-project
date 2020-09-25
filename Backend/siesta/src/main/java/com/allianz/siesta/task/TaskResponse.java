@@ -10,25 +10,32 @@ public class TaskResponse {
     private String taskDescription;
     private Double estimateTime;
     private Double actualTime;
+    private Double billableTime;
     private String referenceLink;
-    private Date taskDate;
+    private String taskDate;
     private Date createDate;
     private Boolean completedStatus;
-    private User user;
-    private Project project;
+    private String assignee;
+    private String projectName;
 
-
-    public TaskResponse(String taskName, String taskDescription, Double estimateTime, Double actualTime, String referenceLink, Date taskDate, Date createDate, Boolean completedStatus, User user, Project project) {
+    public TaskResponse(String taskName, String taskDescription, Double estimateTime, Double actualTime, Double billableTime, String referenceLink, String taskDate, Date createDate, Boolean completedStatus) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.estimateTime = estimateTime;
         this.actualTime = actualTime;
+        this.billableTime = billableTime;
         this.referenceLink = referenceLink;
         this.taskDate = taskDate;
         this.createDate = createDate;
         this.completedStatus = completedStatus;
-        this.user = user;
-        this.project = project;
+    }
+
+    public Double getBillableTime() {
+        return billableTime;
+    }
+
+    public void setBillableTime(Double billableTime) {
+        this.billableTime = billableTime;
     }
 
     public String getTaskName() {
@@ -63,11 +70,11 @@ public class TaskResponse {
         this.referenceLink = referenceLink;
     }
 
-    public Date getTaskDate() {
+    public String getTaskDate() {
         return taskDate;
     }
 
-    public void setTaskDate(Date taskDate) {
+    public void setTaskDate(String taskDate) {
         this.taskDate = taskDate;
     }
 
@@ -95,19 +102,19 @@ public class TaskResponse {
         this.createDate = createDate;
     }
 
-    public User getUser() {
-        return user;
+    public String getAssignee() {
+        return assignee;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
     }
 
-    public Project getProject() {
-        return project;
+    public String getProjectName() {
+        return projectName;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 }

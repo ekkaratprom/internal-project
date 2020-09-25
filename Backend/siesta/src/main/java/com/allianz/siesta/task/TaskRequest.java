@@ -10,8 +10,9 @@ public class TaskRequest {
     private String taskName;
     private Double estimateTime;
     private Double actualTime;
+    private Double billableTime;
     private String referenceLink;
-    private Date taskDate;
+    private String taskDate;
     private Boolean completedStatus;
     private Long userId;
     private Long projectId;
@@ -49,11 +50,11 @@ public class TaskRequest {
         this.referenceLink = referenceLink;
     }
 
-    public Date getTaskDate() {
+    public String getTaskDate() {
         return taskDate;
     }
 
-    public void setTaskDate(Date taskDate) {
+    public void setTaskDate(String taskDate) {
         this.taskDate = taskDate;
     }
 
@@ -81,11 +82,20 @@ public class TaskRequest {
 		this.projectId = projectId;
 	}
 
+    public Double getBillableTime() {
+        return billableTime;
+    }
+
+    public void setBillableTime(Double billableTime) {
+        this.billableTime = billableTime;
+    }
+
     public Task taskRequest() {
         Task task = new Task();
         task.setTaskName(taskName);
         task.setEstimateTime(estimateTime);
         task.setActualTime(actualTime);
+        task.setBillableTime(billableTime);
         task.setReferenceLink(referenceLink);
         task.setTaskDate(taskDate);
         task.setCompletedStatus(completedStatus);

@@ -26,6 +26,9 @@ public class Task {
     @Column(nullable = false, name = "estimate_time")
     private double estimateTime;
 
+    @Column(name = "billable_time")
+    private double billableTime;
+
     @Column(name = "actual_time")
     private double actualTime;
 
@@ -33,7 +36,7 @@ public class Task {
     private String referenceLink;
 
     @Column(nullable = false, name = "task_date")
-    private Date taskDate;
+    private String taskDate;
 
     @Column(nullable = false, name = "create_date")
     private Date createDate;
@@ -100,11 +103,11 @@ public class Task {
         this.referenceLink = referenceLink;
     }
 
-    public Date getTaskDate() {
+    public String getTaskDate() {
         return taskDate;
     }
 
-    public void setTaskDate(Date taskDate) {
+    public void setTaskDate(String taskDate) {
         this.taskDate = taskDate;
     }
 
@@ -139,4 +142,12 @@ public class Task {
 	public void setProject(Project project) {
 		this.project = project;
 	}
+
+    public double getBillableTime() {
+        return billableTime;
+    }
+
+    public void setBillableTime(double billableTime) {
+        this.billableTime = billableTime;
+    }
 }
