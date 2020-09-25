@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-navbar',
@@ -6,8 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  DMY: NgbDateStruct;
+  today = this.calendar.getToday();
+  title = 'angular-text-search-highlight';
 
-  constructor() { }
+
+  constructor(private calendar: NgbCalendar) {
+
+  }
 
   ngOnInit(): void {
   }
