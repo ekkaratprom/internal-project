@@ -24,13 +24,13 @@ public class Task {
     private String taskDescription;
 
     @Column(nullable = false, name = "estimate_time")
-    private double estimateTime;
+    private Double estimateTime;
 
     @Column(name = "billable_time")
-    private double billableTime;
+    private Double billableTime;
 
     @Column(name = "actual_time")
-    private double actualTime;
+    private Double actualTime;
 
     @Column(name = "reference_link")
     private String referenceLink;
@@ -53,7 +53,6 @@ public class Task {
     @JoinColumn(name = "project_id", nullable = true)
     @JsonManagedReference
     private Project project;
-
 
     public Long getId() {
         return id;
@@ -79,19 +78,27 @@ public class Task {
         this.taskDescription = taskDescription;
     }
 
-    public double getEstimateTime() {
+    public Double getEstimateTime() {
         return estimateTime;
     }
 
-    public void setEstimateTime(double estimateTime) {
+    public void setEstimateTime(Double estimateTime) {
         this.estimateTime = estimateTime;
     }
 
-    public double getActualTime() {
+    public Double getBillableTime() {
+        return billableTime;
+    }
+
+    public void setBillableTime(Double billableTime) {
+        this.billableTime = billableTime;
+    }
+
+    public Double getActualTime() {
         return actualTime;
     }
 
-    public void setActualTime(double actualTime) {
+    public void setActualTime(Double actualTime) {
         this.actualTime = actualTime;
     }
 
@@ -127,27 +134,19 @@ public class Task {
         this.completedStatus = completedStatus;
     }
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
-	}
-
-    public double getBillableTime() {
-        return billableTime;
+    public User getUser() {
+        return user;
     }
 
-    public void setBillableTime(double billableTime) {
-        this.billableTime = billableTime;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }
