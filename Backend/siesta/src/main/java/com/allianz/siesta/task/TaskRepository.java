@@ -10,3 +10,5 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     @RestResource(exported = false)
     <S extends Task> S save(S s);
 }
+
+
