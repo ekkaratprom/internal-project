@@ -10,9 +10,10 @@ import { CardComponent } from './card/card.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CardFormComponent } from './card-form/card-form.component';
+import { CardPersonRowComponent } from './card-person-row/card-person-row.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, CardComponent, CardFormComponent, FilterPipe],
+  declarations: [AppComponent, NavbarComponent, CardComponent, CardFormComponent, FilterPipe, CardPersonRowComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule,
     ReactiveFormsModule],
   providers: [],
