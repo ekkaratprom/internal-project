@@ -53,4 +53,33 @@ public class TaskServiceImpl implements TaskService {
         return taskResponsesList;
     }
 
+    @Override
+    public List<TaskResponse> findTaskByDate(String taskDate){
+        List<TaskResponse> taskResponsesList = new ArrayList<>();
+        Iterable<Task> tasks = taskRepository.findByTaskDate(taskDate);
+        for  (Task task : tasks) {
+            TaskResponse taskResponse = new TaskResponse(
+                    task.getTaskName(),
+                    task.getTaskDescription(),
+                    task.getEstimateTime(),
+                    task.getActualTime(),
+                    task.getBillableTime(),
+                    task.getReferenceLink(),
+                    task.getTaskDate(),
+                    task.getCreateDate(),
+                    task.getCompletedStatus()
+            );
+            if (task.getUser() != null) {
+                String assignee = task.getUser().getFirstName() + " " + task.getUser().getLastName();
+                taskResponse.setAssignee(assignee);
+            }
+            if (task.getProject() != null) {
+                taskResponse.setProjectName(task.getProject().getProjectName());
+            }
+
+            taskResponsesList.add(taskResponse);
+        }
+        return taskResponsesList;
+    }
+
 }
