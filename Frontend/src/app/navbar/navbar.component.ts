@@ -13,8 +13,8 @@ export class NavbarComponent implements OnInit {
   DMY = this.calendar.getToday();
 
 
-  monthlist = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"];
+  monthlist = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+    "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
 
   month = '';
   weekdays = [0, 0, 0, 0, 0, 0, 0];
