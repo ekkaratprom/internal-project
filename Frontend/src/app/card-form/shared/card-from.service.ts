@@ -1,58 +1,74 @@
+import { CardForm } from './card-form.model';
+import { Form } from './card-form-test.model';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient, HttpErrorResponse,
+  HttpHeaders,
+  HttpResponse,
+  HttpParams,
+} from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardFormService {
+  url = `http://localhost:8080/api/v1/addtask`;
+
   constructor(private http: HttpClient) { }
 
-  get(medium: string) {
-    const getOptions = {
-      params: { medium }
-    };
-    return this.http.get<CardsResponse>('Cards', getOptions)
-      .pipe(
-        map((response: CardsResponse) => {
-          return response.Cards;
-        }),
-        catchError(this.handleError)
-      );
+  //POST
+  addForm(cardForm: any): Observable<HttpResponse<CardForm>> {
+    return this.http.post<CardForm>(this.url, cardForm, { observe: 'response' });
   }
 
-  add(Card: Card) {
-    return this.http.post('Cards', Card)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
+  // get(assignee: string) {
+  //   const getOptions = {
+  //     params: { assignee }
+  //   };
+  //   return this.http.get<CardsResponse>('Cards', getOptions)
+  //     .pipe(
+  //       map((response: CardsResponse) => {
+  //         return response.Cards;
+  //       }),
+  //       catchError(this.handleError)
+  //     );
+  // }
 
-  delete(Card: Card) {
-    return this.http.delete(`Cards/${Card.id}`)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
+  // add(card: Card) {
+  //   return this.http.post('Cards', card)
+  //     .pipe(
+  //       catchError(this.handleError)
+  //     );
+  // }
 
-  private handleError(error: HttpErrorResponse) {
-    console.error(error.message);
-    return throwError('A data error occurred, please try again.');
-  }
+  // delete(card: Card) {
+  //   return this.http.delete(`Cards/${card.userId}`)
+  //     .pipe(
+  //       catchError(this.handleError)
+  //     );
+  // }
+
+  // private handleError(error: HttpErrorResponse) {
+  //   console.error(error.message);
+  //   return throwError('A data error occurred, please try again.');
+  // }
 }
 
-interface CardsResponse {
-  Cards: Card[];
-}
+// interface CardsResponse {
+//   Cards: Card[];
+// }
 
-export interface Card {
-  id: number;
-  projectId: number;
-  taskName: string;
-  estimateTime: number;
-  actualTime: number;
-  referenceLink: string;
-  taskDate: string;
-  completedStatus: boolean;
-}
+// export interface Card {
+//   userId: number;
+//   taskName: string;
+//   projectId: string;
+//   referenceLink: string;
+//   estimateTime: number;
+//   actualTime: number;
+//   billableTime: number;
+//   taskDate: string;
+//   completedStatus?: boolean;
+// }
