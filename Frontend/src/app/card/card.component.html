@@ -1,49 +1,44 @@
 <!-- <div class="form-group">
   <label for="search-text">Search Text</label>
-  <input
-    type="text"
-    class="form-control"
-    id="search-text"
-    [(ngModel)]="searchText"
-    placeholder="Enter text to search"
-  />
+  <input type="text" class="form-control" id="search-text" [(ngModel)]="searchText"
+    placeholder="Enter text to search" />
 </div> -->
-
+<!-- 
 <ng-template #content let-modal>
   <app-card-form (cardChange)="getAll()"></app-card-form>
 </ng-template>
 
-<button (click)="open(content)" class="add-button">Add Card</button>
+<button (click)="open(content)" class="add-button">Add Card</button> -->
 
 <ul class="list-group list-group-flush">
-  <li class="list-group-item" *ngFor="let c of cardResponse | appFilter: searchText">
+  <li class="list-group-item">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">
           <i class="material-icons">person_pin</i>
-          {{ c.assignee }}
+          {{ card.assignee }}
         </h5>
         <p class="card-text">
-          {{ c.taskName }}
+          {{ card.taskName }}
         </p>
-        <h6 class="project-name">project name: {{ c.projectName }}</h6>
+        <h6 class="project-name">project name: {{ card.projectName }}</h6>
         <hr class="solid" />
 
         <p>
-          <i class="material-icons">ic_insert_link</i>Jira Link :<a target="_blank" [href]="c.referenceLink">Link
+          <i class="material-icons">ic_insert_link</i>Jira Link :<a target="_blank" [href]="card.referenceLink">Link
           </a>
         </p>
         <p>
           <i class="fa fa-clock-o"></i>
-          Estimate Time : {{ c.estimateTime }} Hrs
+          Estimate Time : {{ card.estimateTime }} Hrs
         </p>
         <p>
           <i class="far fa-check-circle"></i>Actual Time :
-          {{ c.actualTime }} Hrs
+          {{ card.actualTime }} Hrs
         </p>
         <p>
           <i class="fas fa-money-bill-wave"></i>
-          Billable Time : {{ c.billableTime }} Hrs
+          Billable Time : {{ card.billableTime }} Hrs
         </p>
       </div>
     </div>

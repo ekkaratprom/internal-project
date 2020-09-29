@@ -21,44 +21,101 @@
 
 <div class="container-fluid ">
     <div class="row">
-        <div class="col row-name" style="padding: 20px; background-color: violet;">Name
+        <div class="col row-name" style="padding: 20px; background-color: #ffffff;">
+            <div>NAME</div>
+            <ng-template #content let-modal>
+                <app-card-form (cardChange)="onCardChange($event)"></app-card-form>
+            </ng-template>
 
+            <button (click)="open(content)" class="add-button">Add Card</button>
         </div>
-        <div class="col" style="padding: 20px; background-color: khaki;">MON
+        <div class="col" style="padding: 20px; background-color: #ffffff;">
+            <div>
+                MON
+            </div>
 
+            <ng-template #content let-modal>
+                <app-card-form (cardChange)="getAll()"></app-card-form>
+            </ng-template>
+
+            <button (click)="open(content)" class="add-button">Add Card</button>
         </div>
-        <div class="col" style="padding: 20px; background-color: violet;">TUE
+        <div class="col" style="padding: 20px; background-color: #ffffff;">
+            <div>
+                TUE
+            </div>
+            <ng-template #content let-modal>
+                <app-card-form (cardChange)="getAll()"></app-card-form>
+            </ng-template>
 
+            <button (click)="open(content)" class="add-button">Add Card</button>
         </div>
-        <div class="col" style="padding: 20px; background-color: khaki;">WED
+        <div class="col" style="padding: 20px; background-color: #ffffff;">
+            <div>
+                WED
+            </div>
+            <ng-template #content let-modal>
+                <app-card-form (cardChange)="getAll()"></app-card-form>
+            </ng-template>
 
+            <button (click)="open(content)" class="add-button">Add Card</button>
         </div>
-        <div class="col" style="padding: 20px; background-color: violet;">THU
+        <div class="col" style="padding: 20px; background-color: #ffffff;">
+            <div>
+                THU
+            </div>
 
+            <ng-template #content let-modal>
+                <app-card-form (cardChange)="getAll()"></app-card-form>
+            </ng-template>
+
+            <button (click)="open(content)" class="add-button">Add Card</button>
         </div>
-        <div class="col" style="padding: 20px; background-color: khaki;">FRI
+        <div class="col" style="padding: 20px; background-color:#ffffff;">
+            <div>
+                FRI
+            </div>
+            <ng-template #content let-modal>
+                <app-card-form (cardChange)="getAll()"></app-card-form>
+            </ng-template>
 
+            <button (click)="open(content)" class="add-button">Add Card</button>
         </div>
     </div>
-    <div class="row">
-        <div class="col row-name " style="padding: 20px; background-color: violet;">
 
-        </div>
-        <div class="col my-card" style="padding: 20px; background-color: khaki;">
-            <!-- <app-card-form></app-card-form> -->
-            <app-card></app-card>
-        </div>
-        <div class="col my-card" style="padding: 20px; background-color: violet;">
-            <app-card></app-card>
-        </div>
-        <div class="col my-card" style="padding: 20px; background-color: khaki;">
-            <app-card></app-card>
-        </div>
-        <div class="col my-card" style="padding: 20px; background-color: violet;">
-            <app-card></app-card>
-        </div>
-        <div class="col my-card" style="padding: 20px; background-color: khaki;">
-            <app-card></app-card>
+
+    <div *ngFor="let people of x | keyvalue">
+        {{people.key}}
+        <div class="row">
+            <div class="col row-name " style="padding: 20px; background-color:#ffffff;">
+            </div>
+            <div class="col my-card" style="padding: 20px; background-color: #ffffff;">
+                <div *ngFor="let c of people.value | keyvalue">
+                    <!-- <div> *ngFor xxx of c.value </div> -->
+                    <app-card *ngIf="c.key === 'Monday'" [card]="c.key === 'Monday' ? c.value : {} "></app-card>
+                </div>
+            </div>
+            <div class="col my-card" style="padding: 20px; background-color: #ffffff;">
+                <div *ngFor="let c of people.value | keyvalue">
+                    <app-card *ngIf="c.key === 'Tuesday'" [card]="c.key === 'Tuesday' ? c.value : {} "></app-card>
+                </div>
+            </div>
+            <div class="col my-card" style="padding: 20px; background-color:#ffffff;">
+                <div *ngFor="let c of people.value | keyvalue">
+                    <app-card *ngIf="c.key === 'Wednesday'" [card]="c.key === 'Wednesday' ? c.value : {} "></app-card>
+                </div>
+            </div>
+            <div class="col my-card" style="padding: 20px; background-color: #ffffff;">
+                <div *ngFor="let c of people.value | keyvalue">
+                    <app-card *ngIf="c.key === 'Thursday'" [card]="c.key === 'Thursday' ? c.value : {} "></app-card>
+                </div>
+            </div>
+            <div class="col my-card" style="padding: 20px; background-color: #ffffff;">
+                <div *ngFor="let c of people.value | keyvalue">
+                    <app-card *ngIf="c.key === 'Friday'" [card]="c.key === 'Friday' ? c.value : {} "></app-card>
+                </div>
+            </div>
         </div>
     </div>
+
 </div>
