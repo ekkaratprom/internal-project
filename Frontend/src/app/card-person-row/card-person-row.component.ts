@@ -73,20 +73,26 @@ export class CardPersonRowComponent implements OnInit {
   }
 
   toWeeks(): void {
+    console.log('something')
     const objToReturn = {}
     this.cards.forEach((task) => {
-      if (objToReturn[task.assignee]) {
-        objToReturn[task.assignee] = objToReturn[task.assignee];
-
-      } else {
+      // If assignee is empty create an object
+      if (!objToReturn[task.assignee]) {
         objToReturn[task.assignee] = objToReturn[task.assignee] = {};
       }
-      // z[task.assignee] = z[task.assignee] ? z[task.assignee] : {}
+      // Date parsing input date string; get dayInweek in number; start on Sunday
       const taskDate = task.taskDate;
       const taskDateParsed = Date.parse(taskDate)
       const taskDateObject = new Date(taskDateParsed);
       const taskDateDayInWeek = taskDateObject.getDay();
-      objToReturn[task.assignee][this.weekdayfn(taskDateDayInWeek)] = task;
+
+      if (!objToReturn[task.assignee][this.weekdayfn(taskDateDayInWeek)]) {
+        // if object is undefined, create an array with task in it
+        objToReturn[task.assignee][this.weekdayfn(taskDateDayInWeek)] = [task];
+      } else {
+        // else push task into exisiting array  
+        objToReturn[task.assignee][this.weekdayfn(taskDateDayInWeek)].push(task);
+      }
     })
     console.log(objToReturn);
     this.x = objToReturn;

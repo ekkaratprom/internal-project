@@ -92,27 +92,49 @@
             <div class="col my-card" style="padding: 20px; background-color: #ffffff;">
                 <div *ngFor="let c of people.value | keyvalue">
                     <!-- <div> *ngFor xxx of c.value </div> -->
-                    <app-card *ngIf="c.key === 'Monday'" [card]="c.key === 'Monday' ? c.value : {} "></app-card>
+                    <div *ngIf="c.key === 'Monday'">
+                        <div *ngFor="let task of c.value">
+                            <app-card [card]="task"></app-card>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="col my-card" style="padding: 20px; background-color: #ffffff;">
                 <div *ngFor="let c of people.value | keyvalue">
-                    <app-card *ngIf="c.key === 'Tuesday'" [card]="c.key === 'Tuesday' ? c.value : {} "></app-card>
+                    <div *ngIf="c.key === 'Tuesday'">
+                        <div *ngFor="let task of c.value">
+                            <app-card [card]="task"></app-card>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="col my-card" style="padding: 20px; background-color:#ffffff;">
                 <div *ngFor="let c of people.value | keyvalue">
-                    <app-card *ngIf="c.key === 'Wednesday'" [card]="c.key === 'Wednesday' ? c.value : {} "></app-card>
+                    <div *ngIf="c.key === 'Wednesday'">
+                        <div *ngFor="let task of c.value">
+                            <app-card [card]="task"></app-card>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col my-card" style="padding: 20px; background-color: #ffffff;">
                 <div *ngFor="let c of people.value | keyvalue">
-                    <app-card *ngIf="c.key === 'Thursday'" [card]="c.key === 'Thursday' ? c.value : {} "></app-card>
+                    <div *ngIf="c.key === 'Thursday'">
+                        <div *ngFor="let task of c.value">
+                            <app-card [card]="task"></app-card>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col my-card" style="padding: 20px; background-color: #ffffff;">
                 <div *ngFor="let c of people.value | keyvalue">
-                    <app-card *ngIf="c.key === 'Friday'" [card]="c.key === 'Friday' ? c.value : {} "></app-card>
+                    <div *ngIf="c.key === 'Friday'">
+                        <div *ngFor="let task of c.value">
+                            <app-card [card]="task"></app-card>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
