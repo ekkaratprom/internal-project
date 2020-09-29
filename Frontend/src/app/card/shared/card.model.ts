@@ -1,4 +1,4 @@
-export interface Card {
+export type CardResponse = {
     name: string;
     id: number;
     projectId: number;

@@ -1,47 +1,63 @@
+import { CardService } from './shared/card.service';
 import { Component, OnInit, NgModule } from '@angular/core';
 import { Pipe, PipeTransform } from '@angular/core';
-import { Card } from './shared/card.model';
+import { CardResponse } from './shared/card.model';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
 })
-export class CardComponent {
-  cards: Card[] = [];
+export class CardComponent implements OnInit {
+  cardResponse: CardResponse;
+
+  cards: CardResponse[] = [];
   referenceLink = '';
   searchText = '';
-  constructor() {
-    this.cards.push({
-      name: 'nine',
-      id: 1,
-      projectId: 2,
-      projectName: 'AllianzProject01',
-      taskName: 'create card component',
-      estimateTime: 6,
-      actualTime: 12,
-      referenceLink: 'https://www.facebook.com/',
-      taskDate: '08/12/56',
-      completedStatus: true,
-      billableTime: 5
-    },
-      {
-        name: 'Big',
-        id: 2,
-        projectId: 2,
-        projectName: 'AllianzProject01',
-        taskName: 'create NavBar component',
-        estimateTime: 8,
-        actualTime: 16,
-        referenceLink: 'https://www.youtube.com/?gl=TH',
-        taskDate: '15/12/56',
-        completedStatus: true,
-        billableTime: 5
-      }
-    );
+  constructor(config: NgbModalConfig, private modalService: NgbModal, public service: CardService) {
+
+
   }
 
+  // open(content) {
+  //   this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+  //     this.closeResult = `Closed with: ${result}`;
+  //   }, (reason) => {
+  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  //   });
+  // }
 
+  ngOnInit(): void {
+    this.getAll();
+  }
+
+  getAll() {
+    this.service.getAllForm().subscribe((res) => {
+      this.cardResponse = res;
+      console.log(this.cards)
+      this.cards.push({
+        name: this.cardResponse.name,
+        id: 1,
+        projectId: this.cardResponse.projectId,
+        projectName: this.cardResponse.projectName,
+        taskName: this.cardResponse.taskName,
+        estimateTime: this.cardResponse.estimateTime,
+        actualTime: this.cardResponse.actualTime,
+        referenceLink: this.cardResponse.referenceLink,
+        taskDate: this.cardResponse.taskDate,
+        completedStatus: this.cardResponse.completedStatus,
+        billableTime: this.cardResponse.billableTime
+      },
+      );
+
+    })
+  }
+
+  open(content) {
+    this.modalService.open(content, { size: 'sm' });
+  }
 
   addCard(): void {
     const newperson = 'new person';
@@ -60,4 +76,11 @@ export class CardComponent {
     }
     );
   }
+
+  // getAll(): void {
+  //   this.service.getAllform().subscribe((res) => {
+  //     this.CardResponse = res;
+
+  //   })
+  // }
 }

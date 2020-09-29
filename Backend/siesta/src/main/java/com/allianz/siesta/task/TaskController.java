@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping(value = "/api")
@@ -26,6 +28,12 @@ public class TaskController {
     public
     Iterable<TaskResponse> getAllTasks() {
         return taskService.getAllTasks();
+    }
+
+    @CrossOrigin
+    @GetMapping(path = "/v2/task/{taskDate}")
+    public List<TaskResponse> findTaskByDate(@PathVariable(value = "taskDate") String taskDate){
+        return taskService.findTaskByDate(taskDate);
     }
 
 
