@@ -1,3 +1,4 @@
+import { CardPersonRowComponent } from './card-person-row/card-person-row.component';
 import { FilterPipe } from './card/filter.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -8,7 +9,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CardComponent } from './card/card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CardFormComponent } from './card-form/card-form.component';
-import { CardPersonRowComponent } from './card-person-row/card-person-row.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
