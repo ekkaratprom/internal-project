@@ -9,15 +9,22 @@
   />
 </div>
 
-<button (click)="addCard()" class="add-button">Add Card</button>
+<ng-template #content let-modal>
+  <app-card-form (cardChange)="getAll()"></app-card-form>
+</ng-template>
+
+<button (click)="open(content)" class="add-button">Add Card</button>
 
 <ul class="list-group list-group-flush">
-  <li class="list-group-item" *ngFor="let c of cards | appFilter: searchText">
+  <li
+    class="list-group-item"
+    *ngFor="let c of cardResponse | appFilter: searchText"
+  >
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">
           <i class="material-icons">person_pin</i>
-          {{ c.name }}
+          {{ c.assignee }}
         </h5>
         <p class="card-text">
           {{ c.taskName }}

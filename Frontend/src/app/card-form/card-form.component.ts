@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { CardFormService } from './shared/card-from.service';
 import { CardForm } from './shared/card-form.model';
@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 export class CardFormComponent implements OnInit {
   card: CardForm;
   form: FormGroup;
+
+  @Output() cardChange = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder,
     private cardFormService: CardFormService,
@@ -47,7 +49,10 @@ export class CardFormComponent implements OnInit {
 
   ngOnInit(): void { }
 
+
+
   onSubmit() {
+
     const currentDate = new Date();
     this.card = {
       actualTime: parseInt(this.addForm.get('actualTime').value),
@@ -67,7 +72,7 @@ export class CardFormComponent implements OnInit {
         console.log(res)
         // this.router.navigateByUrl(['/',]);
       });
-
+    this.cardChange.emit();
   }
 
 }
