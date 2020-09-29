@@ -19,8 +19,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User saveUser(UserRequest userRequest) {
         User user = userRequest.userRequest();
-//        task.setCreateDate(new Date());
-////    	task.setTaskDate(new Date());
         return userRepository.save(user);
+    }
+
+    @Override
+    public Iterable<User> getAllUsers(){
+        return userRepository.findAll();
     }
 }

@@ -7,4 +7,6 @@ import com.allianz.siesta.user.UserRequest;
 public interface UserService {
 
     User saveUser(UserRequest userRequest);
+
+    Iterable<User> getAllUsers();
 }
