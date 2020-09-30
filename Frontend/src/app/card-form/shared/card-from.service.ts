@@ -1,4 +1,4 @@
-import { CardForm } from './card-form.model';
+import { CardForm, User, Project } from './card-form.model';
 import { Form } from './card-form-test.model';
 import { Injectable } from '@angular/core';
 import {
@@ -15,16 +15,24 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class CardFormService {
-  url = `http://localhost:8080/api/v1/addtask`;
+  url = `http://localhost:8080/api/`;
 
   constructor(private http: HttpClient) { }
 
   //POST 
   addForm(cardForm: any): Observable<HttpResponse<CardForm>> {
-    return this.http.post<CardForm>(this.url, cardForm, { observe: 'response' });
+    return this.http.post<CardForm>(this.url + 'v1/addtask', cardForm, { observe: 'response' });
   }
 
+  //GET 
+  getAllAssignee(): Observable<User[]> {
+    return this.http.get<User[]>(this.url + 'v2/user');
+  }
 
+  //GET 
+  getAllAProject(): Observable<Project[]> {
+    return this.http.get<Project[]>(this.url + 'v1/project');
+  }
 
   // get(assignee: string) {
   //   const getOptions = {

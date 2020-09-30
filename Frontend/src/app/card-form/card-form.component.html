@@ -3,10 +3,17 @@
     <div class="card-body">
       <div class="form-group mx-sm-3 mb-2">
         <h6>Assignee</h6>
-        <input type="text" class="form-control" id="input_assignee" placeholder="assignee.." formControlName="userId" />
-        <div *ngIf="addForm.get('userId').hasError('pattern')" class="error">
+        <!-- <input type="text" class="form-control" id="input_assignee" placeholder="assignee.." formControlName="userId" /> -->
+
+
+        <!-- <input class="form-control" [(ngModel)]="userId" (change)="saveUser($event)" id="input_assignee"> -->
+        <select class="form-control" id="input_assignee" formControlName="userId">
+          <option *ngFor="let c of userList" value="{{c.userId}}">{{c.assignee}}</option>
+        </select>
+
+        <!-- <div *ngIf="addForm.get('userId').hasError('pattern')" class="error">
           Assignee has invalid characters
-        </div>
+        </div> -->
       </div>
 
       <div class="form-group mx-sm-3 mb-2">
@@ -20,11 +27,16 @@
 
       <div class="form-group mx-sm-3 mb-2">
         <h6>Project name</h6>
-        <input type="text" class="form-control" id="input_project" placeholder="project name.."
-          formControlName="projectId" />
-        <div *ngIf="addForm.get('projectId').hasError('pattern')" class="error">
+        <!-- <input type="text" class="form-control" id="input_project" placeholder="project name.."
+          formControlName="projectId" /> -->
+
+        <select class="form-control" id="input_project" formControlName="projectId">
+          <option *ngFor="let c of projectList" value="{{c.projectId}}">{{c.projectName}}</option>
+        </select>
+
+        <!-- <div *ngIf="addForm.get('projectId').hasError('pattern')" class="error">
           Project name has invalid characters
-        </div>
+        </div> -->
       </div>
 
       <hr class="solid" />
@@ -66,8 +78,8 @@
       <!-- bug -->
       <!-- <div class="btn mb-2" (onClick)="onCancel()">cancel</div> -->
 
-
-      <button [disabled]="addForm.status === 'INVALID'" type="submit" (onClick)="onSubmit()">
+      <!-- [disabled]="addForm.status === 'INVALID'" -->
+      <button type="submit" (onClick)="onSubmit()">
         Submit
       </button>
       <!-- <p>{{ card | json }}</p> -->

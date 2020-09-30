@@ -10,14 +10,38 @@ import { Router } from '@angular/router';
   styleUrls: ['./card-form.component.css']
 })
 export class CardFormComponent implements OnInit {
-  card: CardForm;
-  form: FormGroup;
-
-  @Output() cardChange = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder,
     private cardFormService: CardFormService,
     private router: Router) { }
+
+  card: CardForm;
+  form: FormGroup;
+  userId: number;
+  projectId: number;
+
+  @Output() cardChange = new EventEmitter();
+
+
+  // userList = [
+  //   { userId: 1, assignee: 'yuppry ryla' },
+  //   { userId: 2, assignee: 'big ekkarat' },
+  //   { userId: 3, assignee: 'kerati kasisuwan' },
+  //   { userId: 4, assignee: 'view atcharee' },
+  //   { userId: 5, assignee: 'Tanta Wan' },
+  //   { userId: 6, assignee: 'Helena Groz' },
+  //   { userId: 7, assignee: 'Selena Razza' }
+  // ];
+  userList = [];
+
+  // projectList = [
+  //   { projectId: 1, projectName: 'armonia' },
+  //   { projectId: 2, projectName: 'siesta' },
+  //   { projectId: 3, projectName: 'olivia' },
+  //   { projectId: 4, projectName: 'Starving' },
+  //   { projectId: 5, projectName: 'Anaconda' }
+  // ];
+  projectList = [];
 
   public addForm = new FormGroup({
     userId: new FormControl('1', Validators.compose([
@@ -47,7 +71,33 @@ export class CardFormComponent implements OnInit {
     ])),
   });
 
-  ngOnInit(): void { }
+  getAllAssignee(): void {
+    this.cardFormService.getAllAssignee().subscribe((res) => {
+      this.userList = res;
+    });
+  }
+  getAllProject(): void {
+    this.cardFormService.getAllAProject().subscribe((res) => {
+      this.projectList = res;
+    });
+  }
+
+  public saveUser(e): void {
+    const assignee = e.target.value;
+    const list = this.userList.filter(x => x.assignee === assignee)[0];
+    // console.log(list.userId);
+  }
+
+  public saveProject(e): void {
+    const project = e.target.value;
+    const list = this.projectList.filter(x => x.projectName === project)[0];
+    console.log(list.projectId);
+  }
+
+  ngOnInit(): void {
+    this.getAllAssignee();
+    this.getAllProject();
+  }
 
 
 

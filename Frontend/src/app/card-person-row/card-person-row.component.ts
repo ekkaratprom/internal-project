@@ -30,7 +30,7 @@ export class CardPersonRowComponent implements OnInit {
   }
 
   getAll() {
-    this.cardService.getAllForm().subscribe(res => {
+    this.cardService.getAllCard().subscribe(res => {
       this.cards = res;
       this.toWeeks();
       // console.log(this.cards)
