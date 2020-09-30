@@ -3,11 +3,12 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { CardFormService } from './shared/card-from.service';
 import { CardForm } from './shared/card-form.model';
 import { Router } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-card-form',
   templateUrl: './card-form.component.html',
-  styleUrls: ['./card-form.component.css']
+  styleUrls: ['./card-form.component.css'],
 })
 export class CardFormComponent implements OnInit {
   card: CardForm;
@@ -17,7 +18,7 @@ export class CardFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private cardFormService: CardFormService,
-    private router: Router) { }
+    private router: Router, public activeModal: NgbActiveModal) { }
 
   public addForm = new FormGroup({
     userId: new FormControl('1', Validators.compose([

@@ -1,5 +1,5 @@
 import { CardService } from './shared/card.service';
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Pipe, PipeTransform } from '@angular/core';
 import { CardResponse } from './shared/card.model';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -20,15 +20,6 @@ export class CardComponent implements OnInit {
 
 
   }
-
-  // open(content) {
-  //   this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-  //     this.closeResult = `Closed with: ${result}`;
-  //   }, (reason) => {
-  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  //   });
-  // }
-
   ngOnInit(): void {
     this.getAll();
   }
@@ -37,20 +28,7 @@ export class CardComponent implements OnInit {
     this.service.getAllForm().subscribe((res) => {
       this.cardResponse = res;
       console.log(this.cards)
-      this.cards.push({
-        name: this.cardResponse.name,
-        id: 1,
-        projectId: this.cardResponse.projectId,
-        projectName: this.cardResponse.projectName,
-        taskName: this.cardResponse.taskName,
-        estimateTime: this.cardResponse.estimateTime,
-        actualTime: this.cardResponse.actualTime,
-        referenceLink: this.cardResponse.referenceLink,
-        taskDate: this.cardResponse.taskDate,
-        completedStatus: this.cardResponse.completedStatus,
-        billableTime: this.cardResponse.billableTime
-      },
-      );
+
 
     })
   }
@@ -76,11 +54,4 @@ export class CardComponent implements OnInit {
     }
     );
   }
-
-  // getAll(): void {
-  //   this.service.getAllform().subscribe((res) => {
-  //     this.CardResponse = res;
-
-  //   })
-  // }
 }
