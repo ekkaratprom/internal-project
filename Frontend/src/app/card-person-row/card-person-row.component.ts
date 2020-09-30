@@ -82,9 +82,11 @@ export class CardPersonRowComponent implements OnInit {
       }
       // Date parsing input date string; get dayInweek in number; start on Sunday
       const taskDate = task.taskDate;
-      const taskDateParsed = Date.parse(taskDate)
+      const taskDateParsed = Date.parse(taskDate);
       const taskDateObject = new Date(taskDateParsed);
       const taskDateDayInWeek = taskDateObject.getDay();
+      const taskDateDayInMonth = taskDateObject.getDate();
+      console.log(taskDateDayInMonth);
 
       if (!objToReturn[task.assignee][this.weekdayfn(taskDateDayInWeek)]) {
         // if object is undefined, create an array with task in it
