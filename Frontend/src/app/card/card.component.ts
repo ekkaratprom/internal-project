@@ -2,7 +2,7 @@ import { CardService } from './shared/card.service';
 import { Component, OnInit, NgModule, Input } from '@angular/core';
 import { Pipe, PipeTransform } from '@angular/core';
 import { CardResponse } from './shared/card.model';
-import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -15,12 +15,17 @@ export class CardComponent implements OnInit {
 
   // cards: CardResponse[] = [];
   @Input() card: CardResponse;
+  modalReference: NgbModalRef;
 
   // referenceLink = '';
   // searchText = '';
   constructor(config: NgbModalConfig, private modalService: NgbModal) {
+
   }
 
+  open(content): void {
+    this.modalReference = this.modalService.open(content, { size: 'sm' });
+  }
   // open(content) {
   //   this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
   //     this.closeResult = `Closed with: ${result}`;

@@ -17,4 +17,5 @@ export class CardService {
   getAllForm(): Observable<CardResponse[]> {
     return this.http.get<CardResponse[]>(this.url);
   }
+
 }

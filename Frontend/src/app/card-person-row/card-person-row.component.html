@@ -1,143 +1,168 @@
-<!-- <div class="row-container">
-    <div class="card-container">
-        <app-card></app-card>
-    </div>
-    <div class="card-container">
+<nav class="navbar navbar-light bg-light">
+  <div class="calendar">
+    <form class="form-inline">
+      <div class="input-group">
+        <input
+          type="hidden"
+          class="form-control"
+          placeholder="dd/mm/yyyy"
+          name="dp"
+          [(ngModel)]="DMY"
+          (ngModelChange)="changeMonth(); changeday(); weekdayfn1()"
+          ngbDatepicker
+          [footerTemplate]="footerTemplate"
+          #d="ngbDatepicker"
+        />
+        <div class="header">{{ month }} {{ DMY.year }}</div>
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary calendar"
+            (click)="d.toggle()"
+            type="button"
+          ></button>
+        </div>
+      </div>
+    </form>
+  </div>
 
-    </div>
-    <div class="card-container">
+  <ng-template #footerTemplate>
+    <hr class="my-0" />
+    <button
+      class="btn btn-primary btn-sm m-2 float-left form-control"
+      (click)="DMY = today; changeMonth(); weekdayfn1(); d.close()"
+      [(ngModel)]="DMY"
+      (ngModelChange)="changeMonth(); weekdayfn1()"
+    >
+      Today
+    </button>
 
-    </div>
-    <div class="card-container">
+    <button
+      class="btn btn-secondary btn-sm m-2 float-right"
+      (click)="d.close()"
+    >
+      Close
+    </button>
+  </ng-template>
+</nav>
 
-    </div>
-    <div class="card-container">
+<div class="form-group">
+  <label for="search-text">Search Text</label>
+  <input
+    type="text"
+    class="form-control"
+    id="search-text"
+    [(ngModel)]="searchText"
+    placeholder="Enter text to search"
+  />
+</div>
 
-    </div>
-    <div class="card-container">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col row-name" style="padding: 20px; background-color: #ffffff">
+      <div>NAME</div>
+      <ng-template #content let-modal>
+        <app-card-form (cardChange)="onCardChange($event)"></app-card-form>
+      </ng-template>
 
+      <button (click)="open(content)" class="add-button">Add Card</button>
     </div>
-</div> -->
+    <div class="col" style="padding: 20px; background-color: #ffffff">
+      <div>MON {{ weekdays[1] }}</div>
 
-<div class="container-fluid ">
+      <ng-template #content let-modal>
+        <app-card-form (cardChange)="getAll()"></app-card-form>
+      </ng-template>
+
+      <button (click)="open(content)" class="add-button">Add Card</button>
+    </div>
+    <div class="col" style="padding: 20px; background-color: #ffffff">
+      <div>TUE {{ weekdays[2] }}</div>
+      <ng-template #content let-modal>
+        <app-card-form (cardChange)="getAll()"></app-card-form>
+      </ng-template>
+
+      <button (click)="open(content)" class="add-button">Add Card</button>
+    </div>
+    <div class="col" style="padding: 20px; background-color: #ffffff">
+      <div>WED {{ weekdays[3] }}</div>
+      <ng-template #content let-modal>
+        <app-card-form (cardChange)="getAll()"></app-card-form>
+      </ng-template>
+
+      <button (click)="open(content)" class="add-button">Add Card</button>
+    </div>
+    <div class="col" style="padding: 20px; background-color: #ffffff">
+      <div>THU {{ weekdays[4] }}</div>
+
+      <ng-template #content let-modal>
+        <app-card-form (cardChange)="getAll()"></app-card-form>
+      </ng-template>
+
+      <button (click)="open(content)" class="add-button">Add Card</button>
+    </div>
+    <div class="col" style="padding: 20px; background-color: #ffffff">
+      <div>FRI {{ weekdays[5] }}</div>
+      <ng-template #content let-modal>
+        <app-card-form (cardChange)="getAll()"></app-card-form>
+      </ng-template>
+
+      <button (click)="open(content)" class="add-button">Add Card</button>
+    </div>
+  </div>
+
+  <div *ngFor="let people of x | keyvalue">
+    {{ people.key | appFilter }}
     <div class="row">
-        <div class="col row-name" style="padding: 20px; background-color: #ffffff;">
-            <div>NAME</div>
-            <ng-template #content let-modal>
-                <app-card-form (cardChange)="onCardChange($event)"></app-card-form>
-            </ng-template>
-
-            <button (click)="open(content)" class="add-button">Add Card</button>
-        </div>
-        <div class="col" style="padding: 20px; background-color: #ffffff;">
-            <div>
-                MON
+      <div
+        class="col row-name"
+        style="padding: 20px; background-color: #ffffff"
+      ></div>
+      <div class="col my-card" style="padding: 20px; background-color: #ffffff">
+        <div *ngFor="let c of people.value | keyvalue">
+          <!-- <div> *ngFor xxx of c.value </div> -->
+          <div *ngIf="c.key === 'Monday'">
+            <div *ngFor="let task of c.value">
+              <app-card [card]="task"></app-card>
             </div>
-
-            <ng-template #content let-modal>
-                <app-card-form (cardChange)="getAll()"></app-card-form>
-            </ng-template>
-
-            <button (click)="open(content)" class="add-button">Add Card</button>
+          </div>
         </div>
-        <div class="col" style="padding: 20px; background-color: #ffffff;">
-            <div>
-                TUE
+      </div>
+      <div class="col my-card" style="padding: 20px; background-color: #ffffff">
+        <div *ngFor="let c of people.value | keyvalue">
+          <div *ngIf="c.key === 'Tuesday'">
+            <div *ngFor="let task of c.value">
+              <app-card [card]="task"></app-card>
             </div>
-            <ng-template #content let-modal>
-                <app-card-form (cardChange)="getAll()"></app-card-form>
-            </ng-template>
-
-            <button (click)="open(content)" class="add-button">Add Card</button>
+          </div>
         </div>
-        <div class="col" style="padding: 20px; background-color: #ffffff;">
-            <div>
-                WED
+      </div>
+      <div class="col my-card" style="padding: 20px; background-color: #ffffff">
+        <div *ngFor="let c of people.value | keyvalue">
+          <div *ngIf="c.key === 'Wednesday'">
+            <div *ngFor="let task of c.value">
+              <app-card [card]="task"></app-card>
             </div>
-            <ng-template #content let-modal>
-                <app-card-form (cardChange)="getAll()"></app-card-form>
-            </ng-template>
-
-            <button (click)="open(content)" class="add-button">Add Card</button>
+          </div>
         </div>
-        <div class="col" style="padding: 20px; background-color: #ffffff;">
-            <div>
-                THU
+      </div>
+      <div class="col my-card" style="padding: 20px; background-color: #ffffff">
+        <div *ngFor="let c of people.value | keyvalue">
+          <div *ngIf="c.key === 'Thursday'">
+            <div *ngFor="let task of c.value">
+              <app-card [card]="task"></app-card>
             </div>
-
-            <ng-template #content let-modal>
-                <app-card-form (cardChange)="getAll()"></app-card-form>
-            </ng-template>
-
-            <button (click)="open(content)" class="add-button">Add Card</button>
+          </div>
         </div>
-        <div class="col" style="padding: 20px; background-color:#ffffff;">
-            <div>
-                FRI
+      </div>
+      <div class="col my-card" style="padding: 20px; background-color: #ffffff">
+        <div *ngFor="let c of people.value | keyvalue">
+          <div *ngIf="c.key === 'Friday'">
+            <div *ngFor="let task of c.value">
+              <app-card [card]="task"></app-card>
             </div>
-            <ng-template #content let-modal>
-                <app-card-form (cardChange)="getAll()"></app-card-form>
-            </ng-template>
-
-            <button (click)="open(content)" class="add-button">Add Card</button>
+          </div>
         </div>
+      </div>
     </div>
-
-
-    <div *ngFor="let people of x | keyvalue">
-        {{people.key}}
-        <div class="row">
-            <div class="col row-name " style="padding: 20px; background-color:#ffffff;">
-            </div>
-            <div class="col my-card" style="padding: 20px; background-color: #ffffff;">
-                <div *ngFor="let c of people.value | keyvalue">
-                    <!-- <div> *ngFor xxx of c.value </div> -->
-                    <div *ngIf="c.key === 'Monday'">
-                        <div *ngFor="let task of c.value">
-                            <app-card [card]="task"></app-card>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col my-card" style="padding: 20px; background-color: #ffffff;">
-                <div *ngFor="let c of people.value | keyvalue">
-                    <div *ngIf="c.key === 'Tuesday'">
-                        <div *ngFor="let task of c.value">
-                            <app-card [card]="task"></app-card>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col my-card" style="padding: 20px; background-color:#ffffff;">
-                <div *ngFor="let c of people.value | keyvalue">
-                    <div *ngIf="c.key === 'Wednesday'">
-                        <div *ngFor="let task of c.value">
-                            <app-card [card]="task"></app-card>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col my-card" style="padding: 20px; background-color: #ffffff;">
-                <div *ngFor="let c of people.value | keyvalue">
-                    <div *ngIf="c.key === 'Thursday'">
-                        <div *ngFor="let task of c.value">
-                            <app-card [card]="task"></app-card>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col my-card" style="padding: 20px; background-color: #ffffff;">
-                <div *ngFor="let c of people.value | keyvalue">
-                    <div *ngIf="c.key === 'Friday'">
-                        <div *ngFor="let task of c.value">
-                            <app-card [card]="task"></app-card>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+  </div>
 </div>

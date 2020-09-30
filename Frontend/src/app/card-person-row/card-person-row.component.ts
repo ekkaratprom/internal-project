@@ -1,7 +1,8 @@
 import { CardResponse } from './../card/shared/card.model';
 import { CardService } from './../card/shared/card.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NgbModalConfig, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-card-person-row',
@@ -11,7 +12,24 @@ import { NgbModalConfig, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstra
 export class CardPersonRowComponent implements OnInit {
   modalReference: NgbModalRef;
   cards: CardResponse[] = [];
+
+  DMY = this.calendar.getToday();
+  weekdays = [0, 0, 0, 0, 0, 0, 0];
+  date = 8;
   x: any;
+  searchText = '';
+
+
+
+
+  monthlist = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+    "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+
+  month = '';
+  today = this.calendar.getToday();
+
+
+  title = 'angular-text-search-highlight';
 
   weekDays = {
     1: 'Monday',
@@ -23,10 +41,18 @@ export class CardPersonRowComponent implements OnInit {
     0: 'Sunday'
   }
 
-  constructor(private cardService: CardService, config: NgbModalConfig, private modalService: NgbModal) { }
+  constructor(private calendar: NgbCalendar, private cardService: CardService, config: NgbModalConfig, private modalService: NgbModal) {
+    this.changeMonth()
+    this.changeday()
+    this.weekdayfn1()
+  }
 
   ngOnInit(): void {
     this.getAll();
+  }
+
+  public changeMonth() {
+    this.month = this.monthlist[this.DMY.month - 1];
   }
 
   getAll() {
@@ -57,6 +83,25 @@ export class CardPersonRowComponent implements OnInit {
       //   );
     });
 
+  }
+
+  public changeday() {
+    this.date = this.calendar.getWeekday(this.DMY);
+  }
+  public weekdayfn1() {
+    this.weekdays.splice(this.date, 1, this.DMY.day)
+    for (let i = 0; i < 7; i++) {
+      if (i < this.date) {
+        let diff = this.date - i
+        let previousday = this.calendar.getPrev(this.DMY, "d", diff)
+        this.weekdays[i] = previousday.day
+      }
+      if (i > this.date) {
+        let diff = i - this.date
+        let previousday = this.calendar.getNext(this.DMY, "d", diff)
+        this.weekdays[i] = previousday.day
+      }
+    }
   }
 
   open(content): void {
