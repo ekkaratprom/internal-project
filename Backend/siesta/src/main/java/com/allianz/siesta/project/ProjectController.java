@@ -16,4 +16,10 @@ public class ProjectController {
     public Project addProject(@RequestBody ProjectRequest projectRequest){
         return projectService.saveProject(projectRequest);
     }
+
+    @CrossOrigin
+    @GetMapping (value = "/v1/project")
+    public Iterable<ProjectResponse> getAllProjects(){
+        return projectService.getAllProjects();
+    }
 }
