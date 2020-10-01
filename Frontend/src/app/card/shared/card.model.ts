@@ -1,6 +1,6 @@
 export type CardResponse = {
-    name: string;
-    id: number;
+    assignee: string;
+    userId: number;
     projectId: number;
     projectName: string;
     taskName: string;

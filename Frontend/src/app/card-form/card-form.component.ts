@@ -56,15 +56,15 @@ export class CardFormComponent implements OnInit {
 
     const currentDate = new Date();
     this.card = {
-      actualTime: parseInt(this.addForm.get('actualTime').value),
+      actualTime: parseFloat(this.addForm.get('actualTime').value),
       completedStatus: true,
-      estimateTime: parseInt(this.addForm.get('estimateTime').value),
+      estimateTime: parseFloat(this.addForm.get('estimateTime').value),
       projectId: parseInt(this.addForm.get('projectId').value),
       referenceLink: this.addForm.get('referenceLink').value,
-      taskDate: currentDate.toUTCString(),
+      taskDate: currentDate.toISOString().split('T')[0],
       taskName: this.addForm.get('taskName').value,
       userId: parseInt(this.addForm.get('userId').value),
-      billableTime: parseInt(this.addForm.get('billableTime').value)
+      billableTime: parseFloat(this.addForm.get('billableTime').value)
     }
 
     console.log(this.card);
@@ -73,7 +73,12 @@ export class CardFormComponent implements OnInit {
         console.log(res)
         // this.router.navigateByUrl(['/',]);
       });
-    this.cardChange.emit();
+    this.cardChange.emit('submit');
+  }
+
+
+  onCancel(): void {
+    this.cardChange.emit('cancel');
   }
 
 }

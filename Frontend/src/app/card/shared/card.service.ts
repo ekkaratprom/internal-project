@@ -14,7 +14,8 @@ export class CardService {
   url = `http://localhost:8080/api/v2/task`;
 
   constructor(private http: HttpClient) { }
-  getAllForm(): Observable<CardResponse> {
-    return this.http.get<CardResponse>(this.url);
+  getAllForm(): Observable<CardResponse[]> {
+    return this.http.get<CardResponse[]>(this.url);
   }
+
 }

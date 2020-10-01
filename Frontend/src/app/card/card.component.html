@@ -1,57 +1,65 @@
-<div class="form-group">
+<!-- <div class="form-group">
   <label for="search-text">Search Text</label>
-  <input
-    type="text"
-    class="form-control"
-    id="search-text"
-    [(ngModel)]="searchText"
-    placeholder="Enter text to search"
-  />
-</div>
-
+  <input type="text" class="form-control" id="search-text" [(ngModel)]="searchText"
+    placeholder="Enter text to search" />
+</div> -->
+<!-- 
 <ng-template #content let-modal>
   <app-card-form (cardChange)="getAll()"></app-card-form>
 </ng-template>
 
-<button (click)="open(content)" class="add-button">Add Card</button>
+<button (click)="open(content)" class="add-button">Add Card</button> -->
 
+<ng-template #content let-modal>
+  <div class="pop-up">
+    <div>assignee: {{ card.assignee }}</div>
+    <div>task: {{ card.taskName }}</div>
+    <div>Project: {{ card.projectName }}</div>
+    <div>
+      Jira Link:
+      <a target="_blank" [href]="card.referenceLink">Link </a>
+    </div>
+    <div>assigned date: {{ card.taskDate }}</div>
+    <div>estimate time: {{ card.estimateTime }}</div>
+    <div>actual time: {{ card.actualTime }}</div>
+    <div>complete status: {{ card.completedStatus }}</div>
+  </div>
+</ng-template>
 <ul class="list-group list-group-flush">
-  <li
-    class="list-group-item"
-    *ngFor="let c of cardResponse | appFilter: searchText"
-  >
+  <li (click)="open(content)" class="list-group-item">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">
           <i class="material-icons">person_pin</i>
-          {{ c.assignee }}
+          {{ card.assignee }}
         </h5>
         <p class="card-text">
-          {{ c.taskName }}
+          {{ card.taskName }}
         </p>
-        <h6 class="project-name">project name: {{ c.projectName }}</h6>
+        <h6 class="project-name">project name: {{ card.projectName }}</h6>
         <hr class="solid" />
 
-        <h6>
-          <i class="fa fa-chain"></i>Jira Link :<a
+        <p>
+          <i class="material-icons">ic_insert_link</i>Jira Link :<a
             target="_blank"
-            [href]="c.referenceLink"
+            [href]="card.referenceLink"
             >Link
           </a>
-        </h6>
-        <h6>
+        </p>
+        <p>
           <i class="fa fa-clock-o"></i>
-          Estimate Time : {{ c.estimateTime }} Hrs
-        </h6>
-        <h6>
+          Estimate Time : {{ card.estimateTime }} Hrs
+        </p>
+        <p>
           <i class="far fa-check-circle"></i>Actual Time :
-          {{ c.actualTime }} Hrs
-        </h6>
-        <h6>
+          {{ card.actualTime }} Hrs
+        </p>
+        <p>
           <i class="fas fa-money-bill-wave"></i>
-          Billable Time : {{ c.billableTime }} Hrs
-        </h6>
+          Billable Time : {{ card.billableTime }} Hrs
+        </p>
       </div>
     </div>
+    <!-- </div> -->
   </li>
 </ul>
