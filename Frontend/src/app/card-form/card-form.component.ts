@@ -77,7 +77,7 @@ export class CardFormComponent implements OnInit {
     });
   }
   getAllProject(): void {
-    this.cardFormService.getAllAProject().subscribe((res) => {
+    this.cardFormService.getAllProject().subscribe((res) => {
       this.projectList = res;
     });
   }

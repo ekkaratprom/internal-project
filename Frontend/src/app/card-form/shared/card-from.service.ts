@@ -30,7 +30,7 @@ export class CardFormService {
   }
 
   //GET 
-  getAllAProject(): Observable<Project[]> {
+  getAllProject(): Observable<Project[]> {
     return this.http.get<Project[]>(this.url + 'v1/project');
   }
 

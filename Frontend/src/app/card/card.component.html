@@ -10,8 +10,23 @@
 
 <button (click)="open(content)" class="add-button">Add Card</button> -->
 
+<ng-template #content let-modal>
+  <div class="pop-up">
+    <div>assignee: {{ card.assignee }}</div>
+    <div>task: {{ card.taskName }}</div>
+    <div>Project: {{ card.projectName }}</div>
+    <div>
+      Jira Link:
+      <a target="_blank" [href]="card.referenceLink">Link </a>
+    </div>
+    <div>assigned date: {{ card.taskDate }}</div>
+    <div>estimate time: {{ card.estimateTime }}</div>
+    <div>actual time: {{ card.actualTime }}</div>
+    <div>complete status: {{ card.completedStatus }}</div>
+  </div>
+</ng-template>
 <ul class="list-group list-group-flush">
-  <li class="list-group-item">
+  <li (click)="open(content)" class="list-group-item">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">
@@ -25,7 +40,10 @@
         <hr class="solid" />
 
         <p>
-          <i class="material-icons">ic_insert_link</i>Jira Link :<a target="_blank" [href]="card.referenceLink">Link
+          <i class="material-icons">ic_insert_link</i>Jira Link :<a
+            target="_blank"
+            [href]="card.referenceLink"
+            >Link
           </a>
         </p>
         <p>
@@ -43,3 +61,5 @@
       </div>
     </div>
     <!-- </div> -->
+  </li>
+</ul>

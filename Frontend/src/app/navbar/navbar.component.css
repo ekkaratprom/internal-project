@@ -19,3 +19,9 @@ button.calendar:active {
   display: flex;
   flex-wrap: wrap;
 }
+.navbar {
+  align-items: center;
+}
+.monday {
+  margin-left: 15%;
+}
