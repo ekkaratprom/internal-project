@@ -11,11 +11,17 @@ import {
   providedIn: 'root'
 })
 export class CardService {
-  url = `http://localhost:8080/api/v2/task`;
+  url = `http://localhost:8080/api/v2/`;
 
   constructor(private http: HttpClient) { }
-  getAllForm(): Observable<CardResponse[]> {
-    return this.http.get<CardResponse[]>(this.url);
+
+  getAllCard(): Observable<CardResponse[]> {
+    return this.http.get<CardResponse[]>(this.url + 'task');
+
+  }
+
+  getCardByDate(taskDate: string): Observable<CardResponse> {
+    return this.http.get<CardResponse>(this.url + 'task/' + taskDate);
   }
 
 }

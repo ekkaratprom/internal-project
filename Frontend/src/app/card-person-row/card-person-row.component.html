@@ -111,7 +111,7 @@
   </div>
 
   <div *ngFor="let people of x | keyvalue">
-    {{ people.key | appFilter: searchText }}
+    {{ people.key | appFilter }}
     <div class="row">
       <div
         class="col row-name"

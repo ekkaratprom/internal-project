@@ -23,4 +23,10 @@ public class UserController {
     public Iterable<User> getAllUsers(){
         return userService.getAllUsers();
     }
+
+    @CrossOrigin
+    @GetMapping(value = "/v2/user")
+    public Iterable<UserResponse> getAllAssignees() {
+        return userService.getAllAssignees();
+    }
 }

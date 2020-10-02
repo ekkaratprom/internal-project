@@ -3,16 +3,33 @@
     <div class="card-body">
       <div class="form-group mx-sm-3 mb-2">
         <h6>Assignee</h6>
-        <input type="text" class="form-control" id="input_assignee" placeholder="assignee.." formControlName="userId" />
-        <div *ngIf="addForm.get('userId').hasError('pattern')" class="error">
+        <!-- <input type="text" class="form-control" id="input_assignee" placeholder="assignee.." formControlName="userId" /> -->
+
+        <!-- <input class="form-control" [(ngModel)]="userId" (change)="saveUser($event)" id="input_assignee"> -->
+        <select
+          class="form-control"
+          id="input_assignee"
+          formControlName="userId"
+        >
+          <option *ngFor="let c of userList" value="{{ c.userId }}">
+            {{ c.assignee }}
+          </option>
+        </select>
+
+        <!-- <div *ngIf="addForm.get('userId').hasError('pattern')" class="error">
           Assignee has invalid characters
-        </div>
+        </div> -->
       </div>
 
       <div class="form-group mx-sm-3 mb-2">
         <h6>Description</h6>
-        <input type="text" class="form-control" id="input_description" placeholder="description/task.."
-          formControlName="taskName" />
+        <input
+          type="text"
+          class="form-control"
+          id="input_description"
+          placeholder="description/task.."
+          formControlName="taskName"
+        />
         <div *ngIf="addForm.get('taskName').hasError('pattern')" class="error">
           Description has invalid characters
         </div>
@@ -20,45 +37,88 @@
 
       <div class="form-group mx-sm-3 mb-2">
         <h6>Project name</h6>
-        <input type="text" class="form-control" id="input_project" placeholder="project name.."
-          formControlName="projectId" />
-        <div *ngIf="addForm.get('projectId').hasError('pattern')" class="error">
-          Project name has invalid characters
-        </div>
-      </div>
+        <!-- <input type="text" class="form-control" id="input_project" placeholder="project name.."
+          formControlName="projectId" /> -->
 
-      <hr class="solid" />
+        <select
+          class="form-control"
+          id="input_project"
+          formControlName="projectId"
+        >
+          <option *ngFor="let c of projectList" value="{{ c.projectId }}">
+            {{ c.projectName }}
+          </option>
+        </select>
+
+        <!-- <div *ngIf="addForm.get('projectId').hasError('pattern')" class="error">
+          Project name has invalid characters
+        </div> -->
+      </div>
 
       <div class="form-group mx-sm-3 mb-2">
         <h6>Jira Link :</h6>
-        <input type="text" class="form-control" id="input_link" placeholder="link.." formControlName="referenceLink" />
-        <div *ngIf="addForm.get('referenceLink').hasError('pattern')" class="error">
+        <input
+          type="text"
+          class="form-control"
+          id="input_link"
+          placeholder="link.."
+          formControlName="referenceLink"
+        />
+        <div
+          *ngIf="addForm.get('referenceLink').hasError('pattern')"
+          class="error"
+        >
           Jira Link has invalid characters
         </div>
       </div>
 
       <div class="form-group mx-sm-3 mb-2">
         <h6>Estimate Time :</h6>
-        <input type="text" class="form-control" id="input_estimate_time" placeholder="0"
-          formControlName="estimateTime" />
-        <div *ngIf="addForm.get('estimateTime').hasError('pattern')" class="error">
+        <input
+          type="text"
+          class="form-control"
+          id="input_estimate_time"
+          placeholder="0"
+          formControlName="estimateTime"
+        />
+        <div
+          *ngIf="addForm.get('estimateTime').hasError('pattern')"
+          class="error"
+        >
           Estimate Time should be number.
         </div>
       </div>
 
       <div class="form-group mx-sm-3 mb-2">
         <h6>Actual Time :</h6>
-        <input type="text" class="form-control" id="input_actual_time" placeholder="0" formControlName="actualTime" />
-        <div *ngIf="addForm.get('actualTime').hasError('pattern')" class="error">
+        <input
+          type="text"
+          class="form-control"
+          id="input_actual_time"
+          placeholder="0"
+          formControlName="actualTime"
+        />
+        <div
+          *ngIf="addForm.get('actualTime').hasError('pattern')"
+          class="error"
+        >
           Actual Time should be number.
         </div>
       </div>
 
       <div class="form-group mx-sm-3 mb-2">
         <h6>Billable Time :</h6>
-        <input type="text" class="form-control" id="input_billable_time" placeholder="0"
-          formControlName="billableTime" />
-        <div *ngIf="addForm.get('billableTime').hasError('pattern')" class="error">
+        <input
+          type="text"
+          class="form-control"
+          id="input_billable_time"
+          placeholder="0"
+          formControlName="billableTime"
+        />
+        <div
+          *ngIf="addForm.get('billableTime').hasError('pattern')"
+          class="error"
+        >
           Billable Time should be number.
         </div>
       </div>
@@ -66,10 +126,8 @@
       <!-- bug -->
       <!-- <div class="btn mb-2" (onClick)="onCancel()">cancel</div> -->
 
-
-      <button [disabled]="addForm.status === 'INVALID'" type="submit" (onClick)="onSubmit()">
-        Submit
-      </button>
+      <!-- [disabled]="addForm.status === 'INVALID'" -->
+      <button type="submit" (onClick)="onSubmit()">Submit</button>
       <!-- <p>{{ card | json }}</p> -->
     </div>
   </form>

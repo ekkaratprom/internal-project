@@ -6,12 +6,6 @@ public class UserRequest {
     private String email;
     private String position;
 
-    public UserRequest(String firstName, String lastName, String email, String position) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.position = position;
-    }
 
     public String getFirstName() {
         return firstName;

@@ -9,3 +9,13 @@ export type CardForm = {
     taskDate: string;
     completedStatus?: boolean;
 };
+
+export type User = {
+    userId: number;
+    assignee: string;
+}
+
+export type Project = {
+    projectId: number;
+    projectName: string;
+}

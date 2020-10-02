@@ -56,7 +56,7 @@ export class CardPersonRowComponent implements OnInit {
   }
 
   getAll() {
-    this.cardService.getAllForm().subscribe(res => {
+    this.cardService.getAllCard().subscribe(res => {
       this.cards = res;
       this.toWeeks();
       // console.log(this.cards)
@@ -98,8 +98,8 @@ export class CardPersonRowComponent implements OnInit {
       }
       if (i > this.date) {
         let diff = i - this.date
-        let previousday = this.calendar.getNext(this.DMY, "d", diff)
-        this.weekdays[i] = previousday.day
+        let nextday = this.calendar.getNext(this.DMY, "d", diff)
+        this.weekdays[i] = nextday.day
       }
     }
   }
@@ -118,7 +118,7 @@ export class CardPersonRowComponent implements OnInit {
   }
 
   toWeeks(): void {
-    console.log('something')
+    // console.log('something')
     const objToReturn = {}
     this.cards.forEach((task) => {
       // If assignee is empty create an object
@@ -127,9 +127,12 @@ export class CardPersonRowComponent implements OnInit {
       }
       // Date parsing input date string; get dayInweek in number; start on Sunday
       const taskDate = task.taskDate;
-      const taskDateParsed = Date.parse(taskDate)
+      const taskDateParsed = Date.parse(taskDate);
       const taskDateObject = new Date(taskDateParsed);
       const taskDateDayInWeek = taskDateObject.getDay();
+      const taskDateDayInMonth = taskDateObject.getDate();
+      // const taskDateDayInMonthnaja = taskDateObject.toISOString().split('T')[0];
+      console.log(taskDateDayInWeek);
 
       if (!objToReturn[task.assignee][this.weekdayfn(taskDateDayInWeek)]) {
         // if object is undefined, create an array with task in it
@@ -138,7 +141,9 @@ export class CardPersonRowComponent implements OnInit {
         // else push task into exisiting array  
         objToReturn[task.assignee][this.weekdayfn(taskDateDayInWeek)].push(task);
       }
-    })
+      // const taskDateq = `${new Date().getFullYear}-${new Date().getMonth}-${new Date().getDate}`;
+      // console.log(taskDateq);
+    });
     console.log(objToReturn);
     this.x = objToReturn;
 

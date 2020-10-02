@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { CardComponent } from './card/card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CardFormComponent } from './card-form/card-form.component';
