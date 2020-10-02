@@ -20,8 +20,8 @@ export class CardService {
 
   }
 
-  getCardByDate(taskDate: string): Observable<CardResponse> {
-    return this.http.get<CardResponse>(this.url + 'task/' + taskDate);
+  getCardByDate(taskDate: string): Observable<CardResponse[]> {
+    return this.http.get<CardResponse[]>(this.url + 'task/' + taskDate);
   }
 
 }

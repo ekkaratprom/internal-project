@@ -15,6 +15,7 @@ export class CardPersonRowComponent implements OnInit {
 
   DMY = this.calendar.getToday();
   weekdays = [0, 0, 0, 0, 0, 0, 0];
+  fullweekdays = [0, 0, 0, 0, 0, 0, 0];
   date = 8;
   x: any;
   searchText = '';
@@ -27,7 +28,7 @@ export class CardPersonRowComponent implements OnInit {
 
   month = '';
   today = this.calendar.getToday();
-
+  r = '';
 
   title = 'angular-text-search-highlight';
 
@@ -55,7 +56,12 @@ export class CardPersonRowComponent implements OnInit {
     this.month = this.monthlist[this.DMY.month - 1];
   }
 
-  getAll() {
+  // getTasksByDate(): void {
+
+
+  // }
+
+  getAll(): void {
     this.cardService.getAllCard().subscribe(res => {
       this.cards = res;
       this.toWeeks();
@@ -89,17 +95,20 @@ export class CardPersonRowComponent implements OnInit {
     this.date = this.calendar.getWeekday(this.DMY);
   }
   public weekdayfn1() {
-    this.weekdays.splice(this.date, 1, this.DMY.day)
+    this.weekdays.splice(this.date, 1, this.DMY.day);
+    // this.fullweekdays.splice(this.date, 1, `${this.DMY.year}-${this.DMY.month}-${this.DMY.day}`);
     for (let i = 0; i < 7; i++) {
       if (i < this.date) {
         let diff = this.date - i
-        let previousday = this.calendar.getPrev(this.DMY, "d", diff)
-        this.weekdays[i] = previousday.day
+        let previousday = this.calendar.getPrev(this.DMY, "d", diff);
+        this.weekdays[i] = previousday.day;
       }
       if (i > this.date) {
-        let diff = i - this.date
-        let nextday = this.calendar.getNext(this.DMY, "d", diff)
+        let diff = i - this.date;
+        let nextday = this.calendar.getNext(this.DMY, "d", diff);
         this.weekdays[i] = nextday.day
+        // r = nextday.year.toString() + nextday.month.toString();
+        // console.log(r);
       }
     }
   }
@@ -130,9 +139,7 @@ export class CardPersonRowComponent implements OnInit {
       const taskDateParsed = Date.parse(taskDate);
       const taskDateObject = new Date(taskDateParsed);
       const taskDateDayInWeek = taskDateObject.getDay();
-      const taskDateDayInMonth = taskDateObject.getDate();
-      // const taskDateDayInMonthnaja = taskDateObject.toISOString().split('T')[0];
-      console.log(taskDateDayInWeek);
+      console.log(taskDate);
 
       if (!objToReturn[task.assignee][this.weekdayfn(taskDateDayInWeek)]) {
         // if object is undefined, create an array with task in it
@@ -146,6 +153,7 @@ export class CardPersonRowComponent implements OnInit {
     });
     console.log(objToReturn);
     this.x = objToReturn;
+
 
   }
 

@@ -27,68 +27,68 @@
     </ng-template>
 </nav>
 
-<div class="form-group">
+<!-- <div class="form-group">
     <label for="search-text">Search Text</label>
     <input type="text" class="form-control" id="search-text" [(ngModel)]="searchText"
         placeholder="Enter text to search" />
-</div>
+</div> -->
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col row-name" style="padding: 20px; background-color: #ffffff">
-            <div>NAME</div>
+        <div class="col row-name" style="padding: 20px; background-color: #ffffff; text-align: center;">
+            <div class="me-column">NAME</div>
             <ng-template #content let-modal>
                 <app-card-form (cardChange)="onCardChange($event)"></app-card-form>
             </ng-template>
 
-            <button (click)="open(content)" class="add-button">Add Card</button>
+
         </div>
         <div class="col" style="padding: 20px; background-color: #ffffff">
-            <div>MON {{ weekdays[1] }}</div>
+            <div class="me-column">MON {{ weekdays[1]  }} {{r}}</div>
 
             <ng-template #content let-modal>
                 <app-card-form (cardChange)="getAll()"></app-card-form>
             </ng-template>
 
-            <button (click)="open(content)" class="add-button">Add Card</button>
+            <button (click)="open(content)" class="btn btn-lg btn-block me-btn-add">+</button>
         </div>
         <div class="col" style="padding: 20px; background-color: #ffffff">
-            <div>TUE {{ weekdays[2] }}</div>
+            <div class="me-column">TUE {{ weekdays[2] }}</div>
             <ng-template #content let-modal>
                 <app-card-form (cardChange)="getAll()"></app-card-form>
             </ng-template>
 
-            <button (click)="open(content)" class="add-button">Add Card</button>
+            <button (click)="open(content)" class="btn btn-lg btn-block me-btn-add">+</button>
         </div>
         <div class="col" style="padding: 20px; background-color: #ffffff">
-            <div>WED {{ weekdays[3] }}</div>
+            <div class="me-column">WED {{ weekdays[3] }}</div>
             <ng-template #content let-modal>
                 <app-card-form (cardChange)="getAll()"></app-card-form>
             </ng-template>
 
-            <button (click)="open(content)" class="add-button">Add Card</button>
+            <button (click)="open(content)" class="btn btn-lg btn-block me-btn-add">+</button>
         </div>
         <div class="col" style="padding: 20px; background-color: #ffffff">
-            <div>THU {{ weekdays[4] }}</div>
+            <div class="me-column">THU {{ weekdays[4] }}</div>
 
             <ng-template #content let-modal>
                 <app-card-form (cardChange)="getAll()"></app-card-form>
             </ng-template>
 
-            <button (click)="open(content)" class="add-button">Add Card</button>
+            <button (click)="open(content)" class="btn btn-lg btn-block me-btn-add">+</button>
         </div>
         <div class="col" style="padding: 20px; background-color: #ffffff">
-            <div>FRI {{ weekdays[5] }}</div>
+            <div class="me-column">FRI {{ weekdays[5] }}</div>
             <ng-template #content let-modal>
                 <app-card-form (cardChange)="getAll()"></app-card-form>
             </ng-template>
 
-            <button (click)="open(content)" class="add-button">Add Card</button>
+            <button (click)="open(content)" class="btn btn-lg btn-block me-btn-add">+</button>
         </div>
     </div>
 
     <div *ngFor="let people of x | keyvalue">
-        {{ people.key | appFilter }}
+        {{ people.key }}
         <div class="row">
             <div class="col row-name" style="padding: 20px; background-color: #ffffff"></div>
             <div class="col my-card" style="padding: 20px; background-color: #ffffff">
