@@ -48,7 +48,7 @@ export class CardFormComponent implements OnInit {
       Validators.required,
       Validators.pattern('^[0-9].*$')
     ])),
-    taskName: new FormControl('write card component', Validators.compose([
+    taskName: new FormControl(null, Validators.compose([
       Validators.required,
     ])),
     projectId: new FormControl('1', Validators.compose([
