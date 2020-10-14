@@ -14,46 +14,21 @@ import { parseMessage } from '@angular/localize/src/utils';
   styleUrls: ['./card-form.component.css'],
 })
 export class CardFormComponent implements OnInit {
-
-  constructor(private formBuilder: FormBuilder,
-    private cardFormService: CardFormService, private calendar: NgbCalendar,
-    private router: Router) {
-    this.toStringDate()
-  }
+  @Output() cardChange = new EventEmitter();
   date1 = this.calendar.getToday();
-
   card: CardForm;
   form: FormGroup;
   userId: number;
   projectId: number;
-
-
-  @Output() cardChange = new EventEmitter();
-
-
-  // userList = [
-  //   { userId: 1, assignee: 'yuppry ryla' },
-  //   { userId: 2, assignee: 'big ekkarat' },
-  //   { userId: 3, assignee: 'kerati kasisuwan' },
-  //   { userId: 4, assignee: 'view atcharee' },
-  //   { userId: 5, assignee: 'Tanta Wan' },
-  //   { userId: 6, assignee: 'Helena Groz' },
-  //   { userId: 7, assignee: 'Selena Razza' }
-  // ];
   userList = [];
   taskDateParse = '';
-
-  // projectList = [
-  //   { projectId: 1, projectName: 'armonia' },
-  //   { projectId: 2, projectName: 'siesta' },
-  //   { projectId: 3, projectName: 'olivia' },
-  //   { projectId: 4, projectName: 'Starving' },
-  //   { projectId: 5, projectName: 'Anaconda' }
-  // ];
   projectList = [];
 
-  toStringDate(): void {
-    this.taskDateParse = this.date1.year + '-' + this.date1.month + '-' + this.date1.day;
+
+  constructor(private formBuilder: FormBuilder,
+    private cardFormService: CardFormService,
+    private calendar: NgbCalendar) {
+    this.toStringDate();
   }
 
   public addForm = new FormGroup({
@@ -85,6 +60,10 @@ export class CardFormComponent implements OnInit {
       Validators.pattern('^[0-9].*$')
     ])),
   });
+
+  toStringDate(): void {
+    this.taskDateParse = this.date1.year + '-' + this.date1.month + '-' + this.date1.day;
+  }
 
   getAllAssignee(): void {
     this.cardFormService.getAllAssignee().subscribe((res) => {
@@ -119,7 +98,7 @@ export class CardFormComponent implements OnInit {
   }
 
 
-  onSubmit() {
+  onSubmit(): void {
 
     this.card = {
       actualTime: parseFloat(this.addForm.get('actualTime').value),
