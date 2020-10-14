@@ -160,7 +160,7 @@ export class CardPersonRowComponent implements OnInit {
 
   }
 
-  datepickerchange(e) {
+  datePickerChange(e) {
     this.weekdays = e;
   }
 

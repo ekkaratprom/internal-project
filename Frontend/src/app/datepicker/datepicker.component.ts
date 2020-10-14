@@ -54,7 +54,7 @@ export class DatepickerComponent implements OnInit {
     }
   }
 
-  datepickerchange() {
+  datePickerChange() {
     this.changeMonth(); this.changeday(); this.weekdayfn1();
     this.datechange.emit(this.weekdays)
   }

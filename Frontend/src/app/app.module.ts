@@ -12,8 +12,9 @@ import { CardFormComponent } from './card-form/card-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QueueViewComponent } from './queue-view/queue-view.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
+import { AvaliableTimeComponent } from './queue-view/avaliable-time/avaliable-time.component';
 @NgModule({
-  declarations: [AppComponent, CardComponent, CardFormComponent, FilterPipe, CardPersonRowComponent, QueueViewComponent, DatepickerComponent, NavbarComponent],
+  declarations: [AppComponent, CardComponent, CardFormComponent, FilterPipe, CardPersonRowComponent, QueueViewComponent, DatepickerComponent, NavbarComponent, AvaliableTimeComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule,
     ReactiveFormsModule,
     NgbModule],

@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<app-datepicker (datechange)="datepickerchange($event)"></app-datepicker>
+<app-datepicker (datechange)="datePickerChange($event)"></app-datepicker>
 <!-- <nav class="navbar navbar-light bg-light">
   <div class="calendar">
     <form class="form-inline">
@@ -55,10 +55,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div
-      class="col row-name"
-      style="padding: 20px; background-color: #ffffff; text-align: center"
-    >
+    <div class="col row-name" style="padding: 20px; background-color: #ffffff; text-align: center">
       <div class="me-column">NAME</div>
       <ng-template #content let-modal>
         <app-card-form (cardChange)="onCardChange($event)"></app-card-form>
@@ -121,10 +118,7 @@
   <div *ngFor="let people of x | keyvalue">
     {{ people.key }}
     <div class="row">
-      <div
-        class="col row-name"
-        style="padding: 20px; background-color: #ffffff"
-      ></div>
+      <div class="col row-name" style="padding: 20px; background-color: #ffffff"></div>
       <div class="col my-card" style="padding: 20px; background-color: #ffffff">
         <div *ngFor="let c of people.value | keyvalue">
           <!-- <div> *ngFor xxx of c.value </div> -->
