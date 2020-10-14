@@ -1,0 +1,11 @@
+package com.allianz.siesta.assignment.service;
+
+import com.allianz.siesta.assignment.Assignment;
+import com.allianz.siesta.assignment.AssignmentRequest;
+
+public interface AssignmentService {
+
+    Assignment addAssignment(AssignmentRequest assignmentRequest);
+
+    Iterable<Assignment> getAllAssignments();
+}

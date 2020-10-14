@@ -1,6 +1,7 @@
 package com.allianz.siesta.project;
 
 import com.allianz.siesta.project.service.ProjectService;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
