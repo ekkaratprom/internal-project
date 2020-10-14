@@ -18,7 +18,7 @@ export class CardFormComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private cardFormService: CardFormService, private calendar: NgbCalendar,
     private router: Router) {
-    this.toStringDate()
+    this.toStringDate();
   }
   date1 = this.calendar.getToday();
 

@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
@@ -7,14 +8,13 @@ import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar } from '@ng-bootstra
   styleUrls: ['./queue-view.component.css']
 })
 export class QueueViewComponent implements OnInit {
-
+  searchText = '';
+  completeStatusCheck = null;
   constructor() { }
 
   ngOnInit(): void {
-
-
   }
-
-
-
+  checkValue(): void {
+    console.log(this.completeStatusCheck);
+  }
 }

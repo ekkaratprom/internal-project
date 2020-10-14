@@ -1,3 +1,54 @@
 <app-navbar></app-navbar>
 <app-datepicker></app-datepicker>
-<p></p>
+<div class="form-group">
+  <label for="search-text">Search Text</label>
+  <input
+    type="text"
+    class="form-control"
+    id="search-text"
+    [(ngModel)]="searchText"
+    placeholder="Assignment"
+  />
+</div>
+<!-- 
+<div class="dropdown">
+  <button
+    class="btn btn-secondary dropdown-toggle"
+    type="button"
+    id="dropdownMenuButton"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    Dropdown button
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+</div> -->
+
+<!-- <select class="form-control" id="input_assignee" formControlName="userId">
+  <option value="null">All</option>
+  <option value="true">Done</option>
+  <option value="false">Undone</option>
+</select> -->
+<!-- <div [formGroup]="form">
+  <select class="form-control" id="input_assignee" formControlName="data">
+    <option [ngValue]="null">All</option>
+    <option [ngValue]="true">Done</option>
+    <option [ngValue]="false">Undone</option>
+  </select>
+  <button type="button" (click)="checkValue()">Check</button>
+</div> -->
+
+<select
+  class="form-control"
+  [(ngModel)]="completeStatusCheck"
+  (change)="checkValue()"
+>
+  <option [ngValue]="null">All</option>
+  <option [ngValue]="true">Done</option>
+  <option [ngValue]="false">Undone</option>
+</select>
