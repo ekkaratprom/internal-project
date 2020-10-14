@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.allianz.siesta.task.Task;
+import com.allianz.siesta.assignment.Assignment;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
@@ -30,36 +30,38 @@ public class Project {
 
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
 	@JsonBackReference
-    private List<Task> tasks = new ArrayList<Task>();
+    private List<Assignment> assignments = new ArrayList<Assignment>();
 
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
-	public String getProjectName() {
-		return projectName;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public List<Task> getTasks() {
-		return tasks;
-	}
+    public String getProjectName() {
+        return projectName;
+    }
 
-	public void setTasks(List<Task> tasks) {
-		this.tasks = tasks;
-	}
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
 
-	public Project() {
-	}
+    public List<Assignment> getAssignments() {
+        return assignments;
+    }
 
-	public Project(Long id) {
-		this.id = id;
-	}
+    public void setAssignments(List<Assignment> assignments) {
+        this.assignments = assignments;
+    }
+
+    public Project(){
+
+    }
+    public Project(Long id) {
+        this.id = id;
+    }
 }
