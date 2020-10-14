@@ -42,20 +42,7 @@ export class CardComponent implements OnInit {
   //   this.service.getAllForm().subscribe((res) => {
   //     this.cardResponse = res;
   //     console.log(this.cards)
-  //     this.cards.push({
-  //       name: this.cardResponse.name,
-  //       id: 1,
-  //       projectId: this.cardResponse.projectId,
-  //       projectName: this.cardResponse.projectName,
-  //       taskName: this.cardResponse.taskName,
-  //       estimateTime: this.cardResponse.estimateTime,
-  //       actualTime: this.cardResponse.actualTime,
-  //       referenceLink: this.cardResponse.referenceLink,
-  //       taskDate: this.cardResponse.taskDate,
-  //       completedStatus: this.cardResponse.completedStatus,
-  //       billableTime: this.cardResponse.billableTime
-  //     },
-  //     );
+
 
   //   })
 
