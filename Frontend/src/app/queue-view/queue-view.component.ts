@@ -1,4 +1,4 @@
-import { Assignment } from './assignment-list/shared/assignment-model';
+import { AssignmentResponse } from './assignment-list/shared/assignment-model';
 import { AssignmentService } from './assignment-list/shared/assignment.service';
 import { Component, OnInit } from '@angular/core';
 import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
@@ -12,7 +12,7 @@ import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar } from '@ng-bootstra
 })
 export class QueueViewComponent implements OnInit {
   modalReference: NgbModalRef;
-  assignments: Assignment[] = [];
+  assignments: AssignmentResponse[] = [];
 
   constructor(private modalService: NgbModal,
     private assignmentService: AssignmentService) { }
@@ -37,7 +37,7 @@ export class QueueViewComponent implements OnInit {
         console.log(this.assignments);
       });
     } catch (error) {
-      console.error('GET all fail naja.');
+      console.error('GET all assignment fail');
     }
 
   }

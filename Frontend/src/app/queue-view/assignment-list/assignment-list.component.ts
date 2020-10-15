@@ -61,9 +61,13 @@ export class AssignmentListComponent implements OnInit {
   }
 
   getAllProject(): void {
-    this.assignmentService.getAllProject().subscribe((res) => {
-      this.projectList = res;
-    });
+    try {
+      this.assignmentService.getAllProject().subscribe((res) => {
+        this.projectList = res;
+      });
+    } catch (error) {
+      console.error('GET all project fail');
+    }
   }
 
   onCancel(): void {
