@@ -1,29 +1,53 @@
-<!-- <ul class="list-group list-group-flush">
-    <li class="list-group-item">
-        <div class="card">
-            <div class="card-body">
-                <p class="card-text">
-                    {{ assignment.assignmentName }}
-                </p>
-                <h6 class="project-name">project name: {{ assignment.projectName }}</h6>
-                <hr class="solid" />
+<div class="form-group">
+  <label for="search-text">Assignment</label>
+  <input
+    type="text"
+    class="form-control"
+    id="search-text"
+    [(ngModel)]="searchText"
+    placeholder="Assignment"
+  />
+</div>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">
+    <div
+      class="card"
+      *ngFor="
+        let assignment of assignments
+          | completedstatusFilter: completedStatusCheck
+          | assignmentFilter: searchText
+      "
+    >
+      <div class="card-body">
+        <p class="card-text">
+          <i class="material-icons">ic_check_circle_48px</i>
+          {{ assignment.assignmentName | assignmentFilter: searchText }}
+        </p>
+        <h6 class="project-name">
+          {{ assignment.projectId }}
+        </h6>
+        <hr class="solid" />
 
-                <p>
-                    <i class="fas fa-money-bill-wave"></i>
-                    Billable Time : {{ assignment.billableTime }} Hrs
-                </p>
+        <div class="d-flex">
+          <p class="d-flex">
+            <i class="material-icons">ic_monetization_on_48px</i>
+            <!-- Billable Time: -->
+            <span> {{ assignment.billableTime }} Hrs </span>
+          </p>
 
-                <p>
-                    <i class="fa fa-clock-o"></i>
-                    Estimate Time : {{ assignment.estimateTime }} Hrs
-                </p>
+          <p class="d-flex">
+            <i class="material-icons">ic_query_builder_48px</i>
+            <!-- Estimate Time: -->
+            <span>{{ assignment.estimateTime }} Hrs</span>
+          </p>
 
-                <p>
-                    <i class="far fa-check-circle"></i>
-                    Actual Time : {{ assignment.actualTime }} Hrs
-                </p>
-
-            </div>
+          <p class="d-flex">
+            <i class="material-icons">ic_watch_later_48px</i>
+            <!-- Actual Time: -->
+            {{ assignment.actualTime }} Hrs
+          </p>
         </div>
-    </li>
-</ul> -->
+      </div>
+    </div>
+  </li>
+</ul>
