@@ -9,12 +9,12 @@ import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar } from '@ng-bootstra
 })
 export class QueueViewComponent implements OnInit {
   searchText = '';
-  completeStatusCheck = null;
+  completedStatusCheck = null;
   constructor() { }
 
   ngOnInit(): void {
   }
   checkValue(): void {
-    console.log(this.completeStatusCheck);
+    console.log(this.completedStatusCheck);
   }
 }

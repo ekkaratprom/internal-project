@@ -2,17 +2,17 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({ name: 'appFilter' })
 export class FilterPipe implements PipeTransform {
-    transform(items: any[], searchText: string): any[] {
+    transform(items: any[], searchText: boolean): any[] {
         if (!items) {
             return [];
         }
         if (!searchText) {
             return items;
         }
-        searchText = searchText.toLocaleLowerCase();
+        // searchText = searchText.toLocaleLowerCase();
 
         return items.filter((it) => {
-            return it.assignmentName.toLocaleLowerCase().includes(searchText);
+            return it.completeStatusCheck.includes(searchText);
         });
     }
 }
