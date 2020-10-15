@@ -1,5 +1,8 @@
+import { Assignment } from './assignment-list/shared/assignment-model';
+import { AssignmentService } from './assignment-list/shared/assignment.service';
 import { Component, OnInit } from '@angular/core';
 import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @Component({
@@ -9,11 +12,13 @@ import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar } from '@ng-bootstra
 })
 export class QueueViewComponent implements OnInit {
   modalReference: NgbModalRef;
+  assignments: Assignment[] = [];
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal,
+    private assignmentService: AssignmentService) { }
 
   ngOnInit(): void {
-
+    this.getAllAssignmentCards();
 
   }
 
@@ -24,6 +29,20 @@ export class QueueViewComponent implements OnInit {
   close(): void {
     this.modalReference.close();
   }
+
+  getAllAssignmentCards(): void {
+    try {
+      this.assignmentService.getAllAssignments().subscribe(res => {
+        this.assignments = res;
+        console.log(this.assignments);
+      });
+    } catch (error) {
+      console.error('GET all fail naja.');
+    }
+
+  }
+
+
 
 
 }
