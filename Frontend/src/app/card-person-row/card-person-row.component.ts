@@ -109,7 +109,7 @@ export class CardPersonRowComponent implements OnInit {
       if (i > this.date) {
         let diff = i - this.date;
         let nextday = this.calendar.getNext(this.DMY, "d", diff);
-        this.weekdays[i] = nextday.day
+        this.weekdays[i] = nextday.day;
         // r = nextday.year.toString() + nextday.month.toString();
         // console.log(r);
       }
@@ -148,7 +148,7 @@ export class CardPersonRowComponent implements OnInit {
         // if object is undefined, create an array with task in it
         objToReturn[task.assignee][this.weekdayfn(taskDateDayInWeek)] = [task];
       } else {
-        // else push task into exisiting array  
+        // else push task into exisiting array
         objToReturn[task.assignee][this.weekdayfn(taskDateDayInWeek)].push(task);
       }
       // const taskDateq = `${new Date().getFullYear}-${new Date().getMonth}-${new Date().getDate}`;

@@ -1,18 +1,18 @@
+import { Assignment } from './assignment-list/shared/assignment-model';
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'appFilter' })
-export class FilterPipe implements PipeTransform {
-    transform(items: any[], searchText: boolean): any[] {
-        if (!items) {
-            return [];
-        }
-        if (!searchText) {
-            return items;
-        }
-        // searchText = searchText.toLocaleLowerCase();
 
-        return items.filter((it) => {
-            return it.completeStatusCheck.includes(searchText);
-        });
+@Pipe({ name: 'completedstatusFilter' })
+export class CompleteStatusPipe implements PipeTransform {
+  transform(items: any[], completedStatusCheck: boolean): any[] {
+    if (!items) {
+      return [];
     }
+    if (completedStatusCheck === undefined) {
+      return items;
+    }
+    return items.filter((it) => {
+      return it.completedStatus === completedStatusCheck;
+    });
+  }
 }

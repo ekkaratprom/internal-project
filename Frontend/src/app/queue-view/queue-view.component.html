@@ -16,7 +16,7 @@
   [(ngModel)]="completedStatusCheck"
   (change)="checkValue()"
 >
-  <option>All</option>
+  <option [ngValue]="undefined">All</option>
   <option [ngValue]="true">Done</option>
   <option [ngValue]="false">Undone</option>
 </select>
@@ -29,4 +29,14 @@
   <button (click)="open(content)" class="btn btn-lg btn-block me-btn-add">
     + assignment
   </button>
+</div>
+
+<div
+  *ngFor="
+    let c of assignments
+      | assignmentFilter: searchText
+      | completedstatusFilter: completedStatusCheck
+  "
+>
+  {{ c | json }}
 </div>

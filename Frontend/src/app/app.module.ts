@@ -1,3 +1,5 @@
+import { AssignmentPipe } from './queue-view/assignmentfilter.pipe';
+import { CompleteStatusPipe } from './queue-view/completestatusfilter.pipe';
 import { from } from 'rxjs';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CardPersonRowComponent } from './card-person-row/card-person-row.component';
@@ -20,7 +22,7 @@ import { AssignmentCardComponent } from './queue-view/assignment-list/assignment
   declarations: [AppComponent, CardComponent, CardFormComponent, FilterPipe,
     CardPersonRowComponent, QueueViewComponent, DatepickerComponent, NavbarComponent, AvaliableTimeComponent,
     AssignmentListComponent,
-    AssignmentCardComponent,],
+    AssignmentCardComponent, CompleteStatusPipe, AssignmentPipe],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule,
     ReactiveFormsModule,
     NgbModule],
