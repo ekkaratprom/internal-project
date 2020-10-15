@@ -1,3 +1,4 @@
+
 import { AssignmentService } from './../shared/assignment.service';
 import { Assignment, AssignmentResponse } from './../shared/assignment-model';
 import { Component, OnInit } from '@angular/core';
@@ -8,6 +9,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./assignment-card.component.css']
 })
 export class AssignmentCardComponent implements OnInit {
+  searchText = '';
+  completedStatusCheck = undefined;
+
   assignments: AssignmentResponse[] = [];
 
   constructor(private assignmentService: AssignmentService) { }
