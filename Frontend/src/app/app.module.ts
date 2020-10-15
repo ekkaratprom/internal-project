@@ -15,10 +15,12 @@ import { QueueViewComponent } from './queue-view/queue-view.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { AvaliableTimeComponent } from './queue-view/avaliable-time/avaliable-time.component';
 import { AssignmentListComponent } from './queue-view/assignment-list/assignment-list.component';
+import { AssignmentCardComponent } from './queue-view/assignment-list/assignment-card/assignment-card.component';
 @NgModule({
   declarations: [AppComponent, CardComponent, CardFormComponent, FilterPipe,
     CardPersonRowComponent, QueueViewComponent, DatepickerComponent, NavbarComponent, AvaliableTimeComponent,
-    AssignmentListComponent,],
+    AssignmentListComponent,
+    AssignmentCardComponent,],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule,
     ReactiveFormsModule,
     NgbModule],

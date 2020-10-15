@@ -21,6 +21,9 @@ export class QueueViewComponent implements OnInit {
     this.modalReference = this.modalService.open(content, { size: 'sm' });
   }
 
+  close(): void {
+    this.modalReference.close();
+  }
 
 
 }

@@ -11,6 +11,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class AssignmentListComponent implements OnInit {
   @Output() assignmentcardChange = new EventEmitter();
+  @Output() submitCompleted = new EventEmitter();
   assignment: Assignment;
   projectList = [];
 
@@ -53,9 +54,8 @@ export class AssignmentListComponent implements OnInit {
     this.assignmentService.addAssignment(this.assignment)
       .subscribe((r) => {
         console.log(r)
+        this.submitCompleted.emit();
       });
-
-
 
 
   }
@@ -64,7 +64,6 @@ export class AssignmentListComponent implements OnInit {
     this.assignmentService.getAllProject().subscribe((res) => {
       this.projectList = res;
     });
-    this.assignmentcardChange.emit('submit');
   }
 
   onCancel(): void {

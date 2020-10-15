@@ -3,10 +3,10 @@
 
 <div class="col" style="padding: 20px; background-color: #ffffff">
     <ng-template #content let-modal>
-        <app-assignment-list></app-assignment-list>
+        <app-assignment-list (submitCompleted)="close()"></app-assignment-list>
     </ng-template>
 
     <button (click)="open(content)" class="btn btn-lg btn-block me-btn-add">
-        +
+        + assignment
     </button>
 </div>
