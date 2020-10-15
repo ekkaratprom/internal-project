@@ -1,25 +1,5 @@
 <app-navbar></app-navbar>
 <app-datepicker></app-datepicker>
-<div class="form-group">
-  <label for="search-text">Assignment</label>
-  <input
-    type="text"
-    class="form-control"
-    id="search-text"
-    [(ngModel)]="searchText"
-    placeholder="Assignment"
-  />
-</div>
-
-<select
-  class="form-control"
-  [(ngModel)]="completedStatusCheck"
-  (change)="checkValue()"
->
-  <option [ngValue]="undefined">All</option>
-  <option [ngValue]="true">Done</option>
-  <option [ngValue]="false">Undone</option>
-</select>
 
 <div class="col" style="padding: 20px; background-color: #ffffff">
   <ng-template #content let-modal>
