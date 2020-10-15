@@ -16,11 +16,13 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
 import { AvaliableTimeComponent } from './queue-view/avaliable-time/avaliable-time.component';
 import { AssignmentListComponent } from './queue-view/assignment-list/assignment-list.component';
 import { AssignmentCardComponent } from './queue-view/assignment-list/assignment-card/assignment-card.component';
+import { AssignmentFormComponent } from './assignment-form/assignment-form.component';
 @NgModule({
   declarations: [AppComponent, CardComponent, CardFormComponent, FilterPipe,
     CardPersonRowComponent, QueueViewComponent, DatepickerComponent, NavbarComponent, AvaliableTimeComponent,
     AssignmentListComponent,
-    AssignmentCardComponent,],
+    AssignmentCardComponent,
+    AssignmentFormComponent,],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule,
     ReactiveFormsModule,
     NgbModule],
