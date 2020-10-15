@@ -62,32 +62,35 @@ export class CardPersonRowComponent implements OnInit {
   // }
 
   getAll(): void {
-    this.cardService.getAllCard().subscribe(res => {
-      this.cards = res;
-      this.toWeeks();
-      // console.log(this.cards)
-      // this.cards.forEach((y) => {
-      //   let q = new Date(Date.parse(y.taskDate));
-      //   let z = q.getDay();
-      //   console.log(this.weekdayfn(z));
-      // })
+    try {
+      this.cardService.getAllCard().subscribe(res => {
+        this.cards = res;
+        this.toWeeks();
+        // console.log(this.cards)
+        // this.cards.forEach((y) => {
+        //   let q = new Date(Date.parse(y.taskDate));
+        //   let z = q.getDay();
+        //   console.log(this.weekdayfn(z));
+        // })
 
-
-      //   this.cards.push({
-      //     name: this.cards.assignee,
-      //     id: 1,
-      //     projectId: this.cardResponse.projectId,
-      //     projectName: this.cardResponse.projectName,
-      //     taskName: this.cardResponse.taskName,
-      //     estimateTime: this.cardResponse.estimateTime,
-      //     actualTime: this.cardResponse.actualTime,
-      //     referenceLink: this.cardResponse.referenceLink,
-      //     taskDate: this.cardResponse.taskDate,
-      //     completedStatus: this.cardResponse.completedStatus,
-      //     billableTime: this.cardResponse.billableTime
-      //   },
-      //   );
-    });
+        //   this.cards.push({
+        //     name: this.cards.assignee,
+        //     id: 1,
+        //     projectId: this.cardResponse.projectId,
+        //     projectName: this.cardResponse.projectName,
+        //     taskName: this.cardResponse.taskName,
+        //     estimateTime: this.cardResponse.estimateTime,
+        //     actualTime: this.cardResponse.actualTime,
+        //     referenceLink: this.cardResponse.referenceLink,
+        //     taskDate: this.cardResponse.taskDate,
+        //     completedStatus: this.cardResponse.completedStatus,
+        //     billableTime: this.cardResponse.billableTime
+        //   },
+        //   );
+      });
+    } catch (error) {
+      console.error('GET all fail naja.');
+    }
 
   }
 
@@ -157,7 +160,7 @@ export class CardPersonRowComponent implements OnInit {
 
   }
 
-  datepickerchange(e) {
+  datePickerChange(e): void {
     this.weekdays = e;
   }
 
