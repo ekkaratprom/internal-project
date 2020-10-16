@@ -1,5 +1,5 @@
-import { Assignment } from './../queue-view/assignment-list/shared/assignment-model';
-import { AssignmentService } from './../queue-view/assignment-list/shared/assignment.service';
+import { AssignmentService } from './../assignment-list/shared/assignment.service';
+import { Assignment } from './../assignment-list/shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 

@@ -1,7 +1,6 @@
+import { AssignmentService } from './../assignment-list/shared/assignment.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Assignment } from './assignment-list/shared/assignment-model';
-import { AssignmentResponse } from './assignment-list/shared/assignment-model';
-import { AssignmentService } from './assignment-list/shared/assignment.service';
+import { Assignment, AssignmentResponse } from './../assignment-list/shared/assignment-model';
 import { Component, OnInit } from '@angular/core';
 import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
