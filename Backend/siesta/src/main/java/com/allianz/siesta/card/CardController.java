@@ -19,4 +19,10 @@ public class CardController {
     public Iterable<AssignmentResponse> getAllCards() {
         return cardService.getAllCards();
     }
+
+    @CrossOrigin
+    @GetMapping(path = "/v2/card")
+    public Iterable<AssignmentResponse> getAllCardsWithQuery() {
+        return cardService.getAllCardsWithQuery();
+    }
 }

@@ -7,5 +7,5 @@ public interface CardService {
 
     Iterable<AssignmentResponse> getAllCards();
 
-
+    Iterable<AssignmentResponse> getAllCardsWithQuery();
 }

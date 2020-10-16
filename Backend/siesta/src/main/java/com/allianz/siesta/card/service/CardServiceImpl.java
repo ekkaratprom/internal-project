@@ -29,7 +29,8 @@ public class CardServiceImpl implements CardService{
             AssignmentResponse assignmentResponse = new AssignmentResponse(
                     assignment.getAssignmentName(),
                     assignment.getBillableTime(),
-                    assignment.getEstimateTime()
+                    assignment.getEstimateTime(),
+                    assignment.getCompletedStatus()
             );
 
             assignmentResponse.setCardObj(new ArrayList());
@@ -42,6 +43,40 @@ public class CardServiceImpl implements CardService{
                 );
                 assignmentResponse.getCardObj().add(cardResponse);
                 amtActualTime += card.getActualTime();
+            }
+
+            assignmentResponse.setActualTime(amtActualTime);
+            assignmentResponseList.add(assignmentResponse);
+        }
+        return assignmentResponseList;
+    }
+
+
+    @Override
+    public Iterable<AssignmentResponse> getAllCardsWithQuery() {
+        List<AssignmentResponse> assignmentResponseList = new ArrayList<>();
+        Iterable<Assignment> assignments = assignmentRepository.findByDeletedStatus(false);
+        for (Assignment assignment : assignments) {
+            AssignmentResponse assignmentResponse = new AssignmentResponse(
+                    assignment.getAssignmentName(),
+                    assignment.getBillableTime(),
+                    assignment.getEstimateTime(),
+                    assignment.getCompletedStatus()
+            );
+
+            assignmentResponse.setCardObj(new ArrayList());
+            Double amtActualTime = 0d;
+            for (Card card : assignment.getCards()) {
+                // skip deleted cards
+                if (card.getDeletedStatus() == false) {
+                    CardResponse cardResponse = new CardResponse(
+                            card.getCardName(),
+                            card.getActualTime(),
+                            card.getCardDate()
+                    );
+                    assignmentResponse.getCardObj().add(cardResponse);
+                    amtActualTime += card.getActualTime();
+                }
             }
 
             assignmentResponse.setActualTime(amtActualTime);
