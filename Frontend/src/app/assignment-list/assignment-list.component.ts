@@ -21,8 +21,9 @@ export class AssignmentListComponent implements OnInit {
   cardLists: CardList;
   cards: CardObj[];
   results: CardData[] = [];
+  cardTest;
 
-  public isCollapsed = false;
+  public isCollapsed = true;
   constructor(private assignmentService: AssignmentService) { }
 
   ngOnInit(): void {
@@ -45,16 +46,43 @@ export class AssignmentListComponent implements OnInit {
   getAllCards(): void {
     try {
       this.assignmentService.getAllCards().subscribe((res) => {
-        this.cardLists = res;
-        this.cards = this.cardLists.cardObj;
-        this.cards.forEach((card) => {
-          const cardData: CardData = {
-            cardName: card.cardName,
-            cardActualTime: card.cardActualTime,
-            cardDate: card.cardDate,
-          };
-          this.results.push(cardData);
+        this.cardTest = res;
+        console.log('cardList', this.cardLists);
+
+        // this.cardTest.forEach(element => {
+        //   console.log('element', element);
+        //   const cardData: CardData = {
+        //     cardName: element.cardName,
+        //     cardActualTime: element.cardActualTime,
+        //     cardDate: element.cardDate
+        //   };
+        //   this.results.push(cardData);
+        // });
+        this.cardTest.forEach(element => {
+          console.log('element', element);
+          element.cardObj.forEach(el => {
+            const cardData: CardData = {
+              cardName: el.cardName,
+              cardActualTime: el.cardActualTime,
+              cardDate: el.cardDate
+            };
+            this.results.push(cardData);
+          });
         });
+        console.log('results', this.results);
+        // this.cards = this.cardLists.cardObj;
+
+        // this.cards.forEach((card) => {
+        //   const cardData: CardData = {
+        //     cardName: card.cardName,
+        //     cardActualTime: card.cardActualTime,
+        //     cardDate: card.cardDate,
+        //   };
+        //   this.results.push(cardData);
+        //   console.log(this.results);
+        // });
+
+
 
 
       });

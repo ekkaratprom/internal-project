@@ -25,6 +25,7 @@ export type CardList = {
     billableTime?: number;
     estimateTime?: number;
     actualTime: number;
+    completedStatus: boolean;
     cardObj: CardObj[];
 }
 
@@ -33,3 +34,4 @@ export type CardObj = {
     cardActualTime: number;
     cardDate: string;
 }
+
