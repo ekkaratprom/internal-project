@@ -1,17 +1,17 @@
+import { AssignmentService } from './shared/assignment.service';
+import { Assignment, AssignmentResponse } from './shared/assignment-model';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { AssignmentService } from './../shared/assignment.service';
-import { Assignment, AssignmentResponse } from './../shared/assignment-model';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-assignment-card',
-  templateUrl: './assignment-card.component.html',
-  styleUrls: ['./assignment-card.component.css']
+  selector: 'app-assignment-list',
+  templateUrl: './assignment-list.component.html',
+  styleUrls: ['./assignment-list.component.css']
 })
-export class AssignmentCardComponent implements OnInit {
+export class AssignmentListComponent implements OnInit {
   searchText = '';
   completedStatusCheck = undefined;
-
   assignments: AssignmentResponse[] = [];
 
   constructor(private assignmentService: AssignmentService) { }
@@ -29,7 +29,6 @@ export class AssignmentCardComponent implements OnInit {
     } catch (error) {
       console.error('GET all assignment fail');
     }
-
-
   }
+
 }
