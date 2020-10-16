@@ -1,6 +1,6 @@
+import { CompleteStatusPipe } from './assignment-list/shared/completestatusfilter.pipe';
 import { AssignmentListComponent } from './assignment-list/assignment-list.component';
-import { AssignmentPipe } from './queue-view/assignmentfilter.pipe';
-import { CompleteStatusPipe } from './queue-view/completestatusfilter.pipe';
+import { AssignmentPipe } from './assignment-list/shared/assignmentfilter.pipe';
 import { from } from 'rxjs';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CardPersonRowComponent } from './card-person-row/card-person-row.component';
@@ -18,6 +18,8 @@ import { QueueViewComponent } from './queue-view/queue-view.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { AvaliableTimeComponent } from './avaliable-time/avaliable-time.component';
 import { AssignmentFormComponent } from './assignment-form/assignment-form.component';
+
+
 
 
 @NgModule({

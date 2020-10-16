@@ -1,4 +1,4 @@
-import { Assignment } from './../assignment-list/shared/assignment-model';
+import { Assignment, AssignmentResponse } from './assignment-model';
 import { Pipe, PipeTransform } from '@angular/core';
 
 

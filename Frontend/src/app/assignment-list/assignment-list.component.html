@@ -44,7 +44,30 @@
                         <!-- Actual Time: -->
                         {{ assignment.actualTime }} Hrs
                     </p>
+                    <!-- <button (click)="toggleState = !toggleState" mat-button>{{ toggleState ? 'ic_chevron_right_48px' : 'ic_chevron_left_48px' }}</button> -->
+                    <p (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+                        aria-controls="collapse">
+                        <i class="material-icons">ic_chevron_right_48px</i>
+
+                    </p>
+
+                    <div id="collapse" [ngbCollapse]="isCollapsed">
+                        <div class="card" *ngFor="let c of cards">
+                            <div class="card-body">
+                                <p class="d-flex">
+                                    fufu
+                                    <span> {{ c.cardName }} </span>
+                                    <span> {{ c.cardDate  }} </span>
+                                    <span> {{ c.cardActualTime  }} </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
+
+
             </div>
         </div>
     </li>

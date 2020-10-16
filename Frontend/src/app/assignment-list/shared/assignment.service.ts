@@ -1,4 +1,4 @@
-import { Assignment, Project, AssignmentResponse } from './assignment-model';
+import { Assignment, Project, AssignmentResponse, CardList } from './assignment-model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
@@ -29,6 +29,11 @@ export class AssignmentService {
 
   //GET ALL ASS
   getAllAssignments(): Observable<AssignmentResponse[]> {
-    return this.http.get<AssignmentResponse[]>(this.url + 'v1/assignment');
+    return this.http.get<AssignmentResponse[]>(this.url + 'v1/card');
+  }
+
+  //GET ALL Card 
+  getAllCards(): Observable<CardList> {
+    return this.http.get<CardList>(this.url + 'v1/card');
   }
 }

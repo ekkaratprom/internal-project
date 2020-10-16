@@ -19,3 +19,17 @@ export type AssignmentResponse = {
     completedStatus?: boolean;
     actualTime: number;
 };
+
+export type CardList = {
+    assignmentName?: string;
+    billableTime?: number;
+    estimateTime?: number;
+    actualTime: number;
+    cardObj: CardObj[];
+}
+
+export type CardObj = {
+    cardName: string;
+    cardActualTime: number;
+    cardDate: string;
+}
