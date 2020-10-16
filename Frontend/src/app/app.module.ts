@@ -15,7 +15,7 @@ import { CardFormComponent } from './card-form/card-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QueueViewComponent } from './queue-view/queue-view.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
-import { AvaliableTimeComponent } from './queue-view/avaliable-time/avaliable-time.component';
+import { AvaliableTimeComponent } from './avaliable-time/avaliable-time.component';
 import { AssignmentListComponent } from './queue-view/assignment-list/assignment-list.component';
 import { AssignmentCardComponent } from './queue-view/assignment-list/assignment-card/assignment-card.component';
 import { AssignmentFormComponent } from './assignment-form/assignment-form.component';
