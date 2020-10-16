@@ -1,12 +1,6 @@
 <div class="form-group">
   <label for="search-text">Assignment</label>
-  <input
-    type="text"
-    class="form-control"
-    id="search-text"
-    [(ngModel)]="searchText"
-    placeholder="Assignment"
-  />
+  <input type="text" class="form-control" id="search-text" [(ngModel)]="searchText" placeholder="Assignment" />
 </div>
 
 <select class="form-control" [(ngModel)]="completedStatusCheck">
@@ -16,14 +10,11 @@
 </select>
 <ul class="list-group list-group-flush">
   <li class="list-group-item">
-    <div
-      class="card"
-      *ngFor="
+    <div class="card" *ngFor="
         let assignment of assignments
           | completedstatusFilter: completedStatusCheck
           | assignmentFilter: searchText
-      "
-    >
+      ">
       <div class="card-body">
         <p class="card-text">
           <i class="material-icons">ic_check_circle_48px</i>
