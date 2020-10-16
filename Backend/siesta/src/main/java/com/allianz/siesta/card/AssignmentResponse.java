@@ -8,12 +8,22 @@ public class AssignmentResponse {
     private Double billableTime;
     private Double estimateTime;
     private Double actualTime;
+    private Boolean completedStatus;
     private List cardObj;
 
-    public AssignmentResponse(String assignmentName, Double billableTime, Double estimateTime) {
+    public AssignmentResponse(String assignmentName, Double billableTime, Double estimateTime, Boolean completedStatus) {
         this.assignmentName = assignmentName;
         this.billableTime = billableTime;
         this.estimateTime = estimateTime;
+        this.completedStatus = completedStatus;
+    }
+
+    public Boolean getCompletedStatus() {
+        return completedStatus;
+    }
+
+    public void setCompletedStatus(Boolean completedStatus) {
+        this.completedStatus = completedStatus;
     }
 
     public String getAssignmentName() {
