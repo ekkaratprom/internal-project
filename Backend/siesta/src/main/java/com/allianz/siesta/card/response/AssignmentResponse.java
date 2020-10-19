@@ -1,4 +1,4 @@
-package com.allianz.siesta.card;
+package com.allianz.siesta.card.response;
 
 
 import java.util.List;
