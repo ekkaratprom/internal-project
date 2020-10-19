@@ -1,3 +1,9 @@
 .form-control {
   width: 10vw;
 }
+
+.col {
+  padding: 20px;
+  margin: auto; 
+  background-color: #ffffff
+}

@@ -1,9 +1,15 @@
 p {
     margin: auto;
     font-size: 12px;
+    padding-left: 1.5rem;
 }
 
-i {
-    font-size: 18px;
-    margin-left : 0rem ;
+.material-icons.md-18 { font-size: 18px; }
+
+.card {
+    margin-bottom: 1.3rem;
+}
+
+.card.childCard {
+    margin-bottom: 0.2rem;
 }

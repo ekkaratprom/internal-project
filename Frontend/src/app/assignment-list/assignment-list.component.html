@@ -18,7 +18,7 @@
         ">
             <div class="card-body">
                 <p class="card-text">
-                    <i class="material-icons">ic_check_circle_48px</i>
+                    <i class="material-icons md-18">ic_check_circle</i>
                     {{ assignment.assignmentName }}
                 </p>
                 <!-- <h6 class="project-name">
@@ -27,43 +27,53 @@
                 <hr class="solid" />
 
                 <div class="d-flex">
-                    <p class="d-flex">
-                        <i class="material-icons">ic_monetization_on_48px</i>
-                        <!-- Billable Time: -->
-                        <span> {{ assignment.billableTime }} Hrs </span>
-                    </p>
 
-                    <p class="d-flex">
-                        <i class="material-icons">ic_query_builder_48px</i>
-                        <!-- Estimate Time: -->
-                        <span>{{ assignment.estimateTime }} Hrs</span>
-                    </p>
+                    <div class="d-flex">
+                        <i class="material-icons md-18">ic_monetization_on</i>
+                        <p>
+                            <!-- Billable Time: -->
+                            <span> {{ assignment.billableTime }} Hrs </span>
+                        </p>
+                    </div>
 
-                    <p class="d-flex">
-                        <i class="material-icons">ic_watch_later_48px</i>
-                        <!-- Actual Time: -->
-                        {{ assignment.actualTime }} Hrs
-                    </p>
+                    <div class="d-flex">
+                        <i class="material-icons md-18">ic_query_builder</i>
+                        <p>
+                            <!-- Estimate Time: -->
+                            <span>{{ assignment.estimateTime }} Hrs</span>
+                        </p>
+                    </div>
+
+                    <div class="d-flex">
+                        <i class="material-icons md-18">ic_watch_later</i>
+                        <p>
+                            <!-- Actual Time: -->
+                            {{ assignment.actualTime }} Hrs
+                        </p>
+                    </div>
+
+
+
                     <!-- <button (click)="toggleState = !toggleState" mat-button>{{ toggleState ? 'ic_chevron_right_48px' : 'ic_chevron_left_48px' }}</button> -->
                     <p (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
                         aria-controls="collapse">
-                        <i class="material-icons">ic_chevron_right_48px</i>
-
+                        <span class="material-icons md-18"> </span>
+                        <i [ngClass]="toggle ? 'ic_expand_more' : 'ic_expand_less'"></i>
                     </p>
 
                 </div>
                 <div id="collapse" [ngbCollapse]="isCollapsed">
-                    <div class="card" *ngFor="let r of results">
+                    <div class="card childCard" *ngFor="let r of results">
                         <div class="card-body">
                             <div class="d-flex">
                                 <p>
-                                    {{r.cardName}}
+                                    Card : {{r.cardName}}
                                 </p>
                                 <p>
-                                    {{r.cardDate | date: "dd/MM/yyyy" }}
+                                    Date :{{r.cardDate | date: "dd/MM/yyyy" }}
                                 </p>
                                 <p>
-                                    {{r.cardActualTime}}
+                                    Actual Time : {{r.cardActualTime}} Hrs.
                                 </p>
                             </div>
 
@@ -74,8 +84,4 @@
             </div>
         </div>
     </li>
-</ul>
-
-<ul *ngFor="let r of results">
-    <li>{{r.cardName}}</li>
 </ul>

@@ -43,7 +43,7 @@ export class QueueViewComponent implements OnInit {
         console.log(this.assignments);
       });
     } catch (error) {
-      console.error('GET all assignment fail');
+      console.error('GET all assignments fail');
     }
 
   }

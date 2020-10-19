@@ -19,9 +19,10 @@ export class AssignmentListComponent implements OnInit {
   completedStatusCheck = undefined;
   assignments: AssignmentResponse[] = [];
   cardLists: CardList;
-  cards: CardObj[];
   results: CardData[] = [];
-  cardTest;
+  cards;
+  toggle1 = false;
+  toggle2 = false;
 
   public isCollapsed = true;
   constructor(private assignmentService: AssignmentService) { }
@@ -38,7 +39,7 @@ export class AssignmentListComponent implements OnInit {
         console.log(this.assignments);
       });
     } catch (error) {
-      console.error('GET all assignment fail');
+      console.error('GET all assignments fail');
     }
   }
 
@@ -46,50 +47,39 @@ export class AssignmentListComponent implements OnInit {
   getAllCards(): void {
     try {
       this.assignmentService.getAllCards().subscribe((res) => {
-        this.cardTest = res;
+        this.cards = res;
         console.log('cardList', this.cardLists);
 
-        // this.cardTest.forEach(element => {
-        //   console.log('element', element);
-        //   const cardData: CardData = {
-        //     cardName: element.cardName,
-        //     cardActualTime: element.cardActualTime,
-        //     cardDate: element.cardDate
-        //   };
-        //   this.results.push(cardData);
-        // });
-        this.cardTest.forEach(element => {
-          console.log('element', element);
-          element.cardObj.forEach(el => {
+        this.cards.forEach(card => {
+          console.log('card', card);
+          card.cardObj.forEach(c => {
             const cardData: CardData = {
-              cardName: el.cardName,
-              cardActualTime: el.cardActualTime,
-              cardDate: el.cardDate
+              cardName: c.cardName,
+              cardActualTime: c.cardActualTime,
+              cardDate: c.cardDate
             };
             this.results.push(cardData);
           });
         });
         console.log('results', this.results);
-        // this.cards = this.cardLists.cardObj;
-
-        // this.cards.forEach((card) => {
-        //   const cardData: CardData = {
-        //     cardName: card.cardName,
-        //     cardActualTime: card.cardActualTime,
-        //     cardDate: card.cardDate,
-        //   };
-        //   this.results.push(cardData);
-        //   console.log(this.results);
-        // });
-
-
-
 
       });
     } catch (error) {
-      console.error('GET all card fail');
+      console.error('GET all cards fail');
     }
 
+  }
+
+  changeType(input_field_password, num) {
+    if (input_field_password.type == "password")
+      input_field_password.type = "text";
+    else
+      input_field_password.type = "password";
+
+    if (num == 1)
+      this.toggle1 = !this.toggle1;
+    else
+      this.toggle2 = !this.toggle2;
   }
 
 }
