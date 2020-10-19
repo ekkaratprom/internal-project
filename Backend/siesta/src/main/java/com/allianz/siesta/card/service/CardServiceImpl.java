@@ -30,64 +30,67 @@ public class CardServiceImpl implements CardService{
         List<AssignmentResponse> assignmentResponseList = new ArrayList<>();
         Iterable<Assignment> assignments = assignmentRepository.findAll();
         for (Assignment assignment : assignments) {
+
+            Double totalActualTime = assignmentRepository.getTotalActualTime(assignment.getId());
+            List<Card> cardList = cardRepository.getCardByAssignmentId(assignment.getId());
+
             AssignmentResponse assignmentResponse = new AssignmentResponse(
                     assignment.getAssignmentName(),
                     assignment.getBillableTime(),
                     assignment.getEstimateTime(),
-                    assignment.getCompletedStatus()
+                    assignment.getCompletedStatus(),
+                    totalActualTime
             );
 
             assignmentResponse.setCardObj(new ArrayList());
-            Double amtActualTime = 0d;
-            for (Card card : assignment.getCards()) {
+            for (Card card : cardList) {
                 CardResponse cardResponse = new CardResponse(
                         card.getCardName(),
                         card.getActualTime(),
                         card.getCardDate()
                 );
+
                 assignmentResponse.getCardObj().add(cardResponse);
-                amtActualTime += card.getActualTime();
-            }
 
-            assignmentResponse.setActualTime(amtActualTime);
+            }
             assignmentResponseList.add(assignmentResponse);
         }
         return assignmentResponseList;
     }
 
 
-    @Override
-    public Iterable<AssignmentResponse> getAllCardsWithQuery() {
-        List<AssignmentResponse> assignmentResponseList = new ArrayList<>();
-        Iterable<Assignment> assignments = assignmentRepository.findByDeletedStatus(false);
-        for (Assignment assignment : assignments) {
-            AssignmentResponse assignmentResponse = new AssignmentResponse(
-                    assignment.getAssignmentName(),
-                    assignment.getBillableTime(),
-                    assignment.getEstimateTime(),
-                    assignment.getCompletedStatus()
-            );
-
-            assignmentResponse.setCardObj(new ArrayList());
-            Double amtActualTime = 0d;
-            for (Card card : assignment.getCards()) {
-                // skip deleted cards
-                if (card.getDeletedStatus() == false) {
-                    CardResponse cardResponse = new CardResponse(
-                            card.getCardName(),
-                            card.getActualTime(),
-                            card.getCardDate()
-                    );
-                    assignmentResponse.getCardObj().add(cardResponse);
-                    amtActualTime += card.getActualTime();
-                }
-            }
-
-            assignmentResponse.setActualTime(amtActualTime);
-            assignmentResponseList.add(assignmentResponse);
-        }
-        return assignmentResponseList;
-    }
+//    @Override
+//    public Iterable<AssignmentResponse> getAllCardsWithQuery() {
+//        List<AssignmentResponse> assignmentResponseList = new ArrayList<>();
+//        Iterable<Assignment> assignments = assignmentRepository.findByDeletedStatus(false);
+//        for (Assignment assignment : assignments) {
+//            AssignmentResponse assignmentResponse = new AssignmentResponse(
+//                    assignment.getAssignmentName(),
+//                    assignment.getBillableTime(),
+//                    assignment.getEstimateTime(),
+//                    assignment.getCompletedStatus()
+//            );
+//
+//            assignmentResponse.setCardObj(new ArrayList());
+//            Double amtActualTime = 0d;
+//            for (Card card : assignment.getCards()) {
+//                // skip deleted cards
+//                if (card.getDeletedStatus() == false) {
+//                    CardResponse cardResponse = new CardResponse(
+//                            card.getCardName(),
+//                            card.getActualTime(),
+//                            card.getCardDate()
+//                    );
+//                    assignmentResponse.getCardObj().add(cardResponse);
+//                    amtActualTime += card.getActualTime();
+//                }
+//            }
+//
+//            assignmentResponse.setActualTime(amtActualTime);
+//            assignmentResponseList.add(assignmentResponse);
+//        }
+//        return assignmentResponseList;
+//    }
 
     @Override
     public Card addCard(CardRequest cardRequest) {
@@ -99,4 +102,11 @@ public class CardServiceImpl implements CardService{
 
         return cardRepository.save(card);
     }
+
+    @Override
+    public Iterable<Card> findCardListByAssignmentId(Long assignmentId) {
+        return cardRepository.findCardListByAssignmentId(assignmentId);
+    }
+
+
 }
