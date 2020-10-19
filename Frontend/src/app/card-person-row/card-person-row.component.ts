@@ -43,9 +43,9 @@ export class CardPersonRowComponent implements OnInit {
   }
 
   constructor(private calendar: NgbCalendar, private cardService: CardService, config: NgbModalConfig, private modalService: NgbModal) {
-    this.changeMonth()
-    this.changeday()
-    this.weekdayfn1()
+    this.changeMonth();
+    this.changeday();
+    this.weekdayfn1();
   }
 
   ngOnInit(): void {

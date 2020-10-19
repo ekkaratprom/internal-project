@@ -1,0 +1,35 @@
+.container {
+  display: contents;
+  flex-direction: row;
+  order: 6;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-control {
+  display: inline;
+  width: 10vw;
+}
+
+.card-title {
+  font-size: larger;
+  font-weight: 600;
+  display: contents;
+  margin-bottom: 12px;
+}
+.fas {
+  margin-right: 3%;
+}
+.position {
+  display: inline;
+  text-align: right;
+  margin-left: 0%;
+  opacity: 0.6;
+}
+.card-body {
+  margin-right: 0;
+}

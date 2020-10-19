@@ -45,17 +45,14 @@ export class AssignmentFormComponent implements OnInit {
       completedStatus: false,
       // tslint:disable-next-line: radix
       projectId: parseInt(this.addAssignment.get('projectId').value),
-    }
-
+    };
     console.log(this.assignment);
 
     this.assignmentService.addAssignment(this.assignment)
       .subscribe((r) => {
-        console.log(r)
+        console.log(r);
         this.submitCompleted.emit();
       });
-
-
   }
 
   getAllProject(): void {

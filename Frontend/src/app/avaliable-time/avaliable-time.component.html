@@ -1,1 +1,51 @@
-<p>avaliable-time works!</p>
+<span class="form-group">
+  <label for="search-text" style="font-weight: bold">Available Time</label>
+  <br />
+  <input
+    type="text"
+    class="form-control"
+    style="margin-right: 2vw"
+    id="search-text"
+    [(ngModel)]="searchText"
+    placeholder="Assignment"
+  />
+</span>
+
+<select class="form-control" [(ngModel)]="completedStatusCheck">
+  <option [ngValue]="undefined">All</option>
+  <option [ngValue]="true">Done</option>
+  <option [ngValue]="false">Undone</option>
+</select>
+
+<select class="form-control" [(ngModel)]="completedStatusCheck">
+  <option [ngValue]="undefined">All</option>
+  <option [ngValue]="true">Done</option>
+  <option [ngValue]="false">Undone</option>
+</select>
+
+<div class="row">
+  <div class="col">
+    <div *ngFor="let c of assignments">
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <div class="card-title">
+            <i style="font-size: 24px" class="fas">&#xf2bd;</i
+            >{{ c.assignmentName }}
+            <br />
+          </div>
+          <h6 class="position">Frontend Developer</h6>
+          <p class="card-text">
+            <mdb-icon fab icon="angular"></mdb-icon>
+            <mdb-icon fab icon="bootstrap"></mdb-icon>
+            <mdb-icon fab icon="html5"></mdb-icon>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">2</div>
+  <div class="col">3</div>
+  <div class="col">4</div>
+  <div class="col">5</div>
+  <div class="col">6</div>
+</div>
