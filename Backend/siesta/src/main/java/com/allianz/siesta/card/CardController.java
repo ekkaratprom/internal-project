@@ -1,11 +1,9 @@
 package com.allianz.siesta.card;
 
+import com.allianz.siesta.card.response.AssignmentResponse;
 import com.allianz.siesta.card.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -24,5 +22,11 @@ public class CardController {
     @GetMapping(path = "/v2/card")
     public Iterable<AssignmentResponse> getAllCardsWithQuery() {
         return cardService.getAllCardsWithQuery();
+    }
+
+    @CrossOrigin
+    @PostMapping(path = "/v1/addcard")
+    public Card addCard(@RequestBody CardRequest cardRequest) {
+        return cardService.addCard(cardRequest);
     }
 }

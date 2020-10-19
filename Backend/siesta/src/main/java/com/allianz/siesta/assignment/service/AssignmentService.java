@@ -8,4 +8,6 @@ public interface AssignmentService {
     Assignment addAssignment(AssignmentRequest assignmentRequest);
 
     Iterable<Assignment> getAllAssignments();
+
+    Assignment editAssignment(AssignmentRequest assignmentRequest);
 }

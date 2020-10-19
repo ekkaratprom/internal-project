@@ -4,13 +4,17 @@ import com.allianz.siesta.assignment.Assignment;
 import com.allianz.siesta.assignment.AssignmentRepository;
 import com.allianz.siesta.card.Card;
 import com.allianz.siesta.card.CardRepository;
-import com.allianz.siesta.card.AssignmentResponse;
-import com.allianz.siesta.card.CardResponse;
+import com.allianz.siesta.card.CardRequest;
+import com.allianz.siesta.card.response.AssignmentResponse;
+import com.allianz.siesta.card.response.CardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import static java.lang.Boolean.FALSE;
 
 @Service
 public class CardServiceImpl implements CardService{
@@ -83,5 +87,16 @@ public class CardServiceImpl implements CardService{
             assignmentResponseList.add(assignmentResponse);
         }
         return assignmentResponseList;
+    }
+
+    @Override
+    public Card addCard(CardRequest cardRequest) {
+        Card card = cardRequest.cardRequest();
+        card.setCompletedStatus(false);
+        card.setDeletedStatus(false);
+        card.setCreateDate(new Date());
+        card.setAssignedStatus(true);
+
+        return cardRepository.save(card);
     }
 }
