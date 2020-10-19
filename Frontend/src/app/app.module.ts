@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CardFormComponent } from './card-form/card-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QueueViewComponent } from './queue-view/queue-view.component';
@@ -28,7 +29,7 @@ import { AssignmentFormComponent } from './assignment-form/assignment-form.compo
     CompleteStatusPipe,
     AssignmentPipe],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule, MDBBootstrapModule.forRoot(),
     NgbModule],
   providers: [],
   bootstrap: [AppComponent],
