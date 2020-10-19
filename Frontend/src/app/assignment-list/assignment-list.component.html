@@ -21,9 +21,9 @@
                     <i class="material-icons">ic_check_circle_48px</i>
                     {{ assignment.assignmentName }}
                 </p>
-                <h6 class="project-name">
+                <!-- <h6 class="project-name">
                     {{ assignment.projectId }}
-                </h6>
+                </h6> -->
                 <hr class="solid" />
 
                 <div class="d-flex">
@@ -51,22 +51,22 @@
 
                     </p>
 
-
-
-
                 </div>
                 <div id="collapse" [ngbCollapse]="isCollapsed">
                     <div class="card" *ngFor="let r of results">
                         <div class="card-body">
-                            <p class="d-flex">
-                                {{r.cardName}}
-                            </p>
-                            <p class="d-flex">
-                                {{r.cardDate | date: "dd/MM/yyyy" }}
-                            </p>
-                            <p class="d-flex">
-                                {{r.cardActualTime}}
-                            </p>
+                            <div class="d-flex">
+                                <p>
+                                    {{r.cardName}}
+                                </p>
+                                <p>
+                                    {{r.cardDate | date: "dd/MM/yyyy" }}
+                                </p>
+                                <p>
+                                    {{r.cardActualTime}}
+                                </p>
+                            </div>
+
                         </div>
                     </div>
                 </div>
