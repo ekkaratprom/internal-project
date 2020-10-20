@@ -23,4 +23,10 @@ public class AssignmentServiceImpl implements AssignmentService {
     public Iterable<Assignment> getAllAssignments(){
         return assignmentRepository.findAll();
     }
+
+    @Override
+    public Assignment editAssignment(AssignmentRequest assignmentRequest) {
+        Assignment assignment = assignmentRequest.assignmentRequest();
+        return assignmentRepository.save(assignment);
+    }
 }

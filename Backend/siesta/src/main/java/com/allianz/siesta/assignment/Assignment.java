@@ -119,4 +119,8 @@ public class Assignment {
 
     public Assignment() {
     }
+
+    public Assignment(Long id) {
+        this.id = id;
+    }
 }
