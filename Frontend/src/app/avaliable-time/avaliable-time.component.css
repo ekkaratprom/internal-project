@@ -24,6 +24,14 @@
 .fas {
   margin-right: 3%;
 }
+.box-nine {
+  display: flex;
+  flex-direction: row;
+  width: 30px;
+  height: 30px;
+  border: none;
+  text-align: center;
+}
 .position {
   display: inline;
   text-align: right;
@@ -32,4 +40,13 @@
 }
 .card-body {
   margin-right: 0;
+}
+.d {
+  display: contents;
+  align-content: center;
+}
+
+.card-text {
+  display: contents;
+  size: 20px;
 }

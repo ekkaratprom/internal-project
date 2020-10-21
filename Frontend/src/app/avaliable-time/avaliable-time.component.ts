@@ -14,8 +14,11 @@ export class AvaliableTimeComponent implements OnInit {
   searchText = '';
   completedStatusCheck = undefined;
   modalReference: NgbModalRef;
+  color = [0, 3, 6, 8];
+  skillsets = ['angular', 'bootstrap', 'html5'];
   x = ['nine', 'big', 'p_view', 'p_joy', 'p_jum'];
   constructor(private modalService: NgbModal,
+    // tslint:disable-next-line: align
     private assignmentService: AssignmentService) { }
 
   ngOnInit(): void {

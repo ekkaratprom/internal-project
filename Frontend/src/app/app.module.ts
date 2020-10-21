@@ -1,3 +1,4 @@
+import { ColorPipe } from './avaliable-time/color.pipe';
 import { AssignmentListComponent } from './assignment-list/assignment-list.component';
 import { AssignmentPipe } from './queue-view/assignmentfilter.pipe';
 import { CompleteStatusPipe } from './queue-view/completestatusfilter.pipe';
@@ -21,12 +22,13 @@ import { AvaliableTimeComponent } from './avaliable-time/avaliable-time.componen
 import { AssignmentFormComponent } from './assignment-form/assignment-form.component';
 
 
+
 @NgModule({
   declarations: [AppComponent, CardComponent, CardFormComponent, FilterPipe,
     CardPersonRowComponent, QueueViewComponent, DatepickerComponent, NavbarComponent, AvaliableTimeComponent,
     AssignmentListComponent,
     AssignmentFormComponent,
-    CompleteStatusPipe,
+    CompleteStatusPipe, ColorPipe,
     AssignmentPipe],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule,
     ReactiveFormsModule, MDBBootstrapModule.forRoot(),

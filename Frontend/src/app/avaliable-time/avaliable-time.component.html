@@ -22,28 +22,44 @@
   <option [ngValue]="true">Done</option>
   <option [ngValue]="false">Undone</option>
 </select>
-
+<div class="row">
+  <div class="col">1</div>
+  <div class="col">2</div>
+  <div class="col">3</div>
+  <div class="col">4</div>
+  <div class="col">5</div>
+  <div class="col">6</div>
+</div>
 <div class="row">
   <div class="col">
     <div *ngFor="let c of assignments">
-      <div class="card" style="width: 18rem">
+      <div class="card" style="width: 13rem">
         <div class="card-body">
           <div class="card-title">
-            <i style="font-size: 24px" class="fas">&#xf2bd;</i
-            >{{ c.assignmentName }}
+            <i style="font-size: 18px" class="fas">&#xf2bd;</i>
+            {{ c.assignmentName }}
             <br />
           </div>
           <h6 class="position">Frontend Developer</h6>
-          <p class="card-text">
-            <mdb-icon fab icon="angular"></mdb-icon>
-            <mdb-icon fab icon="bootstrap"></mdb-icon>
-            <mdb-icon fab icon="html5"></mdb-icon>
+          <br />
+          <p *ngFor="let index of skillsets" class="card-text">
+            <mdb-icon fab icon="{{ index }}" title="{{ index }}"></mdb-icon>
           </p>
         </div>
       </div>
     </div>
   </div>
-  <div class="col">2</div>
+  <div class="col">
+    <span
+      class="box-nine"
+      *ngFor="let index of color"
+      [ngStyle]="{ backgroundColor: index | color }"
+    >
+      <div class="kkk">
+        {{ index }}
+      </div>
+    </span>
+  </div>
   <div class="col">3</div>
   <div class="col">4</div>
   <div class="col">5</div>
