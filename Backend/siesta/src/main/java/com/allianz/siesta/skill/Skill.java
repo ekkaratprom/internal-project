@@ -19,6 +19,9 @@ public class Skill {
     @Column(nullable = false, name = "skill_name")
     private String skillName;
 
+    @Column(nullable = false, name = "icon_path")
+    private String iconPath;
+
     @OneToMany(mappedBy = "skill", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<Technician> technicians = new ArrayList<Technician>();
@@ -46,4 +49,13 @@ public class Skill {
     public void setTechnicians(List<Technician> technicians) {
         this.technicians = technicians;
     }
+
+    public String getIconPath() {
+        return iconPath;
+    }
+
+    public void setIconPath(String iconPath) {
+        this.iconPath = iconPath;
+    }
+
 }

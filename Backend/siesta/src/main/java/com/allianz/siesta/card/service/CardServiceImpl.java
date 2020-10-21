@@ -143,7 +143,8 @@ public class CardServiceImpl implements CardService{
             userResponse.setSkills(new ArrayList());
             for (Technician technician : techniciansList){
                 SkillResponse skillResponse = new SkillResponse(
-                        technician.getSkill().getSkillName()
+                        technician.getSkill().getSkillName(),
+                        technician.getSkill().getIconPath()
                 );
                 userResponse.getSkills().add(skillResponse);
             }
