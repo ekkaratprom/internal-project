@@ -17,12 +17,16 @@
   <option [ngValue]="false">Undone</option>
 </select>
 <div class="row">
-  <div class="col">1</div>
-  <div class="col">2</div>
-  <div class="col">3</div>
-  <div class="col">4</div>
-  <div class="col">5</div>
-  <div class="col">6</div>
+  <div class="col-lg-2 col-xl-2"></div>
+  <div class="col-lg-10 col-xl-10" style="height: 25px; padding: 0%">
+    <div class="d-flex bd-highlight mb-3" style="justify-content: space-around">
+      <span class="color-box" *ngFor="let index of color">
+        <div>
+          {{ index }}
+        </div>
+      </span>
+    </div>
+  </div>
 </div>
 <div class="row">
   <div class="col">
@@ -43,15 +47,14 @@
       </div>
     </div>
   </div>
-  <div class="col">
-    <span class="box-nine" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }">
-      <div class="kkk">
-        {{ index }}
-      </div>
-    </span>
+
+  <div class="col-lg-10 col-xl-10" style="padding: 0%">
+    <div class="d-flex bd-highlight mb-3" style="justify-content: space-around">
+      <span class="color-box" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }">
+        <div class="text-in-box">
+          {{ index }}
+        </div>
+      </span>
+    </div>
   </div>
-  <div class="col">3</div>
-  <div class="col">4</div>
-  <div class="col">5</div>
-  <div class="col">6</div>
 </div>

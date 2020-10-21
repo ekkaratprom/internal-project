@@ -9,44 +9,56 @@
   flex-direction: column;
   align-items: center;
 }
+label {
+  margin: 0;
+}
 
 .form-control {
   display: inline;
   width: 10vw;
+  height: 2.5vw;
+  margin: 0%;
 }
 
 .card-title {
-  font-size: larger;
+  font-size: 13px;
   font-weight: 600;
   display: contents;
   margin-bottom: 12px;
 }
 .fas {
-  margin-right: 3%;
+  margin-right: 1%;
 }
-.box-nine {
+.color-box {
   display: flex;
   flex-direction: row;
-  width: 30px;
+  width: 28px;
   height: 30px;
+  justify-content: center;
   border: none;
   text-align: center;
 }
 .position {
   display: inline;
+  font-size: 10px;
   text-align: right;
-  margin-left: 0%;
+  margin: 0%;
   opacity: 0.6;
 }
 .card-body {
   margin-right: 0;
-}
-.d {
-  display: contents;
-  align-content: center;
+  padding: 0.2rem;
 }
 
 .card-text {
   display: contents;
   size: 20px;
+}
+
+.text-in-box {
+  font-weight: bold;
+  align-self: center;
+}
+.fab {
+  margin-left: 2%;
 }
