@@ -24,8 +24,8 @@ export type CardList = {
     assignmentName?: string;
     billableTime?: number;
     estimateTime?: number;
-    actualTime: number;
     completedStatus: boolean;
+    totalActualTime?: number;
     cardObj: CardObj[];
 }
 
@@ -34,4 +34,5 @@ export type CardObj = {
     cardActualTime: number;
     cardDate: string;
 }
+
 

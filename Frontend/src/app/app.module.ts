@@ -19,6 +19,7 @@ import { QueueViewComponent } from './queue-view/queue-view.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { AvaliableTimeComponent } from './avaliable-time/avaliable-time.component';
 import { AssignmentFormComponent } from './assignment-form/assignment-form.component';
+import { AvaliableFormComponent } from './avaliable-form/avaliable-form.component';
 
 
 
@@ -29,7 +30,8 @@ import { AssignmentFormComponent } from './assignment-form/assignment-form.compo
     AssignmentListComponent,
     AssignmentFormComponent,
     CompleteStatusPipe,
-    AssignmentPipe],
+    AssignmentPipe,
+    AvaliableFormComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule,
     ReactiveFormsModule, MDBBootstrapModule.forRoot(),
     NgbModule],
