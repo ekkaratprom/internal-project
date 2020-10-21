@@ -1,4 +1,5 @@
 import { CompleteStatusPipe } from './assignment-list/shared/completestatusfilter.pipe';
+import { ColorPipe } from './avaliable-time/color.pipe';
 import { AssignmentListComponent } from './assignment-list/assignment-list.component';
 import { AssignmentPipe } from './assignment-list/shared/assignmentfilter.pipe';
 import { from } from 'rxjs';
@@ -21,19 +22,32 @@ import { AvaliableTimeComponent } from './avaliable-time/avaliable-time.componen
 import { AssignmentFormComponent } from './assignment-form/assignment-form.component';
 import { AvaliableFormComponent } from './avaliable-form/avaliable-form.component';
 
-
-
-
 @NgModule({
-  declarations: [AppComponent, CardComponent, CardFormComponent, FilterPipe,
-    CardPersonRowComponent, QueueViewComponent, DatepickerComponent, NavbarComponent, AvaliableTimeComponent,
+  declarations: [
+    AppComponent,
+    CardComponent,
+    CardFormComponent,
+    FilterPipe,
+    CardPersonRowComponent,
+    QueueViewComponent,
+    DatepickerComponent,
+    NavbarComponent,
+    AvaliableTimeComponent,
     AssignmentListComponent,
     AssignmentFormComponent,
     CompleteStatusPipe,
     AssignmentPipe,
-    AvaliableFormComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule,
-    ReactiveFormsModule, MDBBootstrapModule.forRoot(),
+    AvaliableFormComponent,
+    CompleteStatusPipe,
+    ColorPipe,
+    AssignmentPipe],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    MDBBootstrapModule.forRoot(),
     NgbModule],
   providers: [],
   bootstrap: [AppComponent],
