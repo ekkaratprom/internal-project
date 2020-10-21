@@ -1,14 +1,8 @@
 <span class="form-group">
   <label for="search-text" style="font-weight: bold">Available Time</label>
   <br />
-  <input
-    type="text"
-    class="form-control"
-    style="margin-right: 2vw"
-    id="search-text"
-    [(ngModel)]="searchText"
-    placeholder="Assignment"
-  />
+  <input type="text" class="form-control" style="margin-right: 2vw" id="search-text" [(ngModel)]="searchText"
+    placeholder="Assignment" />
 </span>
 
 <select class="form-control" [(ngModel)]="completedStatusCheck">
@@ -32,15 +26,15 @@
 </div>
 <div class="row">
   <div class="col">
-    <div *ngFor="let c of assignments">
+    <div *ngFor="let r of result ">
       <div class="card" style="width: 13rem">
         <div class="card-body">
           <div class="card-title">
             <i style="font-size: 18px" class="fas">&#xf2bd;</i>
-            {{ c.assignmentName }}
+            {{ r.fullName }}
             <br />
           </div>
-          <h6 class="position">Frontend Developer</h6>
+          <h6 class="position">{{r.position}}</h6>
           <br />
           <p *ngFor="let index of skillsets" class="card-text">
             <mdb-icon fab icon="{{ index }}" title="{{ index }}"></mdb-icon>
@@ -50,11 +44,7 @@
     </div>
   </div>
   <div class="col">
-    <span
-      class="box-nine"
-      *ngFor="let index of color"
-      [ngStyle]="{ backgroundColor: index | color }"
-    >
+    <span class="box-nine" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }">
       <div class="kkk">
         {{ index }}
       </div>
