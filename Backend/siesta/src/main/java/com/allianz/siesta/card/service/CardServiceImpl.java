@@ -162,14 +162,14 @@ public class CardServiceImpl implements CardService{
                 userResponse.getCards().add(cardsResponse);
                 cardsResponse.setCard(new ArrayList());
                 for (Card userCards : userCard) {
-                    CardResponse cardResponse = new CardResponse(
+                    CardUserResponse cardUserResponse = new CardUserResponse(
+                            userCards.getId(),
                             userCards.getCardName(),
                             userCards.getActualTime(),
-                            userCards.getCardDate()
+                            userCards.getCreateDate()
                     );
-//                    cardResponse.setCreateDate(userCards.getCreateDate());
-                    cardResponse.setCardId(userCards.getId());
-                    cardsResponse.getCard().add(cardResponse);
+
+                    cardsResponse.getCard().add(cardUserResponse);
                 }
             }
             //concat fullname = fname + lname
