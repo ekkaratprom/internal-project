@@ -58,6 +58,7 @@ public class CardServiceImpl implements CardService{
                         card.getActualTime(),
                         card.getCardDate()
                 );
+                cardResponse.setCardId(card.getId());
 
                 assignmentResponse.getCardObj().add(cardResponse);
 
@@ -166,6 +167,7 @@ public class CardServiceImpl implements CardService{
                             userCards.getActualTime(),
                             userCards.getCardDate()
                     );
+//                    cardResponse.setCreateDate(userCards.getCreateDate());
                     cardResponse.setCardId(userCards.getId());
                     cardsResponse.getCard().add(cardResponse);
                 }
