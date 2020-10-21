@@ -5,7 +5,7 @@
 //import com.allianz.siesta.user.User;
 //import com.allianz.siesta.user.UserRepository;
 //import com.allianz.siesta.user.UserRequest;
-//import com.allianz.siesta.user.UserResponse;
+//import com.allianz.siesta.card.response.UserResponse;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
 //

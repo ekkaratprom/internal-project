@@ -26,4 +26,9 @@ public class AssignmentController {
         return assignmentService.getAllAssignments();
     }
 
+    @CrossOrigin
+    @GetMapping(value = "/v2/assignmentlist")
+    public Iterable<AssignmentListResponse> getAllAssignmentList() {
+        return assignmentService.getAllAssignmentList();
+    }
 }

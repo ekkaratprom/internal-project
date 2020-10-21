@@ -6,12 +6,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RestResource;
 
+import java.util.List;
+
 
 public interface AssignmentRepository extends JpaRepository <Assignment, Long> {
 
     @Override
     @RestResource(exported = false)
     <S extends Assignment> S save(S s);
+
+    List<Assignment> findByDeletedStatus(Boolean deletedStatus);
 
 
    @Query(value ="SELECT SUM(c.actual_time) AS totalActualTime FROM card c, assignment a " +
