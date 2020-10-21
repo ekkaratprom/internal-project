@@ -3,7 +3,7 @@
 //
 //import com.allianz.siesta.user.User;
 //import com.allianz.siesta.user.UserRequest;
-//import com.allianz.siesta.user.UserResponse;
+//import com.allianz.siesta.card.response.UserResponse;
 //
 //import java.util.Optional;
 //
