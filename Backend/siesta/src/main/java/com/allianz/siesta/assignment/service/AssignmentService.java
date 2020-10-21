@@ -1,6 +1,7 @@
 package com.allianz.siesta.assignment.service;
 
 import com.allianz.siesta.assignment.Assignment;
+import com.allianz.siesta.assignment.AssignmentListResponse;
 import com.allianz.siesta.assignment.AssignmentRequest;
 
 public interface AssignmentService {
@@ -10,4 +11,6 @@ public interface AssignmentService {
     Iterable<Assignment> getAllAssignments();
 
     Assignment editAssignment(AssignmentRequest assignmentRequest);
+
+    Iterable<AssignmentListResponse> getAllAssignmentList();
 }
