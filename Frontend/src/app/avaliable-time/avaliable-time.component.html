@@ -1,14 +1,8 @@
 <span class="form-group">
   <label for="search-text" style="font-weight: bold">Available Time</label>
   <br />
-  <input
-    type="text"
-    class="form-control"
-    style="margin-right: 2vw"
-    id="search-text"
-    [(ngModel)]="searchText"
-    placeholder="Assignment"
-  />
+  <input type="text" class="form-control" style="margin-right: 2vw" id="search-text" [(ngModel)]="searchText"
+    placeholder="Assignment" />
 </span>
 
 <select class="form-control" [(ngModel)]="completedStatusCheck">
@@ -43,18 +37,15 @@
           <h6 class="position">Frontend Developer</h6>
           <br />
           <p *ngFor="let index of skillsets" class="card-text">
-            <mdb-icon fab icon="{{ index }}" title="{{ index }}"></mdb-icon>
+            <mdb-icon fab icon="{{ index }}" title="{{ index }}">
+            </mdb-icon>
           </p>
         </div>
       </div>
     </div>
   </div>
   <div class="col">
-    <span
-      class="box-nine"
-      *ngFor="let index of color"
-      [ngStyle]="{ backgroundColor: index | color }"
-    >
+    <span class="box-nine" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }">
       <div class="kkk">
         {{ index }}
       </div>
