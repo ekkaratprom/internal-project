@@ -80,6 +80,31 @@ export class AssignmentListComponent implements OnInit {
           this.cards.forEach(element => {
             // clear
             this.cObj = [];
+            element.cardObj.forEach(c => {
+              const cardObj = {
+                cardName: c.cardName,
+                cardActualTime: c.cardActualTime,
+                cardDate: c.cardDate
+              };
+              this.cObj.push(cardObj);
+            });
+            const cardDetail = {
+              assignmentName: element.assignmentName,
+              billableTime: element.billableTime,
+              completedStatus: element.completedStatus,
+              estimateTime: element.estimateTime,
+              totalActualTime: element.totalActualTime,
+              cardObj: this.cObj,
+            }
+            this.result.push(cardDetail);
+          });
+          console.log('result', this.result);
+        }, (error) => {
+          console.log('Get cards error: ', error);
+          this.cards = this.mockCards.getAllCards();
+          this.cards.forEach(element => {
+            // clear
+            this.cObj = [];
             element.cardObj.forEach(el => {
               const cardObj = {
                 cardName: el.cardName,
@@ -99,70 +124,10 @@ export class AssignmentListComponent implements OnInit {
             this.result.push(cardDetail);
           });
           console.log('result', this.result);
-        });
+        }
+        );
     } catch (error) {
       console.error('GET all cards fail');
     }
   }
-
-  //   getAllCards(): void {
-  //     try {
-  //       this.assignmentService
-  //         .getAllCards()
-  //         .subscribe((res) => {
-  //           this.cards = res;
-  //           console.log('cards', this.cards);
-  //           // this.cards.forEach(e => {
-  //           //   const cardDetail: CardDetail = {
-  //           //     assignmentName: ,
-  //           //     billableTime: ,
-  //           //     completedStatus: ,
-  //           //     estimateTime:,
-  //           //     totalActualTime: ,
-  //           //   }
-
-  //         });
-
-  //       //   this.cards.forEach(card => {
-  //       //     // console.log('card', card);
-  //       //     // this.cardLists = this.cards;
-  //       //     // console.log('cardList', this.cardLists);
-
-
-  //       //     card.cardObj.forEach(c => {
-  //       //       const cardData: CardData = {
-  //       //         cardName: c.cardName,
-  //       //         cardActualTime: c.cardActualTime,
-  //       //         cardDate: c.cardDate,
-
-  //       //       };
-  //       //       this.results.push(cardData);
-  //       //     });
-  //       //   });
-  //       //   console.log('results', this.results);
-  //       // },
-  //       // (error) => {
-  //       //   console.log('Get cards error: ', error);
-  //       //   this.cards = this.mockCards.getAllCards();
-  //       //   this.cards.forEach(card => {
-  //       //     console.log('card', card);
-  //       //     card.cardObj.forEach(c => {
-  //       //       const cardData: CardData = {
-  //       //         cardName: c.cardName,
-  //       //         cardActualTime: c.cardActualTime,
-  //       //         cardDate: c.cardDate
-  //       //       };
-  //       //       this.results.push(cardData);
-  //       //     });
-  //       //   });
-  //       //   console.log('results', this.results);
-  //     }
-  //         );
-  //   } catch(error) {
-  //     console.error('GET all cards fail');
-  //   }
-
-  // }
-
-
 }

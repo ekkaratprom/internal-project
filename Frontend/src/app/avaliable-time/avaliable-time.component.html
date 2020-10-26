@@ -4,37 +4,38 @@
   <input type="text" class="form-control" style="margin-right: 2vw" id="search-text" [(ngModel)]="searchText"
     placeholder="Assignment" />
 </span>
-
 <select class="form-control" [(ngModel)]="completedStatusCheck">
   <option [ngValue]="undefined">All</option>
   <option [ngValue]="true">Done</option>
   <option [ngValue]="false">Undone</option>
 </select>
-
 <select class="form-control" [(ngModel)]="completedStatusCheck">
   <option [ngValue]="undefined">All</option>
   <option [ngValue]="true">Done</option>
   <option [ngValue]="false">Undone</option>
 </select>
 <div class="row">
-  <div class="col">1</div>
-  <div class="col">2</div>
-  <div class="col">3</div>
-  <div class="col">4</div>
-  <div class="col">5</div>
-  <div class="col">6</div>
+  <div class="col-lg-2 col-xl-2"></div>
+  <div class="col-lg-10 col-xl-10" style="height: 25px; padding: 0%">
+    <div class="d-flex bd-highlight mb-3" style="justify-content: space-around">
+      <span class="color-box" *ngFor="let index of color">
+        <div>
+          {{ index }}
+        </div>
+      </span>
+    </div>
+  </div>
 </div>
 <div class="row">
-  <div class="col">
-    <div *ngFor="let c of assignments">
-      <div class="card" style="width: 13rem">
+  <div class="col-lg-12 col-xl-12" style="padding: 0%">
+    <div class="ss" *ngFor="let r of result | nameFilter: searchText">
+      <div class="card" style="width: 10rem">
         <div class="card-body">
           <div class="card-title">
-            <i style="font-size: 18px" class="fas">&#xf2bd;</i>
-            {{ c.assignmentName }}
-            <br />
+            <i style="font-size: 12px" class="fas">&#xf2bd;</i>
+            {{ r.fullName }}
           </div>
-          <h6 class="position">Frontend Developer</h6>
+          <h6 class="position">{{ r.position }}</h6>
           <br />
           <p *ngFor="let index of skillsets" class="card-text">
             <mdb-icon fab icon="{{ index }}" title="{{ index }}">
@@ -42,17 +43,14 @@
           </p>
         </div>
       </div>
+      <div class="color-list" style="justify-content: space-around">
+        <span class="color-box" *ngFor="let index of r['cards']"
+          [ngStyle]="{ backgroundColor: index.totalActualTime  | color }">
+          <div class="text-in-box">
+            {{ index.totalActualTime }}
+          </div>
+        </span>
+      </div>
     </div>
   </div>
-  <div class="col">
-    <span class="box-nine" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }">
-      <div class="kkk">
-        {{ index }}
-      </div>
-    </span>
-  </div>
-  <div class="col">3</div>
-  <div class="col">4</div>
-  <div class="col">5</div>
-  <div class="col">6</div>
 </div>

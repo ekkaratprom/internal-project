@@ -5,16 +5,18 @@ import com.allianz.siesta.assignment.AssignmentRepository;
 import com.allianz.siesta.card.Card;
 import com.allianz.siesta.card.CardRepository;
 import com.allianz.siesta.card.CardRequest;
-import com.allianz.siesta.card.response.AssignmentResponse;
-import com.allianz.siesta.card.response.CardResponse;
+import com.allianz.siesta.card.response.*;
+import com.allianz.siesta.technician.Technician;
+import com.allianz.siesta.technician.TechnicianRepository;
+import com.allianz.siesta.user.User;
+import com.allianz.siesta.user.UserRepository;
+import com.allianz.siesta.card.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static java.lang.Boolean.FALSE;
 
 @Service
 public class CardServiceImpl implements CardService{
@@ -24,6 +26,13 @@ public class CardServiceImpl implements CardService{
 
     @Autowired
     private AssignmentRepository assignmentRepository;
+
+    @Autowired
+    private TechnicianRepository technicianRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+    
 
     @Override
     public Iterable<AssignmentResponse> getAllCards() {
@@ -49,6 +58,7 @@ public class CardServiceImpl implements CardService{
                         card.getActualTime(),
                         card.getCardDate()
                 );
+                cardResponse.setCardId(card.getId());
 
                 assignmentResponse.getCardObj().add(cardResponse);
 
@@ -60,18 +70,18 @@ public class CardServiceImpl implements CardService{
 
 
 //    @Override
-//    public Iterable<AssignmentResponse> getAllCardsWithQuery() {
-//        List<AssignmentResponse> assignmentResponseList = new ArrayList<>();
+//    public Iterable<AssignmentRes> getAllCardsWithQuery() {
+//        List<AssignmentRes> assignmentResList = new ArrayList<>();
 //        Iterable<Assignment> assignments = assignmentRepository.findByDeletedStatus(false);
 //        for (Assignment assignment : assignments) {
-//            AssignmentResponse assignmentResponse = new AssignmentResponse(
+//            AssignmentRes assignmentRes = new AssignmentRes(
 //                    assignment.getAssignmentName(),
 //                    assignment.getBillableTime(),
 //                    assignment.getEstimateTime(),
 //                    assignment.getCompletedStatus()
 //            );
 //
-//            assignmentResponse.setCardObj(new ArrayList());
+//            assignmentRes.setCardObj(new ArrayList());
 //            Double amtActualTime = 0d;
 //            for (Card card : assignment.getCards()) {
 //                // skip deleted cards
@@ -81,15 +91,15 @@ public class CardServiceImpl implements CardService{
 //                            card.getActualTime(),
 //                            card.getCardDate()
 //                    );
-//                    assignmentResponse.getCardObj().add(cardResponse);
+//                    assignmentRes.getCardObj().add(cardResponse);
 //                    amtActualTime += card.getActualTime();
 //                }
 //            }
 //
-//            assignmentResponse.setActualTime(amtActualTime);
-//            assignmentResponseList.add(assignmentResponse);
+//            assignmentRes.setActualTime(amtActualTime);
+//            assignmentResList.add(assignmentRes);
 //        }
-//        return assignmentResponseList;
+//        return assignmentResList;
 //    }
 
     @Override
@@ -103,10 +113,72 @@ public class CardServiceImpl implements CardService{
         return cardRepository.save(card);
     }
 
+//    @Override
+//    public Iterable<CardListResponse> findCardListByAssignmentId(Long assignmentId) {
+//        List<CardListResponse> cardListResponseList = new ArrayList<>();
+//        Iterable<Card> cards =  cardRepository.findCardListByAssignmentId(assignmentId);
+//        for (Card card : cards) {
+//            CardListResponse cardListResponse = new CardListResponse(
+//                    card.getId(),
+//                    card.getCardName()
+//            );
+//            cardListResponseList.add(cardListResponse);
+//        }
+//        return cardListResponseList;
+//    }
+
     @Override
-    public Iterable<Card> findCardListByAssignmentId(Long assignmentId) {
-        return cardRepository.findCardListByAssignmentId(assignmentId);
+    public Iterable<UserResponse> getAllAvailableTime() {
+        List<UserResponse> userResponseList = new ArrayList<>();
+        Iterable<User> users = userRepository.findAll();
+
+        //userId + fullName + position
+        for (User user : users) {
+            List<Technician> techniciansList = technicianRepository.findSkillByUserId(user.getId());
+            UserResponse userResponse = new UserResponse(
+                    user.getId(),
+                    user.getPosition().getPositionName()
+            );
+            //skils
+            userResponse.setSkills(new ArrayList());
+            for (Technician technician : techniciansList){
+                SkillResponse skillResponse = new SkillResponse(
+                        technician.getSkill().getSkillName(),
+                        technician.getSkill().getIconPath()
+                );
+                userResponse.getSkills().add(skillResponse);
+            }
+
+            //Cards[]
+            List<Object[]> cardList = cardRepository.getTotalActualTimeGroupByCardDate(user.getId());
+            List<Card> userCard = cardRepository.getCardByUserId(user.getId());
+            userResponse.setCards(new ArrayList());
+            for (Object[] card : cardList) {
+                CardsResponse cardsResponse = new CardsResponse(
+                        (Double)card[0],
+                        (Date)card[1]
+                );
+
+                //Card[]
+                userResponse.getCards().add(cardsResponse);
+                cardsResponse.setCard(new ArrayList());
+                for (Card userCards : userCard) {
+                    CardUserResponse cardUserResponse = new CardUserResponse(
+                            userCards.getId(),
+                            userCards.getCardName(),
+                            userCards.getActualTime(),
+                            userCards.getCreateDate()
+                    );
+
+                    cardsResponse.getCard().add(cardUserResponse);
+                }
+            }
+            //concat fullname = fname + lname
+            String fullName = user.getFirstName() + " " + user.getLastName();
+            userResponse.setFullName(fullName);
+
+            userResponseList.add(userResponse);
+        }
+        return userResponseList;
     }
-
-
 }

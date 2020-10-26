@@ -1,3 +1,4 @@
+import { NamePipe } from './avaliable-time/name.pipe';
 import { CompleteStatusPipe } from './assignment-list/shared/completestatusfilter.pipe';
 import { ColorPipe } from './avaliable-time/color.pipe';
 import { AssignmentListComponent } from './assignment-list/assignment-list.component';
@@ -37,6 +38,7 @@ import { AvaliableFormComponent } from './avaliable-form/avaliable-form.componen
     AssignmentFormComponent,
     CompleteStatusPipe,
     AssignmentPipe,
+    NamePipe,
     AvaliableFormComponent,
     CompleteStatusPipe,
     ColorPipe,

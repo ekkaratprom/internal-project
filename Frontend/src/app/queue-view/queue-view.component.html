@@ -1,18 +1,16 @@
 <app-navbar></app-navbar>
 <app-datepicker></app-datepicker>
-
-<div class="col">
-  <ng-template #content let-modal>
-    <app-assignment-form (submitCompleted)="close()"></app-assignment-form>
-  </ng-template>
-
-  <button (click)="open(content)" class="btn btn-lg btn-block me-btn-add">
-    + assignment
-  </button>
+<div class="row">
+  <div class="col-lg-2 col-xl-2">
+    <!-- <ng-template #content let-modal>
+      <app-assignment-form (submitCompleted)="close()"></app-assignment-form>
+    </ng-template>
+    <button (click)="open(content)" class="btn btn-lg btn-block me-btn-add">
+      + assignment
+    </button>
+    <app-assignment-list></app-assignment-list> -->
+  </div>
+  <div class="col-lg-10 col-xl-10">
+    <app-avaliable-time></app-avaliable-time>
+  </div>
 </div>
-
-<app-assignment-list></app-assignment-list>
-
-<!-- <app-avaliable-form></app-avaliable-form> -->
-
-<!-- <app-avaliable-time></app-avaliable-time> -->

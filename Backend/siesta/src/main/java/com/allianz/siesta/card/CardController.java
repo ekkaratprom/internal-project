@@ -1,13 +1,10 @@
 package com.allianz.siesta.card;
 
-import com.allianz.siesta.assignment.Assignment;
 import com.allianz.siesta.card.response.AssignmentResponse;
 import com.allianz.siesta.card.service.CardService;
+import com.allianz.siesta.card.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -24,7 +21,7 @@ public class CardController {
 
 //    @CrossOrigin
 //    @GetMapping(path = "/v2/card")
-//    public Iterable<AssignmentResponse> getAllCardsWithQuery() {
+//    public Iterable<AssignmentRes> getAllCardsWithQuery() {
 //        return cardService.getAllCardsWithQuery();
 //    }
 
@@ -34,11 +31,16 @@ public class CardController {
         return cardService.addCard(cardRequest);
     }
 
-    @CrossOrigin
-    @GetMapping(value = "/v1/cardlist/{assignmentId}")
-    public Iterable<Card> getCardList(@PathVariable(value = "assignmentId") Long assignmentId){
+//    @CrossOrigin
+//    @GetMapping(value = "/v1/cardlist/{assignmentId}")
+//    public Iterable<CardListResponse> findCardListByAssignmentId(@PathVariable(value = "assignmentId") Long assignmentId){
+//    return cardService.findCardListByAssignmentId(assignmentId);
+//    }
 
-    return cardService.findCardListByAssignmentId(assignmentId);
+    @CrossOrigin
+    @GetMapping(path = "/v1/availabletime")
+    public Iterable<UserResponse> getAllAvailableTime() {
+        return cardService.getAllAvailableTime();
     }
 
 }

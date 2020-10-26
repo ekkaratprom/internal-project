@@ -3,50 +3,76 @@
   flex-direction: row;
   order: 6;
 }
-
 .col {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
+label {
+  margin: 0;
+}
 .form-control {
   display: inline;
   width: 10vw;
+  height: 2.5vw;
+  margin: 0%;
 }
-
 .card-title {
-  font-size: larger;
+  font-size: 13px;
   font-weight: 600;
   display: contents;
   margin-bottom: 12px;
 }
 .fas {
-  margin-right: 3%;
+  margin-right: 1%;
 }
-.box-nine {
+.color-box {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
-  width: 30px;
+  width: 2rem;
   height: 30px;
+  justify-content: center;
   border: none;
   text-align: center;
 }
+
+.col-xl-10 {
+  padding: 0%;
+}
 .position {
   display: inline;
-  text-align: right;
-  margin-left: 0%;
+  font-size: 8px;
+  text-align: end;
+  margin: 0%;
   opacity: 0.6;
 }
 .card-body {
   margin-right: 0;
+  padding: 0.2rem;
 }
-.d {
-  display: contents;
-  align-content: center;
-}
-
 .card-text {
   display: contents;
   size: 20px;
+}
+.text-in-box {
+  font-weight: bold;
+  align-self: center;
+}
+.fab {
+  margin-left: 2%;
+}
+.card {
+  margin-bottom: 1%;
+  margin-right: 0%;
+}
+
+.ss {
+  display: flex;
+  justify-content: space-around;
+}
+
+.color-list {
+  display: flex;
+  justify-content: space-around;
 }
