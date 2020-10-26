@@ -1,8 +1,14 @@
 <span class="form-group">
   <label for="search-text" style="font-weight: bold">Available Time</label>
   <br />
-  <input type="text" class="form-control" style="margin-right: 2vw" id="search-text" [(ngModel)]="searchText"
-    placeholder="Assignment" />
+  <input
+    type="text"
+    class="form-control"
+    style="margin-right: 2vw"
+    id="search-text"
+    [(ngModel)]="searchText"
+    placeholder="Assignment"
+  />
 </span>
 <select class="form-control" [(ngModel)]="completedStatusCheck">
   <option [ngValue]="undefined">All</option>
@@ -38,16 +44,18 @@
           <h6 class="position">{{ r.position }}</h6>
           <br />
           <p *ngFor="let index of skillsets" class="card-text">
-            <mdb-icon fab icon="{{ index }}" title="{{ index }}">
-            </mdb-icon>
+            <mdb-icon fab icon="{{ index }}" title="{{ index }}"> </mdb-icon>
           </p>
         </div>
       </div>
       <div class="color-list" style="justify-content: space-around">
-        <span class="color-box" *ngFor="let index of r['cards']"
-          [ngStyle]="{ backgroundColor: index.totalActualTime  | color }">
+        <span
+          class="color-box"
+          *ngFor="let index of color"
+          [ngStyle]="{ backgroundColor: index | color }"
+        >
           <div class="text-in-box">
-            {{ index.totalActualTime }}
+            {{ index }}
           </div>
         </span>
       </div>
