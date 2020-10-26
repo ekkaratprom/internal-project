@@ -18,7 +18,7 @@ export class AssignmentPipe implements PipeTransform {
       if (it.assignmentName === null) {
         return false;
       }
-      console.log(it.assignmentName.toLocaleLowerCase().includes(searchText));
+
       return it.assignmentName.toLocaleLowerCase().includes(searchText);
 
     });
