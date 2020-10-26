@@ -30,7 +30,8 @@ label {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  width: 2rem;
+  width: 2vw;
+  align-self: center;
   height: 30px;
   justify-content: center;
   border: none;
@@ -64,6 +65,7 @@ label {
 }
 .card {
   margin-bottom: 1%;
+  margin-top: 1%;
   margin-right: 0%;
 }
 
