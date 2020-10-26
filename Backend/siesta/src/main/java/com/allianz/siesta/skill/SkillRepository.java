@@ -1,4 +1,6 @@
 package com.allianz.siesta.skill;
 
-public interface SkillRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface SkillRepository extends JpaRepository <Skill, Long> {
 }
