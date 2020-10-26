@@ -4,6 +4,7 @@ import { AssignmentService } from './shared/assignment.service';
 import { Assignment, AssignmentResponse, CardList, CardObj } from './shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 export interface CardData {
   cardName: string;
@@ -37,15 +38,26 @@ export class AssignmentListComponent implements OnInit {
   toggle2 = false;
   result = [];
   cObj = [];
+  modalReference: NgbModalRef;
 
   public isCollapsed = true;
+
   constructor(private assignmentService: AssignmentService,
     private mockAssignments: MockAssignmentService,
-    private mockCards: MockCardsService) { }
+    private mockCards: MockCardsService,
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
     // this.getAllAssignmentCards();
     this.getAllCards();
+  }
+
+  open(content): void {
+    this.modalReference = this.modalService.open(content, { size: 'sm' });
+  }
+
+  close(): void {
+    this.modalReference.close();
   }
 
   getAllAssignmentCards(): void {

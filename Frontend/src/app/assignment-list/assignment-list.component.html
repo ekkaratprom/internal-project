@@ -3,6 +3,7 @@
 >
 <br />
 <div class="form-group">
+  <label for="search-text" style="font-weight: bold">Assignment</label>
   <input
     type="text"
     class="form-control"
@@ -22,11 +23,17 @@
   <option [ngValue]="false">Undone</option>
 </select>
 
+<ng-template #content let-modal>
+  <app-assignment-form (submitCompleted)="close()"></app-assignment-form>
+</ng-template>
+<button (click)="open(content)" class="btn btn-lg btn-block me-btn-add">
+  + assignment
+</button>
+
 <ul class="list-group list-group-flush">
   <li class="list-group-item">
     <div
       class="card"
-      style="width: 10rem"
       *ngFor="
         let r of result
           | completedstatusFilter: completedStatusCheck
@@ -48,7 +55,7 @@
             <i class="material-icons md-18">ic_monetization_on</i>
             <p>
               <!-- Billable Time: -->
-              <span> {{ r.billableTime }} Hrs </span>
+              {{ r.billableTime }} Hrs
             </p>
           </div>
 
@@ -56,7 +63,7 @@
             <i class="material-icons md-18">ic_query_builder</i>
             <p>
               <!-- Estimate Time: -->
-              <span>{{ r.estimateTime }} Hrs</span>
+              {{ r.estimateTime }} Hrs
             </p>
           </div>
 

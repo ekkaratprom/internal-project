@@ -13,7 +13,7 @@ import {
   providedIn: 'root'
 })
 export class AssignmentService {
-  url = `http://localhost:8080/api/`;
+  url = `http://10.187.1.33:8081/siesta/api/`;
 
   constructor(private http: HttpClient) { }
 

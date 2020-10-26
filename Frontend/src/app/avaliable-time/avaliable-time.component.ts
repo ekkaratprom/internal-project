@@ -1,9 +1,12 @@
+import { element } from 'protractor';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AvailabilityService } from './shared/availability.service';
 import { MockAvaliabilityService } from './../service/mock-avaliability.service';
 import { AssignmentService } from './../assignment-list/shared/assignment.service';
 import { Assignment, AssignmentResponse } from './../assignment-list/shared/assignment-model';
 import { Component, OnInit } from '@angular/core';
 import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+
 
 export interface UserDetail {
   userId: number;
@@ -25,6 +28,9 @@ export class AvaliableTimeComponent implements OnInit {
   skillsetCheck = null;
   userDetail;
   result = [];
+  skillObj = [];
+  cardObj = [];
+  cardListObj = [];
   completedStatusCheck = undefined;
   modalReference: NgbModalRef;
   color = [0, 3, 6, 8, 4, 6, 8, 1, 2, 4, 0, 2, 7, 1, 5, 8, 9, 2, 2, 8, 1, 4, 5, 7, 3, 4, 7, 2, 4, 6];
@@ -71,16 +77,52 @@ export class AvaliableTimeComponent implements OnInit {
           console.log('availibleUsers', this.availibleUsers);
 
           this.availibleUsers.forEach(element => {
+            this.skillObj = [];
+            element.skills.forEach(e => {
+              const skills = {
+                skillName: e.skillName,
+                iconPath: e.iconPath,
+              };
+              this.skillObj.push(skills);
+            });
+            console.log('skillObj', this.skillObj);
+
+            this.cardObj = [];
+            element.cards.forEach(e => {
+              this.cardListObj = []
+              e.card.forEach(element => {
+                const card = {
+                  cardId: element.cardId,
+                  cardName: element.cardName,
+                  actualTime: element.actualTime,
+                  createDate: element.createDate,
+                };
+                this.cardListObj.push(card);
+
+              });
+              console.log('cardListObj', this.cardListObj);
+
+
+              const cards = {
+                totalActualTime: e.totalActualTime,
+                cardDate: e.cardDate,
+                card: this.cardListObj,
+              };
+              this.cardObj.push(cards);
+            });
+            console.log('cardObj', this.cardObj);
+
             const userDetail = {
               userId: element.userId,
               fullName: element.fullName,
               position: element.position,
+              skills: this.skillObj,
+              cards: this.cardObj,
+
             }
             this.result.push(userDetail);
           });
           console.log('result', this.result);
-
-
 
         }, (error) => {
           console.log('Get all Users Availiable error: ', error);
