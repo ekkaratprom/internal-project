@@ -11,7 +11,7 @@ import {
   providedIn: 'root'
 })
 export class CardService {
-  url = `http://localhost:8080/api/v2/`;
+  url = `http://10.187.1.33:8081/siesta/api/v2/`;
 
   constructor(private http: HttpClient) { }
 

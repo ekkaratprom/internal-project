@@ -43,9 +43,10 @@
         </div>
       </div>
       <div class="color-list" style="justify-content: space-around">
-        <span class="color-box" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }">
+        <span class="color-box" *ngFor="let index of r['cards']"
+          [ngStyle]="{ backgroundColor: index.totalActualTime  | color }">
           <div class="text-in-box">
-            {{ index }}
+            {{ index.totalActualTime }}
           </div>
         </span>
       </div>

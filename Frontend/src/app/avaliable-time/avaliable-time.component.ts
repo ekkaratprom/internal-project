@@ -122,10 +122,6 @@ export class AvaliableTimeComponent implements OnInit {
           });
           console.log('result', this.result);
 
-
-
-
-
         }, (error) => {
           console.log('Get all Users Availiable error: ', error);
           this.availibleUsers = this.mockAvailibility.getUserAvailiability();
