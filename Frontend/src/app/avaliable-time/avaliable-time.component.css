@@ -30,7 +30,7 @@ label {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  width: 1.9rem;
+  width: 2vw;
   height: 30px;
   justify-content: center;
   border: none;

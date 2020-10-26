@@ -1,25 +1,38 @@
 p {
-    margin: auto;
-    font-size: 12px;
-    padding-left: 1.5rem;
+  margin: auto;
+  font-size: 12px;
+  padding-left: 1.5rem;
 }
 
-.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-18 {
+  font-size: 18px;
+}
 
 .card {
-    margin-bottom: 1.3rem;
+  margin-bottom: 1.3rem;
+}
+
+.form-group {
+  display: inline;
+  width: 10vw;
+  height: 2.5vw;
+  margin: 0%;
+}
+.form-control {
+  display: inline;
+  width: 10vw;
+  height: 2.5vw;
+  margin: 0%;
 }
 
 .card.childCard {
-    margin-bottom: 0.2rem;
+  margin-bottom: 0.2rem;
 }
 
 .fox-say {
-    background-color: #000;
-   
+  background-color: #000;
 }
 
-.no { 
-    background-color:red;
-
+.no {
+  background-color: red;
 }

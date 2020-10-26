@@ -1,5 +1,8 @@
+<label for="search-text" style="font-weight: bold; margin: 0%"
+  >Assignment</label
+>
+<br />
 <div class="form-group">
-  <label for="search-text" style="font-weight: bold">Assignment</label>
   <input
     type="text"
     class="form-control"
@@ -9,7 +12,11 @@
   />
 </div>
 
-<select class="form-control" [(ngModel)]="completedStatusCheck">
+<select
+  class="form-control"
+  style="align-self: baseline"
+  [(ngModel)]="completedStatusCheck"
+>
   <option [ngValue]="undefined">All</option>
   <option [ngValue]="true">Done</option>
   <option [ngValue]="false">Undone</option>
@@ -19,6 +26,7 @@
   <li class="list-group-item">
     <div
       class="card"
+      style="width: 10rem"
       *ngFor="
         let r of result
           | completedstatusFilter: completedStatusCheck
