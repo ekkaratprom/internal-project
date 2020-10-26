@@ -1,12 +1,6 @@
 <div class="form-group">
   <label for="search-text" style="font-weight: bold">Assignment</label>
-  <input
-    type="text"
-    class="form-control"
-    id="search-text"
-    [(ngModel)]="searchText"
-    placeholder="Assignment"
-  />
+  <input type="text" class="form-control" id="search-text" [(ngModel)]="searchText" placeholder="Assignment" />
 </div>
 
 <select class="form-control" [(ngModel)]="completedStatusCheck">
@@ -15,16 +9,20 @@
   <option [ngValue]="false">Undone</option>
 </select>
 
+<ng-template #content let-modal>
+  <app-assignment-form (submitCompleted)="close()"></app-assignment-form>
+</ng-template>
+<button (click)="open(content)" class="btn btn-lg btn-block me-btn-add">
+  + assignment
+</button>
+
 <ul class="list-group list-group-flush">
   <li class="list-group-item">
-    <div
-      class="card"
-      *ngFor="
+    <div class="card" *ngFor="
         let r of result
           | completedstatusFilter: completedStatusCheck
           | assignmentFilter: searchText
-      "
-    >
+      ">
       <div class="card-body">
         <p class="card-text">
           <i class="material-icons md-18">ic_check_circle</i>
@@ -40,7 +38,7 @@
             <i class="material-icons md-18">ic_monetization_on</i>
             <p>
               <!-- Billable Time: -->
-              <span> {{ r.billableTime }} Hrs </span>
+              {{ r.billableTime }} Hrs
             </p>
           </div>
 
@@ -48,7 +46,7 @@
             <i class="material-icons md-18">ic_query_builder</i>
             <p>
               <!-- Estimate Time: -->
-              <span>{{ r.estimateTime }} Hrs</span>
+              {{ r.estimateTime }} Hrs
             </p>
           </div>
 
@@ -61,11 +59,7 @@
           </div>
 
           <!-- <button (click)="toggleState = !toggleState" mat-button>{{ toggleState ? 'ic_chevron_right_48px' : 'ic_chevron_left_48px' }}</button> -->
-          <p
-            (click)="isCollapsed = !isCollapsed"
-            [attr.aria-expanded]="!isCollapsed"
-            aria-controls="collapse"
-          >
+          <p (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapse">
             <i class="material-icons md-18">ic_expand_more</i>
           </p>
         </div>

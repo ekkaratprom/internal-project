@@ -37,19 +37,19 @@
           </div>
           <h6 class="position">{{ r.position }}</h6>
           <br />
-          <p *ngFor="let index of skillsets" class="card-text">
-            <mdb-icon fab icon="{{ index }}" title="{{ index }}">
-            </mdb-icon>
+          <p *ngFor="let index of r['skills']" class="card-text">
+            <img style="width: 1rem;" src="{{index.iconPath }}" title="{{ index.skillName }}">
           </p>
         </div>
       </div>
       <div class="color-list" style="justify-content: space-around">
-        <span class="color-box" *ngFor="let index of r['cards']"
-          [ngStyle]="{ backgroundColor: index.totalActualTime  | color }">
+        <li class="color-box" *ngFor="let index of r['cards']" title="{{ index.cardDate }}"
+          [ngStyle]=" { backgroundColor: index.totalActualTime | color }">
           <div class="text-in-box">
             {{ index.totalActualTime }}
+
           </div>
-        </span>
+        </li>
       </div>
     </div>
   </div>
