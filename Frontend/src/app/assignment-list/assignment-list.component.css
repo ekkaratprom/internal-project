@@ -1,0 +1,25 @@
+p {
+    margin: auto;
+    font-size: 12px;
+    padding-left: 1.5rem;
+}
+
+.material-icons.md-18 { font-size: 18px; }
+
+.card {
+    margin-bottom: 1.3rem;
+}
+
+.card.childCard {
+    margin-bottom: 0.2rem;
+}
+
+.fox-say {
+    background-color: #000;
+   
+}
+
+.no { 
+    background-color:red;
+
+}

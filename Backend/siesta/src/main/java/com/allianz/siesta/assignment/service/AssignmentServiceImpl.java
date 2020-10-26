@@ -1,10 +1,14 @@
 package com.allianz.siesta.assignment.service;
 
 import com.allianz.siesta.assignment.Assignment;
+import com.allianz.siesta.assignment.AssignmentListResponse;
 import com.allianz.siesta.assignment.AssignmentRepository;
 import com.allianz.siesta.assignment.AssignmentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AssignmentServiceImpl implements AssignmentService {
@@ -22,5 +26,25 @@ public class AssignmentServiceImpl implements AssignmentService {
     @Override
     public Iterable<Assignment> getAllAssignments(){
         return assignmentRepository.findAll();
+    }
+
+    @Override
+    public Assignment editAssignment(AssignmentRequest assignmentRequest) {
+        Assignment assignment = assignmentRequest.assignmentRequest();
+        return assignmentRepository.save(assignment);
+    }
+
+    @Override
+    public Iterable<AssignmentListResponse> getAllAssignmentList() {
+        List<AssignmentListResponse> assignmentListResponseArrayList = new ArrayList<>();
+        Iterable<Assignment> assignments = assignmentRepository.findAll();
+        for (Assignment assignment : assignments) {
+            AssignmentListResponse assignmentListResponse = new AssignmentListResponse(
+                    assignment.getId(),
+                    assignment.getAssignmentName()
+            );
+            assignmentListResponseArrayList.add(assignmentListResponse);
+        }
+        return assignmentListResponseArrayList;
     }
 }

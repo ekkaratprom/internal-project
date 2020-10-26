@@ -31,7 +31,7 @@ export class CardFormService {
 
   //GET 
   getAllProject(): Observable<Project[]> {
-    return this.http.get<Project[]>(this.url + 'v1/project');
+    return this.http.get<Project[]>(this.url + 'v1/projects');
   }
 
   // get(assignee: string) {
@@ -67,18 +67,4 @@ export class CardFormService {
   // }
 }
 
-// interface CardsResponse {
-//   Cards: Card[];
-// }
 
-// export interface Card {
-//   userId: number;
-//   taskName: string;
-//   projectId: string;
-//   referenceLink: string;
-//   estimateTime: number;
-//   actualTime: number;
-//   billableTime: number;
-//   taskDate: string;
-//   completedStatus?: boolean;
-// }

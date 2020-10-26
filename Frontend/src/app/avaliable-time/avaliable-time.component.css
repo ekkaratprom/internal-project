@@ -3,7 +3,6 @@
   flex-direction: row;
   order: 6;
 }
-
 .col {
   display: flex;
   flex-direction: column;
@@ -12,14 +11,12 @@
 label {
   margin: 0;
 }
-
 .form-control {
   display: inline;
   width: 10vw;
   height: 2.5vw;
   margin: 0%;
 }
-
 .card-title {
   font-size: 13px;
   font-weight: 600;
@@ -54,12 +51,10 @@ label {
   margin-right: 0;
   padding: 0.2rem;
 }
-
 .card-text {
   display: contents;
   size: 20px;
 }
-
 .text-in-box {
   font-weight: bold;
   align-self: center;
@@ -69,4 +64,5 @@ label {
 }
 .card {
   margin-bottom: 1%;
+  margin-right: 0%;
 }

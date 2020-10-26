@@ -15,31 +15,31 @@ public class Card {
     @Column(name = "id")
     private Long id;
 
-    @Column(nullable = false, name = "card_name")
+    @Column(name = "card_name")
     private String cardName;
 
-    @Column(nullable = true, name = "card_description")
+    @Column( name = "card_description")
     private String cardDescription;
 
-    @Column(nullable = true, name = "actual_time")
+    @Column( name = "actual_time")
     private Double actualTime;
 
     @Column(name = "reference_link")
     private String referenceLink;
 
-    @Column(nullable = false, name = "card_date")
+    @Column(name = "card_date")
     private Date cardDate;
 
-    @Column(nullable = false, name = "create_date")
+    @Column(name = "create_date")
     private Date createDate;
 
-    @Column(nullable = false, name = "assigned_status")
+    @Column(name = "assigned_status")
     private Boolean assignedStatus;
 
-    @Column(nullable = false, name = "completed_status")
+    @Column(name = "completed_status")
     private Boolean completedStatus;
 
-    @Column(nullable = false, name = "deleted_status")
+    @Column(name = "deleted_status")
     private Boolean deletedStatus;
 
     @ManyToOne

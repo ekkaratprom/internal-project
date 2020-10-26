@@ -18,11 +18,9 @@ export class QueueViewComponent implements OnInit {
   modalReference: NgbModalRef;
   assignments: AssignmentResponse[] = [];
 
-  constructor(private modalService: NgbModal,
-    private assignmentService: AssignmentService) { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.getAllAssignmentCards();
   }
   checkValue(): void {
     console.log(this.completedStatusCheck);
@@ -35,20 +33,6 @@ export class QueueViewComponent implements OnInit {
   close(): void {
     this.modalReference.close();
   }
-
-  getAllAssignmentCards(): void {
-    try {
-      this.assignmentService.getAllAssignments().subscribe(res => {
-        this.assignments = res;
-        console.log(this.assignments);
-      });
-    } catch (error) {
-      console.error('GET all assignment fail');
-    }
-
-  }
-
-
 
 
 }

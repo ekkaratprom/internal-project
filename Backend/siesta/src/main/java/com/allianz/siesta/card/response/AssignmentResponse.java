@@ -1,4 +1,4 @@
-package com.allianz.siesta.card;
+package com.allianz.siesta.card.response;
 
 
 import java.util.List;
@@ -7,13 +7,24 @@ public class AssignmentResponse {
     private String assignmentName;
     private Double billableTime;
     private Double estimateTime;
-    private Double actualTime;
+    private Boolean completedStatus;
+    private Double totalActualTime;
     private List cardObj;
 
-    public AssignmentResponse(String assignmentName, Double billableTime, Double estimateTime) {
+    public AssignmentResponse(String assignmentName, Double billableTime, Double estimateTime, Boolean completedStatus, Double totalActualTime) {
         this.assignmentName = assignmentName;
         this.billableTime = billableTime;
         this.estimateTime = estimateTime;
+        this.completedStatus = completedStatus;
+        this.totalActualTime = totalActualTime;
+    }
+
+    public Boolean getCompletedStatus() {
+        return completedStatus;
+    }
+
+    public void setCompletedStatus(Boolean completedStatus) {
+        this.completedStatus = completedStatus;
     }
 
     public String getAssignmentName() {
@@ -40,13 +51,6 @@ public class AssignmentResponse {
         this.estimateTime = estimateTime;
     }
 
-    public Double getActualTime() {
-        return actualTime;
-    }
-
-    public void setActualTime(Double actualTime) {
-        this.actualTime = actualTime;
-    }
 
     public List getCardObj() {
         return cardObj;
@@ -54,5 +58,13 @@ public class AssignmentResponse {
 
     public void setCardObj(List cardObj) {
         this.cardObj = cardObj;
+    }
+
+    public Double getTotalActualTime() {
+        return totalActualTime;
+    }
+
+    public void setTotalActualTime(Double totalActualTime) {
+        this.totalActualTime = totalActualTime;
     }
 }

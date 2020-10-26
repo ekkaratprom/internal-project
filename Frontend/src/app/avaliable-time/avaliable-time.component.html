@@ -10,13 +10,11 @@
     placeholder="Assignment"
   />
 </span>
-
 <select class="form-control" [(ngModel)]="completedStatusCheck">
   <option [ngValue]="undefined">All</option>
   <option [ngValue]="true">Done</option>
   <option [ngValue]="false">Undone</option>
 </select>
-
 <select class="form-control" [(ngModel)]="completedStatusCheck">
   <option [ngValue]="undefined">All</option>
   <option [ngValue]="true">Done</option>
@@ -35,15 +33,15 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-lg-2 col-xl-2">
-    <div *ngFor="let c of assignments">
+  <div class="col-lg-2 col-xl-2" style="padding: 0%">
+    <div *ngFor="let r of result">
       <div class="card" style="width: 10rem">
         <div class="card-body">
           <div class="card-title">
             <i style="font-size: 12px" class="fas">&#xf2bd;</i>
-            {{ c.assignmentName }}
+            {{ r.fullName }}
           </div>
-          <h6 class="position">Frontend Developer</h6>
+          <h6 class="position">{{ r.position }}</h6>
           <br />
           <p *ngFor="let index of skillsets" class="card-text">
             <mdb-icon fab icon="{{ index }}" title="{{ index }}"></mdb-icon>
@@ -52,7 +50,6 @@
       </div>
     </div>
   </div>
-
   <div class="col-lg-10 col-xl-10" style="padding: 0%">
     <div class="d-flex bd-highlight mb-3" style="justify-content: space-around">
       <span
