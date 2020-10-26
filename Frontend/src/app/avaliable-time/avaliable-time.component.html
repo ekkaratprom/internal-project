@@ -46,11 +46,10 @@
   </div>
   <div class="col-lg-10 col-xl-10" style="padding: 0%">
     <div class="d-flex bd-highlight mb-3" style="justify-content: space-around">
-      <span class="color-box" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }">
+      <div class="color-box" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }">
         <div class="text-in-box">
           {{ index }}
         </div>
-      </span>
+      </div>
     </div>
   </div>
-</div>
