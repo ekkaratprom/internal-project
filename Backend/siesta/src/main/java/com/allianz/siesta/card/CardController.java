@@ -19,11 +19,6 @@ public class CardController {
         return cardService.getAllCards();
     }
 
-//    @CrossOrigin
-//    @GetMapping(path = "/v2/card")
-//    public Iterable<AssignmentRes> getAllCardsWithQuery() {
-//        return cardService.getAllCardsWithQuery();
-//    }
 
     @CrossOrigin
     @PostMapping(path = "/v1/addcard")
@@ -31,11 +26,6 @@ public class CardController {
         return cardService.addCard(cardRequest);
     }
 
-//    @CrossOrigin
-//    @GetMapping(value = "/v1/cardlist/{assignmentId}")
-//    public Iterable<CardListResponse> findCardListByAssignmentId(@PathVariable(value = "assignmentId") Long assignmentId){
-//    return cardService.findCardListByAssignmentId(assignmentId);
-//    }
 
     @CrossOrigin
     @GetMapping(path = "/v1/availabletime")
