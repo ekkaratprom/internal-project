@@ -3,7 +3,6 @@
 >
 <br />
 <div class="form-group">
-  <label for="search-text" style="font-weight: bold">Assignment</label>
   <input
     type="text"
     class="form-control"
@@ -26,7 +25,11 @@
 <ng-template #content let-modal>
   <app-assignment-form (submitCompleted)="close()"></app-assignment-form>
 </ng-template>
-<button (click)="open(content)" class="btn btn-lg btn-block me-btn-add">
+<button
+  (click)="open(content)"
+  class="btn btn-lg btn-block me-btn-add"
+  style="border: solid"
+>
   + assignment
 </button>
 
