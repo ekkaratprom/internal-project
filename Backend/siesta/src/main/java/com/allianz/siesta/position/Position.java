@@ -16,7 +16,7 @@ public class Position {
     @Column(name = "id")
     private Long id;
 
-    @Column(nullable = false, name = "position_name")
+    @Column(name = "position_name")
     private String positionName;
 
     @OneToMany(mappedBy = "position", fetch = FetchType.LAZY)
