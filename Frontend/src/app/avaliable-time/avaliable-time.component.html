@@ -28,14 +28,14 @@
 </div>
 <div class="row">
   <div class="col-lg-2 col-xl-2" style="padding: 0%;">
-    <div *ngFor="let c of assignments">
+    <div *ngFor="let r of result">
       <div class="card" style="width: 10rem">
         <div class="card-body">
           <div class="card-title">
             <i style="font-size: 12px" class="fas">&#xf2bd;</i>
-            {{ c.assignmentName }}
+            {{ r.fullName }}
           </div>
-          <h6 class="position">Frontend Developer</h6>
+          <h6 class="position">{{r.position}}</h6>
           <br />
           <p *ngFor="let index of skillsets" class="card-text">
             <mdb-icon fab icon="{{ index }}" title="{{ index }}"></mdb-icon>
