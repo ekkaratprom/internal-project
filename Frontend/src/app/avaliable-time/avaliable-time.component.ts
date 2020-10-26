@@ -1,4 +1,3 @@
-import { Skill } from './shared/availiability.model';
 import { element } from 'protractor';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AvailabilityService } from './shared/availability.service';

@@ -1,86 +1,86 @@
 <div class="form-group">
-    <label for="search-text">Assignment</label>
-    <input type="text" class="form-control" id="search-text" [(ngModel)]="searchText" placeholder="Assignment" />
+  <label for="search-text" style="font-weight: bold">Assignment</label>
+  <input
+    type="text"
+    class="form-control"
+    id="search-text"
+    [(ngModel)]="searchText"
+    placeholder="Assignment"
+  />
 </div>
 
 <select class="form-control" [(ngModel)]="completedStatusCheck">
-    <option [ngValue]="undefined">All</option>
-    <option [ngValue]="true">Done</option>
-    <option [ngValue]="false">Undone</option>
+  <option [ngValue]="undefined">All</option>
+  <option [ngValue]="true">Done</option>
+  <option [ngValue]="false">Undone</option>
 </select>
 
 <ul class="list-group list-group-flush">
-    <li class="list-group-item">
-        <div class="card" *ngFor="
-          let r of result
-            | completedstatusFilter: completedStatusCheck
-            | assignmentFilter: searchText 
-        ">
-            <div class="card-body">
-                <p class="card-text">
-                    <i class="material-icons md-18">ic_check_circle</i>
-                    {{  r.assignmentName }}
-                </p>
-                <!-- <h6 class="project-name">
+  <li class="list-group-item">
+    <div
+      class="card"
+      *ngFor="
+        let r of result
+          | completedstatusFilter: completedStatusCheck
+          | assignmentFilter: searchText
+      "
+    >
+      <div class="card-body">
+        <p class="card-text">
+          <i class="material-icons md-18">ic_check_circle</i>
+          {{ r.assignmentName }}
+        </p>
+        <!-- <h6 class="project-name">
                     {{ assignment.projectId }}
                 </h6> -->
-                <hr class="solid" />
+        <hr class="solid" />
 
-                <div class="d-flex">
+        <div class="d-flex">
+          <div class="d-flex">
+            <i class="material-icons md-18">ic_monetization_on</i>
+            <p>
+              <!-- Billable Time: -->
+              <span> {{ r.billableTime }} Hrs </span>
+            </p>
+          </div>
 
-                    <div class="d-flex">
-                        <i class="material-icons md-18">ic_monetization_on</i>
-                        <p>
-                            <!-- Billable Time: -->
-                            <span> {{ r.billableTime }} Hrs </span>
-                        </p>
-                    </div>
+          <div class="d-flex">
+            <i class="material-icons md-18">ic_query_builder</i>
+            <p>
+              <!-- Estimate Time: -->
+              <span>{{ r.estimateTime }} Hrs</span>
+            </p>
+          </div>
 
-                    <div class="d-flex">
-                        <i class="material-icons md-18">ic_query_builder</i>
-                        <p>
-                            <!-- Estimate Time: -->
-                            <span>{{ r.estimateTime }} Hrs</span>
-                        </p>
-                    </div>
+          <div class="d-flex">
+            <i class="material-icons md-18">ic_watch_later</i>
+            <p>
+              <!-- Actual Time: -->
+              {{ r.actualTime }} Hrs
+            </p>
+          </div>
 
-                    <div class="d-flex">
-                        <i class="material-icons md-18">ic_watch_later</i>
-                        <p>
-                            <!-- Actual Time: -->
-                            {{ r.actualTime }} Hrs
-                        </p>
-                    </div>
-
-
-
-                    <!-- <button (click)="toggleState = !toggleState" mat-button>{{ toggleState ? 'ic_chevron_right_48px' : 'ic_chevron_left_48px' }}</button> -->
-                    <p (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
-                        aria-controls="collapse">
-                        <i class="material-icons md-18">ic_expand_more</i>
-                    </p>
-
-                </div>
-                <div id="collapse" [ngbCollapse]="isCollapsed">
-                    <div class="card childCard" *ngFor="let co of r['cardObj']">
-                        <div class="card-body">
-                            <div class="d-flex">
-                                <p>
-                                    Card : {{ co.cardName}}
-                                </p>
-                                <p>
-                                    Date :{{ co.cardDate | date: "dd/MM/yyyy" }}
-                                </p>
-                                <p>
-                                    Actual Time : {{ co.cardActualTime}} Hrs.
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+          <!-- <button (click)="toggleState = !toggleState" mat-button>{{ toggleState ? 'ic_chevron_right_48px' : 'ic_chevron_left_48px' }}</button> -->
+          <p
+            (click)="isCollapsed = !isCollapsed"
+            [attr.aria-expanded]="!isCollapsed"
+            aria-controls="collapse"
+          >
+            <i class="material-icons md-18">ic_expand_more</i>
+          </p>
         </div>
-    </li>
+        <div id="collapse" [ngbCollapse]="isCollapsed">
+          <div class="card childCard" *ngFor="let co of r['cardObj']">
+            <div class="card-body">
+              <div class="d-flex">
+                <p>Card : {{ co.cardName }}</p>
+                <p>Date :{{ co.cardDate | date: "dd/MM/yyyy" }}</p>
+                <p>Actual Time : {{ co.cardActualTime }} Hrs.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
 </ul>

@@ -27,29 +27,28 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-lg-2 col-xl-2" style="padding: 0%;">
-    <div *ngFor="let r of result">
+  <div class="col-lg-12 col-xl-12" style="padding: 0%">
+    <div class="ss" *ngFor="let r of result | nameFilter: searchText">
       <div class="card" style="width: 10rem">
         <div class="card-body">
           <div class="card-title">
             <i style="font-size: 12px" class="fas">&#xf2bd;</i>
             {{ r.fullName }}
           </div>
-          <h6 class="position">{{r.position}}</h6>
+          <h6 class="position">{{ r.position }}</h6>
           <br />
           <p *ngFor="let index of skillsets" class="card-text">
             <mdb-icon fab icon="{{ index }}" title="{{ index }}"></mdb-icon>
           </p>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="col-lg-10 col-xl-10" style="padding: 0%">
-    <div class="d-flex bd-highlight mb-3" style="justify-content: space-around">
-      <div class="color-box" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }">
-        <div class="text-in-box">
-          {{ index }}
-        </div>
+      <div class="color-list" style="justify-content: space-around">
+        <span class="color-box" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }">
+          <div class="text-in-box">
+            {{ index }}
+          </div>
+        </span>
       </div>
     </div>
   </div>
+</div>
