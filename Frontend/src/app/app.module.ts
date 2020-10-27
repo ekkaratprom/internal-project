@@ -1,3 +1,4 @@
+import { SkillPipe } from './avaliable-time/skillset.pipe';
 import { PositionPipe } from './avaliable-time/position.pipe';
 import { NamePipe } from './avaliable-time/name.pipe';
 import { CompleteStatusPipe } from './assignment-list/shared/completestatusfilter.pipe';
@@ -33,6 +34,7 @@ import { AvaliableFormComponent } from './avaliable-form/avaliable-form.componen
     QueueViewComponent,
     DatepickerComponent,
     NavbarComponent,
+    SkillPipe,
     AvaliableTimeComponent,
     AssignmentListComponent,
     AssignmentFormComponent,

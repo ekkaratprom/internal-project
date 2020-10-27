@@ -21,6 +21,7 @@
   <option [ngValue]="null">skillset</option>
   <option Value="Angular">Angular</option>
   <option Value="Java">Java</option>
+  <option Value="Robot">Robot framework</option>
 </select>
 <div class="row">
   <div class="col" style="width: 10rem; padding: 0"></div>
@@ -42,7 +43,10 @@
     <div
       class="ss"
       *ngFor="
-        let r of result | nameFilter: searchText | positionFilter: positionCheck
+        let r of result
+          | nameFilter: searchText
+          | positionFilter: positionCheck
+          | skillFilter: skillsetCheck
       "
     >
       <div class="card" style="width: 10rem">
