@@ -1,9 +1,9 @@
+import { PositionPipe } from './avaliable-time/position.pipe';
 import { NamePipe } from './avaliable-time/name.pipe';
 import { CompleteStatusPipe } from './assignment-list/shared/completestatusfilter.pipe';
 import { ColorPipe } from './avaliable-time/color.pipe';
 import { AssignmentListComponent } from './assignment-list/assignment-list.component';
 import { AssignmentPipe } from './assignment-list/shared/assignmentfilter.pipe';
-import { from } from 'rxjs';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CardPersonRowComponent } from './card-person-row/card-person-row.component';
 import { FilterPipe } from './card/filter.pipe';
@@ -38,6 +38,7 @@ import { AvaliableFormComponent } from './avaliable-form/avaliable-form.componen
     AssignmentFormComponent,
     CompleteStatusPipe,
     AssignmentPipe,
+    PositionPipe,
     NamePipe,
     AvaliableFormComponent,
     CompleteStatusPipe,

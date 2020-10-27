@@ -24,6 +24,8 @@ export class AvaliableTimeComponent implements OnInit {
   assignments: AssignmentResponse[] = [];
   searchText = '';
   availibleUsers;
+  positionCheck = null;
+  skillsetCheck = null;
   userDetail;
   result = [];
   skillObj = [];
