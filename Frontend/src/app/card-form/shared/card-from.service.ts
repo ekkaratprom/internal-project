@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { CardForm, User, Project } from './card-form.model';
 import { Form } from './card-form-test.model';
 import { Injectable } from '@angular/core';
@@ -15,23 +16,22 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class CardFormService {
-  url = `http://10.187.1.33:8081/siesta/api/`;
 
   constructor(private http: HttpClient) { }
 
   //POST 
   addForm(cardForm: any): Observable<HttpResponse<CardForm>> {
-    return this.http.post<CardForm>(this.url + 'v1/addtask', cardForm, { observe: 'response' });
+    return this.http.post<CardForm>(`${environment.apiUrl}` + 'v1/addtask', cardForm, { observe: 'response' });
   }
 
   //GET 
   getAllAssignee(): Observable<User[]> {
-    return this.http.get<User[]>(this.url + 'v2/user');
+    return this.http.get<User[]>(`${environment.apiUrl}` + 'v2/user');
   }
 
   //GET 
   getAllProject(): Observable<Project[]> {
-    return this.http.get<Project[]>(this.url + 'v1/projects');
+    return this.http.get<Project[]>(`${environment.apiUrl}` + 'v1/projects');
   }
 
   // get(assignee: string) {

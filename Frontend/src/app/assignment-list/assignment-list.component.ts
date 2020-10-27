@@ -1,6 +1,6 @@
+import { AssignmentService } from './shared/assignment.service';
 import { MockCardsService } from './../service/mock-cards.service';
 import { MockAssignmentService } from './../service/mock-assignment.service';
-import { AssignmentService } from './shared/assignment.service';
 import { Assignment, AssignmentResponse, CardList, CardObj } from './shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
