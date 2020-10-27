@@ -1,5 +1,6 @@
-package com.allianz.siesta.assignment;
+package com.allianz.siesta.assignment.request;
 
+import com.allianz.siesta.assignment.Assignment;
 import com.allianz.siesta.project.Project;
 
 public class AssignmentRequest {
