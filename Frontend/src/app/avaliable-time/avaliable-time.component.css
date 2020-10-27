@@ -34,9 +34,10 @@ label {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  width: 40px;
-  align-self: center;
+  width: 35px;
   height: 40px;
+  align-self: center;
+
   justify-content: center;
   border: none;
   text-align: center;
