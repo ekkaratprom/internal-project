@@ -31,7 +31,8 @@ export class AvaliableTimeComponent implements OnInit {
   cardListObj = [];
   completedStatusCheck = undefined;
   modalReference: NgbModalRef;
-  color = [0, 3, 6, 8, 4, 6, 8, 1, 2, 4, 0, 2, 7, 1, 5, 8, 9, 2, 2, 8, 1, 4, 5, 7, 3, 4, 7, 2, 4, 6];
+  color = [0, 3, 6, 8, 4, 6, 8, 1, 2, 4, 0, 2, 7, 1, 5, 8, 9, 2, 2, 8];
+
   skillsets = ['angular', 'bootstrap', 'html5'];
   x = ['nine', 'big', 'p_view', 'p_joy', 'p_jum'];
   dateList = [];

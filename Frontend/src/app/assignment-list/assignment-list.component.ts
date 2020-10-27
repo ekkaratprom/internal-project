@@ -27,7 +27,7 @@ export interface CardDetail {
   styleUrls: ['./assignment-list.component.css']
 })
 export class AssignmentListComponent implements OnInit {
-  searchText = '';
+  assignmentsearchText = '';
   completedStatusCheck = undefined;
   assignments: AssignmentResponse[] = [];
   cardLists: CardList;
