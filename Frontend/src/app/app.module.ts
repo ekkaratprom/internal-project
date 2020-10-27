@@ -1,3 +1,4 @@
+import { AvaliableFormComponent } from './avaliable-form/avaliable-form.component';
 import { PositionPipe } from './avaliable-time/position.pipe';
 import { NamePipe } from './avaliable-time/name.pipe';
 import { CompleteStatusPipe } from './assignment-list/shared/completestatusfilter.pipe';
@@ -21,7 +22,6 @@ import { QueueViewComponent } from './queue-view/queue-view.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { AvaliableTimeComponent } from './avaliable-time/avaliable-time.component';
 import { AssignmentFormComponent } from './assignment-form/assignment-form.component';
-import { AvaliableFormComponent } from './avaliable-form/avaliable-form.component';
 
 @NgModule({
   declarations: [
