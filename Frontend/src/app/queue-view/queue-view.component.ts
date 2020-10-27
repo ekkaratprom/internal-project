@@ -14,6 +14,7 @@ import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar } from '@ng-bootstra
 export class QueueViewComponent implements OnInit {
   searchText = '';
   completedStatusCheck = undefined;
+  date = {};
 
   modalReference: NgbModalRef;
   assignments: AssignmentResponse[] = [];
@@ -24,6 +25,10 @@ export class QueueViewComponent implements OnInit {
   }
   checkValue(): void {
     console.log(this.completedStatusCheck);
+  }
+
+  collectDate(e): void {
+    this.date = e;
   }
 
 

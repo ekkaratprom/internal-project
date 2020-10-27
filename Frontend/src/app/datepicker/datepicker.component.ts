@@ -14,7 +14,8 @@ export class DatepickerComponent implements OnInit {
   date = 8;
   weekdays = [0, 0, 0, 0, 0, 0, 0];
   DMY = this.calendar.getToday();
-  @Output() datechange = new EventEmitter();
+  @Output() weekChange = new EventEmitter();
+  @Output() dateChange = new EventEmitter();
 
   constructor(private calendar: NgbCalendar, config: NgbModalConfig, private modalService: NgbModal) {
     this.changeMonth()
@@ -35,8 +36,11 @@ export class DatepickerComponent implements OnInit {
   }
   public weekdayfn1() {
     this.weekdays.splice(this.date, 1, this.DMY.day);
-    this.datechange.emit(this.weekdays);
+    this.weekChange.emit(this.weekdays);
+    this.dateChange.emit(this.DMY);
+
     console.log('child', this.weekdays)
+    console.log('date', this.DMY)
     // this.fullweekdays.splice(this.date, 1, `${this.DMY.year}-${this.DMY.month}-${this.DMY.day}`);
     for (let i = 0; i < 7; i++) {
       if (i < this.date) {
@@ -56,7 +60,7 @@ export class DatepickerComponent implements OnInit {
 
   datePickerChange(): void {
     this.changeMonth(); this.changeday(); this.weekdayfn1();
-    this.datechange.emit(this.weekdays);
+    this.weekChange.emit(this.weekdays);
   }
 }
 

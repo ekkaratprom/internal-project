@@ -1,11 +1,9 @@
-import { element } from 'protractor';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AvailabilityService } from './shared/availability.service';
 import { MockAvaliabilityService } from './../service/mock-avaliability.service';
 import { AssignmentService } from './../assignment-list/shared/assignment.service';
-import { Assignment, AssignmentResponse } from './../assignment-list/shared/assignment-model';
-import { Component, OnInit } from '@angular/core';
-import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { AssignmentResponse } from './../assignment-list/shared/assignment-model';
+import { Component, Input, OnInit } from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 
 export interface UserDetail {
@@ -14,19 +12,19 @@ export interface UserDetail {
   position: string;
 }
 
-
 @Component({
   selector: 'app-avaliable-time',
   templateUrl: './avaliable-time.component.html',
   styleUrls: ['./avaliable-time.component.css']
 })
 export class AvaliableTimeComponent implements OnInit {
+  private _date;
   assignments: AssignmentResponse[] = [];
   searchText = '';
   availibleUsers;
   positionCheck = null;
   skillsetCheck = null;
-  userDetail;
+  userDetail: UserDetail;
   result = [];
   skillObj = [];
   cardObj = [];
@@ -34,14 +32,30 @@ export class AvaliableTimeComponent implements OnInit {
   completedStatusCheck = undefined;
   modalReference: NgbModalRef;
   color = [0, 3, 6, 8, 4, 6, 8, 1, 2, 4, 0, 2, 7, 1, 5, 8, 9, 2, 2, 8, 1, 4, 5, 7, 3, 4, 7, 2, 4, 6];
-
   skillsets = ['angular', 'bootstrap', 'html5'];
   x = ['nine', 'big', 'p_view', 'p_joy', 'p_jum'];
+  dateList = [];
+
+  @Input()
+  set date(val: any) {
+    if (val.year !== undefined) {
+      this._date = new Date(val.year, val.month - 1, val.day, 0, 0, 0, 0);
+    } else {
+      this._date = new Date();
+    }
+    this.addDateList();
+  }
+
+  get date(): any {
+    if (!this._date) { return new Date(); }
+    return this._date;
+  }
+
   constructor(private modalService: NgbModal,
-    // tslint:disable-next-line: align
     private assignmentService: AssignmentService,
     private availibilityService: AvailabilityService,
-    private mockAvailibility: MockAvaliabilityService) { }
+    private mockAvailibility: MockAvaliabilityService,
+  ) { }
 
   ngOnInit(): void {
     this.getAllAssignmentCards();
@@ -52,19 +66,10 @@ export class AvaliableTimeComponent implements OnInit {
     try {
       this.assignmentService.getAllAssignments().subscribe(res => {
         this.assignments = res;
-        // console.log(this.assignments);
       });
     } catch (error) {
       console.error('GET all assignment fail');
     }
-  }
-
-  open(content): void {
-    this.modalReference = this.modalService.open(content, { size: 'sm' });
-  }
-
-  close(): void {
-    this.modalReference.close();
   }
 
   getAllUsersAvailiable(): void {
@@ -73,11 +78,9 @@ export class AvaliableTimeComponent implements OnInit {
         .getUserAvailiability()
         .subscribe((res) => {
           this.availibleUsers = res;
-
-          console.log('availibleUsers', this.availibleUsers);
-
           this.availibleUsers.forEach(element => {
             this.skillObj = [];
+
             element.skills.forEach(e => {
               const skills = {
                 skillName: e.skillName,
@@ -85,11 +88,10 @@ export class AvaliableTimeComponent implements OnInit {
               };
               this.skillObj.push(skills);
             });
-            console.log('skillObj', this.skillObj);
 
             this.cardObj = [];
             element.cards.forEach(e => {
-              this.cardListObj = []
+              this.cardListObj = [];
               e.card.forEach(element => {
                 const card = {
                   cardId: element.cardId,
@@ -100,9 +102,6 @@ export class AvaliableTimeComponent implements OnInit {
                 this.cardListObj.push(card);
 
               });
-              console.log('cardListObj', this.cardListObj);
-
-
               const cards = {
                 totalActualTime: e.totalActualTime,
                 cardDate: e.cardDate,
@@ -110,20 +109,15 @@ export class AvaliableTimeComponent implements OnInit {
               };
               this.cardObj.push(cards);
             });
-            console.log('cardObj', this.cardObj);
-
             const userDetail = {
               userId: element.userId,
               fullName: element.fullName,
               position: element.position,
               skills: this.skillObj,
               cards: this.cardObj,
-
-            }
+            };
             this.result.push(userDetail);
           });
-          console.log('result', this.result);
-
         }, (error) => {
           console.log('Get all Users Availiable error: ', error);
           this.availibleUsers = this.mockAvailibility.getUserAvailiability();
@@ -133,17 +127,35 @@ export class AvaliableTimeComponent implements OnInit {
               userId: element.userId,
               fullName: element.fullName,
               position: element.position,
-            }
+            };
             this.result.push(userDetail);
           });
-          console.log('result', this.result);
-
-
         });
     } catch (error) {
       console.error('GET All Users Availiable fail');
     }
   }
 
+  addDateList(): void {
+    const p = this.date;
+    p.setDate(p.getDate() - 1);
+    let i = 0;
+    this.dateList = [];
+    while (i < 20) {
+      p.setDate(p.getDate() + 1);
+      const d = new Date(p);
+      if (d.getDay() !== 0 && d.getDay() !== 6) {
+        this.dateList.push(d);
+        i++;
+      }
+    }
+  }
 
+  open(content): void {
+    this.modalReference = this.modalService.open(content, { size: 'sm' });
+  }
+
+  close(): void {
+    this.modalReference.close();
+  }
 }
