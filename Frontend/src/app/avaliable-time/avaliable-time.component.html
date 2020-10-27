@@ -21,11 +21,9 @@
   <div class="col" style="width: 10rem; padding: 0"></div>
   <div class="col-lg-10 col-xl-10" style="height: 25px; padding: 0%">
     <div class="d-flex bd-highlight mb-3" style="justify-content: space-between">
-      <span class="color-box" *ngFor="let index of dateList">
-        <div>
-          {{ index.getDate() }}
-        </div>
-      </span>
+      <div class="color-box mth" *ngFor="let index of dateList">
+        {{ index | date: 'EEE' }} <br> {{ index.getDay() }}
+      </div>
     </div>
   </div>
 </div>

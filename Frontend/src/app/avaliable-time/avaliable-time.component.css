@@ -40,6 +40,11 @@ label {
   justify-content: center;
   border: none;
   text-align: center;
+  
+}
+
+.color-box.mth {
+  font-size: 12px;
 }
 
 .col-xl-10 {
