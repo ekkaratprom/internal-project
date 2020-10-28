@@ -19,6 +19,8 @@ export interface UserDetail {
 })
 export class AvaliableTimeComponent implements OnInit {
   private _date;
+  startDate;
+  endDate;
   assignments: AssignmentResponse[] = [];
   searchText = '';
   availibleUsers;
@@ -110,6 +112,8 @@ export class AvaliableTimeComponent implements OnInit {
               };
               this.cardObj.push(cards);
             });
+            console.log('card', this.cardObj);
+
             const userDetail = {
               userId: element.userId,
               fullName: element.fullName,
@@ -150,7 +154,15 @@ export class AvaliableTimeComponent implements OnInit {
         i++;
       }
     }
+    this.startDate = this.dateList[0];
+    this.endDate = this.dateList[19];
+    console.log('start', this.startDate);
+    console.log('end', this.endDate);
   }
+
+  // addTotalActualTime(): void{
+
+  // }
 
   open(content): void {
     this.modalReference = this.modalService.open(content, { size: 'sm' });

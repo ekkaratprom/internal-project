@@ -18,11 +18,11 @@
   <option Value="Robot">Robot framework</option>
 </select>
 <div class="row">
-  <div class="col-lg-2 col-xl-2" style="width: 10rem; padding: 0"></div>
-  <div class="col-lg-10 col-xl-10" style="height: 25px; padding: 0%">
+  <div class="col-lg-1 col-xl-1" style="margin-bottom: 5%; padding: 0"></div>
+  <div class="col-lg-11 col-xl-11" style="height: 25px; padding-left: 9.5%">
     <div class="d-flex bd-highlight mb-3" style="justify-content: space-between">
-      <div class="color-box mth" *ngFor="let index of dateList">
-        {{ index | date: 'EEE' }} <br> {{ index.getDay() }}
+      <div class="color-box mth" *ngFor="let day of dateList">
+        {{ day | date: 'EEE' }} <br> {{ day | date: 'dd' }}
       </div>
     </div>
   </div>
@@ -35,7 +35,7 @@
           | positionFilter: positionCheck
           | skillFilter: skillsetCheck
       ">
-      <div class="col-lg-2 col-xl-2" style="padding: 0%; margin-left: 2%;">
+      <div class="col-lg-2 col-xl-2" style="padding: 0%; margin: 0 2%;">
         <div class="card" style="width: 10rem">
           <div class="card-body">
             <div class="card-title">
@@ -50,14 +50,14 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-10 col-xl-10">
-        <div class="color-list" style="justify-content: space-around">
-          <li class="color-box" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }">
-            <div class="text-in-box">
-              {{ index }}
-            </div>
-          </li>
-        </div>
+      <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center;">
+
+        <li class="color-box" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }">
+          <div class="text-in-box" title="{{ index }}">
+            {{ index }}
+          </div>
+        </li>
+
       </div>
     </div>
   </div>
