@@ -18,9 +18,9 @@ export class DatepickerComponent implements OnInit {
   @Output() dateChange = new EventEmitter();
 
   constructor(private calendar: NgbCalendar, config: NgbModalConfig, private modalService: NgbModal) {
-    this.changeMonth()
-    this.changeday()
-    this.weekdayfn1()
+    this.changeMonth();
+    this.changeday();
+    this.weekdayfn1();
   }
 
   ngOnInit(): void {
