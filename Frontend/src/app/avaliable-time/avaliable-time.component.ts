@@ -84,7 +84,10 @@ export class AvaliableTimeComponent implements OnInit {
       this.availibilityService
         .getUserAvailiability()
         .subscribe((res) => {
+          // debugger;
+
           this.availibleUsers = res;
+          // console.log('response', this.availibleUsers);
           this.availibleUsers.forEach(element => {
             this.skillObj = [];
 
@@ -115,9 +118,12 @@ export class AvaliableTimeComponent implements OnInit {
                 card: this.cardListObj,
               };
               this.cardObj.push(cards);
+              console.log('cardDate', cards.cardDate);
+              const cod = cards.cardDate;
+              console.log('cod', cod);
             });
             this.totalSave = this.cardObj;
-            // console.log('card', this.cardObj);
+            console.log('card', this.cardObj);
 
             const userDetail = {
               userId: element.userId,
@@ -128,6 +134,7 @@ export class AvaliableTimeComponent implements OnInit {
             };
             this.result.push(userDetail);
           });
+
         }, (error) => {
           console.log('Get all Users Availiable error: ', error);
           this.availibleUsers = this.mockAvailibility.getUserAvailiability();
@@ -166,48 +173,54 @@ export class AvaliableTimeComponent implements OnInit {
   }
 
   setTotalActualTime(): void {
+    console.log('fun 1', this.totalSave.length);
 
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.totalSave.length; i++) {
-      let a = this.totalSave[i].totalActualTime;
-      let b = this.totalSave[i].cardDate;
-      let c = new Date(b);
-      let d = this.setDayWOSunSat(c);
-      this.totalActualTimeList[d] = a;
-      console.log('result', a, b, c, d);
-      console.log('totals p', this.totalActualTimeList);
+      this.totalActualTimeList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      const actual = this.totalSave[i].totalActualTime;
+      const date = this.totalSave[i].cardDate;
+      const toDate = new Date(date);
+      console.log('Date fun 1: ', date);
+      console.log('toDate fun 1: ', toDate);
+      // toDate.setMonth(toDate.getMonth() - 1);
+      const rd = this.setDayWOSunSat(toDate);
+      if (rd == null) {
+        continue;
+      }
+      this.totalActualTimeList[rd] = actual;
+      console.log('result :', actual, date, toDate, rd);
+      console.log('totalActualTimeList :', this.totalActualTimeList);
     }
 
   }
 
   setDayWOSunSat(date): number {
     let i = 0;
-    let sd = this.startDate;
-    if (date < this.startDate) {
-
-      while (date.getDate() != sd.getDate()) {
-        if (date.getDay() !== 0 && date.getDay() !== 6) {
+    const sd = this.startDate;
+    let d = date;
+    console.log('setDayWOSunSat');
+    console.log('if', date > this.startDate, date < this.endDate);
+    console.log('Date', date);
+    console.log('Startdate', this.startDate);
+    if (d > this.startDate && d < this.endDate) {
+      console.log('m', d, sd)
+      while (d.getDate() != sd.getDate()) {
+        if (d.getDay() !== 0 && d.getDay() !== 6) {
           i++;
         }
-        date.setDate(date.getDate() + 1);
-        // console.log('while naja <', i);
+        d.setDate(d.getDate() + 1);
+        // console.log('while', i);
         // console.log('date', date);
         // console.log('sd', sd);
       }
+      console.log('b', d.getDate() != sd.getDate(), d.getDate(), sd.getDate())
+      console.log('d', d);
       return i;
-    } else {
-      while (date.getDate() != sd.getDate()) {
-        if (sd.getDay() !== 0 && sd.getDay() !== 6) {
-          i++;
-        }
-        sd.setDate(sd.getDate() + 1);
-        // console.log('while naja >', i);
-        // console.log('date', date);
-        // console.log('sd', sd);
 
-      }
-      return i;
     }
+    return null;
+
   }
 
 

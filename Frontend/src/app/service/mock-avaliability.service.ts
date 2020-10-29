@@ -11,11 +11,18 @@ export class MockAvaliabilityService {
     fullName: 'Ekkarat P.',
     position: 'Junior Frontend Developer',
     skills: [
-      { skillName: 'Angular' },
-      { skillName: 'Bootstrap' },
-      { skillName: 'Material Angular' },
-      { skillName: 'CSS' },
-      { skillName: 'HTML' },
+      {
+        skillName: 'Angular',
+        iconPath: 'https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/21_Angular_logo_logos-512.png'
+      },
+      {
+        skillName: 'JAVA',
+        iconPath: 'https://icon-library.com/images/java-icon-images/java-icon-images-6.jpg'
+      },
+      {
+        skillName: 'Oracle',
+        iconPath: 'https://www.kindpng.com/picc/m/0-3498_oracle-cloud-icon-png-transparent-png.png'
+      }
     ],
     cards: [
       {
@@ -55,12 +62,18 @@ export class MockAvaliabilityService {
     userId: 2,
     fullName: 'Kerati K',
     position: 'Junior Frontend Developer',
-    skills: [
-      { skillName: 'Angular' },
-      { skillName: 'Bootstrap' },
-      { skillName: 'Material Angular' },
-      { skillName: 'CSS' },
-      { skillName: 'HTML' },
+    skills: [{
+      skillName: 'Angular',
+      iconPath: 'https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/21_Angular_logo_logos-512.png'
+    },
+    {
+      skillName: 'JAVA',
+      iconPath: 'https://icon-library.com/images/java-icon-images/java-icon-images-6.jpg'
+    },
+    {
+      skillName: 'Oracle',
+      iconPath: 'https://www.kindpng.com/picc/m/0-3498_oracle-cloud-icon-png-transparent-png.png'
+    }
     ],
     cards: [
       {
@@ -89,8 +102,18 @@ export class MockAvaliabilityService {
     fullName: 'Krittinon P.',
     position: 'Junior Backend Developer',
     skills: [
-      { skillName: 'Node.js' },
-      { skillName: 'Java' },
+      {
+        skillName: 'Angular',
+        iconPath: 'https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/21_Angular_logo_logos-512.png'
+      },
+      {
+        skillName: 'JAVA',
+        iconPath: 'https://icon-library.com/images/java-icon-images/java-icon-images-6.jpg'
+      },
+      {
+        skillName: 'Oracle',
+        iconPath: 'https://www.kindpng.com/picc/m/0-3498_oracle-cloud-icon-png-transparent-png.png'
+      }
     ],
     cards: [
       {
