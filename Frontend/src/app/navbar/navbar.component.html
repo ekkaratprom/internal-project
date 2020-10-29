@@ -1,51 +1,23 @@
-<!-- <nav class="navbar navbar-light bg-light">
-  <div class="calendar">
-    <form class="form-inline">
-      <div class="input-group">
-        <input
-          type="hidden"
-          class="form-control"
-          placeholder="dd/mm/yyyy"
-          name="dp"
-          [(ngModel)]="DMY"
-          (ngModelChange)="changeMonth(); changeday(); weekdayfn()"
-          ngbDatepicker
-          [footerTemplate]="footerTemplate"
-          #d="ngbDatepicker"
-        />
-        <div class="header">{{ month }} {{ DMY.year }}</div>
-        <div class="input-group-append">
-          <button
-            class="btn btn-outline-secondary calendar"
-            (click)="d.toggle()"
-            type="button"
-          ></button>
-        </div>
-      </div>
-    </form>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand na" routerLink="">Queueview</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link na" routerLink="card"
+          >Card <span class="sr-only">(current)</span></a
+        >
+      </li>
+    </ul>
   </div>
-
-  <ng-template #footerTemplate>
-    <hr class="my-0" />
-    <button
-      class="btn btn-primary btn-sm m-2 float-left form-control"
-      (click)="DMY = today; d.close()"
-      [(ngModel)]="DMY"
-      (ngModelChange)="changeMonth(); weekdayfn()"
-    >
-      Today
-    </button>
-
-    <button
-      class="btn btn-secondary btn-sm m-2 float-right"
-      (click)="d.close()"
-    >
-      Close
-    </button>
-  </ng-template>
 </nav>
-<span class="monday">monday {{ weekdays[1] }}</span>
-<span class="tuesday">tuesday {{ weekdays[2] }}</span>
-<span class="mwednesay">wednesday {{ weekdays[3] }}</span>
-<span class="thursday">thursday {{ weekdays[4] }}</span>
-<span class="friday">friday {{ weekdays[5] }}</span> -->

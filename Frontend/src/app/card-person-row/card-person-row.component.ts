@@ -43,9 +43,9 @@ export class CardPersonRowComponent implements OnInit {
   }
 
   constructor(private calendar: NgbCalendar, private cardService: CardService, config: NgbModalConfig, private modalService: NgbModal) {
-    this.changeMonth()
-    this.changeday()
-    this.weekdayfn1()
+    this.changeMonth();
+    this.changeday();
+    this.weekdayfn1();
   }
 
   ngOnInit(): void {
@@ -62,32 +62,35 @@ export class CardPersonRowComponent implements OnInit {
   // }
 
   getAll(): void {
-    this.cardService.getAllCard().subscribe(res => {
-      this.cards = res;
-      this.toWeeks();
-      // console.log(this.cards)
-      // this.cards.forEach((y) => {
-      //   let q = new Date(Date.parse(y.taskDate));
-      //   let z = q.getDay();
-      //   console.log(this.weekdayfn(z));
-      // })
+    try {
+      this.cardService.getAllCard().subscribe(res => {
+        this.cards = res;
+        this.toWeeks();
+        // console.log(this.cards)
+        // this.cards.forEach((y) => {
+        //   let q = new Date(Date.parse(y.taskDate));
+        //   let z = q.getDay();
+        //   console.log(this.weekdayfn(z));
+        // })
 
-
-      //   this.cards.push({
-      //     name: this.cards.assignee,
-      //     id: 1,
-      //     projectId: this.cardResponse.projectId,
-      //     projectName: this.cardResponse.projectName,
-      //     taskName: this.cardResponse.taskName,
-      //     estimateTime: this.cardResponse.estimateTime,
-      //     actualTime: this.cardResponse.actualTime,
-      //     referenceLink: this.cardResponse.referenceLink,
-      //     taskDate: this.cardResponse.taskDate,
-      //     completedStatus: this.cardResponse.completedStatus,
-      //     billableTime: this.cardResponse.billableTime
-      //   },
-      //   );
-    });
+        //   this.cards.push({
+        //     name: this.cards.assignee,
+        //     id: 1,
+        //     projectId: this.cardResponse.projectId,
+        //     projectName: this.cardResponse.projectName,
+        //     taskName: this.cardResponse.taskName,
+        //     estimateTime: this.cardResponse.estimateTime,
+        //     actualTime: this.cardResponse.actualTime,
+        //     referenceLink: this.cardResponse.referenceLink,
+        //     taskDate: this.cardResponse.taskDate,
+        //     completedStatus: this.cardResponse.completedStatus,
+        //     billableTime: this.cardResponse.billableTime
+        //   },
+        //   );
+      });
+    } catch (error) {
+      console.error('GET all fail naja.');
+    }
 
   }
 
@@ -106,7 +109,7 @@ export class CardPersonRowComponent implements OnInit {
       if (i > this.date) {
         let diff = i - this.date;
         let nextday = this.calendar.getNext(this.DMY, "d", diff);
-        this.weekdays[i] = nextday.day
+        this.weekdays[i] = nextday.day;
         // r = nextday.year.toString() + nextday.month.toString();
         // console.log(r);
       }
@@ -145,7 +148,7 @@ export class CardPersonRowComponent implements OnInit {
         // if object is undefined, create an array with task in it
         objToReturn[task.assignee][this.weekdayfn(taskDateDayInWeek)] = [task];
       } else {
-        // else push task into exisiting array  
+        // else push task into exisiting array
         objToReturn[task.assignee][this.weekdayfn(taskDateDayInWeek)].push(task);
       }
       // const taskDateq = `${new Date().getFullYear}-${new Date().getMonth}-${new Date().getDate}`;
@@ -155,6 +158,10 @@ export class CardPersonRowComponent implements OnInit {
     this.x = objToReturn;
 
 
+  }
+
+  datePickerChange(e): void {
+    this.weekdays = e;
   }
 
 

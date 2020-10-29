@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CardResponse } from './card.model';
@@ -11,17 +12,16 @@ import {
   providedIn: 'root'
 })
 export class CardService {
-  url = `http://localhost:8080/api/v2/`;
 
   constructor(private http: HttpClient) { }
 
   getAllCard(): Observable<CardResponse[]> {
-    return this.http.get<CardResponse[]>(this.url + 'task');
+    return this.http.get<CardResponse[]>(`${environment.apiUrl}` + 'v2/task');
 
   }
 
   getCardByDate(taskDate: string): Observable<CardResponse[]> {
-    return this.http.get<CardResponse[]>(this.url + 'task/' + taskDate);
+    return this.http.get<CardResponse[]>(`${environment.apiUrl}` + 'v2/task/' + taskDate);
   }
 
 }

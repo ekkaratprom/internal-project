@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { CardForm, User, Project } from './card-form.model';
 import { Form } from './card-form-test.model';
 import { Injectable } from '@angular/core';
@@ -15,23 +16,22 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class CardFormService {
-  url = `http://localhost:8080/api/`;
 
   constructor(private http: HttpClient) { }
 
   //POST 
   addForm(cardForm: any): Observable<HttpResponse<CardForm>> {
-    return this.http.post<CardForm>(this.url + 'v1/addtask', cardForm, { observe: 'response' });
+    return this.http.post<CardForm>(`${environment.apiUrl}` + 'v1/addtask', cardForm, { observe: 'response' });
   }
 
   //GET 
   getAllAssignee(): Observable<User[]> {
-    return this.http.get<User[]>(this.url + 'v2/user');
+    return this.http.get<User[]>(`${environment.apiUrl}` + 'v2/user');
   }
 
   //GET 
   getAllProject(): Observable<Project[]> {
-    return this.http.get<Project[]>(this.url + 'v1/project');
+    return this.http.get<Project[]>(`${environment.apiUrl}` + 'v1/projects');
   }
 
   // get(assignee: string) {
@@ -67,18 +67,4 @@ export class CardFormService {
   // }
 }
 
-// interface CardsResponse {
-//   Cards: Card[];
-// }
 
-// export interface Card {
-//   userId: number;
-//   taskName: string;
-//   projectId: string;
-//   referenceLink: string;
-//   estimateTime: number;
-//   actualTime: number;
-//   billableTime: number;
-//   taskDate: string;
-//   completedStatus?: boolean;
-// }

@@ -1,0 +1,74 @@
+<span class="form-group">
+  <label for="search-text" style="font-weight: bold; font-size: 0.8rem">Available Time</label>
+  <br />
+  <input type="text" class="form-control" style="margin-right: 2vw" id="search-text" [(ngModel)]="searchText"
+    placeholder="All Assignment" />
+</span>
+
+<select class="form-control" [(ngModel)]="positionCheck">
+  <option [ngValue]="undefined">All Position</option>
+  <option Value="FE">FE</option>
+  <option Value="BE">BE</option>
+  <option Value="QA">QA</option>
+</select>
+<select class="form-control" [(ngModel)]="skillsetCheck">
+  <option [ngValue]="undefined">All Skillset</option>
+  <option Value="Angular">Angular</option>
+  <option Value="JAVA">Java</option>
+  <option Value="mysql">MySQL</option>
+  <option Value="Oracle">Oracle</option>
+  <option Value="Robot">Robot framework</option>
+</select>
+<div class="row">
+  <div class="col-lg-2 col-xl-2" style="margin-bottom: 5%; padding: 0"></div>
+  <div class="col-lg-10 col-xl-10" style="height: 25px; padding-left: 5%; padding-right: 15px">
+    <div class="d-flex bd-highlight mb-3" style="justify-content: space-between">
+      <div class="color-box mth" *ngFor="let day of dateList">
+        {{ day | date: "EEE" }} <br />
+        {{ day | date: "dd" }}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col" style="padding: 0%">
+    <div class="col ss" *ngFor="
+        let r of result
+          | nameFilter: searchText
+          | positionFilter: positionCheck
+          | skillFilter: skillsetCheck
+      ">
+      <div class="col-lg-2 col-xl-2" style="padding: 0%; margin: 0">
+        <div class="card" style="width: 9rem">
+          <div class="card-body">
+            <div class="card-title">
+              <i style="font-size: 12px" class="fas">&#xf2bd;</i>
+              {{ r.fullName }}
+            </div>
+            <h6 class="position">{{ r.position }}</h6>
+            <br />
+            <p *ngFor="let index of r['skills']" class="card-text">
+              <img style="width: 1rem" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center;">
+
+        <li class="color-box" *ngFor="let index of r['cards']" [ngStyle]="{ backgroundColor: index.totalActualTime | color }"> -->
+
+      <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center">
+        <li class="color-box" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }">
+
+          <div class="text-in-box" title="{{ index }}">
+            <!-- {{ index.totalActualTime }} -->
+            {{ index }}
+          </div>
+
+        </li>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- {{ availibleUsers | json}} -->
