@@ -8,8 +8,8 @@ import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar } from '@ng-bootstra
 })
 export class DatepickerComponent implements OnInit {
   modalReference: NgbModalRef;
-  monthlist = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
-    "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+  monthlist = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE',
+    'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
   month = '';
   date = 8;
   weekdays = [0, 0, 0, 0, 0, 0, 0];
@@ -18,9 +18,9 @@ export class DatepickerComponent implements OnInit {
   @Output() dateChange = new EventEmitter();
 
   constructor(private calendar: NgbCalendar, config: NgbModalConfig, private modalService: NgbModal) {
-    this.changeMonth()
-    this.changeday()
-    this.weekdayfn1()
+    this.changeMonth();
+    this.changeday();
+    this.weekdayfn1();
   }
 
   ngOnInit(): void {
@@ -45,12 +45,12 @@ export class DatepickerComponent implements OnInit {
     for (let i = 0; i < 7; i++) {
       if (i < this.date) {
         let diff = this.date - i
-        let previousday = this.calendar.getPrev(this.DMY, "d", diff);
+        let previousday = this.calendar.getPrev(this.DMY, 'd', diff);
         this.weekdays[i] = previousday.day;
       }
       if (i > this.date) {
         let diff = i - this.date;
-        let nextday = this.calendar.getNext(this.DMY, "d", diff);
+        let nextday = this.calendar.getNext(this.DMY, 'd', diff);
         this.weekdays[i] = nextday.day
         // r = nextday.year.toString() + nextday.month.toString();
         // console.log(r);

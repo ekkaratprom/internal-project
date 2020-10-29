@@ -25,3 +25,22 @@ button.calendar:active {
 .monday {
   margin-left: 15%;
 }
+
+.navbar {
+  padding: 0;
+}
+
+.na {
+  font-size: 18px;
+}
+
+.navbar-light {
+  justify-content: center;
+  padding: 0 16px;
+}
+
+.header {
+  font-weight: bolder;
+  font-size: 25px;
+  justify-content: center;
+}

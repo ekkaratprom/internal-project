@@ -9,9 +9,10 @@ button.calendar:active {
 
 .navbar-light {
   justify-content: center;
+  padding: 0 16px;
 }
 
 .header {
   font-weight: bolder;
-  font-size: 30px;
+  font-size: 25px;
 }
