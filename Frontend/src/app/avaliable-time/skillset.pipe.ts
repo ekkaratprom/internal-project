@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+
 @Pipe({ name: 'skillFilter' })
 export class SkillPipe implements PipeTransform {
 
@@ -12,14 +13,6 @@ export class SkillPipe implements PipeTransform {
     }
     searchText = searchText.toLocaleLowerCase();
 
-    return items.filter((it) => {
-      if (it.skill === null) {
-        return items;
-      }
-
-      return it.filter(it.skills.filter(skill => skill.skillName.toLocaleLowerCase() === searchText).length > 0);
-
-    });
+    return items.filter(item => item.skills.filter(skill => skill.skillName.toLocaleLowerCase() === searchText).length > 0);
   }
 }
-
