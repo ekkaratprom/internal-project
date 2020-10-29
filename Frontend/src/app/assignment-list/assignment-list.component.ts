@@ -27,7 +27,7 @@ export interface CardDetail {
   styleUrls: ['./assignment-list.component.css']
 })
 export class AssignmentListComponent implements OnInit {
-  searchText = '';
+  assignmentsearchText = '';
   completedStatusCheck = undefined;
   assignments: AssignmentResponse[] = [];
   cardLists: CardList;
@@ -66,7 +66,7 @@ export class AssignmentListComponent implements OnInit {
         .getAllAssignments()
         .subscribe(res => {
           this.assignments = res;
-          console.log(this.assignments);
+          // console.log(this.assignments);
         }
           ,
           (error) => {
@@ -86,7 +86,7 @@ export class AssignmentListComponent implements OnInit {
         .subscribe((res) => {
           this.cards = res;
 
-          console.log('cards', this.cards);
+          // console.log('cards', this.cards);
 
 
           this.cards.forEach(element => {
@@ -110,7 +110,7 @@ export class AssignmentListComponent implements OnInit {
             }
             this.result.push(cardDetail);
           });
-          console.log('result', this.result);
+          // console.log('result', this.result);
         }, (error) => {
           console.log('Get cards error: ', error);
           this.cards = this.mockCards.getAllCards();
@@ -135,7 +135,7 @@ export class AssignmentListComponent implements OnInit {
             }
             this.result.push(cardDetail);
           });
-          console.log('result', this.result);
+          // console.log('result', this.result);
         }
         );
     } catch (error) {

@@ -21,4 +21,6 @@ export type Card = {
 
 export type Skill = {
     skillName: string;
+    iconPath: string;
 }
+

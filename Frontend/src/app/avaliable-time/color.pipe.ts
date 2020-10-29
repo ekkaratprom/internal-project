@@ -11,16 +11,16 @@ export class ColorPipe implements PipeTransform {
       return '#CEC3BA';
     }
     if ((1 <= index) && (index <= 5)) {
-      return '#CAE71E';
+      return '#DAF7A6';
     }
     if ((6 <= index) && (index <= 7)) {
-      return '#E77E1E';
+      return '#FFC300';
     }
     if (index === 8) {
-      return '#FF3333';
+      return '#FF5733';
     }
     if (index > 8) {
-      return '#FF0000';
+      return '#C70039';
     }
 
   }

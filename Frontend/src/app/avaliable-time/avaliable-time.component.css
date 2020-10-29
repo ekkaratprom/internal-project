@@ -6,7 +6,7 @@
 .col {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 label {
   margin: 0;
@@ -14,6 +14,8 @@ label {
 .form-control {
   display: inline;
   width: 10vw;
+  font-size: 0.8rem;
+  padding: 0%;
   height: 2.5vw;
   margin: 0%;
 }
@@ -27,15 +29,25 @@ label {
   margin-right: 1%;
 }
 .color-box {
+  border: 0;
+  margin: 0 4x;
+  border-radius: 10%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  width: 2vw;
-  align-self: center;
+  width: 30px;
   height: 30px;
+  align-self: center;
+
   justify-content: center;
   border: none;
   text-align: center;
+}
+
+.color-box.mth {
+  font-size: 12px;
+  display: flex;
+  align-self: center;
 }
 
 .col-xl-10 {
@@ -69,12 +81,16 @@ label {
   margin-right: 0%;
 }
 
-.ss {
+.col .ss {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-around;
 }
 
 .color-list {
   display: flex;
+  align-items: center;
   justify-content: space-around;
+  padding-left: 3.5%;
 }

@@ -1,21 +1,42 @@
 p {
   margin: auto;
   font-size: 13px;
-  font-weight: bold;
+  font-weight: 400;
   padding-left: 0.5rem;
+}
+
+hr {
+  margin: 2% 0;
 }
 
 .material-icons.md-18 {
   font-size: 9px;
   justify-content: center;
+  display: contents;
 }
+.material-icons.md-18.cursor {
+  font-size: 9px;
+  justify-content: center;
+  cursor: pointer;
+}
+
 .card-body {
   padding: 0.5rem;
 }
 .card {
   margin-bottom: 1.3rem;
 }
+.assignmentsearch {
+  display: flex;
+  flex-direction: row;
+}
 
+.assignment-part {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .form-group {
   display: inline;
   width: 10vw;
@@ -26,6 +47,8 @@ p {
   display: inline;
   width: 10vw;
   height: 2.5vw;
+  font-size: 0.8rem;
+  padding: 0%;
   margin: 0%;
 }
 
@@ -36,7 +59,29 @@ p {
 .fox-say {
   background-color: #000;
 }
+.assignment-header {
+  display: flex;
+  font-weight: bold;
+  margin-left: 6%;
+  font-size: 0.8rem;
+  justify-content: flex-start;
+}
 
 .no {
   background-color: red;
+}
+
+.btn {
+  border: 1px solid #ced4da;
+  height: 30px;
+  padding: 0%;
+  width: 200px;
+  margin: 3%;
+  align-content: center;
+  font-size: 0.8rem;
+  justify-content: center;
+}
+.card-body {
+  margin: 0;
+  padding: 0.2rem;
 }
