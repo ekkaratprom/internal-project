@@ -34,6 +34,8 @@ export class AvaliableTimeComponent implements OnInit {
   completedStatusCheck = undefined;
   modalReference: NgbModalRef;
   color = [0, 3, 6, 8, 4, 6, 8, 1, 2, 4, 0, 2, 7, 1, 5, 8, 9, 2, 2, 8];
+  totalActualTimeList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  totalSave = [];
 
   skillsets = ['angular', 'bootstrap', 'html5'];
   x = ['nine', 'big', 'p_view', 'p_joy', 'p_jum'];
@@ -47,6 +49,7 @@ export class AvaliableTimeComponent implements OnInit {
       this._date = new Date();
     }
     this.addDateList();
+    this.setTotalActualTime();
   }
 
   get date(): any {
@@ -63,6 +66,7 @@ export class AvaliableTimeComponent implements OnInit {
   ngOnInit(): void {
     this.getAllAssignmentCards();
     this.getAllUsersAvailiable();
+    this.setTotalActualTime();
   }
 
   getAllAssignmentCards(): void {
@@ -112,7 +116,8 @@ export class AvaliableTimeComponent implements OnInit {
               };
               this.cardObj.push(cards);
             });
-            console.log('card', this.cardObj);
+            this.totalSave = this.cardObj;
+            // console.log('card', this.cardObj);
 
             const userDetail = {
               userId: element.userId,
@@ -160,9 +165,51 @@ export class AvaliableTimeComponent implements OnInit {
     console.log('end', this.endDate);
   }
 
-  // addTotalActualTime(): void{
+  setTotalActualTime(): void {
 
-  // }
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.totalSave.length; i++) {
+      let a = this.totalSave[i].totalActualTime;
+      let b = this.totalSave[i].cardDate;
+      let c = new Date(b);
+      let d = this.setDayWOSunSat(c);
+      this.totalActualTimeList[d] = a;
+      console.log('result', a, b, c, d);
+      console.log('totals p', this.totalActualTimeList);
+    }
+
+  }
+
+  setDayWOSunSat(date): number {
+    let i = 0;
+    let sd = this.startDate;
+    if (date < this.startDate) {
+
+      while (date.getDate() != sd.getDate()) {
+        if (date.getDay() !== 0 && date.getDay() !== 6) {
+          i++;
+        }
+        date.setDate(date.getDate() + 1);
+        // console.log('while naja <', i);
+        // console.log('date', date);
+        // console.log('sd', sd);
+      }
+      return i;
+    } else {
+      while (date.getDate() != sd.getDate()) {
+        if (sd.getDay() !== 0 && sd.getDay() !== 6) {
+          i++;
+        }
+        sd.setDate(sd.getDate() + 1);
+        // console.log('while naja >', i);
+        // console.log('date', date);
+        // console.log('sd', sd);
+
+      }
+      return i;
+    }
+  }
+
 
   open(content): void {
     this.modalReference = this.modalService.open(content, { size: 'sm' });

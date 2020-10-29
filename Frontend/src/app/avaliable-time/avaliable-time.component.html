@@ -52,7 +52,7 @@
       </div>
       <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center;">
 
-        <li class="color-box" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }">
+        <li class="color-box" *ngFor="let index of totalActualTimeList" [ngStyle]="{ backgroundColor: index | color }">
           <div class="text-in-box" title="{{ index }}">
             {{ index }}
           </div>
