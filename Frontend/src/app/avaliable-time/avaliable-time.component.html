@@ -33,7 +33,7 @@
 <div class="row">
   <div class="col" style="padding: 0%">
     <div class="col ss" *ngFor="
-        let r of result
+        let r of avaliableLists
           | nameFilter: searchText
           | positionFilter: positionCheck
           | skillFilter: skillsetCheck
@@ -53,16 +53,17 @@
           </div>
         </div>
       </div>
-      <!-- <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center;">
+      <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center;">
 
-        <li class="color-box" *ngFor="let index of r['cards']" [ngStyle]="{ backgroundColor: index.totalActualTime | color }"> -->
+        <li class="color-box" *ngFor="let index of r['cards']"
+          [ngStyle]="{ backgroundColor: index.totalActualTime | color }">
 
-      <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center">
-        <li class="color-box" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }">
+          <!-- <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center">
+        <li class="color-box" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }"> -->
 
           <div class="text-in-box" title="{{ index }}">
-            <!-- {{ index.totalActualTime }} -->
-            {{ index }}
+            {{ index.totalActualTime }}
+            <!-- {{ index }} -->
           </div>
 
         </li>

@@ -2,7 +2,7 @@ import { AvailabilityService } from './shared/availability.service';
 import { MockAvaliabilityService } from './../service/mock-avaliability.service';
 import { AssignmentService } from './../assignment-list/shared/assignment.service';
 import { AssignmentResponse } from './../assignment-list/shared/assignment-model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, DebugElement, Input, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -24,8 +24,8 @@ export class AvaliableTimeComponent implements OnInit {
   assignments: AssignmentResponse[] = [];
   searchText = '';
   availibleUsers;
-  positionCheck = undefined;
-  skillsetCheck = undefined;
+  positionCheck = null;
+  skillsetCheck = null;
   userDetail: UserDetail;
   result = [];
   skillObj = [];
@@ -36,6 +36,10 @@ export class AvaliableTimeComponent implements OnInit {
   color = [0, 3, 6, 8, 4, 6, 8, 1, 2, 4, 0, 2, 7, 1, 5, 8, 9, 2, 2, 8];
   totalActualTimeList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   totalSave = [];
+  users;
+  cards;
+  avaliableLists = [];
+
 
   skillsets = ['angular', 'bootstrap', 'html5'];
   x = ['nine', 'big', 'p_view', 'p_joy', 'p_jum'];
@@ -50,6 +54,8 @@ export class AvaliableTimeComponent implements OnInit {
     }
     this.addDateList();
     this.setTotalActualTime();
+    this.avaliableLists = [];
+    this.avaliableList();
   }
 
   get date(): any {
@@ -84,10 +90,8 @@ export class AvaliableTimeComponent implements OnInit {
       this.availibilityService
         .getUserAvailiability()
         .subscribe((res) => {
-          // debugger;
-
           this.availibleUsers = res;
-          // console.log('response', this.availibleUsers);
+          console.log('response', this.availibleUsers);
           this.availibleUsers.forEach(element => {
             this.skillObj = [];
 
@@ -118,9 +122,6 @@ export class AvaliableTimeComponent implements OnInit {
                 card: this.cardListObj,
               };
               this.cardObj.push(cards);
-              console.log('cardDate', cards.cardDate);
-              const cod = cards.cardDate;
-              console.log('cod', cod);
             });
             this.totalSave = this.cardObj;
             console.log('card', this.cardObj);
@@ -193,6 +194,39 @@ export class AvaliableTimeComponent implements OnInit {
       console.log('totalActualTimeList :', this.totalActualTimeList);
     }
 
+  }
+
+  avaliableList(): void {
+    console.log('this.dateList', this.dateList);
+    this.avaliableLists = [];
+    this.availibilityService
+      .getUserAvailiability()
+      .subscribe((res) => {
+        this.users = res;
+        this.users.map(user => {
+          const userList = JSON.parse(JSON.stringify(user));
+          userList.cards = [];
+          this.dateList.map(date => {
+            const cardTemp = {
+              'totalActualTime': 0,
+              'cardDate': date,
+              'card': []
+            };
+            let status;
+            const dateFormat = new Date(date).toLocaleString('en-GB').substring(0, 10).split('/').join('');
+            user.cards.map(card => {
+              const dateCard = new Date(card.cardDate).toLocaleString('en-GB').substring(0, 10).split('/').join('');
+              if (dateCard === dateFormat) {
+                status = true;
+                userList.cards = [...userList.cards, card];
+              }
+            });
+            if (!status) { userList.cards = [...userList.cards, cardTemp]; }
+          });
+          this.avaliableLists = [...this.avaliableLists, userList];
+        });
+        console.log('***avaliableList', this.avaliableLists);
+      });
   }
 
   setDayWOSunSat(date): number {
