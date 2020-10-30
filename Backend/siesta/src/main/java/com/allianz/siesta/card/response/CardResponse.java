@@ -1,5 +1,7 @@
 package com.allianz.siesta.card.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Entity;
 import java.util.Date;
 
@@ -8,6 +10,8 @@ public class CardResponse {
     private Long cardId;
     private String cardName;
     private Double cardActualTime;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date cardDate;
 
     public CardResponse(String cardName, Double cardActualTime, Date cardDate) {

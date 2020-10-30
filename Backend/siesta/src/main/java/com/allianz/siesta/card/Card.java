@@ -2,6 +2,7 @@ package com.allianz.siesta.card;
 
 import com.allianz.siesta.assignment.Assignment;
 import com.allianz.siesta.user.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class Card {
     private String referenceLink;
 
     @Column(name = "card_date")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date cardDate;
 
     @Column(name = "create_date")
