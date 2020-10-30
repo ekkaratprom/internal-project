@@ -19,9 +19,17 @@ public class Position {
     @Column(name = "position_name")
     private String positionName;
 
-    @OneToMany(mappedBy = "position", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "position", fetch = FetchType.LAZY,cascade=CascadeType.ALL)
     @JsonBackReference
     private List<User> users = new ArrayList<User>();
+
+    public Position(Long id) {
+        this.id = id;
+    }
+
+    public Position() {
+
+    }
 
     public Long getId() {
         return id;
@@ -46,4 +54,5 @@ public class Position {
     public void setUsers(List<User> users) {
         this.users = users;
     }
+
 }
