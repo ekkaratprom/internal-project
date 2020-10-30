@@ -61,10 +61,17 @@
           <!-- <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center">
         <li class="color-box" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }"> -->
 
-          <div class="text-in-box" title="{{ index }}">
+
+
+          <ng-template #content let-modal>
+            <app-avaliable-form (submitCompleted)="close()"></app-avaliable-form>
+          </ng-template>
+          <div (click)="open(content)" class="text-in-box" title="{{ index | json }}">
             {{ index.totalActualTime }}
             <!-- {{ index }} -->
           </div>
+
+
 
         </li>
       </div>
