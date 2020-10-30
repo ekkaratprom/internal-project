@@ -1,7 +1,7 @@
 import { AssignmentService } from './../assignment-list/shared/assignment.service';
-import { Assignment, CardForm } from './../assignment-list/shared/assignment-model';
+import { Assignment, CardForm, CardList } from './../assignment-list/shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-avaliable-form',
@@ -9,6 +9,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./avaliable-form.component.css']
 })
 export class AvaliableFormComponent implements OnInit {
+  @Input() modalValue: any;
   @Output() assignmentcardChange = new EventEmitter();
   @Output() submitCompleted = new EventEmitter();
   card: CardForm;
@@ -16,6 +17,8 @@ export class AvaliableFormComponent implements OnInit {
   projectList = [];
   assignmentList = [];
   rAssignmentList = [];
+  cardsData = [];
+
 
   constructor(private assignmentService: AssignmentService) { }
 
@@ -34,13 +37,18 @@ export class AvaliableFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllAssignment();
+    console.log('************', this.modalValue);
+    console.log('************', this.modalValue[0].cards);
+    this.cardsData = [this.modalValue[0].cards];
+
+    console.log('****card', this.cardsData);
   }
 
   onSubmit(): void {
     const dateFormat = new Date('2020-10-30T03:48:49.759Z').toLocaleString('en-GB').substring(0, 10).split('/').join('-');
     this.card = {
-      userId: 2,
-      cardDate: new Date('2020-10-30'),
+      userId: this.modalValue.userId,
+      cardDate: this.modalValue.cards.cardDate,
       cardName: this.addCard.get('cardName').value,
       actualTime: parseFloat(this.addCard.get('actualTime').value),
       // tslint:disable-next-line: radix

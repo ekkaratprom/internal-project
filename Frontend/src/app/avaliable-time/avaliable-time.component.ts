@@ -25,6 +25,7 @@ export class AvaliableTimeComponent implements OnInit {
   cards;
   avaliableLists = [];
   dateList = [];
+  data;
 
   @Input()
   set date(val: any) {
@@ -102,7 +103,9 @@ export class AvaliableTimeComponent implements OnInit {
       });
   }
 
-  open(content): void {
+  open(content, result): void {
+    // debugger;
+    this.data = result;
     this.modalReference = this.modalService.open(content, { size: 'sm' });
   }
 

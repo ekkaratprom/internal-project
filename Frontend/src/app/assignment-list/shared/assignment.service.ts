@@ -48,4 +48,9 @@ export class AssignmentService {
     return this.http.post<CardForm>(`${environment.apiUrl}` + 'v1/addcard', cardForm, { observe: 'response' });
   }
 
+  //PATCH
+  editCard(cardForm: any): Observable<HttpResponse<CardForm>> {
+    return this.http.post<CardForm>(`${environment.apiUrl}` + 'v1/addcard', cardForm, { observe: 'response' });
+  }
+
 }

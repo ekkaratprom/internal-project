@@ -35,9 +35,25 @@
             </div>
 
             <button type="submit" (onClick)="onSubmit()">Submit</button>
+            <div>
+                <div class="form-group mx-sm-3 mb-2">
+                    <h6>Card List :</h6>
 
-            <div class="form-group mx-sm-3 mb-2">
-                <h6>Card List:</h6>
+                    <div *ngFor="let c of cardsData">
+                        <div *ngFor="let i of c.card">
+
+                            {{ i.cardName | json}}
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+
+
 
 
             </div>
