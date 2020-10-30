@@ -18,4 +18,6 @@ public interface AssignmentService {
     Assignment deleteAssignment(DeleteStatusRequest deleteStatusRequest, Long id);
 
     Assignment updateAssignment(AssignmentRequest assignmentRequest, Long id);
+
+    Assignment checkAssignmentId(Long id);
 }
