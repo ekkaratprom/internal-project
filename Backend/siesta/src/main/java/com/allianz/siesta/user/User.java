@@ -10,6 +10,7 @@ import com.allianz.siesta.position.Position;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+
 @Entity
 @Table(name = "user")
 public class User {
@@ -31,7 +32,7 @@ public class User {
     private Date updateDate;
 
 	@ManyToOne
-	@JoinColumn(name = "position_id", nullable = false)
+	@JoinColumn(name = "position_id", nullable = true)
 	@JsonManagedReference
 	private Position position;
 
