@@ -7,9 +7,9 @@
     type="text"
     class="form-control"
     style="margin-right: 2vw"
-    id="search-text"
+    id="assignment-search-text"
     [(ngModel)]="searchText"
-    placeholder="All Assignment"
+    placeholder="All Person"
   />
 </span>
 
@@ -24,6 +24,7 @@
   <option Value="Angular">Angular</option>
   <option Value="JAVA">Java</option>
   <option Value="mysql">MySQL</option>
+  <option Value="PHP">PHP</option>
   <option Value="Oracle">Oracle</option>
   <option Value="Robot">Robot framework</option>
 </select>
@@ -31,16 +32,19 @@
   <div class="col-lg-2 col-xl-2" style="margin-bottom: 5%; padding: 0"></div>
   <div
     class="col-lg-10 col-xl-10"
-    style="height: 25px; padding-left: 5%; padding-right: 15px"
+    style="height: 25px; padding-left: 3%; padding-right: 15px"
   >
     <div
       class="d-flex bd-highlight mb-3"
       style="justify-content: space-between"
     >
+      <a (click)="nextweek()" href="#" class="previous round">&#8249;</a>
       <div class="color-box mth" *ngFor="let day of dateList">
         {{ day | date: "EEE" }} <br />
-        {{ day | date: "dd" }}
+        {{ day | date: "dd" }} <br />
+        {{ day | date: "MMM" }}
       </div>
+      <a (click)="nextweek()" href="#" class="next round">&#8250;</a>
     </div>
   </div>
 </div>

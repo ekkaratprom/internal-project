@@ -140,6 +140,13 @@ export class AvaliableTimeComponent implements OnInit {
       console.error('GET All Users Availiable fail');
     }
   }
+  nextweek(): void {
+    this.dateList = [];
+    this.startDate.setDate(this.startDate.getDate() - 6);
+    console.log('std', this.startDate);
+    this.addDateList();
+    console.log('dl', this.dateList);
+  }
 
   addDateList(): void {
     const p = this.date;
