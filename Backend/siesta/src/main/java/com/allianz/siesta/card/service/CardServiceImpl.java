@@ -153,14 +153,15 @@ public class CardServiceImpl implements CardService{
 
             //Cards[]
             List<Object[]> cardList = cardRepository.getTotalActualTimeGroupByCardDate(user.getId());
-            List<Card> userCard = cardRepository.getCardByUserId(user.getId());
+
             userResponse.setCards(new ArrayList());
             for (Object[] card : cardList) {
+                Date cardDate = (Date)card[1];
                 GroupByCardsResponse groupByCardsResponse = new GroupByCardsResponse(
                         (Double)card[0],
                         (Date)card[1]
                 );
-
+                List<Card> userCard = cardRepository.getCardByUserId(user.getId(), cardDate);
                 //Card[]
                 userResponse.getCards().add(groupByCardsResponse);
                 groupByCardsResponse.setCard(new ArrayList());
