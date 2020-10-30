@@ -38,7 +38,7 @@
       class="d-flex bd-highlight mb-3"
       style="justify-content: space-between"
     >
-      <a (click)="nextweek()" href="#" class="previous round">&#8249;</a>
+      <a (click)="previousweek()" href="#" class="previous round">&#8249;</a>
       <div class="color-box mth" *ngFor="let day of dateList">
         {{ day | date: "EEE" }} <br />
         {{ day | date: "dd" }} <br />
@@ -53,7 +53,7 @@
     <div
       class="col ss"
       *ngFor="
-        let r of result
+        let r of avaliableLists
           | nameFilter: searchText
           | positionFilter: positionCheck
           | skillFilter: skillsetCheck
@@ -84,14 +84,20 @@
       >
         <li
           class="color-box"
-          *ngFor="let index of color"
-          [ngStyle]="{ backgroundColor: index | color }"
+          *ngFor="let index of r['cards']"
+          [ngStyle]="{ backgroundColor: index.totalActualTime | color }"
         >
+          <!-- <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center">
+        <li class="color-box" *ngFor="let index of color" [ngStyle]="{ backgroundColor: index | color }"> -->
+
           <div class="text-in-box" title="{{ index }}">
-            {{ index }}
+            {{ index.totalActualTime }}
+            <!-- {{ index }} -->
           </div>
         </li>
       </div>
     </div>
   </div>
 </div>
+
+<!-- {{ availibleUsers | json}} -->

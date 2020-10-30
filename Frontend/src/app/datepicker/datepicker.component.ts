@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -11,11 +11,24 @@ export class DatepickerComponent implements OnInit {
   monthlist = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE',
     'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
   month = '';
+  private _datep;
   date = 8;
   weekdays = [0, 0, 0, 0, 0, 0, 0];
   DMY = this.calendar.getToday();
   @Output() weekChange = new EventEmitter();
   @Output() dateChange = new EventEmitter();
+
+  @Input()
+  set datep(val: any) {
+    if (val.year !== undefined) {
+      this._datep = new Date(val.year, val.month - 1, val.day, 0, 0, 0, 0);
+    }
+  }
+
+  get datep(): any {
+    if (!this._datep) { return new Date(); }
+    return this._datep;
+  }
 
   constructor(private calendar: NgbCalendar, config: NgbModalConfig, private modalService: NgbModal) {
     this.changeMonth();

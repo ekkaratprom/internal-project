@@ -24,7 +24,6 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
 import { AvaliableTimeComponent } from './avaliable-time/avaliable-time.component';
 import { AssignmentFormComponent } from './assignment-form/assignment-form.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

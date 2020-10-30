@@ -2,7 +2,7 @@ import { AvailabilityService } from './shared/availability.service';
 import { MockAvaliabilityService } from './../service/mock-avaliability.service';
 import { AssignmentService } from './../assignment-list/shared/assignment.service';
 import { AssignmentResponse } from './../assignment-list/shared/assignment-model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, DebugElement, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -19,6 +19,7 @@ export interface UserDetail {
 })
 export class AvaliableTimeComponent implements OnInit {
   private _date;
+  private _dateNext;
   startDate;
   endDate;
   assignments: AssignmentResponse[] = [];
@@ -34,11 +35,18 @@ export class AvaliableTimeComponent implements OnInit {
   completedStatusCheck = undefined;
   modalReference: NgbModalRef;
   color = [0, 3, 6, 8, 4, 6, 8, 1, 2, 4, 0, 2, 7, 1, 5, 8, 9, 2, 2, 8];
+  totalActualTimeList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  totalSave = [];
+  users;
+  cards;
+  avaliableLists = [];
+
 
   skillsets = ['angular', 'bootstrap', 'html5'];
   x = ['nine', 'big', 'p_view', 'p_joy', 'p_jum'];
   dateList = [];
 
+  @Output() dateChange = new EventEmitter();
   @Input()
   set date(val: any) {
     if (val.year !== undefined) {
@@ -47,6 +55,10 @@ export class AvaliableTimeComponent implements OnInit {
       this._date = new Date();
     }
     this.addDateList();
+    // this.nextweek();
+    this.setTotalActualTime();
+    this.avaliableLists = [];
+    this.avaliableList();
   }
 
   get date(): any {
@@ -63,6 +75,7 @@ export class AvaliableTimeComponent implements OnInit {
   ngOnInit(): void {
     this.getAllAssignmentCards();
     this.getAllUsersAvailiable();
+    this.setTotalActualTime();
   }
 
   getAllAssignmentCards(): void {
@@ -81,6 +94,7 @@ export class AvaliableTimeComponent implements OnInit {
         .getUserAvailiability()
         .subscribe((res) => {
           this.availibleUsers = res;
+          console.log('response', this.availibleUsers);
           this.availibleUsers.forEach(element => {
             this.skillObj = [];
 
@@ -112,6 +126,7 @@ export class AvaliableTimeComponent implements OnInit {
               };
               this.cardObj.push(cards);
             });
+            this.totalSave = this.cardObj;
             console.log('card', this.cardObj);
 
             const userDetail = {
@@ -123,6 +138,7 @@ export class AvaliableTimeComponent implements OnInit {
             };
             this.result.push(userDetail);
           });
+
         }, (error) => {
           console.log('Get all Users Availiable error: ', error);
           this.availibleUsers = this.mockAvailibility.getUserAvailiability();
@@ -141,11 +157,41 @@ export class AvaliableTimeComponent implements OnInit {
     }
   }
   nextweek(): void {
+    const p = this.dateList[0];
+    p.setDate(p.getDate() + 6);
+    let i = 0;
     this.dateList = [];
-    this.startDate.setDate(this.startDate.getDate() - 6);
-    console.log('std', this.startDate);
-    this.addDateList();
-    console.log('dl', this.dateList);
+    while (i < 20) {
+      p.setDate(p.getDate() + 1);
+      const d = new Date(p);
+      if (d.getDay() !== 0 && d.getDay() !== 6) {
+        this.dateList.push(d);
+        i++;
+      }
+    }
+    this.startDate = this.dateList[0];
+    this.endDate = this.dateList[19];
+    this.dateChange.emit(this.dateList[0]);
+  }
+
+  previousweek(): void {
+    const p = this.dateList[0];
+    p.setDate(p.getDate() - 8);
+    let i = 0;
+    this.dateList = [];
+    while (i < 20) {
+      p.setDate(p.getDate() + 1);
+      const d = new Date(p);
+      if (d.getDay() !== 0 && d.getDay() !== 6) {
+        this.dateList.push(d);
+        i++;
+      }
+    }
+    this.startDate = this.dateList[0];
+    this.endDate = this.dateList[19];
+    console.log('start', this.startDate);
+    console.log('end', this.endDate);
+    this.dateChange.emit(this.dateList[0]);
   }
 
   addDateList(): void {
@@ -163,13 +209,94 @@ export class AvaliableTimeComponent implements OnInit {
     }
     this.startDate = this.dateList[0];
     this.endDate = this.dateList[19];
-    console.log('start', this.startDate);
-    console.log('end', this.endDate);
+    this.dateChange.emit(this.dateList[0]);
   }
 
-  // addTotalActualTime(): void{
+  setTotalActualTime(): void {
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.totalSave.length; i++) {
+      this.totalActualTimeList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      const actual = this.totalSave[i].totalActualTime;
+      const date = this.totalSave[i].cardDate;
+      const toDate = new Date(date);
+      console.log('Date fun 1: ', date);
+      console.log('toDate fun 1: ', toDate);
+      // toDate.setMonth(toDate.getMonth() - 1);
+      const rd = this.setDayWOSunSat(toDate);
+      if (rd == null) {
+        continue;
+      }
+      this.totalActualTimeList[rd] = actual;
+      console.log('result :', actual, date, toDate, rd);
+      console.log('totalActualTimeList :', this.totalActualTimeList);
+    }
 
-  // }
+  }
+
+  avaliableList(): void {
+    console.log('this.dateList', this.dateList);
+    this.avaliableLists = [];
+    this.availibilityService
+      .getUserAvailiability()
+      .subscribe((res) => {
+        this.users = res;
+        this.users.map(user => {
+          const userList = JSON.parse(JSON.stringify(user));
+          userList.cards = [];
+          this.dateList.map(date => {
+            const cardTemp = {
+              'totalActualTime': 0,
+              'cardDate': date,
+              'card': []
+            };
+            let status;
+            const dateFormat = new Date(date).toLocaleString('en-GB').substring(0, 10).split('/').join('');
+            user.cards.map(card => {
+              const dateCard = new Date(card.cardDate).toLocaleString('en-GB').substring(0, 10).split('/').join('');
+              if (dateCard === dateFormat) {
+                status = true;
+                userList.cards = [...userList.cards, card];
+              }
+            });
+            if (!status) { userList.cards = [...userList.cards, cardTemp]; }
+          });
+          this.avaliableLists = [...this.avaliableLists, userList];
+        });
+        console.log('***avaliableList', this.avaliableLists);
+      });
+  }
+
+  setDayWOSunSat(date): number {
+    let i = 0;
+    const sd = this.startDate;
+    let d = date;
+    console.log('setDayWOSunSat');
+    console.log('if', date > this.startDate, date < this.endDate);
+    console.log('Date', date);
+    console.log('Startdate', this.startDate);
+    if (d > this.startDate && d < this.endDate) {
+      console.log('m', d, sd)
+      while (d.getDate() != sd.getDate()) {
+        if (d.getDay() !== 0 && d.getDay() !== 6) {
+          i++;
+        }
+        d.setDate(d.getDate() + 1);
+        // console.log('while', i);
+        // console.log('date', date);
+        // console.log('sd', sd);
+      }
+      console.log('b', d.getDate() != sd.getDate(), d.getDate(), sd.getDate())
+      console.log('d', d);
+      return i;
+
+    }
+    return null;
+
+  }
+  ud(): void {
+    this.dateChange.emit(this.dateList[0]);
+  }
+
 
   open(content): void {
     this.modalReference = this.modalService.open(content, { size: 'sm' });
@@ -178,4 +305,5 @@ export class AvaliableTimeComponent implements OnInit {
   close(): void {
     this.modalReference.close();
   }
+
 }
