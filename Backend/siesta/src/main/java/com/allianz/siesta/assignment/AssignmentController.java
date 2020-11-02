@@ -4,9 +4,13 @@ import com.allianz.siesta.assignment.exception.AssignmentNotFoundException;
 import com.allianz.siesta.assignment.request.AssignmentRequest;
 import com.allianz.siesta.assignment.request.DeleteStatusRequest;
 import com.allianz.siesta.assignment.service.AssignmentService;
+import com.allianz.siesta.project.exception.ProjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.NoSuchElementException;
 
 
 @RestController
@@ -38,22 +42,13 @@ public class AssignmentController {
 
     @CrossOrigin
     @PatchMapping(value = "/v1/{id}/deleteassignment")
-    public Assignment deleteAssignment (@PathVariable(value = "id") Long id, @RequestBody DeleteStatusRequest deleteStatusRequest) throws AssignmentNotFoundException {
-        verifyAssignmentId(id);
-        return assignmentService.deleteAssignment(deleteStatusRequest, id);
+    public ResponseEntity<Assignment> deleteAssignment (@PathVariable(value = "id") Long id, @RequestBody DeleteStatusRequest deleteStatusRequest) throws AssignmentNotFoundException {
+        return ResponseEntity.accepted().body(assignmentService.deleteAssignment(deleteStatusRequest, id));
     }
 
     @CrossOrigin
     @PatchMapping(value = "/v1/{id}/updateassignment")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Assignment updateAssignment(@PathVariable(value = "id") Long id, @RequestBody AssignmentRequest assignmentRequest) throws AssignmentNotFoundException {
-        verifyAssignmentId(id);
-        return assignmentService.updateAssignment(assignmentRequest, id);
+    public ResponseEntity<Assignment> updateAssignment(@PathVariable(value = "id") Long id, @RequestBody AssignmentRequest assignmentRequest) throws AssignmentNotFoundException, ProjectNotFoundException {
+        return ResponseEntity.accepted().body(assignmentService.updateAssignment(assignmentRequest, id));
     }
-
-    //check assignmentIdNoSuchElementException
-    private Assignment verifyAssignmentId (Long id) throws AssignmentNotFoundException {
-        return assignmentService.checkAssignmentId(id);
-    }
-
 }
