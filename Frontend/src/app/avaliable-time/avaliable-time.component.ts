@@ -4,7 +4,6 @@ import { AssignmentResponse } from './../assignment-list/shared/assignment-model
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
-
 @Component({
   selector: 'app-avaliable-time',
   templateUrl: './avaliable-time.component.html',
@@ -25,6 +24,10 @@ export class AvaliableTimeComponent implements OnInit {
   cards;
   avaliableLists = [];
   dateList = [];
+  data;
+  data2;
+
+  // @Input() avaliable: Observable<any>;
 
   @Input()
   set date(val: any) {
@@ -48,7 +51,11 @@ export class AvaliableTimeComponent implements OnInit {
     private mockAvailibility: MockAvaliabilityService,
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    // this.avaliable = Observable
+    //   .interval(1000)
+    //   .startWith(0).switchMap(() => this.availibilityService.getUserAvailiability());
+  }
 
   addDateList(): void {
     const p = this.date;
@@ -102,7 +109,10 @@ export class AvaliableTimeComponent implements OnInit {
       });
   }
 
-  open(content): void {
+  open(content, result): void {
+    // debugger;
+    this.data = result;
+    // this.data2 = result2;
     this.modalReference = this.modalService.open(content, { size: 'sm' });
   }
 
