@@ -2,7 +2,7 @@ import { AvailabilityService } from './shared/availability.service';
 import { MockAvaliabilityService } from './../service/mock-avaliability.service';
 import { AssignmentService } from './../assignment-list/shared/assignment.service';
 import { AssignmentResponse } from './../assignment-list/shared/assignment-model';
-import { Component, DebugElement, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, DebugElement, Input, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -46,7 +46,6 @@ export class AvaliableTimeComponent implements OnInit {
   x = ['nine', 'big', 'p_view', 'p_joy', 'p_jum'];
   dateList = [];
 
-  @Output() dateChange = new EventEmitter();
   @Input()
   set date(val: any) {
     if (val.year !== undefined) {
@@ -171,12 +170,13 @@ export class AvaliableTimeComponent implements OnInit {
     }
     this.startDate = this.dateList[0];
     this.endDate = this.dateList[19];
-    this.dateChange.emit(this.dateList[0]);
+    console.log('start', this.startDate);
+    console.log('end', this.endDate);
   }
 
   previousweek(): void {
     const p = this.dateList[0];
-    p.setDate(p.getDate() - 8);
+    p.setDate(p.getDate() + 6);
     let i = 0;
     this.dateList = [];
     while (i < 20) {
@@ -191,7 +191,6 @@ export class AvaliableTimeComponent implements OnInit {
     this.endDate = this.dateList[19];
     console.log('start', this.startDate);
     console.log('end', this.endDate);
-    this.dateChange.emit(this.dateList[0]);
   }
 
   addDateList(): void {
@@ -209,10 +208,13 @@ export class AvaliableTimeComponent implements OnInit {
     }
     this.startDate = this.dateList[0];
     this.endDate = this.dateList[19];
-    this.dateChange.emit(this.dateList[0]);
+    console.log('start', this.startDate);
+    console.log('end', this.endDate);
   }
 
   setTotalActualTime(): void {
+    console.log('fun 1', this.totalSave.length);
+
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.totalSave.length; i++) {
       this.totalActualTimeList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -292,9 +294,6 @@ export class AvaliableTimeComponent implements OnInit {
     }
     return null;
 
-  }
-  ud(): void {
-    this.dateChange.emit(this.dateList[0]);
   }
 
 
