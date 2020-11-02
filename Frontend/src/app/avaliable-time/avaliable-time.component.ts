@@ -19,6 +19,7 @@ export interface UserDetail {
 })
 export class AvaliableTimeComponent implements OnInit {
   private _date;
+  private _dateNext;
   startDate;
   endDate;
   assignments: AssignmentResponse[] = [];
@@ -53,6 +54,7 @@ export class AvaliableTimeComponent implements OnInit {
       this._date = new Date();
     }
     this.addDateList();
+    // this.nextweek();
     this.setTotalActualTime();
     this.avaliableLists = [];
     this.avaliableList();
@@ -152,6 +154,43 @@ export class AvaliableTimeComponent implements OnInit {
     } catch (error) {
       console.error('GET All Users Availiable fail');
     }
+  }
+  nextweek(): void {
+    const p = this.dateList[0];
+    p.setDate(p.getDate() + 6);
+    let i = 0;
+    this.dateList = [];
+    while (i < 20) {
+      p.setDate(p.getDate() + 1);
+      const d = new Date(p);
+      if (d.getDay() !== 0 && d.getDay() !== 6) {
+        this.dateList.push(d);
+        i++;
+      }
+    }
+    this.startDate = this.dateList[0];
+    this.endDate = this.dateList[19];
+    console.log('start', this.startDate);
+    console.log('end', this.endDate);
+  }
+
+  previousweek(): void {
+    const p = this.dateList[0];
+    p.setDate(p.getDate() + 6);
+    let i = 0;
+    this.dateList = [];
+    while (i < 20) {
+      p.setDate(p.getDate() + 1);
+      const d = new Date(p);
+      if (d.getDay() !== 0 && d.getDay() !== 6) {
+        this.dateList.push(d);
+        i++;
+      }
+    }
+    this.startDate = this.dateList[0];
+    this.endDate = this.dateList[19];
+    console.log('start', this.startDate);
+    console.log('end', this.endDate);
   }
 
   addDateList(): void {
