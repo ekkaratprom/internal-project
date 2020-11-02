@@ -176,7 +176,7 @@ export class AvaliableTimeComponent implements OnInit {
 
   previousweek(): void {
     const p = this.dateList[0];
-    p.setDate(p.getDate() + 6);
+    p.setDate(p.getDate() - 8);
     let i = 0;
     this.dateList = [];
     while (i < 20) {
