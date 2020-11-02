@@ -1,1 +1,70 @@
-<p>avaliable-form works!</p>
+<div class="card">
+  <form class="form-inline" [formGroup]="addCard" (ngSubmit)="onSubmit()">
+    <div class="card-body">
+      <div class="form-group mx-sm-3 mb-2">
+        <div>
+          <h6>Assignment</h6>
+        </div>
+        <div>
+          <select
+            class="form-control"
+            id="input_assignment_id"
+            formControlName="assignmentId"
+          >
+            <option
+              *ngFor="let c of rAssignmentList"
+              value="{{ c.assignmentId }}"
+            >
+              {{ c.assignmentName }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group mx-sm-3 mb-2">
+        <h6>Card</h6>
+
+        <input
+          type="text"
+          class="form-control"
+          id="input_card_name"
+          placeholder="type your card..."
+          formControlName="cardName"
+        />
+        <div *ngIf="addCard.get('cardName').hasError('pattern')" class="error">
+          cardName has invalid characters.
+        </div>
+
+        <input
+          type="number"
+          class="form-control"
+          id="input_actual_time"
+          placeholder="0"
+          formControlName="actualTime"
+        />
+        <div
+          *ngIf="addCard.get('actualTime').hasError('pattern')"
+          class="error"
+        >
+          invalid actual time.
+        </div>
+      </div>
+
+      <button type="submit" (onClick)="onSubmit()">Submit</button>
+      <div>
+        <div class="form-group mx-sm-3 mb-2 d-flex">
+          <div>
+            <h6>Card List :</h6>
+          </div>
+          <div *ngFor="let c of cardsData">
+            <div class="card" *ngFor="let i of c.card">
+              <div class="card-body">
+                {{ i.cardName }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

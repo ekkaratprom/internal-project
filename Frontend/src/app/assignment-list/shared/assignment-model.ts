@@ -36,3 +36,15 @@ export type CardObj = {
 }
 
 
+export type AssignmentList = {
+    id: number,
+    assignmentName?: string,
+}
+
+export type CardForm = {
+    actualTime: number,
+    assignmentId: number,
+    cardDate: Date,
+    cardName: string,
+    userId: number,
+}
