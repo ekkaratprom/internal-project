@@ -64,9 +64,10 @@
 
 
           <ng-template #content let-modal>
-            <app-avaliable-form [modalValue]="data" (submitCompleted)="close()"></app-avaliable-form>
+            <app-avaliable-form [modalValue]="data" (submitCompleted)="close()">
+            </app-avaliable-form>
           </ng-template>
-          <div (click)="open(content, [{'userId': r.userId, 'cards': index}])" class="text-in-box"
+          <div (click)="open(content, [{'userId': r.userId, 'cards': index},r] )" class="text-in-box"
             title="{{ index | json }}">
             {{ index.totalActualTime }}
             <!-- {{ index }} -->
