@@ -26,6 +26,13 @@ public class Skill {
     @JsonBackReference
     private List<Technician> technicians = new ArrayList<Technician>();
 
+    public Skill(Long id) {
+        this.id = id;
+    }
+
+    public Skill() {
+    }
+
     public Long getId() {
         return id;
     }

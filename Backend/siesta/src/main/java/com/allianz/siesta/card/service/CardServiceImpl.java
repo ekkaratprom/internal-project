@@ -4,7 +4,9 @@ import com.allianz.siesta.assignment.Assignment;
 import com.allianz.siesta.assignment.AssignmentRepository;
 import com.allianz.siesta.card.Card;
 import com.allianz.siesta.card.CardRepository;
-import com.allianz.siesta.card.CardRequest;
+import com.allianz.siesta.card.request.CardRequest;
+import com.allianz.siesta.card.request.DeleteStatusRequest;
+import com.allianz.siesta.card.request.UpdateCardRequest;
 import com.allianz.siesta.card.response.*;
 import com.allianz.siesta.technician.Technician;
 import com.allianz.siesta.technician.TechnicianRepository;
@@ -151,17 +153,18 @@ public class CardServiceImpl implements CardService{
 
             //Cards[]
             List<Object[]> cardList = cardRepository.getTotalActualTimeGroupByCardDate(user.getId());
-            List<Card> userCard = cardRepository.getCardByUserId(user.getId());
+
             userResponse.setCards(new ArrayList());
             for (Object[] card : cardList) {
-                CardsResponse cardsResponse = new CardsResponse(
+                Date cardDate = (Date)card[1];
+                GroupByCardsResponse groupByCardsResponse = new GroupByCardsResponse(
                         (Double)card[0],
                         (Date)card[1]
                 );
-
+                List<Card> userCard = cardRepository.getCardByUserId(user.getId(), cardDate);
                 //Card[]
-                userResponse.getCards().add(cardsResponse);
-                cardsResponse.setCard(new ArrayList());
+                userResponse.getCards().add(groupByCardsResponse);
+                groupByCardsResponse.setCard(new ArrayList());
                 for (Card userCards : userCard) {
                     CardUserResponse cardUserResponse = new CardUserResponse(
                             userCards.getId(),
@@ -170,7 +173,7 @@ public class CardServiceImpl implements CardService{
                             userCards.getCreateDate()
                     );
 
-                    cardsResponse.getCard().add(cardUserResponse);
+                    groupByCardsResponse.getCard().add(cardUserResponse);
                 }
             }
             //concat fullname = fname + lname
@@ -180,5 +183,28 @@ public class CardServiceImpl implements CardService{
             userResponseList.add(userResponse);
         }
         return userResponseList;
+    }
+
+    @Override
+    public Card updateCard(UpdateCardRequest updateCardRequest, Long id) {
+        Card card = cardRepository.getOne(id);
+
+        if (updateCardRequest.getActualTime() != null) {
+            card.setActualTime(updateCardRequest.getActualTime());
+            card.setCompletedStatus(Boolean.TRUE);
+        }
+
+        return cardRepository.save(card);
+    }
+
+    @Override
+    public Card deleteCard(DeleteStatusRequest deleteStatusRequest, Long id) {
+        Card card = cardRepository.getOne(id);
+
+        if (deleteStatusRequest.getDeletedStatus() != null) {
+            card.setDeletedStatus(deleteStatusRequest.getDeletedStatus());
+        }
+
+        return cardRepository.save(card);
     }
 }
