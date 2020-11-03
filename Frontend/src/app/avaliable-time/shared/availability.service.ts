@@ -1,5 +1,5 @@
 import { environment } from './../../../environments/environment';
-import { UserResponse } from './availiability-model';
+import { Actual, UserResponse } from './availiability-model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -19,6 +19,16 @@ export class AvailabilityService {
 
   getUserAvailiability(): Observable<UserResponse> {
     return this.http.get<UserResponse>(`${environment.apiUrl}` + 'v1/availabletime');
+  }
+
+  updateCard(id: any, actual: any): Observable<HttpResponse<Actual[]>> {
+    // debugger;
+    // /siesta/api/v1/{id}/updatecard
+    //
+    return this.http.patch<Actual[]>(`${environment.apiUrl}v1/${id}/updatecard`, actual, {
+      // return this.http.patch<Actual[]>(`https://jsonplaceholder.typicode.com/posts/1`, actual, {
+      observe: 'response',
+    });
   }
 
 

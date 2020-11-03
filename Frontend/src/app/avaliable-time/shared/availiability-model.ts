@@ -24,3 +24,7 @@ export type Skill = {
     iconPath: string;
 }
 
+
+export type Actual = {
+    actualTime: number;
+}
