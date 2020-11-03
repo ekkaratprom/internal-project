@@ -4,6 +4,7 @@ import com.allianz.siesta.assignment.Assignment;
 import com.allianz.siesta.assignment.AssignmentRepository;
 import com.allianz.siesta.card.Card;
 import com.allianz.siesta.card.CardRepository;
+import com.allianz.siesta.card.exception.CardNotFoundException;
 import com.allianz.siesta.card.request.CardRequest;
 import com.allianz.siesta.card.request.DeleteStatusRequest;
 import com.allianz.siesta.card.request.UpdateCardRequest;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CardServiceImpl implements CardService{
@@ -186,7 +188,8 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
-    public Card updateCard(UpdateCardRequest updateCardRequest, Long id) {
+    public Card updateCard(UpdateCardRequest updateCardRequest, Long id) throws CardNotFoundException {
+        verifyCardId(id);
         Card card = cardRepository.getOne(id);
 
         if (updateCardRequest.getActualTime() != null) {
@@ -198,7 +201,8 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
-    public Card deleteCard(DeleteStatusRequest deleteStatusRequest, Long id) {
+    public Card deleteCard(DeleteStatusRequest deleteStatusRequest, Long id) throws CardNotFoundException {
+        verifyCardId(id);
         Card card = cardRepository.getOne(id);
 
         if (deleteStatusRequest.getDeletedStatus() != null) {
@@ -207,4 +211,10 @@ public class CardServiceImpl implements CardService{
 
         return cardRepository.save(card);
     }
+
+    //check assignmentId
+    private Card verifyCardId (Long id) throws CardNotFoundException {
+        return cardRepository.findById(id).orElseThrow(() ->
+                new CardNotFoundException("error"));
+    };
 }
