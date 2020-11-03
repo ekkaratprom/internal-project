@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { AssignmentService } from './shared/assignment.service';
 import { MockCardsService } from './../service/mock-cards.service';
 import { MockAssignmentService } from './../service/mock-assignment.service';
@@ -78,6 +79,15 @@ export class AssignmentListComponent implements OnInit {
       console.error('GET all assignments fail');
     }
   }
+  toggle(): void {
+    if (this.completedStatusCheck === true){
+      this.completedStatusCheck = false;
+    }
+    if (this.completedStatusCheck === false){
+      this.completedStatusCheck = true;
+    }
+    console.log(this.completedStatusCheck);
+  }
 
   getAllCards(): void {
     try {
@@ -107,7 +117,7 @@ export class AssignmentListComponent implements OnInit {
               estimateTime: element.estimateTime,
               totalActualTime: element.totalActualTime,
               cardObj: this.cObj,
-            }
+            };
             this.result.push(cardDetail);
           });
           // console.log('result', this.result);
@@ -132,7 +142,7 @@ export class AssignmentListComponent implements OnInit {
               estimateTime: element.estimateTime,
               totalActualTime: element.totalActualTime,
               cardObj: this.cObj,
-            }
+            };
             this.result.push(cardDetail);
           });
           // console.log('result', this.result);

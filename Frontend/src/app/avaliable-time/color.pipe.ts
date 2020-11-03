@@ -10,10 +10,10 @@ export class ColorPipe implements PipeTransform {
     if (index === 0) {
       return '#CEC3BA';
     }
-    if ((1 <= index) && (index <= 5)) {
+    if ((0 < index) && (index <= 5)) {
       return '#DAF7A6';
     }
-    if ((6 <= index) && (index <= 7)) {
+    if ((5 < index) && (index < 8)) {
       return '#FFC300';
     }
     if (index === 8) {

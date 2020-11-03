@@ -6,7 +6,8 @@
                     <h6>Assignment</h6>
                 </div>
                 <div>
-                    <select class="form-control" id="input_assignment_id" formControlName="assignmentId">
+                    <select class="form-control" id="input_assignment_id" formControlName="assignmentId"
+                        placeholder="choose your assignment">
                         <option *ngFor="let c of rAssignmentList" value="{{ c.assignmentId }}">
                             {{ c.assignmentName }}
                         </option>
