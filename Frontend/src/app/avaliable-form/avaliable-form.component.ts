@@ -128,7 +128,7 @@ export class AvaliableFormComponent implements OnInit {
       // const cardId = this.modalValue[0].cards.card[0].cardId;
       // rest of your code
       const cardId = card;
-      debugger;
+
       this.actual = {
         actualTime: parseFloat(this.editCard.get('cardActualTime').value),
         // tslint:disable-next-line: radix

@@ -25,9 +25,9 @@
   <div class="col-lg-10 col-xl-10" style="height: 25px; padding-left: 3%; padding-right: 15px">
     <div class="d-flex bd-highlight mb-3" style="justify-content: space-between">
       <a (click)="previousweek()" href="#" class="previous round">&#8249;</a>
-      <div class="color-box mth" *ngFor="let day of dateList">
-        {{ day | date: "EEE" }} <br />
-        {{ day | date: "dd" }} <br />
+      <div class="top-color-box" *ngFor="let day of dateList">
+        {{ day | date: "EEE" }} <br/>
+        {{ day | date: "dd" }} <br/>
         {{ day | date: "MMM" }}
       </div>
       <a (click)="nextweek()" href="#" class="next round">&#8250;</a>
