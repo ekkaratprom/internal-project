@@ -1,0 +1,8 @@
+.close {
+  cursor: pointer;
+  position: absolute;
+  top: 3%;
+  right: 1%;
+  font-size: 15px;
+  transform: translate(0%, -50%);
+}
