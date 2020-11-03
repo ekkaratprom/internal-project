@@ -1,3 +1,5 @@
+import { TitleCompletedStatusPipe } from './assignment-list/titlecompletestatus.pipe';
+import { ColorCompletedStatusPipe } from './assignment-list/completedstatus.pipe';
 import { AvaliableFormComponent } from './avaliable-form/avaliable-form.component';
 import { SkillPipe } from './avaliable-time/skillset.pipe';
 import { PositionPipe } from './avaliable-time/position.pipe';
@@ -29,13 +31,16 @@ import { AssignmentFormComponent } from './assignment-form/assignment-form.compo
     AppComponent,
     CardComponent,
     CardFormComponent,
+    TitleCompletedStatusPipe,
     FilterPipe,
     CardPersonRowComponent,
     QueueViewComponent,
     DatepickerComponent,
+    ColorCompletedStatusPipe,
     NavbarComponent,
     SkillPipe,
     AvaliableTimeComponent,
+    CompleteStatusPipe,
     AssignmentListComponent,
     AssignmentFormComponent,
     CompleteStatusPipe,
