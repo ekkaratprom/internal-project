@@ -48,7 +48,7 @@
                         {{ i.cardName }}
                     </div>
                     <span class="close" title="Delete Card">&times;</span>
-                    <form [formGroup]="editCard" (keydown)="keyDownFunction($event)">
+                    <form [formGroup]="editCard" (keydown)="keyDownFunction($event,i.cardId)">
                         <input type="number" class="form-control" id="input_actual_time" placeholder="{{i.actualTime}}"
                             formControlName="cardActualTime" />
                     </form>
