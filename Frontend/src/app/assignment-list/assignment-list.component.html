@@ -20,6 +20,8 @@
     + assignment
   </button>
 
+  <button (click)="test2()">dadadadada</button>
+
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
       <div class="card" *ngFor="
@@ -28,11 +30,14 @@
             | assignmentFilter: assignmentsearchText
         ">
         <div class="card-body">
-          <p class="card-text" style="font-weight: bold">
+          <p class="card-text text" style="font-weight: bold; ">
             <i class="material-icons md-18" title="{{r.completedStatus | titlecompletedStatusPipe}}" (click)="toggle()"
               [ngStyle]="{ color:  r.completedStatus  | colorcompletedStatusPipe :  r.completedStatus   }">ic_check_circle</i>
             {{ r.assignmentName }}
+            <span class="close">&times;</span>
+
           </p>
+
 
           <hr class="solid" />
 

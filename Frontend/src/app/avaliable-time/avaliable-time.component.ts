@@ -1,6 +1,6 @@
+import { QueueviewserviceService } from './../queueviewservice.service';
 import { AvailabilityService } from './shared/availability.service';
 import { MockAvaliabilityService } from './../service/mock-avaliability.service';
-import { AssignmentResponse } from './../assignment-list/shared/assignment-model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
@@ -12,9 +12,9 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 export class AvaliableTimeComponent implements OnInit {
   private _date;
-  private _dateNext;
   startDate;
   endDate;
+  test3;
   searchText = '';
   positionCheck = undefined;
   skillsetCheck = undefined;
@@ -51,14 +51,15 @@ export class AvaliableTimeComponent implements OnInit {
   }
 
   constructor(private modalService: NgbModal,
+    private qv:QueueviewserviceService,
     private availibilityService: AvailabilityService,
     private mockAvailibility: MockAvaliabilityService,
   ) { }
 
   ngOnInit(): void {
-    // this.avaliable = Observable
-    //   .interval(1000)
-    //   .startWith(0).switchMap(() => this.availibilityService.getUserAvailiability());
+    this.qv.getTest().subscribe((val) => {
+      console.log(val);
+    });
   }
   nextweek(): void {
     const p = this.dateList[0];

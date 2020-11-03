@@ -16,6 +16,7 @@ export class QueueViewComponent implements OnInit {
   completedStatusCheck = undefined;
   date = {};
   dateSent;
+  photo= 'https://www.freepik.com/free-photo/mountains-nature-landscape_1253947.htm#page=1&query=mountain&position=16';
 
   modalReference: NgbModalRef;
   assignments: AssignmentResponse[] = [];

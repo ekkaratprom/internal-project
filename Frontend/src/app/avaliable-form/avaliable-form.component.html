@@ -4,6 +4,7 @@
             <div class="form-group mx-sm-3 mb-2">
                 <div>
                     <h6>Assignment</h6>
+                    <span class="close head" title="Exit"(click)="close()">&times;</span>
                 </div>
                 <div>
                     <select class="form-control" id="input_assignment_id" formControlName="assignmentId"
@@ -40,11 +41,13 @@
             <div>
                 <h6>Card List :</h6>
             </div>
+
             <div *ngFor="let c of cardsData">
                 <div class="card" *ngFor="let i of c.card">
                     <div class="card-body">
                         {{ i.cardName }}
                     </div>
+                    <span class="close" title="Delete Card">&times;</span>
                     <form [formGroup]="editCard" (keydown)="keyDownFunction($event)">
                         <input type="number" class="form-control" id="input_actual_time" placeholder="{{i.actualTime}}"
                             formControlName="cardActualTime" />

@@ -1,3 +1,4 @@
+import { QueueviewserviceService } from './../queueviewservice.service';
 import { element } from 'protractor';
 import { AssignmentService } from './shared/assignment.service';
 import { MockCardsService } from './../service/mock-cards.service';
@@ -40,10 +41,11 @@ export class AssignmentListComponent implements OnInit {
   result = [];
   cObj = [];
   modalReference: NgbModalRef;
+  kevin =false;
 
   public isCollapsed = true;
 
-  constructor(private assignmentService: AssignmentService,
+  constructor(private qv:QueueviewserviceService , private assignmentService: AssignmentService,
     private mockAssignments: MockAssignmentService,
     private mockCards: MockCardsService,
     private modalService: NgbModal) { }
@@ -87,6 +89,12 @@ export class AssignmentListComponent implements OnInit {
       this.completedStatusCheck = true;
     }
     console.log(this.completedStatusCheck);
+  }
+
+  test2(){
+    console.log("test2");
+    this.qv.settest(this.kevin);
+    this.kevin = !this.kevin;
   }
 
   getAllCards(): void {
