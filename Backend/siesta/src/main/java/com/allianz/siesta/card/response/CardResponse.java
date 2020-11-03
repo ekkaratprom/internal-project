@@ -10,8 +10,6 @@ public class CardResponse {
     private Long cardId;
     private String cardName;
     private Double cardActualTime;
-
-    @JsonFormat(pattern="yyyy-MM-dd")
     private Date cardDate;
 
     public CardResponse(String cardName, Double cardActualTime, Date cardDate) {

@@ -29,7 +29,6 @@ public class Card {
     private String referenceLink;
 
     @Column(name = "card_date")
-    @JsonFormat(pattern="yyyy-MM-dd")
     private Date cardDate;
 
     @Column(name = "create_date")

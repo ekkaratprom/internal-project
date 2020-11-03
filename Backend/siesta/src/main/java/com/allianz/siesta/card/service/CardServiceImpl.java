@@ -17,6 +17,7 @@ import com.allianz.siesta.card.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -163,16 +164,17 @@ public class CardServiceImpl implements CardService{
                         (Double)card[0],
                         (Date)card[1]
                 );
-                List<Card> userCard = cardRepository.getCardByUserId(user.getId(), cardDate);
-                //Card[]
+                List<Object[]> userCard = cardRepository.getCardByUserId(user.getId(), cardDate);
+
                 userResponse.getCards().add(groupByCardsResponse);
+                //Card[]
                 groupByCardsResponse.setCard(new ArrayList());
-                for (Card userCards : userCard) {
+                for (Object[] userCards : userCard) {
                     CardUserResponse cardUserResponse = new CardUserResponse(
-                            userCards.getId(),
-                            userCards.getCardName(),
-                            userCards.getActualTime(),
-                            userCards.getCreateDate()
+                            (BigInteger)userCards[0],
+                            (String)userCards[1],
+                            (Double)userCards[2],
+                            (Date)userCards[3]
                     );
 
                     groupByCardsResponse.getCard().add(cardUserResponse);
