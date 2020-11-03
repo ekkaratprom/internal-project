@@ -1,3 +1,4 @@
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AvailabilityService } from './../avaliable-time/shared/availability.service';
 import { Actual } from './../avaliable-time/shared/availiability-model';
 import { AssignmentService } from './../assignment-list/shared/assignment.service';
@@ -5,6 +6,7 @@ import { Assignment, CardForm, CardList } from './../assignment-list/shared/assi
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -27,7 +29,7 @@ export class AvaliableFormComponent implements OnInit {
 
 
 
-  constructor(private assignmentService: AssignmentService, private router: Router, private availabilityService: AvailabilityService) { }
+  constructor(private ngbmodal:NgbModal, private assignmentService: AssignmentService, private router: Router, private availabilityService: AvailabilityService) { }
 
   public addCard = new FormGroup({
     assignmentId: new FormControl(null, Validators.compose([
@@ -113,12 +115,15 @@ export class AvaliableFormComponent implements OnInit {
   onCancel(): void {
     this.assignmentcardChange.emit('cancel');
   }
+  close(){
+    this.ngbmodal.dismissAll();
+  }
 
 
   keyDownFunction(event, card: string) {
     if (event.keyCode === 13) {
 
-      // console.log(card);     
+      // console.log(card);
       alert('you just pressed the enter key');
       // const cardId = this.modalValue[0].cards.card[0].cardId;
       // rest of your code
