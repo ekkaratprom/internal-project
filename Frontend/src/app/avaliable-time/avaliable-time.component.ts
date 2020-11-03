@@ -1,7 +1,7 @@
 import { AvailabilityService } from './shared/availability.service';
 import { MockAvaliabilityService } from './../service/mock-avaliability.service';
 import { AssignmentResponse } from './../assignment-list/shared/assignment-model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -12,11 +12,12 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 export class AvaliableTimeComponent implements OnInit {
   private _date;
+  private _dateNext;
   startDate;
   endDate;
   searchText = '';
-  positionCheck = null;
-  skillsetCheck = null;
+  positionCheck = undefined;
+  skillsetCheck = undefined;
   completedStatusCheck = undefined;
   modalReference: NgbModalRef;
   color = [0, 3, 6, 8, 4, 6, 8, 1, 2, 4, 0, 2, 7, 1, 5, 8, 9, 2, 2, 8];
@@ -26,6 +27,7 @@ export class AvaliableTimeComponent implements OnInit {
   dateList = [];
   data;
   data2;
+  dateSent;
 
   // @Input() avaliable: Observable<any>;
 
@@ -40,6 +42,8 @@ export class AvaliableTimeComponent implements OnInit {
     this.avaliableLists = [];
     this.avaliableList();
   }
+  @Output() dateOnNextBack = new EventEmitter();
+
 
   get date(): any {
     if (!this._date) { return new Date(); }
@@ -55,6 +59,47 @@ export class AvaliableTimeComponent implements OnInit {
     // this.avaliable = Observable
     //   .interval(1000)
     //   .startWith(0).switchMap(() => this.availibilityService.getUserAvailiability());
+  }
+  nextweek(): void {
+    const p = this.dateList[0];
+    p.setDate(p.getDate() + 6);
+    let i = 0;
+    this.dateList = [];
+    while (i < 20) {
+      p.setDate(p.getDate() + 1);
+      const d = new Date(p);
+      if (d.getDay() !== 0 && d.getDay() !== 6) {
+        this.dateList.push(d);
+        i++;
+      }
+    }
+    this.startDate = this.dateList[0];
+    this.endDate = this.dateList[19];
+    console.log('start', this.startDate);
+    console.log('end', this.endDate);
+    this.dateOnNextBack.emit(this.startDate);
+    this.avaliableList();
+  }
+
+  previousweek(): void {
+    const p = this.dateList[0];
+    p.setDate(p.getDate() - 8);
+    let i = 0;
+    this.dateList = [];
+    while (i < 20) {
+      p.setDate(p.getDate() + 1);
+      const d = new Date(p);
+      if (d.getDay() !== 0 && d.getDay() !== 6) {
+        this.dateList.push(d);
+        i++;
+      }
+    }
+    this.startDate = this.dateList[0];
+    this.endDate = this.dateList[19];
+    console.log('start', this.startDate);
+    console.log('end', this.endDate);
+    this.dateOnNextBack.emit(this.startDate);
+    this.avaliableList();
   }
 
   addDateList(): void {
@@ -119,4 +164,5 @@ export class AvaliableTimeComponent implements OnInit {
   close(): void {
     this.modalReference.close();
   }
+
 }

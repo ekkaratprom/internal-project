@@ -18,12 +18,12 @@ export class AssignmentService {
 
   constructor(private http: HttpClient) { }
 
-  //POST 
+  //POST
   addAssignment(assignmentForm: any): Observable<HttpResponse<Assignment>> {
     return this.http.post<Assignment>(`${environment.apiUrl}` + 'v1/addAssignment', assignmentForm, { observe: 'response' });
   }
 
-  //GET 
+  //GET
   getAllProject(): Observable<Project[]> {
     return this.http.get<Project[]>(`${environment.apiUrl}` + 'v1/project');
   }
@@ -33,7 +33,7 @@ export class AssignmentService {
     return this.http.get<AssignmentResponse[]>(`${environment.apiUrl}` + 'v1/assignment');
   }
 
-  //GET ALL Card 
+  //GET ALL Card
   getAllCards(): Observable<CardList> {
     return this.http.get<CardList>(`${environment.apiUrl}` + 'v1/card');
   }
@@ -43,7 +43,7 @@ export class AssignmentService {
     return this.http.get<AssignmentList[]>(`${environment.apiUrl}` + 'v2/assignmentlist');
   }
 
-  //POST 
+  //POST
   addCard(cardForm: any): Observable<HttpResponse<CardForm>> {
     return this.http.post<CardForm>(`${environment.apiUrl}` + 'v1/addcard', cardForm, { observe: 'response' });
   }

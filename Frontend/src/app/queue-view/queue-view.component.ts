@@ -15,6 +15,7 @@ export class QueueViewComponent implements OnInit {
   searchText = '';
   completedStatusCheck = undefined;
   date = {};
+  dateSent;
 
   modalReference: NgbModalRef;
   assignments: AssignmentResponse[] = [];
@@ -29,6 +30,13 @@ export class QueueViewComponent implements OnInit {
 
   collectDate(e): void {
     this.date = e;
+  }
+
+  collectDateOnNextBack(e): void{
+    this.dateSent = e;
+    console.log(e)
+    console.log(this.dateSent)
+
   }
 
 

@@ -1,7 +1,10 @@
+import { AvailabilityService } from './../avaliable-time/shared/availability.service';
+import { Actual } from './../avaliable-time/shared/availiability-model';
 import { AssignmentService } from './../assignment-list/shared/assignment.service';
 import { Assignment, CardForm, CardList } from './../assignment-list/shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,15 +17,17 @@ export class AvaliableFormComponent implements OnInit {
   @Output() assignmentcardChange = new EventEmitter();
   @Output() submitCompleted = new EventEmitter();
   card: CardForm;
+  actual: Actual;
 
   projectList = [];
   assignmentList = [];
   rAssignmentList = [];
   cardsData = [];
+  // cardId;
 
 
 
-  constructor(private assignmentService: AssignmentService) { }
+  constructor(private assignmentService: AssignmentService, private router: Router, private availabilityService: AvailabilityService) { }
 
   public addCard = new FormGroup({
     assignmentId: new FormControl(null, Validators.compose([
@@ -37,6 +42,13 @@ export class AvaliableFormComponent implements OnInit {
     ])),
   });
 
+  public editCard = new FormGroup({
+    cardActualTime: new FormControl(null, Validators.compose([
+      Validators.required,
+      Validators.pattern('^[0-9].*$')
+    ])),
+  });
+
   ngOnInit(): void {
     this.getAllAssignment();
     console.log('************', this.modalValue);
@@ -45,7 +57,7 @@ export class AvaliableFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const dateFormat = new Date('2020-10-30T03:48:49.759Z').toLocaleString('en-GB').substring(0, 10).split('/').join('-');
+    // const dateFormat = new Date('2020-10-30T03:48:49.759Z').toLocaleString('en-GB').substring(0, 10).split('/').join('-');
     this.card = {
       userId: this.modalValue[1].userId,
       cardDate: this.modalValue[0].cards.cardDate,
@@ -59,9 +71,13 @@ export class AvaliableFormComponent implements OnInit {
     this.assignmentService.addCard(this.card)
       .subscribe((r) => {
         console.log(r);
+        this.router.navigateByUrl('');
         this.submitCompleted.emit();
       });
+
   }
+
+
 
   getAllProject(): void {
     try {
@@ -96,6 +112,27 @@ export class AvaliableFormComponent implements OnInit {
 
   onCancel(): void {
     this.assignmentcardChange.emit('cancel');
+  }
+
+
+  keyDownFunction(event) {
+    if (event.keyCode === 13) {
+      // debugger;
+      alert('you just pressed the enter key');
+      const cardId = this.modalValue[0].cards.card[0].cardId;
+      // rest of your code
+      this.actual = {
+        actualTime: parseFloat(this.editCard.get('cardActualTime').value),
+        // tslint:disable-next-line: radix
+      };
+      console.log('actual :', this.actual);
+      console.log('cardId :', cardId);
+
+      this.availabilityService.updateCard(cardId, this.actual)
+        .subscribe((r) => {
+          console.log(r);
+        });
+    }
   }
 
 }

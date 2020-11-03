@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -6,7 +7,7 @@ import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar } from '@ng-bootstra
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.css']
 })
-export class DatepickerComponent implements OnInit {
+export class DatepickerComponent implements OnInit , OnChanges{
   modalReference: NgbModalRef;
   monthlist = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE',
     'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
@@ -17,13 +18,28 @@ export class DatepickerComponent implements OnInit {
   @Output() weekChange = new EventEmitter();
   @Output() dateChange = new EventEmitter();
 
+  @Input() datep: any;
+
   constructor(private calendar: NgbCalendar, config: NgbModalConfig, private modalService: NgbModal) {
     this.changeMonth();
     this.changeday();
     this.weekdayfn1();
+
   }
 
   ngOnInit(): void {
+    console.log('datep',this.datep);
+  }
+
+  ngOnChanges(changes) {
+    // changes.prop contains the old and the new value...
+    console.log(changes)
+    if (this.datep){
+    this.month = this.monthlist[this.datep.getMonth()];
+    console.log(this.datep);
+    console.log(this.month);
+    console.log(this.datep.getMonth());
+    }
 
   }
   public changeMonth() {
