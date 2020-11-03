@@ -1,25 +1,26 @@
 package com.allianz.siesta.card.response;
 
+import java.math.BigInteger;
 import java.util.Date;
 
 public class CardUserResponse {
-    private Long cardId;
+    private BigInteger cardId;
     private String cardName;
     private Double actualTime;
     private Date createDate;
 
-    public CardUserResponse(Long cardId, String cardName, Double actualTime, Date createDate) {
+    public CardUserResponse(BigInteger cardId, String cardName, Double actualTime, Date createDate) {
         this.cardId = cardId;
         this.cardName = cardName;
         this.actualTime = actualTime;
         this.createDate = createDate;
     }
 
-    public Long getCardId() {
+    public BigInteger getCardId() {
         return cardId;
     }
 
-    public void setCardId(Long cardId) {
+    public void setCardId(BigInteger cardId) {
         this.cardId = cardId;
     }
 

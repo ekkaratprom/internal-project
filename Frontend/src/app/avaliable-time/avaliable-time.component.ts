@@ -165,5 +165,4 @@ export class AvaliableTimeComponent implements OnInit {
   close(): void {
     this.modalReference.close();
   }
-
 }

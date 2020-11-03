@@ -1,5 +1,7 @@
 package com.allianz.siesta.card.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Entity;
 import java.util.Date;
 

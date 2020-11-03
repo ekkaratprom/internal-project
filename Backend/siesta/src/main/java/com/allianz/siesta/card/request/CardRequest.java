@@ -1,6 +1,7 @@
-package com.allianz.siesta.card;
+package com.allianz.siesta.card.request;
 
 import com.allianz.siesta.assignment.Assignment;
+import com.allianz.siesta.card.Card;
 import com.allianz.siesta.user.User;
 
 import java.util.Date;

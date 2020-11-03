@@ -1,11 +1,10 @@
 package com.allianz.siesta.card;
 
-import com.allianz.siesta.assignment.Assignment;
-import com.allianz.siesta.card.response.CardsResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface CardRepository extends JpaRepository <Card, Long> {
@@ -25,9 +24,10 @@ public interface CardRepository extends JpaRepository <Card, Long> {
             "GROUP BY DATE(card_date) ", nativeQuery = true)
     List<Object[]> getTotalActualTimeGroupByCardDate(@Param("id") Long id);
 
-    @Query(value = "SELECT * FROM CARD " +
+    @Query(value = "SELECT id, card_name, actual_time, create_date FROM CARD " +
             "WHERE deleted_status IS FALSE " +
-            "AND user_id = :id ", nativeQuery = true)
-    List<Card> getCardByUserId(@Param("id") Long id);
+            "AND user_id = :id " +
+            "AND card_date = :cardDate", nativeQuery = true)
+    List<Object[]> getCardByUserId(@Param("id") Long id, @Param("cardDate") Date cardDate);
 
 }

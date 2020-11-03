@@ -1,15 +1,15 @@
 package com.allianz.siesta.card.response;
-
-import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
 
-public class CardsResponse {
+public class GroupByCardsResponse {
     private Double totalActualTime;
+
     private Date cardDate;
+
     private List card;
 
-    public CardsResponse(Double totalActualTime, Date cardDate) {
+    public GroupByCardsResponse(Double totalActualTime, Date cardDate) {
         this.totalActualTime = totalActualTime;
         this.cardDate = cardDate;
     }

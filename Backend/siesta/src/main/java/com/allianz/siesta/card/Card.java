@@ -2,6 +2,7 @@ package com.allianz.siesta.card;
 
 import com.allianz.siesta.assignment.Assignment;
 import com.allianz.siesta.user.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
