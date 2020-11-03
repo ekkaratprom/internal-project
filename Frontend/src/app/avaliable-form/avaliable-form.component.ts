@@ -115,12 +115,15 @@ export class AvaliableFormComponent implements OnInit {
   }
 
 
-  keyDownFunction(event) {
+  keyDownFunction(event, card: string) {
     if (event.keyCode === 13) {
-      // debugger;
+
+      // console.log(card);     
       alert('you just pressed the enter key');
-      const cardId = this.modalValue[0].cards.card[0].cardId;
+      // const cardId = this.modalValue[0].cards.card[0].cardId;
       // rest of your code
+      const cardId = card;
+      debugger;
       this.actual = {
         actualTime: parseFloat(this.editCard.get('cardActualTime').value),
         // tslint:disable-next-line: radix
