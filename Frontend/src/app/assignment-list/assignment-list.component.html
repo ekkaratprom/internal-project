@@ -64,12 +64,11 @@
                 <!-- Actual Time: -->
                 {{ r.actualTime }} Hrs
               </p>
+              <p (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapse">
+                <i class="material-icons md-18 cursor">ic_expand_more</i>
+              </p>
             </div>
 
-            <!-- <button (click)="toggleState = !toggleState" mat-button>{{ toggleState ? 'ic_chevron_right_48px' : 'ic_chevron_left_48px' }}</button> -->
-            <p (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapse">
-              <i class="material-icons md-18 cursor">ic_expand_more</i>
-            </p>
           </div>
           <div id="collapse" [ngbCollapse]="isCollapsed">
             <div class="card childCard" *ngFor="let co of r['cardObj']">

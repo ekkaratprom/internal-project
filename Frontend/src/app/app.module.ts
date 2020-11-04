@@ -1,3 +1,4 @@
+import { LongNamePipe } from './avaliable-time/longname.pipe';
 import { TitleCompletedStatusPipe } from './assignment-list/titlecompletestatus.pipe';
 import { ColorCompletedStatusPipe } from './assignment-list/completedstatus.pipe';
 import { AvaliableFormComponent } from './avaliable-form/avaliable-form.component';
@@ -38,6 +39,7 @@ import { AssignmentFormComponent } from './assignment-form/assignment-form.compo
     DatepickerComponent,
     ColorCompletedStatusPipe,
     NavbarComponent,
+    LongNamePipe,
     SkillPipe,
     AvaliableTimeComponent,
     CompleteStatusPipe,
