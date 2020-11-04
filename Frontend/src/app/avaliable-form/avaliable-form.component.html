@@ -49,8 +49,8 @@
                     </div>
                     <span class="close" (click)="updateDeleteStatus(i.cardId)" title="Delete Card">&times;</span>
                     <form [formGroup]="editCard" (keydown)="keyDownFunction($event,i.cardId)">
-                        <input type="number" class="form-control" id="input_actual_time" placeholder="{{i.actualTime}}"
-                            formControlName="cardActualTime" />
+                        <input type="number" class="form-control" id="input_card_actual_time" placeholder="{{i.actualTime}}" value="{{i.actualTime}}"
+                            formControlName="cardActualTime"/>
                     </form>
 
 

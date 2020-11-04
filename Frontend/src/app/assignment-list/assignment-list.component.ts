@@ -4,6 +4,7 @@ import { Assignment, AssignmentResponse, CardList, CardObj } from './shared/assi
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 export interface CardData {
   cardName: string;
@@ -48,7 +49,7 @@ export class AssignmentListComponent implements OnInit {
   public isCollapsed = true;
 
   constructor(private qv: QueueviewserviceService , private assignmentService: AssignmentService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,private router: Router) { }
 
   ngOnInit(): void {
     // this.getAllAssignmentCards();
@@ -61,6 +62,7 @@ export class AssignmentListComponent implements OnInit {
 
   close(): void {
     this.modalReference.close();
+    this.router.navigateByUrl('');
   }
 
   updateDeleteStatus(id: string): void {
@@ -74,6 +76,7 @@ export class AssignmentListComponent implements OnInit {
         this.assignmentService.updateDeleteStatusAssignment(assignmentId, this.status)
         .subscribe((r) => {
           console.log(r);
+
         });
         console.log('id', id);
         console.log(' delete status', this.status);
@@ -95,8 +98,8 @@ export class AssignmentListComponent implements OnInit {
         .subscribe((r) => {
           console.log(r);
         });
-    console.log('id=', id);
-    console.log('status=' , this.status);
+    // console.log('id=', id);
+    // console.log('status=' , this.status);
 
 
   }

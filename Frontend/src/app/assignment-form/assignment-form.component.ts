@@ -2,6 +2,7 @@ import { AssignmentService } from './../assignment-list/shared/assignment.servic
 import { Assignment } from './../assignment-list/shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-assignment-form',
@@ -13,7 +14,7 @@ export class AssignmentFormComponent implements OnInit {
   @Output() submitCompleted = new EventEmitter();
   assignment: Assignment;
   projectList = [];
-  constructor(private assignmentService: AssignmentService) { }
+  constructor(private assignmentService: AssignmentService,private router: Router) { }
 
 
   public addAssignment = new FormGroup({

@@ -51,8 +51,8 @@ export class AvaliableFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllAssignment();
-    console.log('************', this.modalValue);
-    console.log('************', this.modalValue[0].cards);
+    // console.log('************', this.modalValue);
+    // console.log('************', this.modalValue[0].cards);
     this.cardsData = [this.modalValue[0].cards];
   }
 
@@ -71,7 +71,7 @@ export class AvaliableFormComponent implements OnInit {
     this.assignmentService.addCard(this.card)
       .subscribe((r) => {
         console.log(r);
-        this.router.navigateByUrl('');
+        // this.router.navigateByUrl('/available-form');
         this.submitCompleted.emit();
       });
 
@@ -132,6 +132,8 @@ export class AvaliableFormComponent implements OnInit {
       this.availabilityService.updateCard(cardId, this.actual)
         .subscribe((r) => {
           console.log(r);
+          //this.router.navigateByUrl('');
+          console.log('***actual time:', this.actual);
         });
     }
   }
