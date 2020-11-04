@@ -28,8 +28,8 @@ public class User {
     @Column(nullable = false, name = "email")
     private String email;
 
-    @Column(nullable = true, name = "update_date")
-    private Date updateDate;
+//    @Column(nullable = true, name = "update_date")
+//    private Date updateDate;
 
 	@ManyToOne
 	@JoinColumn(name = "position_id", nullable = true)
@@ -79,13 +79,13 @@ public class User {
         this.email = email;
     }
 
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
+//    public Date getUpdateDate() {
+//        return updateDate;
+//    }
+//
+//    public void setUpdateDate(Date updateDate) {
+//        this.updateDate = updateDate;
+//    }
 
     public Position getPosition() {
         return position;
