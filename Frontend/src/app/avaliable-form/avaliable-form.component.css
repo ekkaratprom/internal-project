@@ -6,3 +6,9 @@
   font-size: 15px;
   transform: translate(0%, -50%);
 }
+
+.btn { 
+  border: 1px solid #ced4da;  
+  width: 80%;
+  margin-left: 6%;
+}
