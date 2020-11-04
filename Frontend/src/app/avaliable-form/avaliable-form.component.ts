@@ -25,6 +25,7 @@ export class AvaliableFormComponent implements OnInit {
   assignmentList = [];
   rAssignmentList = [];
   cardsData = [];
+  status;
   // cardId;
 
 
@@ -123,16 +124,15 @@ export class AvaliableFormComponent implements OnInit {
 
   keyDownFunction(event, card: string) {
     if (event.keyCode === 13) {
-      debugger;
+      // debugger;
       // console.log(card);
-      alert('you just pressed the enter key');
+      alert('Edit Success');
       // const cardId = this.modalValue[0].cards.card[0].cardId;
       // rest of your code
       const cardId = card;
 
       this.actual = {
         actualTime: parseFloat(this.editCard.get('cardActualTime').value),
-        // tslint:disable-next-line: radix
       };
       console.log('actual :', this.actual);
       console.log('cardId :', cardId);
@@ -142,6 +142,29 @@ export class AvaliableFormComponent implements OnInit {
           console.log(r);
         });
     }
+  }
+
+  updateDeleteStatus(id: string): void {
+    const deleteStatus = true;
+    const cardId = id;
+    // debugger;
+    this.status = {
+        deletedStatus: deleteStatus,
+      };
+    try {
+        this.availabilityService.updateDeleteStatusCard(cardId, this.status)
+        .subscribe((r) => {
+          console.log(r);
+        });
+        console.log('id', id);
+        console.log(' delete status', this.status);
+        alert('Delete success');
+
+      } catch (error) {
+        alert('Delete fail');
+      }
+
+
   }
 
 }

@@ -20,8 +20,6 @@
     + assignment
   </button>
 
-  <button (click)="test2()">dadadadada</button>
-
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
       <div class="card" *ngFor="
@@ -31,10 +29,10 @@
         ">
         <div class="card-body">
           <p class="card-text text" style="font-weight: bold; ">
-            <i class="material-icons md-18" title="{{r.completedStatus | titlecompletedStatusPipe}}" (click)="toggle()"
+            <i class="material-icons md-18" title="{{r.completedStatus | titlecompletedStatusPipe}}" (click)="toggle(r.assignmentId,r.completedStatus)"
               [ngStyle]="{ color:  r.completedStatus  | colorcompletedStatusPipe :  r.completedStatus   }">ic_check_circle</i>
             {{ r.assignmentName }}
-            <span class="close">&times;</span>
+            <span class="close" (click)="updateDeleteStatus(r.assignmentId)">&times;</span>
 
           </p>
 

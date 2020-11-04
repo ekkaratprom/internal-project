@@ -1,5 +1,5 @@
 import { environment } from './../../../environments/environment';
-import { Actual, UserResponse } from './availiability-model';
+import { Actual, DeleteStatus, UserResponse } from './availiability-model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -22,14 +22,19 @@ export class AvailabilityService {
   }
 
   updateCard(id: any, actual: any): Observable<HttpResponse<Actual[]>> {
-    // debugger;
-    // /siesta/api/v1/{id}/updatecard
-    //
     return this.http.patch<Actual[]>(`${environment.apiUrl}v1/${id}/updatecard`, actual, {
-      // return this.http.patch<Actual[]>(`https://jsonplaceholder.typicode.com/posts/1`, actual, {
       observe: 'response',
     });
   }
+
+  updateDeleteStatusCard(id: any, status: any): Observable<HttpResponse<DeleteStatus[]>> {
+    // /siesta/api/v1/{id}/updatedeletestatus
+
+    return this.http.patch<DeleteStatus[]>(`${environment.apiUrl}v1/${id}/updatedeletestatus`, status, {
+      observe: 'response',
+    });
+  }
+
 
 
 }

@@ -1,8 +1,5 @@
 import { QueueviewserviceService } from './../queueviewservice.service';
-import { element } from 'protractor';
 import { AssignmentService } from './shared/assignment.service';
-import { MockCardsService } from './../service/mock-cards.service';
-import { MockAssignmentService } from './../service/mock-assignment.service';
 import { Assignment, AssignmentResponse, CardList, CardObj } from './shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
@@ -15,6 +12,7 @@ export interface CardData {
 }
 
 export interface CardDetail {
+  assignmentId: number;
   assignmentName: string;
   billableTime: number;
   completedStatus: boolean;
@@ -41,14 +39,16 @@ export class AssignmentListComponent implements OnInit {
   result = [];
   cObj = [];
   modalReference: NgbModalRef;
-  kevin =false;
+  kevin = false;
+  completeStatus = false;
+  assigmentId;
+  status;
+  completedStatus ;
 
   public isCollapsed = true;
 
-  constructor(private qv:QueueviewserviceService , private assignmentService: AssignmentService,
-    private mockAssignments: MockAssignmentService,
-    private mockCards: MockCardsService,
-    private modalService: NgbModal) { }
+  constructor(private qv: QueueviewserviceService , private assignmentService: AssignmentService,
+              private modalService: NgbModal) { }
 
   ngOnInit(): void {
     // this.getAllAssignmentCards();
@@ -63,6 +63,44 @@ export class AssignmentListComponent implements OnInit {
     this.modalReference.close();
   }
 
+  updateDeleteStatus(id: string): void {
+    const deleteStatus = true;
+    const assignmentId = id;
+    // debugger;
+    this.status = {
+        deletedStatus: deleteStatus,
+      };
+    try {
+        this.assignmentService.updateDeleteStatusAssignment(assignmentId, this.status)
+        .subscribe((r) => {
+          console.log(r);
+        });
+        console.log('id', id);
+        console.log(' delete status', this.status);
+        alert('Delete success');
+
+      } catch (error) {
+        alert('Delete fail');
+      }
+
+
+  }
+
+
+  updateStatus(id: string, statusChange: boolean): void {
+    this.status = {
+      completedStatus: statusChange,
+      };
+    this.assignmentService.updateCompleteAssignment(id, this.status)
+        .subscribe((r) => {
+          console.log(r);
+        });
+    console.log('id=', id);
+    console.log('status=' , this.status);
+
+
+  }
+
   getAllAssignmentCards(): void {
     try {
       this.assignmentService
@@ -74,25 +112,27 @@ export class AssignmentListComponent implements OnInit {
           ,
           (error) => {
             console.log('Get Assignment error: ', error);
-            this.assignments = this.mockAssignments.getAllAssignments();
           }
         );
     } catch (error) {
       console.error('GET all assignments fail');
     }
   }
-  toggle(): void {
-    if (this.completedStatusCheck === true){
-      this.completedStatusCheck = false;
+  toggle(id: string, status: boolean): void {
+    if (status === true){
+      this.completedStatus = false;
     }
-    if (this.completedStatusCheck === false){
-      this.completedStatusCheck = true;
+    if (status === false){
+      this.completedStatus = true;
+
     }
-    console.log(this.completedStatusCheck);
+    this.updateStatus(id, this.completedStatus);
+    console.log('completedStatus', this.completedStatus);
+    alert('Change completed status success');
   }
 
   test2(){
-    console.log("test2");
+    console.log('test2');
     this.qv.settest(this.kevin);
     this.kevin = !this.kevin;
   }
@@ -119,6 +159,7 @@ export class AssignmentListComponent implements OnInit {
               this.cObj.push(cardObj);
             });
             const cardDetail = {
+              assignmentId: element.assignmentId,
               assignmentName: element.assignmentName,
               billableTime: element.billableTime,
               completedStatus: element.completedStatus,
@@ -128,32 +169,7 @@ export class AssignmentListComponent implements OnInit {
             };
             this.result.push(cardDetail);
           });
-          // console.log('result', this.result);
-        }, (error) => {
-          console.log('Get cards error: ', error);
-          this.cards = this.mockCards.getAllCards();
-          this.cards.forEach(element => {
-            // clear
-            this.cObj = [];
-            element.cardObj.forEach(el => {
-              const cardObj = {
-                cardName: el.cardName,
-                cardActualTime: el.cardActualTime,
-                cardDate: el.cardDate
-              };
-              this.cObj.push(cardObj);
-            });
-            const cardDetail = {
-              assignmentName: element.assignmentName,
-              billableTime: element.billableTime,
-              completedStatus: element.completedStatus,
-              estimateTime: element.estimateTime,
-              totalActualTime: element.totalActualTime,
-              cardObj: this.cObj,
-            };
-            this.result.push(cardDetail);
-          });
-          // console.log('result', this.result);
+          console.log('result', this.result);
         }
         );
     } catch (error) {

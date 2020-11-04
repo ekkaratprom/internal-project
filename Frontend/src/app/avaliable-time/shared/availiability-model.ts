@@ -28,3 +28,9 @@ export type Skill = {
 export type Actual = {
     actualTime: number;
 }
+
+export type DeleteStatus = {
+  deletedStatus: boolean;
+}
+
+

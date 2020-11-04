@@ -12,12 +12,14 @@ export type Project = {
 }
 
 export type AssignmentResponse = {
-    assignmentName: string;
-    projectId: number;
-    estimateTime: number;
-    billableTime: number;
-    completedStatus?: boolean;
-    actualTime: number;
+  id:              number;
+  assignmentName?: string;
+  billableTime?:    number;
+  estimateTime?:    number;
+  actualTime?:      number;
+  completedStatus?: boolean;
+  deletedStatus:   boolean;
+  project?:         Project;
 };
 
 export type CardList = {
@@ -27,6 +29,16 @@ export type CardList = {
     completedStatus: boolean;
     totalActualTime?: number;
     cardObj: CardObj[];
+}
+
+export type CardLists = {
+  assignmentId: number;
+  assignmentName?: string;
+  billableTime?: number;
+  estimateTime?: number;
+  completedStatus: boolean;
+  totalActualTime?: number;
+  cardObj: CardObj[];
 }
 
 export type CardObj = {
@@ -48,3 +60,12 @@ export type CardForm = {
     cardName: string,
     userId: number,
 }
+
+export type DeletedStatusAssignment = {
+  deletedStatus: boolean;
+}
+
+export type CompleteStatus = {
+  completedStatus: boolean;
+}
+

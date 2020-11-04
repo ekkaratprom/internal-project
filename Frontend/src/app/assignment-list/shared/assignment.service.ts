@@ -1,5 +1,5 @@
 import { environment } from './../../../environments/environment';
-import { Assignment, Project, AssignmentResponse, CardList, AssignmentList, CardForm } from './assignment-model';
+import { Assignment, Project, AssignmentResponse, CardList, AssignmentList, CardForm, DeletedStatusAssignment, CompleteStatus, CardLists } from './assignment-model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -34,8 +34,8 @@ export class AssignmentService {
   }
 
   //GET ALL Card
-  getAllCards(): Observable<CardList> {
-    return this.http.get<CardList>(`${environment.apiUrl}` + 'v1/card');
+  getAllCards(): Observable<CardLists> {
+    return this.http.get<CardLists>(`${environment.apiUrl}` + 'v1/card');
   }
 
   // AssignmentList
@@ -51,6 +51,20 @@ export class AssignmentService {
   //PATCH
   editCard(cardForm: any): Observable<HttpResponse<CardForm>> {
     return this.http.post<CardForm>(`${environment.apiUrl}` + 'v1/addcard', cardForm, { observe: 'response' });
+  }
+
+  updateCompleteAssignment(id: any, status: any): Observable<HttpResponse<CompleteStatus[]>> {
+    // /siesta/api/v1/{id}/updateassignment
+    return this.http.patch<CompleteStatus[]>(`${environment.apiUrl}v1/${id}/updateassignment`, status, {
+      observe: 'response',
+    });
+  }
+
+  updateDeleteStatusAssignment(id: any, status: any): Observable<HttpResponse<DeletedStatusAssignment[]>> {
+    // /siesta/api/v1/{id}/deleteassignment
+    return this.http.patch<DeletedStatusAssignment[]>(`${environment.apiUrl}v1/${id}/deleteassignment`, status, {
+      observe: 'response',
+    });
   }
 
 }
