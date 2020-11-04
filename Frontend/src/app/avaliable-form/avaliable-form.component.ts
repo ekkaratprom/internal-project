@@ -7,8 +7,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
-
-
 @Component({
   selector: 'app-avaliable-form',
   templateUrl: './avaliable-form.component.html',
@@ -28,10 +26,8 @@ export class AvaliableFormComponent implements OnInit {
   status;
   // cardId;
 
-
-
-  constructor(private ngbmodal:NgbModal , private assignmentService: AssignmentService,
-   private router: Router, private availabilityService: AvailabilityService) { }
+  constructor(private ngbmodal: NgbModal, private assignmentService: AssignmentService,
+    private router: Router, private availabilityService: AvailabilityService) { }
 
   public addCard = new FormGroup({
     assignmentId: new FormControl(null, Validators.compose([
@@ -81,8 +77,6 @@ export class AvaliableFormComponent implements OnInit {
 
   }
 
-
-
   getAllProject(): void {
     try {
       this.assignmentService.getAllProject().subscribe((res) => {
@@ -117,14 +111,12 @@ export class AvaliableFormComponent implements OnInit {
   onCancel(): void {
     this.assignmentcardChange.emit('cancel');
   }
-  close(){
+  close() {
     this.ngbmodal.dismissAll();
   }
 
-
   keyDownFunction(event, card: string) {
     if (event.keyCode === 13) {
-      // debugger;
       // console.log(card);
       alert('Edit Success');
       // const cardId = this.modalValue[0].cards.card[0].cardId;
@@ -163,7 +155,6 @@ export class AvaliableFormComponent implements OnInit {
       } catch (error) {
         alert('Delete fail');
       }
-
 
   }
 

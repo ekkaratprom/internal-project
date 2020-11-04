@@ -75,7 +75,7 @@ hr {
 .close {
   cursor: pointer;
   position: absolute;
-  top: 10%;
+  top: 8px;
   right: 1%;
   font-size: 15px;
 

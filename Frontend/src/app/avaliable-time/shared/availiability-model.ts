@@ -19,10 +19,7 @@ export type Card = {
     createDate: string;
 }
 
-export type Skill = {
-    skillName: string;
-    iconPath: string;
-}
+
 
 
 export type Actual = {
@@ -34,3 +31,18 @@ export type DeleteStatus = {
 }
 
 
+export type Position = {
+    id: number;
+    positionName: string;
+}
+
+export type Skills = {
+    id: number;
+    skillName: string;
+    iconPath: string;
+}
+
+export type Skill = {
+    skillName: string;
+    iconPath: string;
+}

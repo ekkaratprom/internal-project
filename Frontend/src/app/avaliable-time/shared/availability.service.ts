@@ -1,5 +1,5 @@
 import { environment } from './../../../environments/environment';
-import { Actual, DeleteStatus, UserResponse } from './availiability-model';
+import { Actual, UserResponse, Skill, Skills,DeleteStatus } from './availiability-model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -35,6 +35,13 @@ export class AvailabilityService {
     });
   }
 
+  getAllPosition(): Observable<Position[]> {
+    return this.http.get<Position[]>(`${environment.apiUrl}` + 'v1/getallposition');
+  }
+
+  getAllSkill(): Observable<Skills[]> {
+    return this.http.get<Skills[]>(`${environment.apiUrl}` + 'v1/skill');
+  }
 
 
 }

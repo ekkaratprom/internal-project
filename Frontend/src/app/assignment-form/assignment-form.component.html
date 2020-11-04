@@ -13,8 +13,6 @@
 
             <div class="form-group mx-sm-3 mb-2">
                 <h6>Project name</h6>
-                <!-- <input type="text" class="form-control" id="input_project" placeholder="project name.."
-                  formControlName="projectId" /> -->
 
                 <select class="form-control" id="input_project" formControlName="projectId">
                     <option *ngFor="let c of projectList" value="{{ c.projectId }}">
@@ -22,9 +20,6 @@
                     </option>
                 </select>
 
-                <!-- <div *ngIf="addForm.get('projectId').hasError('pattern')" class="error">
-                  Project name has invalid characters
-                </div> -->
             </div>
 
             <div class="form-group mx-sm-3 mb-2">

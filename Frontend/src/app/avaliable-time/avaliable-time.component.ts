@@ -1,3 +1,4 @@
+import { Position } from './shared/availiability-model';
 import { QueueviewserviceService } from './../queueviewservice.service';
 import { AvailabilityService } from './shared/availability.service';
 import { MockAvaliabilityService } from './../service/mock-avaliability.service';
@@ -25,6 +26,8 @@ export class AvaliableTimeComponent implements OnInit {
   cards;
   avaliableLists = [];
   dateList = [];
+  position = [];
+  skill = [];
   data;
   data2;
   dateSent;
@@ -51,7 +54,7 @@ export class AvaliableTimeComponent implements OnInit {
   }
 
   constructor(private modalService: NgbModal,
-    private qv:QueueviewserviceService,
+    private qv: QueueviewserviceService,
     private availibilityService: AvailabilityService,
     private mockAvailibility: MockAvaliabilityService,
   ) { }
@@ -60,6 +63,8 @@ export class AvaliableTimeComponent implements OnInit {
     this.qv.getTest().subscribe((val) => {
       console.log(val);
     });
+    this.getAllPosition();
+    this.getAllSkill();
   }
   nextweek(): void {
     const p = this.dateList[0];
@@ -156,7 +161,7 @@ export class AvaliableTimeComponent implements OnInit {
   }
 
   open(content, result): void {
-    // debugger;
+
     this.data = result;
     // this.data2 = result2;
     this.modalReference = this.modalService.open(content, { size: 'sm' });
@@ -165,4 +170,26 @@ export class AvaliableTimeComponent implements OnInit {
   close(): void {
     this.modalReference.close();
   }
+
+
+  getAllPosition(): void {
+    try {
+      this.availibilityService.getAllPosition().subscribe((res) => {
+        this.position = res;
+      });
+    } catch (error) {
+      console.error('GET all position fail');
+    }
+  }
+
+  getAllSkill(): void {
+    try {
+      this.availibilityService.getAllSkill().subscribe((res) => {
+        this.skill = res;
+      });
+    } catch (error) {
+      console.error('GET all position fail');
+    }
+  }
+
 }
