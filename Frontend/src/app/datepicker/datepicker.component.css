@@ -11,8 +11,10 @@ button.calendar:active {
 
 .navbar-light {
   justify-content: center;
-  padding: 0 16px;
+  padding: 30px 0;
+  background-color: white;
 }
+
 
 .header {
   font-weight: bolder;

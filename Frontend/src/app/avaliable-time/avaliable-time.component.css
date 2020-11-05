@@ -48,7 +48,6 @@ a {
   width: 30px;
   height: 30px;
   align-self: center;
-
   justify-content: center;
   border: none;
   text-align: center;
@@ -95,6 +94,7 @@ a {
   margin-left: 2%;
 }
 .card {
+  background-color: #FAFAFA;
   margin-bottom: 1%;
   margin-top: 1%;
   margin-right: 0%;

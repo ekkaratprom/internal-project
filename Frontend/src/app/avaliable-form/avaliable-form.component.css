@@ -12,3 +12,19 @@
   width: 80%;
   margin-left: 6%;
 }
+
+#input_card_actual_time{
+  width: 55%;
+  display: inline;
+}
+
+.bottom{
+  right: 0%;
+  margin-left: 5%;;
+  margin-bottom: 2.5%;
+  width: 37%;
+}
+
+.card-list{
+  margin-left: 6%;
+}
