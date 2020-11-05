@@ -1,22 +1,16 @@
-<div >
-<app-navbar> </app-navbar>
+<div>
+  <app-navbar> </app-navbar>
 
-<app-datepicker
-(dateChange)="collectDate($event)"
-[datep]="dateSent"
+  <app-datepicker (dateChange)="collectDate($event)" [datep]="dateSent"></app-datepicker>
 
-></app-datepicker>
-
-<div class="row">
-  <div class="col-lg-3 col-xl-3">
-    <app-assignment-list></app-assignment-list>
+  <div class="row">
+    <div class="col-lg-3 col-xl-3">
+      <app-assignment-list></app-assignment-list>
+      <div class="vl"></div>
+    </div>
+    <div class="col-lg-9 col-xl-9">
+      <app-avaliable-time (dateChange)="collectDate($event)" (dateOnNextBack)="collectDateOnNextBack($event)"
+        [date]="date"></app-avaliable-time>
+    </div>
   </div>
-  <div class="col-lg-9 col-xl-9">
-    <app-avaliable-time
-      (dateChange)="collectDate($event)"
-      (dateOnNextBack)="collectDateOnNextBack($event)"
-      [date]="date"
-    ></app-avaliable-time>
-  </div>
-</div>
 </div>

@@ -29,9 +29,11 @@
         ">
         <div class="card-body">
           <p class="card-text text" style="font-weight: bold; ">
-            <i class="material-icons md-18" title="{{r.completedStatus | titlecompletedStatusPipe}}" (click)="toggle(r.assignmentId,r.completedStatus)"
+            <i class="material-icons md-18 sd" title="{{r.completedStatus | titlecompletedStatusPipe}}"
+              (click)="toggle(r.assignmentId,r.completedStatus)"
               [ngStyle]="{ color:  r.completedStatus  | colorcompletedStatusPipe :  r.completedStatus   }">ic_check_circle</i>
             {{ r.assignmentName }}
+
             <span class="close" (click)="updateDeleteStatus(r.assignmentId)">&times;</span>
 
           </p>

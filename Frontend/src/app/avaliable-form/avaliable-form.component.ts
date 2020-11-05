@@ -138,25 +138,47 @@ export class AvaliableFormComponent implements OnInit {
     }
   }
 
+  updateFunction(card: string) {
+    // console.log(card);
+    alert('Edit Success');
+    // const cardId = this.modalValue[0].cards.card[0].cardId;
+    // rest of your code
+    const cardId = card;
+
+    this.actual = {
+      actualTime: parseFloat(this.editCard.get('cardActualTime').value),
+    };
+    console.log('actual :', this.actual);
+    console.log('cardId :', cardId);
+
+    this.availabilityService.updateCard(cardId, this.actual)
+      .subscribe((r) => {
+        console.log(r);
+        //this.router.navigateByUrl('');
+        console.log('***actual time:', this.actual);
+      });
+  }
+
+
   updateDeleteStatus(id: string): void {
     const deleteStatus = true;
     const cardId = id;
     // debugger;
     this.status = {
-        deletedStatus: deleteStatus,
-      };
+      deletedStatus: deleteStatus,
+    };
     try {
-        this.availabilityService.updateDeleteStatusCard(cardId, this.status)
+      this.availabilityService.updateDeleteStatusCard(cardId, this.status)
         .subscribe((r) => {
           console.log(r);
         });
-        console.log('id', id);
-        console.log(' delete status', this.status);
-        alert('Delete success');
+      console.log('id', id);
+      console.log(' delete status', this.status);
+      alert('Delete success');
 
-      } catch (error) {
-        alert('Delete fail');
-      }
+    } catch (error) {
+      alert('Delete fail');
+    }
 
   }
 

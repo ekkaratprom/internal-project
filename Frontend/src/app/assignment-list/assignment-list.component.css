@@ -26,17 +26,22 @@ hr {
   display: contents;
   cursor: context-menu;
 }
-.material-icons.md-18.cursor {
+.material-icons.md-18.sd {
   font-size: 15px;
   justify-content: center;
   cursor: pointer;
+  color: #000;
+}
+.material-icons.md-18.sd:hover {
+  color: #000;
 }
 
 .card-body {
   padding: 0.5rem;
 }
 .card {
-  margin-bottom: 1.3rem;
+  margin-bottom: 1.6%;
+  background-color: #FAFAFA;
 }
 .assignmentsearch {
   display: flex;
