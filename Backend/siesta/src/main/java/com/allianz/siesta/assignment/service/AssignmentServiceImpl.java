@@ -44,7 +44,7 @@ public class AssignmentServiceImpl implements AssignmentService {
     @Override
     public Iterable<AssignmentListResponse> getAllAssignmentList() {
         List<AssignmentListResponse> assignmentListResponseArrayList = new ArrayList<>();
-        Iterable<Assignment> assignments = assignmentRepository.findAll();
+        Iterable<Assignment> assignments = assignmentRepository.findByDeletedStatus(false);
         for (Assignment assignment : assignments) {
             AssignmentListResponse assignmentListResponse = new AssignmentListResponse(
                     assignment.getId(),

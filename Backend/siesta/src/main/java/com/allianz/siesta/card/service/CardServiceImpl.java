@@ -78,39 +78,6 @@ public class CardServiceImpl implements CardService{
     }
 
 
-//    @Override
-//    public Iterable<AssignmentRes> getAllCardsWithQuery() {
-//        List<AssignmentRes> assignmentResList = new ArrayList<>();
-//        Iterable<Assignment> assignments = assignmentRepository.findByDeletedStatus(false);
-//        for (Assignment assignment : assignments) {
-//            AssignmentRes assignmentRes = new AssignmentRes(
-//                    assignment.getAssignmentName(),
-//                    assignment.getBillableTime(),
-//                    assignment.getEstimateTime(),
-//                    assignment.getCompletedStatus()
-//            );
-//
-//            assignmentRes.setCardObj(new ArrayList());
-//            Double amtActualTime = 0d;
-//            for (Card card : assignment.getCards()) {
-//                // skip deleted cards
-//                if (card.getDeletedStatus() == false) {
-//                    CardResponse cardResponse = new CardResponse(
-//                            card.getCardName(),
-//                            card.getActualTime(),
-//                            card.getCardDate()
-//                    );
-//                    assignmentRes.getCardObj().add(cardResponse);
-//                    amtActualTime += card.getActualTime();
-//                }
-//            }
-//
-//            assignmentRes.setActualTime(amtActualTime);
-//            assignmentResList.add(assignmentRes);
-//        }
-//        return assignmentResList;
-//    }
-
     @Override
     public Card addCard(CardRequest cardRequest) {
         Card card = cardRequest.cardRequest();
@@ -122,19 +89,6 @@ public class CardServiceImpl implements CardService{
         return cardRepository.save(card);
     }
 
-//    @Override
-//    public Iterable<CardListResponse> findCardListByAssignmentId(Long assignmentId) {
-//        List<CardListResponse> cardListResponseList = new ArrayList<>();
-//        Iterable<Card> cards =  cardRepository.findCardListByAssignmentId(assignmentId);
-//        for (Card card : cards) {
-//            CardListResponse cardListResponse = new CardListResponse(
-//                    card.getId(),
-//                    card.getCardName()
-//            );
-//            cardListResponseList.add(cardListResponse);
-//        }
-//        return cardListResponseList;
-//    }
 
     @Override
     public Iterable<UserResponse> getAllAvailableTime() {
