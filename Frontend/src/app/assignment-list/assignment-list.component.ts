@@ -46,6 +46,7 @@ export class AssignmentListComponent implements OnInit {
   status;
   completedStatus ;
 
+  collapesdId ;
   public isCollapsed = true;
 
   constructor(private qv: QueueviewserviceService , private assignmentService: AssignmentService,
@@ -139,6 +140,11 @@ export class AssignmentListComponent implements OnInit {
     this.qv.settest(this.kevin);
     this.kevin = !this.kevin;
   }
+
+  collapsed(id : string): void{
+    this.collapesdId = id;
+  }
+
 
   getAllCards(): void {
     try {

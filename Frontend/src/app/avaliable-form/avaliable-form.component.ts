@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 })
 export class AvaliableFormComponent implements OnInit {
   @Input() modalValue: any;
+  @Input() cardNumber: number;
+  @Output() itemCardChange = new EventEmitter<number>();
   @Output() assignmentcardChange = new EventEmitter();
   @Output() submitCompleted = new EventEmitter();
   card: CardForm;
@@ -24,7 +26,7 @@ export class AvaliableFormComponent implements OnInit {
   rAssignmentList = [];
   cardsData = [];
   status;
-  // cardId;
+  // cardId;""
 
   constructor(private ngbmodal: NgbModal, private assignmentService: AssignmentService,
     private router: Router, private availabilityService: AvailabilityService) { }
@@ -134,6 +136,7 @@ export class AvaliableFormComponent implements OnInit {
           console.log(r);
           //this.router.navigateByUrl('');
           console.log('***actual time:', this.actual);
+          this.itemCardChange.emit(this.cardNumber);
         });
     }
   }
@@ -151,13 +154,17 @@ export class AvaliableFormComponent implements OnInit {
           console.log(r);
         });
         console.log('id', id);
-        console.log(' delete status', this.status);
+        console.log(' Delete status', this.status);
         alert('Delete success');
 
       } catch (error) {
         alert('Delete fail');
       }
 
+  }
+
+  onKey(event: any) {
+    this.cardNumber = event.target.value;
   }
 
 }

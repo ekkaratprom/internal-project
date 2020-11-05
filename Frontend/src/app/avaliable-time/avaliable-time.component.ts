@@ -31,6 +31,8 @@ export class AvaliableTimeComponent implements OnInit {
   data;
   data2;
   dateSent;
+  indexSelected: number;
+  itemSelected: number;
 
   // @Input() avaliable: Observable<any>;
 
@@ -171,6 +173,14 @@ export class AvaliableTimeComponent implements OnInit {
     this.modalReference.close();
   }
 
+  selectItem(index, item) : void{
+    this.indexSelected = index;
+    this.itemSelected = item;
+  }
+
+  updateItem(newItem: any) {
+    this.avaliableLists[this.indexSelected] = newItem;
+  }
 
   getAllPosition(): void {
     try {
