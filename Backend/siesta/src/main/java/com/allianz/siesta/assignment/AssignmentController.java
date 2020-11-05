@@ -18,10 +18,10 @@ public class AssignmentController {
     @Autowired
     private AssignmentService assignmentService;
 
-    @ResponseStatus(HttpStatus.CREATED)
+
     @PostMapping(value = "/v1/addAssignment")
-    public Assignment addAssignment(@RequestBody AssignmentRequest assignmentRequest) {
-        return assignmentService.addAssignment(assignmentRequest);
+    public ResponseEntity<Assignment> addAssignment(@RequestBody AssignmentRequest assignmentRequest) {
+        return ResponseEntity.accepted().body(assignmentService.addAssignment(assignmentRequest));
     }
 
 

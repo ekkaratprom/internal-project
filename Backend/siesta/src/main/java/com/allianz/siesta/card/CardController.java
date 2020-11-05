@@ -26,8 +26,8 @@ public class CardController {
 
 
     @PostMapping(path = "/v1/addcard")
-    public Card addCard(@RequestBody CardRequest cardRequest) {
-        return cardService.addCard(cardRequest);
+    public ResponseEntity<Card> addCard(@RequestBody CardRequest cardRequest) {
+        return ResponseEntity.accepted().body(cardService.addCard(cardRequest));
     }
 
     @GetMapping(path = "/v1/availabletime")
