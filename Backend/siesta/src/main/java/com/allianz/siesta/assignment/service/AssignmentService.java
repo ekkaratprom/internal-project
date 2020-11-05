@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public interface AssignmentService {
 
-    Assignment addAssignment(AssignmentRequest assignmentRequest);
+    Assignment addAssignment(AssignmentRequest assignmentRequest) throws ProjectNotFoundException;
 
     Iterable<Assignment> getAllAssignments();
 

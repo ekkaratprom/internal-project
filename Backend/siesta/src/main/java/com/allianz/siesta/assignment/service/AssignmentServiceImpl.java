@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 
 @Service
@@ -27,7 +27,9 @@ public class AssignmentServiceImpl implements AssignmentService {
     private ProjectRepository projectRepository;
 
     @Override
-    public Assignment addAssignment(AssignmentRequest assignmentRequest) {
+    public Assignment addAssignment(AssignmentRequest assignmentRequest) throws ProjectNotFoundException {
+        verifyProjectId(assignmentRequest.getProjectId());
+
         Assignment assignment = assignmentRequest.assignmentRequest();
         assignment.setDeletedStatus(false);
         return assignmentRepository.save(assignment);

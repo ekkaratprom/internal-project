@@ -20,7 +20,7 @@ public class AssignmentController {
 
 
     @PostMapping(value = "/v1/addAssignment")
-    public ResponseEntity<Assignment> addAssignment(@RequestBody AssignmentRequest assignmentRequest) {
+    public ResponseEntity<Assignment> addAssignment(@RequestBody AssignmentRequest assignmentRequest) throws ProjectNotFoundException {
         return ResponseEntity.accepted().body(assignmentService.addAssignment(assignmentRequest));
     }
 
