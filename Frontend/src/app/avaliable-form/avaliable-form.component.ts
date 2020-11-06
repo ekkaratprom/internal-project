@@ -31,7 +31,7 @@ export class AvaliableFormComponent implements OnInit {
 
   public addCard = new FormGroup({
     assignmentId: new FormControl(null, Validators.compose([
-      // Validators.required,
+      Validators.required,
     ])),
     actualTime: new FormControl(null, Validators.compose([
       Validators.required,

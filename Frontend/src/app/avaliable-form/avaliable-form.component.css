@@ -18,6 +18,10 @@
   display: inline;
 }
 
+.assignment{
+  margin-left: 7%;
+}
+
 .bottom{
   right: 0%;
   margin-left: 5%;;
@@ -27,4 +31,9 @@
 
 .card-list{
   margin-left: 6%;
+}
+
+#input_assignment_id{
+  width: 200px;
+  padding-left: 0%;
 }

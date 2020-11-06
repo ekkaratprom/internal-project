@@ -1,16 +1,17 @@
 <div class="card">
     <form class="form-inline" [formGroup]="addCard" (ngSubmit)="onSubmit()">
         <div class="card-body">
+            <h6 class="assignment">Assignment</h6>
             <div class="form-group mx-sm-3 mb-2">
                 <div>
-                    <h6>Assignment</h6>
+
                     <span class="close head" title="Exit" (click)="close()">&times;</span>
                 </div>
                 <div>
                     <select class="form-control" id="input_assignment_id" formControlName="assignmentId"
                         placeholder="choose your assignment">
-                        <option></option>
-                        <option *ngFor="let c of rAssignmentList" value="{{ c.assignmentId }}">
+                        <option [ngValue]="null">choose your assignment</option>
+                        <option *ngFor=" let c of rAssignmentList" value="{{ c.assignmentId }}">
                             {{ c.assignmentName }}
                         </option>
                     </select>
@@ -33,7 +34,8 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" (onClick)="onSubmit()">Submit</button>
+            <button [disabled]="addCard.status === 'INVALID'" type="submit" class="btn btn-primary"
+                (onClick)="onSubmit()">Submit</button>
 
         </div>
     </form>
