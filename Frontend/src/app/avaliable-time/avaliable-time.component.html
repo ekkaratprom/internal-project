@@ -40,12 +40,12 @@
           | skillFilter: skillsetCheck
       ">
       <div class="col-lg-2 col-xl-2" style="padding: 0%; margin: 0">
-        <div class="card" style="width: 9rem">
+        <div class="card" style="width: 11rem">
           <div class="card-body">
             <div class="card-title">
               <i style="font-size: 12px" class="fas">&#xf2bd;</i>
               <span title={{r.fullName}}>
-                {{ r.fullName | longnameFilter: 13 }}
+                {{ r.fullName | longnameFilter: 20 }}
               </span>
             </div>
             <h6 class="position">{{ r.position }}</h6>
@@ -62,7 +62,8 @@
           (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r]) ; selectItem(item.totalActualTime,item)">
 
           <ng-template #content let-modal>
-            <app-avaliable-form [modalValue]="data" [cardNumber]="itemSelected" (itemCardChange)="updateItem($event)" (submitCompleted)="close()">
+            <app-avaliable-form [modalValue]="data" [cardNumber]="itemSelected" (itemCardChange)="updateItem($event)"
+              (submitCompleted)="close()">
             </app-avaliable-form>
           </ng-template>
 

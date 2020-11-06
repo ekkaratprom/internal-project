@@ -37,3 +37,7 @@
   width: 200px;
   padding-left: 0%;
 }
+
+.form-control{
+  height: 2vw;
+}
