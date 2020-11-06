@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class AssignmentFormComponent implements OnInit {
   @Output() assignmentcardChange = new EventEmitter();
   @Output() submitCompleted = new EventEmitter();
+  newAssignment;
   assignment: Assignment;
   projectList = [];
   constructor(private assignmentService: AssignmentService,private router: Router) { }
@@ -53,6 +54,8 @@ export class AssignmentFormComponent implements OnInit {
       .subscribe((r) => {
         console.log(r);
         this.submitCompleted.emit();
+        this.newAssignment = this.assignment;
+        console.log('newAssignment',this.newAssignment);
       });
   }
 

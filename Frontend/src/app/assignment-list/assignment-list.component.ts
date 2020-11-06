@@ -2,7 +2,7 @@ import { QueueviewserviceService } from './../queueviewservice.service';
 import { AssignmentService } from './shared/assignment.service';
 import { Assignment, AssignmentResponse, CardList, CardObj } from './shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 
@@ -28,7 +28,7 @@ export interface CardDetail {
   styleUrls: ['./assignment-list.component.css']
 })
 export class AssignmentListComponent implements OnInit {
-
+  @Input() assignmentForm: any;
   assignmentsearchText = '';
   completedStatusCheck = undefined;
   assignments: AssignmentResponse[] = [];
@@ -109,6 +109,10 @@ export class AssignmentListComponent implements OnInit {
     // console.log('status=' , this.status);
 
 
+
+  }
+
+  updateNewAssignment(assignment): void {
 
   }
 
