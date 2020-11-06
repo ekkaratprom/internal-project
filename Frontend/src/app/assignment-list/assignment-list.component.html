@@ -6,7 +6,7 @@
         placeholder="All Assignment" />
     </div>
 
-    <select class="form-control" [(ngModel)]="completedStatusCheck">
+    <select class="form-control complete" [(ngModel)]="completedStatusCheck">
       <option [ngValue]="undefined">All</option>
       <option [ngValue]="true">Done</option>
       <option [ngValue]="false">Undone</option>
@@ -26,15 +26,17 @@
           let r of result
             | completedstatusFilter: completedStatusCheck
             | assignmentFilter: assignmentsearchText
+            ; index as i
+
         ">
         <div class="card-body">
           <p class="card-text text" style="font-weight: bold; ">
-            <i class="material-icons md-18 sd" title="{{r.completedStatus | titlecompletedStatusPipe}}"
-              (click)="toggle(r.assignmentId,r.completedStatus)"
-              [ngStyle]="{ color:  r.completedStatus  | colorcompletedStatusPipe :  r.completedStatus   }">ic_check_circle</i>
+            <i class="material-icons md-18 sd" title="{{ r.completedStatus | titlecompletedStatusPipe}}"
+              (click)="toggle(i,r.assignmentId,r.completedStatus)"
+              [ngStyle]="{ color:  r.completedStatus | colorcompletedStatusPipe :  r.completedStatus   }">ic_check_circle</i>
             {{ r.assignmentName }}
 
-            <span class="close" (click)="updateDeleteStatus(r.assignmentId)">&times;</span>
+            <span class="close" (click)="updateDeleteStatus(i,r.assignmentId)">&times;</span>
 
           </p>
 
@@ -64,15 +66,17 @@
                 <!-- Actual Time: -->
                 {{ r.actualTime }} Hrs
               </p>
-              <p (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapse">
+              <p (click)="isCollapsed = !isCollapsed ; collapsed(r.assignmentId)" [attr.aria-expanded]="!isCollapsed" aria-controls="collapse">
                 <i class="material-icons md-18 cursor">ic_expand_more</i>
               </p>
             </div>
 
           </div>
           <div id="collapse" [ngbCollapse]="isCollapsed">
+            <div *ngIf="(r.assignmentId == collapesdId)">
             <div class="card childCard" *ngFor="let co of r['cardObj']">
-              <div class="card-body">
+
+              <div class="card-body" >
                 <div class="d-flex">
                   <p>Card : {{ co.cardName }}</p>
                   <p>Date :{{ co.cardDate | date: "dd/MM/yyyy" }}</p>
@@ -80,6 +84,7 @@
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>

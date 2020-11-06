@@ -57,17 +57,17 @@
         </div>
       </div>
       <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center">
-        <li class="color-box" *ngFor="let index of r['cards']"
-          [ngStyle]="{ backgroundColor: index.totalActualTime | color }"
-          (click)="open(content, [{ 'userId': r.userId, 'cards': index }, r])">
+        <li class="color-box" *ngFor="let item of r['cards']"
+          [ngStyle]="{ backgroundColor: item.totalActualTime | color }"
+          (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r]) ; selectItem(item.totalActualTime,item)">
 
           <ng-template #content let-modal>
-            <app-avaliable-form [modalValue]="data" (submitCompleted)="close()">
+            <app-avaliable-form [modalValue]="data" [cardNumber]="itemSelected" (itemCardChange)="updateItem($event)" (submitCompleted)="close()">
             </app-avaliable-form>
           </ng-template>
 
-          <div class="text-in-box" title="{{ index | json }}">
-            {{ index.totalActualTime }}
+          <div class="text-in-box" title="{{ item | json }}">
+            {{ item.totalActualTime }}
             <!-- {{ index }} -->
           </div>
         </li>
