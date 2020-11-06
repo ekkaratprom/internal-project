@@ -1,3 +1,4 @@
+import { DeleteStatusPipe } from './assignment-list/deletestatus.pipe';
 import { LongNamePipe } from './avaliable-time/longname.pipe';
 import { TitleCompletedStatusPipe } from './assignment-list/titlecompletestatus.pipe';
 import { ColorCompletedStatusPipe } from './assignment-list/completedstatus.pipe';
@@ -34,6 +35,7 @@ import { AssignmentFormComponent } from './assignment-form/assignment-form.compo
     CardFormComponent,
     TitleCompletedStatusPipe,
     FilterPipe,
+    DeleteStatusPipe,
     CardPersonRowComponent,
     QueueViewComponent,
     DatepickerComponent,

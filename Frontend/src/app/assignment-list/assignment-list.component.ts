@@ -28,6 +28,7 @@ export interface CardDetail {
   styleUrls: ['./assignment-list.component.css']
 })
 export class AssignmentListComponent implements OnInit {
+
   assignmentsearchText = '';
   completedStatusCheck = undefined;
   assignments: AssignmentResponse[] = [];
@@ -45,12 +46,15 @@ export class AssignmentListComponent implements OnInit {
   assigmentId;
   status;
   completedStatus ;
+  indexSelected;
+
+
 
   collapesdId ;
   public isCollapsed = true;
 
   constructor(private qv: QueueviewserviceService , private assignmentService: AssignmentService,
-              private modalService: NgbModal,private router: Router) { }
+              private modalService: NgbModal, private router: Router) { }
 
   ngOnInit(): void {
     // this.getAllAssignmentCards();
@@ -66,7 +70,7 @@ export class AssignmentListComponent implements OnInit {
     this.router.navigateByUrl('');
   }
 
-  updateDeleteStatus(id: string): void {
+  updateDeleteStatus(index,id: string): void {
     const deleteStatus = true;
     const assignmentId = id;
     // debugger;
@@ -76,7 +80,9 @@ export class AssignmentListComponent implements OnInit {
     try {
         this.assignmentService.updateDeleteStatusAssignment(assignmentId, this.status)
         .subscribe((r) => {
-          console.log(r);
+          console.log("updateDelete assignment", r);
+          // this.result[index].deletedStatus = deleteStatus;
+          this.getAllCards();
 
         });
         console.log('id', id);
@@ -87,20 +93,21 @@ export class AssignmentListComponent implements OnInit {
         alert('Delete fail');
       }
 
-
   }
 
 
-  updateStatus(id: string, statusChange: boolean): void {
+  updateStatus(index,id: string, statusChange: boolean): void {
     this.status = {
       completedStatus: statusChange,
       };
     this.assignmentService.updateCompleteAssignment(id, this.status)
         .subscribe((r) => {
-          console.log(r);
+          console.log("result assignment",r);
+          this.result[index].completedStatus = statusChange;
         });
     // console.log('id=', id);
     // console.log('status=' , this.status);
+
 
 
   }
@@ -122,17 +129,22 @@ export class AssignmentListComponent implements OnInit {
       console.error('GET all assignments fail');
     }
   }
-  toggle(id: string, status: boolean): void {
+  toggle(index,id: string, status: boolean): void {
+    let value1 ;
+
     if (status === true){
       this.completedStatus = false;
+      value1 = 'undone';
     }
     if (status === false){
       this.completedStatus = true;
 
+      value1 = 'done';
     }
-    this.updateStatus(id, this.completedStatus);
+    this.updateStatus(index,id, this.completedStatus);
     console.log('completedStatus', this.completedStatus);
-    alert('Change completed status success');
+    alert('Change completed status to ' + value1);
+
   }
 
   test2(){
@@ -141,12 +153,13 @@ export class AssignmentListComponent implements OnInit {
     this.kevin = !this.kevin;
   }
 
-  collapsed(id : string): void{
+  collapsed(id: string): void{
     this.collapesdId = id;
   }
 
 
   getAllCards(): void {
+    this.result = [];
     try {
       this.assignmentService
         .getAllCards()
