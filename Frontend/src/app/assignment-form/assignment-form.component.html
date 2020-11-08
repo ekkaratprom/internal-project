@@ -1,9 +1,11 @@
 <div class="card">
     <form class="form-inline" [formGroup]="addAssignment" (ngSubmit)="onSubmit()">
         <div class="card-body">
+          <h6 >Create Assignment :</h6>
+          <div class="card inner">
 
             <div class="form-group mx-sm-3 mb-2">
-                <h6>Assignment name</h6>
+                <p>Assignment name</p>
                 <input type="text" class="form-control" id="input_assignment" placeholder="assignment name.."
                     formControlName="assignmentName" />
                 <div *ngIf="addAssignment.get('assignmentName').hasError('pattern')" class="error">
@@ -12,7 +14,7 @@
             </div>
 
             <div class="form-group mx-sm-3 mb-2">
-                <h6>Project name</h6>
+                <p>Project name</p>
 
                 <select class="form-control" id="input_project" formControlName="projectId">
                     <option *ngFor="let c of projectList" value="{{ c.projectId }}">
@@ -23,7 +25,7 @@
             </div>
 
             <div class="form-group mx-sm-3 mb-2">
-                <h6>Billable Time :</h6>
+                <p>Billable Time :</p>
                 <input type="number" class="form-control" id="input_billable_time" placeholder="0"
                     formControlName="billableTime" />
                 <div *ngIf="addAssignment.get('billableTime').hasError('pattern')" class="error">
@@ -32,7 +34,7 @@
             </div>
 
             <div class="form-group mx-sm-3 mb-2">
-                <h6>Estimate Time :</h6>
+                <p>Estimate Time :</p>
                 <input type="number" class="form-control" id="input_estimate_time" placeholder="0"
                     formControlName="estimateTime" />
                 <div *ngIf="addAssignment.get('estimateTime').hasError('pattern')" class="error">
@@ -48,5 +50,6 @@
                 (onClick)="onSubmit()">Submit</button>
             <!-- <p>{{ card | json }}</p> -->
         </div>
+      </div>
     </form>
 </div>
