@@ -175,11 +175,6 @@ export class AvaliableTimeComponent implements OnInit {
     this.avaliableList();
   }
 
-  selectItem(index,item) : void{
-    this.indexSelected = index;
-    this.itemSelected = item;
-  }
-
   // tslint:disable-next-line: typedef
   updateItem(newItem: any) {
     this.avaliableLists[this.indexSelected] = newItem;

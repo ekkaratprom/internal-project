@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 })
 export class AvaliableFormComponent implements OnInit {
   @Input() modalValue: any;
-  @Input() cardNumber: number;
   @Output() itemCardChange = new EventEmitter<number>();
   @Output() assignmentcardChange = new EventEmitter();
   @Output() submitCompleted = new EventEmitter();
@@ -75,7 +74,6 @@ export class AvaliableFormComponent implements OnInit {
         console.log(r);
         // this.router.navigateByUrl('/available-form');
         this.submitCompleted.emit();
-        this.itemCardChange.emit(this.cardNumber);
       });
 
   }
@@ -194,10 +192,5 @@ export class AvaliableFormComponent implements OnInit {
     }
 
   }
-
-  // tslint:disable-next-line: typedef
-  // onKey(event: any) {
-  //   this.cardNumber = event.target.value;
-  // }
 
 }

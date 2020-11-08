@@ -24,7 +24,7 @@
 
             <div class="form-group mx-sm-3 mb-2">
                 <h6>Billable Time :</h6>
-                <input type="text" class="form-control" id="input_billable_time" placeholder="0"
+                <input type="number" class="form-control" id="input_billable_time" placeholder="0"
                     formControlName="billableTime" />
                 <div *ngIf="addAssignment.get('billableTime').hasError('pattern')" class="error">
                     Billable Time should be positive number.
@@ -33,7 +33,7 @@
 
             <div class="form-group mx-sm-3 mb-2">
                 <h6>Estimate Time :</h6>
-                <input type="text" class="form-control" id="input_estimate_time" placeholder="0"
+                <input type="number" class="form-control" id="input_estimate_time" placeholder="0"
                     formControlName="estimateTime" />
                 <div *ngIf="addAssignment.get('estimateTime').hasError('pattern')" class="error">
                     Estimate Time should be positive number.
