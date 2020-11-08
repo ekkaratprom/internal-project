@@ -7,9 +7,9 @@
   transform: translate(0%, -50%);
 }
 
-.btn { 
-  border: 1px solid #ced4da;  
-  width: 80%;
+.btn {
+  border: 1px solid #ced4da;
+  width: 85%;
   margin-left: 6%;
 }
 
@@ -24,9 +24,13 @@
 
 .bottom{
   right: 0%;
-  margin-left: 5%;;
+  margin-left: 5%;
   margin-bottom: 2.5%;
   width: 37%;
+}
+
+.complete{
+  margin-top: 5%;;
 }
 
 .card-list{
@@ -34,10 +38,16 @@
 }
 
 #input_assignment_id{
-  width: 200px;
+  width: 100%;
   padding-left: 0%;
 }
 
 .form-control{
-  height: 2vw;
+  height: 3vw;
+  margin-left: 2%;
 }
+
+.inner {
+  padding: 0;
+}
+

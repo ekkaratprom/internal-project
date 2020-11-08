@@ -1,41 +1,49 @@
 <div class="card">
     <form class="form-inline" [formGroup]="addCard" (ngSubmit)="onSubmit()">
+      <div>
+
+        <span class="close head" title="Exit" (click)="close() ; updateComplete()">&times;</span>
+    </div>
         <div class="card-body">
-            <h6 class="assignment">Assignment</h6>
-            <div class="form-group mx-sm-3 mb-2">
-                <div>
+          <h6 >Create Card :</h6>
+          <div class="card ">
+            <div class="card-body inner">
+              <p class="assignment">Assignment</p>
+              <div class="form-group mx-sm-3 mb-2">
 
-                    <span class="close head" title="Exit" (click)="close()">&times;</span>
-                </div>
-                <div>
-                    <select class="form-control" id="input_assignment_id" formControlName="assignmentId"
-                        placeholder="choose your assignment">
-                        <option [ngValue]="null">choose your assignment</option>
-                        <option *ngFor=" let c of rAssignmentList" value="{{ c.assignmentId }}">
-                            {{ c.assignmentName }}
-                        </option>
-                    </select>
-                </div>
+                  <div>
+                      <select class="form-control" id="input_assignment_id" formControlName="assignmentId"
+                          placeholder="choose your assignment">
+                          <option [ngValue]="null">choose your assignment</option>
+                          <option *ngFor=" let c of rAssignmentList" value="{{ c.assignmentId }}">
+                              {{ c.assignmentName }}
+                          </option>
+                      </select>
+                  </div>
+              </div>
+
+              <div class="form-group mx-sm-3 mb-2">
+                  <p>Card</p>
+
+                  <input type="text" class="form-control" id="input_card_name" placeholder="type your card..."
+                      formControlName="cardName" />
+                  <div *ngIf="addCard.get('cardName').hasError('pattern')" class="error">
+                      cardName has invalid characters.
+                  </div>
+                  <p>Actual Time</p>
+
+                  <input type="number" class="form-control" id="input_actual_time" placeholder="0"
+                      formControlName="actualTime" />
+                  <div *ngIf="addCard.get('actualTime').hasError('pattern')" class="error">
+                      invalid actual time.
+                  </div>
+              </div>
+
+              <button [disabled]="addCard.status === 'INVALID'" type="submit" class="btn btn-primary"
+                  (onClick)="onSubmit()">Submit</button>
             </div>
+          </div>
 
-            <div class="form-group mx-sm-3 mb-2">
-                <h6>Card</h6>
-
-                <input type="text" class="form-control" id="input_card_name" placeholder="type your card..."
-                    formControlName="cardName" />
-                <div *ngIf="addCard.get('cardName').hasError('pattern')" class="error">
-                    cardName has invalid characters.
-                </div>
-
-                <input type="number" class="form-control" id="input_actual_time" placeholder="0"
-                    formControlName="actualTime" />
-                <div *ngIf="addCard.get('actualTime').hasError('pattern')" class="error">
-                    invalid actual time.
-                </div>
-            </div>
-
-            <button [disabled]="addCard.status === 'INVALID'" type="submit" class="btn btn-primary"
-                (onClick)="onSubmit()">Submit</button>
 
         </div>
     </form>
@@ -54,13 +62,16 @@
                     <span class="close" (click)="updateDeleteStatus(i.cardId)" title="Delete Card">&times;</span>
                     <form [formGroup]="editCard" (keydown)="keyDownFunction($event,i.cardId)">
 
-                        <input type="number" class="form-control" id="input_card_actual_time" [value]="cardNumber"
-                        (keyup)="onKey($event)" formControlName="cardActualTime" />
-                        <button class="btn btn-primary bottom" (click)="updateFunction(i.cardId)">update</button>
+                      <input type="number" class="form-control" id="input_card_actual_time" placeholder="{{i.actualTime}}"
+                       formControlName="cardActualTime" />
+
+                        <button class="btn btn-primary bottom" (click)="updateFunction(i.cardId)">Update</button>
                     </form>
 
 
+
                 </div>
+                <button class="btn btn-primary complete" (click)="updateComplete()">Update Complete</button>
 
             </div>
         </div>

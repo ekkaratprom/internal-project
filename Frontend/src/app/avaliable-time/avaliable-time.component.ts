@@ -50,15 +50,16 @@ export class AvaliableTimeComponent implements OnInit {
   @Output() dateOnNextBack = new EventEmitter();
 
 
+  // tslint:disable-next-line: adjacent-overload-signatures
   get date(): any {
     if (!this._date) { return new Date(); }
     return this._date;
   }
 
   constructor(private modalService: NgbModal,
-    private qv: QueueviewserviceService,
-    private availibilityService: AvailabilityService,
-    private mockAvailibility: MockAvaliabilityService,
+              private qv: QueueviewserviceService,
+              private availibilityService: AvailabilityService,
+              private mockAvailibility: MockAvaliabilityService,
   ) { }
 
   ngOnInit(): void {
@@ -171,13 +172,15 @@ export class AvaliableTimeComponent implements OnInit {
 
   close(): void {
     this.modalReference.close();
+    this.avaliableList();
   }
 
-  selectItem(index, item) : void{
+  selectItem(index,item) : void{
     this.indexSelected = index;
     this.itemSelected = item;
   }
 
+  // tslint:disable-next-line: typedef
   updateItem(newItem: any) {
     this.avaliableLists[this.indexSelected] = newItem;
   }

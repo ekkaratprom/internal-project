@@ -75,6 +75,7 @@ export class AvaliableFormComponent implements OnInit {
         console.log(r);
         // this.router.navigateByUrl('/available-form');
         this.submitCompleted.emit();
+        this.itemCardChange.emit(this.cardNumber);
       });
 
   }
@@ -113,10 +114,13 @@ export class AvaliableFormComponent implements OnInit {
   onCancel(): void {
     this.assignmentcardChange.emit('cancel');
   }
+  // tslint:disable-next-line: typedef
   close() {
     this.ngbmodal.dismissAll();
+    this.submitCompleted.emit();
   }
 
+  // tslint:disable-next-line: typedef
   keyDownFunction(event, card: string) {
     if (event.keyCode === 13) {
       // console.log(card);
@@ -136,11 +140,12 @@ export class AvaliableFormComponent implements OnInit {
           console.log(r);
           // this.router.navigateByUrl('');
           console.log('***actual time:', this.actual);
-          this.itemCardChange.emit(this.cardNumber);
+          // this.itemCardChange.emit(this.cardNumber);
         });
     }
   }
 
+  // tslint:disable-next-line: typedef
   updateFunction(card: string) {
     // console.log(card);
     alert('Edit Success');
@@ -162,6 +167,10 @@ export class AvaliableFormComponent implements OnInit {
       });
   }
 
+  updateComplete() {
+    this.submitCompleted.emit();
+  }
+
 
   updateDeleteStatus(id: string): void {
     const deleteStatus = true;
@@ -178,6 +187,7 @@ export class AvaliableFormComponent implements OnInit {
       console.log('id', id);
       console.log(' Delete status', this.status);
       alert('Delete success');
+      this.submitCompleted.emit();
 
     } catch (error) {
       alert('Delete fail');
@@ -185,8 +195,9 @@ export class AvaliableFormComponent implements OnInit {
 
   }
 
-  onKey(event: any) {
-    this.cardNumber = event.target.value;
-  }
+  // tslint:disable-next-line: typedef
+  // onKey(event: any) {
+  //   this.cardNumber = event.target.value;
+  // }
 
 }
