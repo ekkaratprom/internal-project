@@ -12,10 +12,10 @@ import { Router } from '@angular/router';
 export class AssignmentFormComponent implements OnInit {
   @Output() assignmentcardChange = new EventEmitter();
   @Output() submitCompleted = new EventEmitter();
-  newAssignment;
+  @Output() newAssignment: EventEmitter<any> = new EventEmitter<any>();
   assignment: Assignment;
   projectList = [];
-  constructor(private assignmentService: AssignmentService,private router: Router) { }
+  constructor(private assignmentService: AssignmentService, private router: Router) { }
 
 
   public addAssignment = new FormGroup({
@@ -54,7 +54,7 @@ export class AssignmentFormComponent implements OnInit {
       .subscribe((r) => {
         console.log(r);
         this.submitCompleted.emit();
-        this.newAssignment = this.assignment;
+        // this.newAssignment.emit(this.assignment);
         console.log('newAssignment',this.newAssignment);
       });
   }

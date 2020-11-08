@@ -67,10 +67,10 @@ export class AssignmentListComponent implements OnInit {
 
   close(): void {
     this.modalReference.close();
-    this.router.navigateByUrl('');
+    this.getAllCards();
   }
 
-  updateDeleteStatus(index,id: string): void {
+  updateDeleteStatus(id: string): void {
     const deleteStatus = true;
     const assignmentId = id;
     // debugger;
@@ -112,9 +112,6 @@ export class AssignmentListComponent implements OnInit {
 
   }
 
-  updateNewAssignment(assignment): void {
-
-  }
 
   getAllAssignmentCards(): void {
     try {
