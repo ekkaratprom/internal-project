@@ -2,7 +2,7 @@
     <form class="form-inline" [formGroup]="addCard" (ngSubmit)="onSubmit()">
       <div>
 
-        <span class="close head" title="Exit" (click)="close() ; updateComplete()">&times;</span>
+        <span class="close head" title="Exit" (click)=" updateComplete() ">&times;</span>
     </div>
         <div class="card-body" style="border: none;">
           <h6 >Create Card :</h6>
@@ -32,7 +32,7 @@
                   </div>
                   <p>Actual Time</p>
 
-                  <input type="number" class="form-control" id="input_actual_time" placeholder="0"
+                  <input type="number" max="16" maxlength="2" class="form-control" id="input_actual_time" placeholder="0"
                       formControlName="actualTime" />
                   <div *ngIf="addCard.get('actualTime').hasError('pattern')" class="error">
                       invalid actual time.
@@ -62,16 +62,22 @@
                     <span class="close" (click)="updateDeleteStatus(i.cardId)" title="Delete Card">&times;</span>
                     <form [formGroup]="editCard" (keydown)="keyDownFunction($event,i.cardId)">
 
-                      <input type="number" class="form-control" id="input_card_actual_time" placeholder="{{i.actualTime}}"
+                      <input type="number" class="form-control" id="input_card_actual_time"  max="16" maxlength="2" placeholder="{{i.actualTime}}"
                        formControlName="cardActualTime" />
-
-                        <button class="btn btn-primary bottom" (click)="updateFunction(i.cardId)">Update</button>
+                        <button class="btn btn-primary bottom" [disabled]="editCard.status === 'INVALID'" (click)="updateFunction(i.cardId)">Update</button>
                     </form>
 
 
 
                 </div>
-                <button class="btn btn-primary complete" (click)="updateComplete()">Update Complete</button>
+
+
+                <div *ngIf="c.card.length > 0">
+                  <button class="btn btn-primary complete" (click)="updateComplete()">Update Complete</button>
+              </div>
+              <div *ngIf="c.card.length <= 0">
+                Don't have card.
+            </div>
 
             </div>
         </div>

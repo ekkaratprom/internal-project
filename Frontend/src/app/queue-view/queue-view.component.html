@@ -5,11 +5,11 @@
 
   <div class="row">
     <div class="col-lg-3 col-xl-3">
-      <app-assignment-list></app-assignment-list>
+      <app-assignment-list (updateDelete)="setReload(true)" ></app-assignment-list>
       <div class="vl"></div>
     </div>
     <div class="col-lg-9 col-xl-9">
-      <app-avaliable-time (dateChange)="collectDate($event)" (dateOnNextBack)="collectDateOnNextBack($event)"
+      <app-avaliable-time [(isReLoad)]="isReLoad" (dateChange)="collectDate($event)" (dateOnNextBack)="collectDateOnNextBack($event)"
         [date]="date"></app-avaliable-time>
     </div>
   </div>

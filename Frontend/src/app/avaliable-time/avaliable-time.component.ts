@@ -2,7 +2,7 @@ import { Position } from './shared/availiability-model';
 import { QueueviewserviceService } from './../queueviewservice.service';
 import { AvailabilityService } from './shared/availability.service';
 import { MockAvaliabilityService } from './../service/mock-avaliability.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -11,7 +11,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./avaliable-time.component.css']
 })
 
-export class AvaliableTimeComponent implements OnInit {
+export class AvaliableTimeComponent implements OnInit, DoCheck {
   private _date;
   startDate;
   endDate;
@@ -47,8 +47,11 @@ export class AvaliableTimeComponent implements OnInit {
     this.avaliableLists = [];
     this.avaliableList();
   }
-  @Output() dateOnNextBack = new EventEmitter();
+  @Input() isReLoad: boolean;
+  @Output() isReLoadChange = new EventEmitter<boolean>();
 
+  @Output() dateOnNextBack = new EventEmitter();
+  @Output() availableListFunc = new EventEmitter();
 
   // tslint:disable-next-line: adjacent-overload-signatures
   get date(): any {
@@ -69,6 +72,16 @@ export class AvaliableTimeComponent implements OnInit {
     this.getAllPosition();
     this.getAllSkill();
   }
+
+  ngDoCheck(): void{
+    console.log('ngDoCheck', this.isReLoad);
+    if (this.isReLoad === true){
+      this.avaliableList();
+      this.isReLoad = false;
+      this.isReLoadChange.emit(this.isReLoad);
+    }
+  }
+
   nextweek(): void {
     const p = this.dateList[0];
     p.setDate(p.getDate() + 6);
@@ -158,6 +171,7 @@ export class AvaliableTimeComponent implements OnInit {
             if (!status) { userList.cards = [...userList.cards, cardTemp]; }
           });
           this.avaliableLists = [...this.avaliableLists, userList];
+          this.availableListFunc.emit();
         });
         console.log('***avaliableList', this.avaliableLists);
       });
@@ -172,6 +186,10 @@ export class AvaliableTimeComponent implements OnInit {
 
   close(): void {
     this.modalReference.close();
+    this.avaliableList();
+  }
+
+  updateCardList(): void {
     this.avaliableList();
   }
 

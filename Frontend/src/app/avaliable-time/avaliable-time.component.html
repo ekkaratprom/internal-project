@@ -63,7 +63,7 @@
 
           <ng-template #content let-modal>
             <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)"
-              (submitCompleted)="close()">
+              (submitCompleted)="close()" (submitUpdateCardCompleted)="updateCardList()">
             </app-avaliable-form>
           </ng-template>
 
