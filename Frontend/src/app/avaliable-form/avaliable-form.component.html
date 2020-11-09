@@ -32,7 +32,7 @@
                   </div>
                   <p>Actual Time</p>
 
-                  <input type="number" max="16" maxlength="2" class="form-control" id="input_actual_time" placeholder="0"
+                  <input type="number" class="form-control" id="input_actual_time" placeholder="0"
                       formControlName="actualTime" />
                   <div *ngIf="addCard.get('actualTime').hasError('pattern')" class="error">
                       invalid actual time.
@@ -56,8 +56,13 @@
 
             <div *ngFor="let c of cardsData">
                 <div class="card list" *ngFor="let i of c.card">
+                  <p class="bold">Card name : </p>
                     <div class="card-body">
                         {{ i.cardName }}
+                    </div>
+                    <p class="bold">Assignment name : </p>
+                    <div class="card-body">
+                        {{ i.assignmentName }}
                     </div>
                     <span class="close" (click)="updateDeleteStatus(i.cardId)" title="Delete Card">&times;</span>
                     <form [formGroup]="editCard" (keydown)="keyDownFunction($event,i.cardId)">
@@ -66,9 +71,6 @@
                        formControlName="cardActualTime" />
                         <button class="btn btn-primary bottom" [disabled]="editCard.status === 'INVALID'" (click)="updateFunction(i.cardId)">Update</button>
                     </form>
-
-
-
                 </div>
 
 
