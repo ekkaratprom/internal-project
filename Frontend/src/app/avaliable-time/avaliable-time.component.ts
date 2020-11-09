@@ -32,7 +32,7 @@ export class AvaliableTimeComponent implements OnInit {
   dateSent;
   indexSelected: number;
   itemSelected: number;
-  isLoading = false;
+  isLoading = true;
 
   // @Input() avaliable: Observable<any>;
 
@@ -133,7 +133,6 @@ export class AvaliableTimeComponent implements OnInit {
   avaliableList(): void {
     console.log('this.dateList', this.dateList);
     this.isLoading = true;
-
     this.avaliableLists = [];
     this.availibilityService
       .getUserAvailiability()

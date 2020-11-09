@@ -28,7 +28,7 @@ export class AvaliableFormComponent implements OnInit {
   // cardId;""
 
   constructor(private ngbmodal: NgbModal, private assignmentService: AssignmentService,
-              private router: Router, private availabilityService: AvailabilityService) { }
+    private router: Router, private availabilityService: AvailabilityService) { }
 
   public addCard = new FormGroup({
     assignmentId: new FormControl(null, Validators.compose([
@@ -111,11 +111,6 @@ export class AvaliableFormComponent implements OnInit {
 
   onCancel(): void {
     this.assignmentcardChange.emit('cancel');
-  }
-  // tslint:disable-next-line: typedef
-  close() {
-    this.ngbmodal.dismissAll();
-    this.submitCompleted.emit();
   }
 
   // tslint:disable-next-line: typedef
