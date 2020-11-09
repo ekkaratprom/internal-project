@@ -132,7 +132,8 @@ public class CardServiceImpl implements CardService{
                             (BigInteger)userCards[0],
                             (String)userCards[1],
                             (Double)userCards[2],
-                            (Date)userCards[3]
+                            (Date)userCards[3],
+                            (String)userCards[4]
                     );
 
                     groupByCardsResponse.getCard().add(cardUserResponse);
