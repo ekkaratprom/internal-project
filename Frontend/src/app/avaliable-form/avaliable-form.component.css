@@ -6,9 +6,13 @@
   font-size: 15px;
   transform: translate(0%, -50%);
 }
+#input_card_name{
+  margin-left: 7%;
+}
 .bold{
   font-weight: bolder;
   margin-bottom: 0;
+  margin-left: 3%;
 }
 
 .btn {
@@ -72,3 +76,4 @@
 .complete{
   margin-top: 5%;
 }
+

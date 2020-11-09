@@ -184,7 +184,7 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
 
     this.data = result;
     // this.data2 = result2;
-    this.modalReference = this.modalService.open(content, { size: 'sm' });
+    this.modalReference = this.modalService.open(content, { size: 'md' });
   }
 
   close(): void {
