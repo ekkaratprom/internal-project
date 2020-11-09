@@ -2,7 +2,7 @@
 <div class="assignment-part">
   <div class="assignmentsearch">
     <div class="form-group">
-      <input type="text" class="form-control" id="search-text" [(ngModel)]="assignmentsearchText"
+      <input type="text" class="form-control search" id="search-text" [(ngModel)]="assignmentsearchText"
         placeholder="All Assignment" />
     </div>
 
@@ -66,7 +66,8 @@
                 <!-- Actual Time: -->
                 {{ r.totalActualTime }} Hrs
               </p>
-              <p (click)="isCollapsed = !isCollapsed ; collapsed(r.assignmentId)" [attr.aria-expanded]="!isCollapsed" aria-controls="collapse">
+              <p (click)="isCollapsed = !isCollapsed ; collapsed(r.assignmentId)" [attr.aria-expanded]="!isCollapsed"
+                aria-controls="collapse">
                 <i class="material-icons md-18 cursor">ic_expand_more</i>
               </p>
             </div>
@@ -74,17 +75,17 @@
           </div>
           <div id="collapse" [ngbCollapse]="isCollapsed">
             <div *ngIf="(r.assignmentId == collapesdId)">
-            <div class="card childCard" *ngFor="let co of r['cardObj']">
+              <div class="card childCard" *ngFor="let co of r['cardObj']">
 
-              <div class="card-body" >
-                <div class="d-flex">
-                  <p>Card : {{ co.cardName }}</p>
-                  <p>Date :{{ co.cardDate | date: "dd/MM/yyyy" }}</p>
-                  <p>Actual Time : {{ co.cardActualTime }} Hrs.</p>
+                <div class="card-body">
+                  <div class="d-flex">
+                    <p>Card : {{ co.cardName }}</p>
+                    <p>Date :{{ co.cardDate | date: "dd/MM/yyyy" }}</p>
+                    <p>Actual Time : {{ co.cardActualTime }} Hrs.</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
           </div>
         </div>
       </div>

@@ -1,55 +1,55 @@
 <div class="card">
     <form class="form-inline" [formGroup]="addAssignment" (ngSubmit)="onSubmit()">
         <div class="card-body">
-          <h6 >Create Assignment :</h6>
-          <div class="card inner">
+            <h6>Create Assignment :</h6>
+            <div class="card inner">
 
-            <div class="form-group mx-sm-3 mb-2">
-                <p>Assignment name</p>
-                <input type="text" class="form-control" id="input_assignment" placeholder="assignment name.."
-                    formControlName="assignmentName" />
-                <div *ngIf="addAssignment.get('assignmentName').hasError('pattern')" class="error">
-                    Assignment name has invalid characters
+                <div class="form-group mx-sm-3 mb-2">
+                    <p>Assignment name</p>
+                    <input type="text" class="form-control" id="input_assignment" placeholder="assignment name.."
+                        formControlName="assignmentName" />
+                    <div *ngIf="addAssignment.get('assignmentName').hasError('pattern')" class="error">
+                        Assignment name has invalid characters
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group mx-sm-3 mb-2">
-                <p>Project name</p>
+                <div class="form-group mx-sm-3 mb-2">
+                    <p>Project name</p>
 
-                <select class="form-control" id="input_project" formControlName="projectId">
-                    <option *ngFor="let c of projectList" value="{{ c.projectId }}">
-                        {{ c.projectName }}
-                    </option>
-                </select>
+                    <select class="form-control" id="input_project" formControlName="projectId">
+                        <option *ngFor="let c of projectList" value="{{ c.projectId }}">
+                            {{ c.projectName }}
+                        </option>
+                    </select>
 
-            </div>
-
-            <div class="form-group mx-sm-3 mb-2">
-                <p>Billable Time :</p>
-                <input type="number" class="form-control" id="input_billable_time" placeholder="0"
-                    formControlName="billableTime" />
-                <div *ngIf="addAssignment.get('billableTime').hasError('pattern')" class="error">
-                    Billable Time should be positive number.
                 </div>
-            </div>
 
-            <div class="form-group mx-sm-3 mb-2">
-                <p>Estimate Time :</p>
-                <input type="number" class="form-control" id="input_estimate_time" placeholder="0"
-                    formControlName="estimateTime" />
-                <div *ngIf="addAssignment.get('estimateTime').hasError('pattern')" class="error">
-                    Estimate Time should be positive number.
+                <div class="form-group mx-sm-3 mb-2">
+                    <p>Billable Time :</p>
+                    <input type="number" class="form-control" id="input_billable_time" placeholder="0"
+                        formControlName="billableTime" />
+                    <div *ngIf="addAssignment.get('billableTime').hasError('pattern')" class="error">
+                        Billable Time should be positive number.
+                    </div>
                 </div>
+
+                <div class="form-group mx-sm-3 mb-2">
+                    <p>Estimate Time :</p>
+                    <input type="number" class="form-control" id="input_estimate_time" placeholder="0"
+                        formControlName="estimateTime" />
+                    <div *ngIf="addAssignment.get('estimateTime').hasError('pattern')" class="error">
+                        Estimate Time should be positive number.
+                    </div>
+                </div>
+
+                <!-- bug -->
+                <!-- <div class="btn mb-2" (onClick)="onCancel()">cancel</div> -->
+
+                <!-- [disabled]="addForm.status === 'INVALID'" -->
+                <button [disabled]="addAssignment.status === 'INVALID'" class="btn btn-primary bottonx" type="submit"
+                    (onClick)="onSubmit()">Submit</button>
+                <!-- <p>{{ card | json }}</p> -->
             </div>
-
-            <!-- bug -->
-            <!-- <div class="btn mb-2" (onClick)="onCancel()">cancel</div> -->
-
-            <!-- [disabled]="addForm.status === 'INVALID'" -->
-            <button [disabled]="addAssignment.status === 'INVALID'" class="btn btn-primary bottonx" type="submit"
-                (onClick)="onSubmit()">Submit</button>
-            <!-- <p>{{ card | json }}</p> -->
         </div>
-      </div>
     </form>
 </div>

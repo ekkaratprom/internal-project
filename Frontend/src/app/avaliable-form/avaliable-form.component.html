@@ -1,78 +1,80 @@
-<div class="card">
-    <form class="form-inline" [formGroup]="addCard" (ngSubmit)="onSubmit()">
-      <div>
+<div class="row">
+    <div class="card col">
+        <form class="form-inline" [formGroup]="addCard" (ngSubmit)="onSubmit()">
+            <div>
 
-        <span class="close head" title="Exit" (click)="close() ; updateComplete()">&times;</span>
-    </div>
-        <div class="card-body" style="border: none;">
-          <h6 >Create Card :</h6>
-          <div class="card ">
-            <div class="card-body inner">
-              <p class="assignment">Assignment</p>
-              <div class="form-group mx-sm-3 mb-2">
-
-                  <div>
-                      <select class="form-control" id="input_assignment_id" formControlName="assignmentId"
-                          placeholder="choose your assignment">
-                          <option [ngValue]="null">choose your assignment</option>
-                          <option *ngFor=" let c of rAssignmentList" value="{{ c.assignmentId }}">
-                              {{ c.assignmentName }}
-                          </option>
-                      </select>
-                  </div>
-              </div>
-
-              <div class="form-group mx-sm-3 mb-2">
-                  <p>Card</p>
-
-                  <input type="text" class="form-control" id="input_card_name" placeholder="type your card..."
-                      formControlName="cardName" />
-                  <div *ngIf="addCard.get('cardName').hasError('pattern')" class="error">
-                      cardName has invalid characters.
-                  </div>
-                  <p>Actual Time</p>
-
-                  <input type="number" class="form-control" id="input_actual_time" placeholder="0"
-                      formControlName="actualTime" />
-                  <div *ngIf="addCard.get('actualTime').hasError('pattern')" class="error">
-                      invalid actual time.
-                  </div>
-              </div>
-
-              <button [disabled]="addCard.status === 'INVALID'" type="submit" class="btn btn-primary"
-                  (onClick)="onSubmit()">Submit</button>
+                <span class="close head" title="Exit" (click)="close() ; updateComplete()">&times;</span>
             </div>
-          </div>
+            <div class="card-body" style="border: none;">
+                <h6>Create Card :</h6>
+                <div class="card ">
+                    <div class="card-body inner">
+                        <p class="assignment">Assignment</p>
+                        <div class="form-group mx-sm-3 mb-2">
 
+                            <div>
+                                <select class="form-control" id="input_assignment_id" formControlName="assignmentId"
+                                    placeholder="choose your assignment">
+                                    <option [ngValue]="null">choose your assignment</option>
+                                    <option *ngFor=" let c of rAssignmentList" value="{{ c.assignmentId }}">
+                                        {{ c.assignmentName }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
 
-        </div>
-    </form>
-    <div>
-        <div>
-            <h6 class="card-list">Card List :</h6>
-        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <p>Card</p>
 
-        <div class="form-group mx-sm-3 mb-2 d-flex">
+                            <input type="text" class="form-control" id="input_card_name" placeholder="type your card..."
+                                formControlName="cardName" />
+                            <div *ngIf="addCard.get('cardName').hasError('pattern')" class="error">
+                                cardName has invalid characters.
+                            </div>
+                            <p>Actual Time</p>
 
-            <div *ngFor="let c of cardsData">
-                <div class="card list" *ngFor="let i of c.card">
-                    <div class="card-body">
-                        {{ i.cardName }}
+                            <input type="number" class="form-control" id="input_actual_time" placeholder="0"
+                                formControlName="actualTime" />
+                            <div *ngIf="addCard.get('actualTime').hasError('pattern')" class="error">
+                                invalid actual time.
+                            </div>
+                        </div>
+
+                        <button [disabled]="addCard.status === 'INVALID'" type="submit" class="btn btn-primary"
+                            (onClick)="onSubmit()">Submit</button>
                     </div>
-                    <span class="close" (click)="updateDeleteStatus(i.cardId)" title="Delete Card">&times;</span>
-                    <form [formGroup]="editCard" (keydown)="keyDownFunction($event,i.cardId)">
-
-                      <input type="number" class="form-control" id="input_card_actual_time" placeholder="{{i.actualTime}}"
-                       formControlName="cardActualTime" />
-
-                        <button class="btn btn-primary bottom" (click)="updateFunction(i.cardId)">Update</button>
-                    </form>
+                </div>
 
 
+            </div>
+        </form>
+        <div class="col">
+            <div>
+                <h6 class="card-list">Card List :</h6>
+            </div>
+
+            <div class="form-group mx-sm-3 mb-2 d-flex">
+
+                <div *ngFor="let c of cardsData">
+                    <div class="card list" *ngFor="let i of c.card">
+                        <div class="card-body">
+                            {{ i.cardName }}
+                        </div>
+                        <span class="close" (click)="updateDeleteStatus(i.cardId)" title="Delete Card">&times;</span>
+                        <form [formGroup]="editCard" (keydown)="keyDownFunction($event,i.cardId)">
+
+                            <input type="number" class="form-control" id="input_card_actual_time"
+                                placeholder="{{i.actualTime}}" formControlName="cardActualTime" />
+
+                            <button class="btn btn-primary bottom" (click)="updateFunction(i.cardId)">Update</button>
+                        </form>
+
+
+
+                    </div>
+                    <button class="btn btn-primary complete" (click)="updateComplete()">Update Complete</button>
 
                 </div>
-                <button class="btn btn-primary complete" (click)="updateComplete()">Update Complete</button>
-
             </div>
         </div>
     </div>

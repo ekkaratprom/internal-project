@@ -21,7 +21,6 @@ export class AvaliableTimeComponent implements OnInit {
   skillsetCheck = undefined;
   completedStatusCheck = undefined;
   modalReference: NgbModalRef;
-  color = [0, 3, 6, 8, 4, 6, 8, 1, 2, 4, 0, 2, 7, 1, 5, 8, 9, 2, 2, 8];
   users;
   cards;
   avaliableLists = [];
@@ -33,6 +32,7 @@ export class AvaliableTimeComponent implements OnInit {
   dateSent;
   indexSelected: number;
   itemSelected: number;
+  isLoading = false;
 
   // @Input() avaliable: Observable<any>;
 
@@ -57,9 +57,9 @@ export class AvaliableTimeComponent implements OnInit {
   }
 
   constructor(private modalService: NgbModal,
-              private qv: QueueviewserviceService,
-              private availibilityService: AvailabilityService,
-              private mockAvailibility: MockAvaliabilityService,
+    private qv: QueueviewserviceService,
+    private availibilityService: AvailabilityService,
+    private mockAvailibility: MockAvaliabilityService,
   ) { }
 
   ngOnInit(): void {
@@ -132,10 +132,13 @@ export class AvaliableTimeComponent implements OnInit {
 
   avaliableList(): void {
     console.log('this.dateList', this.dateList);
+    this.isLoading = true;
+
     this.avaliableLists = [];
     this.availibilityService
       .getUserAvailiability()
       .subscribe((res) => {
+        this.isLoading = false;
         this.users = res;
         this.users.map(user => {
           const userList = JSON.parse(JSON.stringify(user));

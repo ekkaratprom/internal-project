@@ -7,9 +7,9 @@
   transform: translate(0%, -50%);
 }
 
-.btn {
-  border: 1px solid #ced4da;
-  width: 85%;
+.btn { 
+  border: 1px solid #ced4da;  
+  width: 80%;
   margin-left: 6%;
 }
 
@@ -24,44 +24,17 @@
 
 .bottom{
   right: 0%;
-  margin-left: 5%;
+  margin-left: 5%;;
   margin-bottom: 2.5%;
   width: 37%;
 }
 
-.complete{
-  margin-top: 5%;;
-}
-
 .card-list{
   margin-left: 6%;
-  margin-top: 0%;
 }
 
 #input_assignment_id{
-  width: 100%;
+  width: 200px;
   padding-left: 0%;
 }
 
-.form-control{
-  height: 3vw;
-  margin-left: 2%;
-  box-shadow: 0px 4px 8px rgba(69, 69, 67, 0.14);
-  border: none;
-
-}
-
-.inner {
-  padding: 0;
-  padding-bottom: 4%;
-}
-
-.p {
-  margin-bottom: 0;
-}
-
-.list {
-  margin-top: 2%;
-  box-shadow: 0px 4px 8px rgba(69, 69, 67, 0.14);
-  border: none;
-}

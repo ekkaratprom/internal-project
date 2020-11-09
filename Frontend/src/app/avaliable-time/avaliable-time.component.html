@@ -1,78 +1,85 @@
-<span class="form-group">
-  <label for="search-text" style="font-weight: bold; font-size: 0.8rem">Available Time</label>
-  <br />
-  <input type="text" class="form-control" style="margin-right: 2vw" id="assignment-search-text" [(ngModel)]="searchText"
-    placeholder="All Person" />
-</span>
+<div>
+  <span class="form-group">
+    <label for="search-text" style="font-weight: bold; font-size: 0.8rem">Available Time</label>
+    <br />
+    <input type="text" class="form-control" style="margin-right: 2vw" id="assignment-search-text"
+      [(ngModel)]="searchText" placeholder="All Person" />
+  </span>
 
-<select class="form-control" [(ngModel)]="positionCheck">
-  <option [ngValue]="undefined">All Position</option>
-  <option *ngFor="let c of position" value="{{c.positionName }}">
-    {{ c.positionName }}
-  </option>
-</select>
-<select class="form-control" [(ngModel)]="skillsetCheck">
-  <option [ngValue]="undefined">All Skillset</option>
-  <option *ngFor="let c of skill" value="{{c.skillName }}">
-    {{ c.skillName }}
-  </option>
-</select>
-<div class="row">
-  <div class="col-lg-2 col-xl-2" style="margin-bottom: 5%; padding: 0"></div>
-  <div class="col-lg-10 col-xl-10" style="height: 25px; padding-left: 3%; padding-right: 15px">
-    <div class="d-flex bd-highlight mb-3" style="justify-content: space-between">
-      <a (click)="previousweek()" href="#" class="previous round">&#8249;</a>
-      <div class="top-color-box" *ngFor="let day of dateList">
-        {{ day | date: "EEE" }} <br />
-        {{ day | date: "dd" }} <br />
-        {{ day | date: "MMM" }}
+  <select class="form-control" [(ngModel)]="positionCheck">
+    <option [ngValue]="undefined">All Position</option>
+    <option *ngFor="let c of position" value="{{c.positionName }}">
+      {{ c.positionName }}
+    </option>
+  </select>
+  <select class="form-control" [(ngModel)]="skillsetCheck">
+    <option [ngValue]="undefined">All Skillset</option>
+    <option *ngFor="let c of skill" value="{{c.skillName }}">
+      {{ c.skillName }}
+    </option>
+  </select>
+  <span class="txt"> color chart : </span>
+  <img class="colr" src="../../assets/images/color.PNG" />
+  <div class="row">
+    <div class="col-lg-2 col-xl-2" style="margin-bottom: 5%; padding: 0"></div>
+    <div class="col-lg-10 col-xl-10" style="height: 25px; padding-left: 3%; padding-right: 15px">
+      <div class="d-flex bd-highlight mb-3" style="justify-content: space-between">
+        <a (click)="previousweek()" href="#" class="previous round">&#8249;</a>
+        <div class="top-color-box" *ngFor="let day of dateList">
+          {{ day | date: "EEE" }} <br />
+          {{ day | date: "dd" }} <br />
+          {{ day | date: "MMM" }}
+        </div>
+        <a (click)="nextweek()" href="#" class="next round">&#8250;</a>
       </div>
-      <a (click)="nextweek()" href="#" class="next round">&#8250;</a>
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="col" style="padding: 0%">
-    <div class="col ss" *ngFor="
+  <div class="row">
+    <div class="col" style="padding: 0%">
+      <div *ngIf="isLoading === true">
+        <img class="loading" src="../../assets/images/Double Ring-1s-200px.gif" />
+      </div>
+      <div class="col ss" *ngFor="
         let r of avaliableLists
           | nameFilter: searchText
           | positionFilter: positionCheck
           | skillFilter: skillsetCheck
       ">
-      <div class="col-lg-2 col-xl-2" style="padding: 0%; margin: 0">
-        <div class="card" style="width: 11rem">
-          <div class="card-body">
-            <div class="card-title">
-              <i style="font-size: 12px" class="fas">&#xf2bd;</i>
-              <span title={{r.fullName}}>
-                {{ r.fullName | longnameFilter: 20 }}
-              </span>
+        <div class="col-lg-2 col-xl-2" style="padding: 0%; margin: 0">
+          <div class="card" style="width: 11rem">
+            <div class="card-body">
+              <div class="card-title">
+                <i style="font-size: 12px" class="fas">&#xf2bd;</i>
+                <span title={{r.fullName}}>
+                  {{ r.fullName | longnameFilter: 20 }}
+                </span>
+              </div>
+              <h6 class="position">{{ r.position }}</h6>
+              <br />
+              <p *ngFor="let index of r['skills']" class="card-text">
+                <img style="width: 1rem" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
+              </p>
             </div>
-            <h6 class="position">{{ r.position }}</h6>
-            <br />
-            <p *ngFor="let index of r['skills']" class="card-text">
-              <img style="width: 1rem" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
-            </p>
           </div>
         </div>
-      </div>
-      <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center">
-        <li class="color-box" *ngFor="let item of r['cards']"
-          [ngStyle]="{ backgroundColor: item.totalActualTime | color }"
-          (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
+        <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center">
+          <li class="color-box" *ngFor="let item of r['cards']"
+            [ngStyle]="{ backgroundColor: item.totalActualTime | color }"
+            (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
 
-          <ng-template #content let-modal>
-            <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)"
-              (submitCompleted)="close()">
-            </app-avaliable-form>
-          </ng-template>
+            <ng-template #content let-modal>
+              <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)" (submitCompleted)="close()">
+              </app-avaliable-form>
+            </ng-template>
 
-          <div class="text-in-box" title="{{ item | json }}">
-            {{ item.totalActualTime }}
-            <!-- {{ index }} -->
-          </div>
-        </li>
+            <div class="text-in-box" title="{{ item | json }}">
+              {{ item.totalActualTime }}
+              <!-- {{ index }} -->
+            </div>
+          </li>
+        </div>
       </div>
     </div>
   </div>
+
 </div>
