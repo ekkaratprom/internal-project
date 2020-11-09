@@ -1,6 +1,7 @@
 package com.allianz.siesta.assignment;
 
 import com.allianz.siesta.assignment.exception.AssignmentNotFoundException;
+import com.allianz.siesta.assignment.exception.DeletedStatusException;
 import com.allianz.siesta.assignment.request.AssignmentRequest;
 import com.allianz.siesta.assignment.request.DeleteStatusRequest;
 import com.allianz.siesta.assignment.service.AssignmentService;
@@ -40,7 +41,7 @@ public class AssignmentController {
 
 
     @PatchMapping(value = "/v1/{id}/deleteassignment")
-    public ResponseEntity<Assignment> deleteAssignment (@PathVariable(value = "id") Long id, @RequestBody DeleteStatusRequest deleteStatusRequest) throws AssignmentNotFoundException {
+    public ResponseEntity<Assignment> deleteAssignment (@PathVariable(value = "id") Long id, @RequestBody DeleteStatusRequest deleteStatusRequest) throws AssignmentNotFoundException, DeletedStatusException {
         return ResponseEntity.accepted().body(assignmentService.deleteAssignment(deleteStatusRequest, id));
     }
 
