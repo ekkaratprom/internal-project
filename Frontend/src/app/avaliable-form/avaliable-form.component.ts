@@ -29,7 +29,7 @@ export class AvaliableFormComponent implements OnInit {
   // cardId;""
 
   constructor(private ngbmodal: NgbModal, private assignmentService: AssignmentService,
-              private router: Router, private availabilityService: AvailabilityService) { }
+    private router: Router, private availabilityService: AvailabilityService) { }
 
   public addCard = new FormGroup({
     assignmentId: new FormControl(null, Validators.compose([
@@ -37,11 +37,13 @@ export class AvaliableFormComponent implements OnInit {
     ])),
     actualTime: new FormControl(null, Validators.compose([
       Validators.required,
-      Validators.pattern('^[0-9].*$'),
-      Validators.max(16)
+      Validators.pattern('^[1-9].*$'),
+      Validators.max(24),
+      Validators.min(1)
     ])),
     cardName: new FormControl(null, Validators.compose([
       Validators.required,
+      Validators.pattern('[\\w\\-\\s\\/]+')
     ])),
   });
 
@@ -49,7 +51,8 @@ export class AvaliableFormComponent implements OnInit {
     cardActualTime: new FormControl(null, Validators.compose([
       Validators.required,
       Validators.pattern('^[1-9].*$'),
-      Validators.max(16)
+      Validators.max(24),
+      Validators.min(1)
     ])),
   });
 
@@ -115,7 +118,6 @@ export class AvaliableFormComponent implements OnInit {
   onCancel(): void {
     this.assignmentcardChange.emit('cancel');
   }
-
 
   // tslint:disable-next-line: typedef
   keyDownFunction(event, card: string) {

@@ -15,19 +15,23 @@ export class AssignmentFormComponent implements OnInit {
   @Output() newAssignment: EventEmitter<any> = new EventEmitter<any>();
   assignment: Assignment;
   projectList = [];
+
+
   constructor(private assignmentService: AssignmentService, private router: Router) { }
 
 
   public addAssignment = new FormGroup({
     assignmentName: new FormControl(null, Validators.compose([
       Validators.required,
+      Validators.pattern('[\\w\\-\\s\\/]+')
     ])),
     billableTime: new FormControl(null, Validators.compose([
-      Validators.pattern('^[0-9].*$')
+      Validators.required,
+      Validators.pattern('^[1-9].*$'),
     ])),
     estimateTime: new FormControl(null, Validators.compose([
       Validators.required,
-      Validators.pattern('^[0-9].*$')
+      Validators.pattern('^[1-9].*$'),
     ])),
     projectId: new FormControl('1', Validators.compose([
       Validators.required,
@@ -55,7 +59,7 @@ export class AssignmentFormComponent implements OnInit {
         console.log(r);
         this.submitCompleted.emit();
         // this.newAssignment.emit(this.assignment);
-        console.log('newAssignment',this.newAssignment);
+        console.log('newAssignment', this.newAssignment);
       });
   }
 

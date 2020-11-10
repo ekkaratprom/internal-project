@@ -106,3 +106,6 @@ display: inline;
   padding: 0%;
   font-weight: 400;
 }
+.error {
+  color: red;
+}

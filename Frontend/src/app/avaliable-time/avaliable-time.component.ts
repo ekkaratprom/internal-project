@@ -146,7 +146,6 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
   avaliableList(): void {
     console.log('this.dateList', this.dateList);
     this.isLoading = true;
-
     this.avaliableLists = [];
     this.availibilityService
       .getUserAvailiability()
