@@ -7,27 +7,38 @@
   transform: translate(0%, -50%);
 }
 #input_card_name{
-  margin-left: 7%;
+  margin-left: 3%;
+  width: 66%;
+  margin-right: 4%;
 }
 .bold{
   font-weight: bolder;
-  margin-bottom: 0;
-  margin-left: 3%;
+    margin-bottom: 10px;
+    display: inline-flex;
+    padding-left: 27px;
 }
 
 .btn {
   border: 1px solid #ced4da;
   width: 80%;
-  margin-left: 6%;
+  margin-left: 8%;
+}
+
+#input_actual_time{
+  width: 15%;
+  margin-left: 0%;
 }
 
 #input_card_actual_time{
-  width: 55%;
-  display: inline;
+width: 20%;
+display: inline;
 }
 
 .assignment{
+  font-weight: bold;
+    font-size: 63%;
   margin-left: 7%;
+  margin-top: 2%;
 }
 .card-body{
   padding: 0.5rem;
@@ -36,17 +47,21 @@
 
 .bottom{
   right: 0%;
-  margin-left: 5%;;
-  margin-bottom: 2.5%;
+  margin-left: 6%;;
+  margin-bottom: 1.5%;
   width: 37%;
 }
-
 .card-list{
+  width: 100%;
+}
+
+.card-list-header{
   margin-left: 6%;
 }
 
 #input_assignment_id{
-  width: 200px;
+  margin-left: 7%;
+  width: 142%;
   padding-left: 0%;
 }
 
@@ -77,3 +92,17 @@
   margin-top: 5%;
 }
 
+.txt.actualtime{
+  margin-left: 65%;
+  font-weight: bold;
+  font-size: 63%;
+}
+.txt.cardd{
+  font-weight: bold;
+  font-size: 63%;
+  margin-left: 4%;
+}
+.listt{
+  padding: 0%;
+  font-weight: 400;
+}

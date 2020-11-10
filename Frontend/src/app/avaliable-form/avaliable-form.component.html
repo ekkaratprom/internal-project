@@ -8,7 +8,7 @@
           <h6 >Create Card :</h6>
           <div class="card ">
             <div class="card-body inner">
-              <p class="assignment">Assignment</p>
+              <div class="assignment">Assignment</div>
               <div class="form-group mx-sm-3 mb-2">
 
                   <div>
@@ -23,23 +23,26 @@
               </div>
 
               <div class="form-group mx-sm-3 mb-2">
-                  <div>Card     </div>
+                  <div class="txt cardd">Card     </div>
+                  <!-- <div>Actual time</div> -->
+                  <label class="txt actualtime">Actual Time</label>
 
                   <input type="text" class="form-control" id="input_card_name" placeholder="type your card..."
                       formControlName="cardName" />
                   <div *ngIf="addCard.get('cardName').hasError('pattern')" class="error">
                       cardName has invalid characters.
                   </div>
-                  <p>Actual Time</p>
-
                   <input type="number" class="form-control" id="input_actual_time" placeholder="0"
                       formControlName="actualTime" />
+                  <!-- <p>Actual Time</p> -->
+
+
                   <div *ngIf="addCard.get('actualTime').hasError('pattern')" class="error">
                       invalid actual time.
                   </div>
               </div>
 
-              <button [disabled]="addCard.status === 'INVALID'" type="submit" class="btn btn-primary"
+              <button [disabled]="addCard.status === 'INVALID'" type="submit" class="btn btn-primary bottom"
                   (onClick)="onSubmit()">Submit</button>
             </div>
           </div>
@@ -47,23 +50,31 @@
 
         </div>
     </form>
-    <div>
-        <div>
-            <h6 class="card-list">Card List :</h6>
+    <div >
+        <div >
+            <h6 class="card-list-header">Card List :</h6>
         </div>
 
         <div class="form-group mx-sm-3 mb-2 d-flex">
 
-            <div *ngFor="let c of cardsData">
+            <div *ngFor="let c of cardsData" class="card-list">
                 <div class="card list" *ngFor="let i of c.card">
-                  <p class="bold">Card name : </p>
-                    <div class="card-body">
-                        {{ i.cardName }}
+                  <div class="row">
+                    <div class="bold col-5">
+                      Card name :
                     </div>
-                    <p class="bold">Assignment name : </p>
-                    <div class="card-body">
-                        {{ i.assignmentName }}
+                    <div class="card-body listt col-7">
+                      {{ i.cardName }}
                     </div>
+                  </div>
+                  <div class="row">
+                    <div class="bold col-5">
+                      Assignment name :
+                    </div>
+                    <div class="card-body listt col-7">
+                      {{ i.assignmentName }}
+                    </div>
+                  </div>
                     <span class="close" (click)="updateDeleteStatus(i.cardId)" title="Delete Card">&times;</span>
                     <form [formGroup]="editCard" (keydown)="keyDownFunction($event,i.cardId)">
 

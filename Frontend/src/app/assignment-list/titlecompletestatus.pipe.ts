@@ -8,10 +8,10 @@ export class TitleCompletedStatusPipe implements PipeTransform {
   transform(index: boolean): any {
 
     if (index === true) {
-      return 'Done';
+      return 'Complete';
     }
     if (index === false) {
-      return 'Undone';
+      return 'Incomplete';
     }
 
   }
