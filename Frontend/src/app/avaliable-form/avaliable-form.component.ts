@@ -37,11 +37,13 @@ export class AvaliableFormComponent implements OnInit {
     ])),
     actualTime: new FormControl(null, Validators.compose([
       Validators.required,
-      Validators.pattern('^[0-9].*$'),
-      Validators.max(16)
+      Validators.pattern('^[1-9].*$'),
+      Validators.max(24),
+      Validators.min(1)
     ])),
     cardName: new FormControl(null, Validators.compose([
       Validators.required,
+      Validators.pattern('[\\w\\-\\s\\/]+')
     ])),
   });
 
@@ -49,7 +51,8 @@ export class AvaliableFormComponent implements OnInit {
     cardActualTime: new FormControl(null, Validators.compose([
       Validators.required,
       Validators.pattern('^[1-9].*$'),
-      Validators.max(16)
+      Validators.max(24),
+      Validators.min(1)
     ])),
   });
 

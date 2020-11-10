@@ -28,16 +28,22 @@
                         <input type="text" class="form-control" id="input_card_name" placeholder="type your card..."
                             formControlName="cardName" />
                         <div *ngIf="addCard.get('cardName').hasError('pattern')" class="error">
-                            cardName has invalid characters.
+                            Card name has invalid characters.
                         </div>
                         <p>Actual Time</p>
                         <br>
 
                         <input type="number" class="form-control" id="input_actual_time" placeholder="0"
                             formControlName="actualTime" />
-                        <div *ngIf="addCard.get('actualTime').hasError('pattern')" class="error">
-                            invalid actual time.
+                        <div *ngIf="addCard.get('actualTime').errors.max || addCard.get('actualTime').errors.min"
+                            class="error">
+                            Actual time must be 1 to 24.
                         </div>
+                        <div *ngIf="addCard.get('actualTime').errors.pattern" class="error">
+                            Invalid actual time.
+                        </div>
+
+
                     </div>
 
                     <button [disabled]="addCard.status === 'INVALID'" type="submit" class="btn btn-primary"
@@ -68,8 +74,17 @@
                     <span class="close" (click)="updateDeleteStatus(i.cardId)" title="Delete Card">&times;</span>
                     <form [formGroup]="editCard" (keydown)="keyDownFunction($event,i.cardId)">
 
-                        <input type="number" class="form-control" id="input_card_actual_time" max="16" maxlength="2"
+                        <input type="number" class="form-control" id="input_card_actual_time" maxlength="2"
                             placeholder="{{i.actualTime}}" formControlName="cardActualTime" />
+
+                        <div *ngIf="editCard.get('cardActualTime').errors.max || editCard.get('cardActualTime').errors.min"
+                            class="error">
+                            Actual time must be 1 to 24.
+                        </div>
+                        <div *ngIf="editCard.get('cardActualTime').errors.pattern" class="error">
+                            Invalid actual time.
+                        </div>
+
                         <button class="btn btn-primary bottom" [disabled]="editCard.status === 'INVALID'"
                             (click)="updateFunction(i.cardId)">Update</button>
                     </form>
