@@ -17,6 +17,7 @@ export class AvaliableFormComponent implements OnInit {
   @Output() itemCardChange = new EventEmitter<number>();
   @Output() assignmentcardChange = new EventEmitter();
   @Output() submitCompleted = new EventEmitter();
+  @Output() submitUpdateCardCompleted = new EventEmitter();
   card: CardForm;
   actual: Actual;
   modalReference: NgbModalRef;
@@ -36,7 +37,8 @@ export class AvaliableFormComponent implements OnInit {
     ])),
     actualTime: new FormControl(null, Validators.compose([
       Validators.required,
-      Validators.pattern('^[0-9].*$')
+      Validators.pattern('^[0-9].*$'),
+      Validators.max(16)
     ])),
     cardName: new FormControl(null, Validators.compose([
       Validators.required,
@@ -46,7 +48,8 @@ export class AvaliableFormComponent implements OnInit {
   public editCard = new FormGroup({
     cardActualTime: new FormControl(null, Validators.compose([
       Validators.required,
-      Validators.pattern('^[0-9].*$')
+      Validators.pattern('^[1-9].*$'),
+      Validators.max(16)
     ])),
   });
 
@@ -116,10 +119,7 @@ export class AvaliableFormComponent implements OnInit {
   // tslint:disable-next-line: typedef
   keyDownFunction(event, card: string) {
     if (event.keyCode === 13) {
-      // console.log(card);
       alert('Edit Success');
-      // const cardId = this.modalValue[0].cards.card[0].cardId;
-      // rest of your code
       const cardId = card;
 
       this.actual = {
@@ -131,19 +131,14 @@ export class AvaliableFormComponent implements OnInit {
       this.availabilityService.updateCard(cardId, this.actual)
         .subscribe((r) => {
           console.log(r);
-          // this.router.navigateByUrl('');
           console.log('***actual time:', this.actual);
-          // this.itemCardChange.emit(this.cardNumber);
         });
     }
   }
 
   // tslint:disable-next-line: typedef
   updateFunction(card: string) {
-    // console.log(card);
     alert('Edit Success');
-    // const cardId = this.modalValue[0].cards.card[0].cardId;
-    // rest of your code
     const cardId = card;
 
     this.actual = {
@@ -155,7 +150,6 @@ export class AvaliableFormComponent implements OnInit {
     this.availabilityService.updateCard(cardId, this.actual)
       .subscribe((r) => {
         console.log(r);
-        // this.router.navigateByUrl('');
         console.log('***actual time:', this.actual);
       });
   }
@@ -180,6 +174,7 @@ export class AvaliableFormComponent implements OnInit {
       console.log('id', id);
       console.log(' Delete status', this.status);
       alert('Delete success');
+      // this.submitUpdateCardCompleted.emit();
       this.submitCompleted.emit();
 
     } catch (error) {

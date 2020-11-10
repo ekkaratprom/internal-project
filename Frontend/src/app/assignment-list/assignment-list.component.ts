@@ -29,6 +29,7 @@ export interface CardDetail {
 })
 export class AssignmentListComponent implements OnInit {
   @Input() assignmentForm: any;
+  @Output() updateDelete = new EventEmitter<any>();
   assignmentsearchText = '';
   completedStatusCheck = undefined;
   assignments: AssignmentResponse[] = [];
@@ -47,11 +48,9 @@ export class AssignmentListComponent implements OnInit {
   status;
   completedStatus ;
   indexSelected;
-
-
-
   collapesdId ;
   public isCollapsed = true;
+
 
   constructor(private qv: QueueviewserviceService , private assignmentService: AssignmentService,
               private modalService: NgbModal, private router: Router) { }
@@ -83,7 +82,7 @@ export class AssignmentListComponent implements OnInit {
           console.log("updateDelete assignment", r);
           // this.result[index].deletedStatus = deleteStatus;
           this.getAllCards();
-
+          this.updateDelete.emit();
         });
         console.log('id', id);
         console.log(' delete status', this.status);

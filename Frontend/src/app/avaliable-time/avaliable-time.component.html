@@ -39,7 +39,7 @@
       <div *ngIf="isLoading === true">
         <img class="loading" src="../../assets/images/Double Ring-1s-200px.gif" />
       </div>
-      <div class="col ss" *ngFor="
+      <div class="col person-list top" *ngFor="
         let r of avaliableLists
           | nameFilter: searchText
           | positionFilter: positionCheck
@@ -68,11 +68,12 @@
             (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
 
             <ng-template #content let-modal>
-              <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)" (submitCompleted)="close()">
+              <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)" (submitCompleted)="close()"
+                (submitUpdateCardCompleted)="updateCardList()">
               </app-avaliable-form>
             </ng-template>
 
-            <div class="text-in-box" title="{{ item | json }}">
+            <div class="text-in-box">
               {{ item.totalActualTime }}
               <!-- {{ index }} -->
             </div>
@@ -81,5 +82,4 @@
       </div>
     </div>
   </div>
-
 </div>

@@ -16,10 +16,11 @@ export class QueueViewComponent implements OnInit {
   completedStatusCheck = undefined;
   date = {};
   dateSent;
-  photo= 'https://www.freepik.com/free-photo/mountains-nature-landscape_1253947.htm#page=1&query=mountain&position=16';
+  photo = 'https://www.freepik.com/free-photo/mountains-nature-landscape_1253947.htm#page=1&query=mountain&position=16';
 
   modalReference: NgbModalRef;
   assignments: AssignmentResponse[] = [];
+  isReLoad = false;
 
   constructor(private modalService: NgbModal) { }
 
@@ -40,6 +41,9 @@ export class QueueViewComponent implements OnInit {
 
   }
 
-
+  setReload(value): void {
+    this.isReLoad = value;
+    console.log('setReload', this.isReLoad);
+  }
 
 }
