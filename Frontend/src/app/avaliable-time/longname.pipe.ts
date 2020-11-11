@@ -6,9 +6,7 @@ export class LongNamePipe implements PipeTransform {
         if (!items) {
             return '';
         }
-        if (!length) {
-            return items;
-        }
+
 
         if (items.length > namelength) {
             items = items.slice(0, namelength) + '...';

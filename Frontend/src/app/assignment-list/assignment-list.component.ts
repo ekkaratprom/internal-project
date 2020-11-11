@@ -2,7 +2,7 @@ import { QueueviewserviceService } from './../queueviewservice.service';
 import { AssignmentService } from './shared/assignment.service';
 import { Assignment, AssignmentResponse, CardList, CardObj } from './shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 
@@ -27,8 +27,10 @@ export interface CardDetail {
   templateUrl: './assignment-list.component.html',
   styleUrls: ['./assignment-list.component.css']
 })
-export class AssignmentListComponent implements OnInit {
+export class AssignmentListComponent implements OnInit , DoCheck {
   @Input() assignmentForm: any;
+  @Input() isReloadAssignment: boolean;
+  @Output() isReloadAssignmentChange = new EventEmitter<boolean>();
   @Output() updateDelete = new EventEmitter<any>();
   assignmentsearchText = '';
   completedStatusCheck = undefined;
@@ -57,7 +59,17 @@ export class AssignmentListComponent implements OnInit {
 
   ngOnInit(): void {
     // this.getAllAssignmentCards();
+    console.log('ngOnInit');
     this.getAllCards();
+  }
+
+  ngDoCheck(): void{
+    console.log('assign-list - ngDoCheck', this.isReloadAssignment);
+    if (this.isReloadAssignment === true){
+      this.getAllCards();
+      // this.isReloadAssignment = false;
+      // this.isReLoadChange.emit(this.isReloadAssignment);
+    }
   }
 
   open(content): void {
@@ -66,6 +78,7 @@ export class AssignmentListComponent implements OnInit {
 
   close(): void {
     this.modalReference.close();
+    console.log('close');
     this.getAllCards();
   }
 
@@ -79,13 +92,13 @@ export class AssignmentListComponent implements OnInit {
     try {
         this.assignmentService.updateDeleteStatusAssignment(assignmentId, this.status)
         .subscribe((r) => {
-          console.log("updateDelete assignment", r);
+          console.log('Update Delete assignment', r);
           // this.result[index].deletedStatus = deleteStatus;
           this.getAllCards();
           this.updateDelete.emit();
         });
         console.log('id', id);
-        console.log(' delete status', this.status);
+        console.log('Delete status', this.status);
         alert('Delete success');
 
       } catch (error) {
@@ -101,7 +114,7 @@ export class AssignmentListComponent implements OnInit {
       };
     this.assignmentService.updateCompleteAssignment(id, this.status)
         .subscribe((r) => {
-          console.log("result assignment",r);
+          console.log('result assignment',r);
           this.result[index].completedStatus = statusChange;
         });
     // console.log('id=', id);
@@ -110,6 +123,8 @@ export class AssignmentListComponent implements OnInit {
 
 
   }
+
+
 
 
   getAllAssignmentCards(): void {
@@ -159,16 +174,13 @@ export class AssignmentListComponent implements OnInit {
 
 
   getAllCards(): void {
-    this.result = [];
     try {
       this.assignmentService
         .getAllCards()
         .subscribe((res) => {
+          this.result = [];
           this.cards = res;
-
           // console.log('cards', this.cards);
-
-
           this.cards.forEach(element => {
             // clear
             this.cObj = [];
@@ -192,6 +204,10 @@ export class AssignmentListComponent implements OnInit {
             this.result.push(cardDetail);
           });
           console.log('result', this.result);
+          if (this.isReloadAssignment === true){
+            this.isReloadAssignment = false;
+            this.isReloadAssignmentChange.emit(this.isReloadAssignment);
+          }
         }
         );
     } catch (error) {

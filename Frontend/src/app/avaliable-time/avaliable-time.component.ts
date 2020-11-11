@@ -52,6 +52,7 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
 
   @Output() dateOnNextBack = new EventEmitter();
   @Output() availableListFunc = new EventEmitter();
+  @Output() submitedLeft = new EventEmitter();
 
   // tslint:disable-next-line: adjacent-overload-signatures
   get date(): any {
@@ -74,7 +75,7 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void{
-    console.log('ngDoCheck', this.isReLoad);
+    // console.log('ngDoCheck', this.isReLoad);
     if (this.isReLoad === true){
       this.avaliableList();
       this.isReLoad = false;
@@ -144,7 +145,7 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
   }
 
   avaliableList(): void {
-    console.log('this.dateList', this.dateList);
+    //console.log('this.dateList', this.dateList);
     this.isLoading = true;
     this.avaliableLists = [];
     this.availibilityService
@@ -175,7 +176,7 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
           this.avaliableLists = [...this.avaliableLists, userList];
           this.availableListFunc.emit();
         });
-        console.log('***avaliableList', this.avaliableLists);
+        //console.log('***avaliableList', this.avaliableLists);
       });
   }
 
@@ -189,6 +190,7 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
   close(): void {
     this.modalReference.close();
     this.avaliableList();
+    this.submitedLeft.emit();
   }
 
   updateCardList(): void {

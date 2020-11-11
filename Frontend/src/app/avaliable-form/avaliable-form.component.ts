@@ -157,6 +157,7 @@ export class AvaliableFormComponent implements OnInit {
       });
   }
 
+  // tslint:disable-next-line: typedef
   updateComplete() {
     this.submitCompleted.emit();
   }
