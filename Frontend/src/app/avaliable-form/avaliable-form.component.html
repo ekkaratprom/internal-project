@@ -114,7 +114,7 @@
           >
             <input
               type="number"
-              class="form-control"
+              class="form-control editInput"
               id="input_card_actual_time_{{ i }}"
               max="16"
               maxlength="2"
@@ -122,12 +122,13 @@
               formControlName="cardActualTime"
             />
             <button
-              class="btn btn-primary bottom"
+              class="btn btn-primary bottom editbtn"
               [disabled]="editCard.status === 'INVALID'"
               (click)="updateFunction(item.cardId)"
             >
               Update
             </button>
+
             <div
               *ngIf="editCard.get('cardActualTime').hasError('max')"
               class="error"

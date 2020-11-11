@@ -6,16 +6,16 @@
   font-size: 15px;
   transform: translate(0%, -50%);
 }
-#input_card_name{
+#input_card_name {
   margin-left: 3%;
   width: 66%;
   margin-right: 4%;
 }
-.bold{
+.bold {
   font-weight: bolder;
-    margin-bottom: 10px;
-    display: inline-flex;
-    padding-left: 27px;
+  margin-bottom: 10px;
+  display: inline-flex;
+  padding-left: 27px;
 }
 
 .btn {
@@ -24,53 +24,52 @@
   margin-left: 8%;
 }
 
-#input_actual_time{
+#input_actual_time {
   width: 15%;
   margin-left: 0%;
 }
 
-#input_card_actual_time{
-width: 20%;
-display: inline;
+#input_card_actual_time {
+  width: 20%;
+  display: inline;
 }
 
-.assignment{
+.assignment {
   font-weight: bold;
-    font-size: 63%;
+  font-size: 63%;
   margin-left: 7%;
   margin-top: 2%;
 }
-.card-body{
+.card-body {
   padding: 0.5rem;
-
 }
 
-.bottom{
+.bottom {
   right: 0%;
-  margin-left: 6%;;
+  margin-left: 6%;
   margin-bottom: 1.5%;
+  margin-top: 1.5%;
   width: 37%;
 }
-.card-list{
+.card-list {
   width: 100%;
 }
 
-.card-list-header{
+.card-list-header {
   margin-left: 6%;
 }
 
-#input_assignment_id{
+#input_assignment_id {
   margin-left: 7%;
   width: 142%;
   padding-left: 0%;
 }
 
-.form-control{
-
-  margin-left: 2%;
+.form-control {
+  margin-left: 2rem;
+  width: 10rem;
   box-shadow: 0px 4px 8px rgba(69, 69, 67, 0.14);
   border: none;
-
 }
 
 .inner {
@@ -88,24 +87,33 @@ display: inline;
   border: none;
 }
 
-.complete{
+.complete {
   margin-top: 5%;
 }
 
-.txt.actualtime{
+.txt.actualtime {
   margin-left: 65%;
   font-weight: bold;
   font-size: 63%;
 }
-.txt.cardd{
+.txt.cardd {
   font-weight: bold;
   font-size: 63%;
   margin-left: 4%;
 }
-.listt{
+.listt {
   padding: 0%;
   font-weight: 400;
 }
 .error {
   color: red;
+}
+
+.editInput {
+  display: inline-block;
+  margin-right: 2rem;
+}
+
+.editbtn {
+  display: inline-block;
 }
