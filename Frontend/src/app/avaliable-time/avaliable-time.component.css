@@ -8,9 +8,21 @@
   flex-direction: column;
   align-items: flex-start;
 }
-label {
-  margin: 0;
+.top{
+  margin-top: 1%;
 }
+.loading{
+    margin-left: 290%;
+    margin-top: 79%;
+    width: 36%;
+}
+.txt{
+  margin-left: 31%;
+}
+.colr{
+  width: 20%;
+}
+
 a {
   color: #0e0e0e;
 
@@ -21,11 +33,13 @@ a {
 }
 .form-control {
   display: inline;
-  width: 10vw;
-  font-size: 0.8rem;
-  padding: 0%;
-  height: 2.5vw;
-  margin: 0%;
+    width: 8vw;
+    font-size: 0.8rem;
+    padding: 0%;
+    height: 2vw;
+    margin: 0.5%;
+    border: none;
+    box-shadow: 0px 4px 8px rgba(69, 69, 67, 0.14);
 }
 .card-title {
   font-size: 13px;
@@ -38,6 +52,31 @@ a {
 }
 .color-box {
   border: 0;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.24);
+  margin: 0 4x;
+  border-radius: 10%;
+  display: flex;
+  cursor: pointer;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 30px;
+  height: 30px;
+  align-self: center;
+  justify-content: center;
+  border: none;
+  text-align: center;
+}
+
+.row .person-list{
+  padding: 10px;
+}
+
+.row .person-list:nth-of-type(odd) {
+  background-color: #f7f7f7;
+  }
+
+.top-color-box {
+  border: 0;
   margin: 0 4x;
   border-radius: 10%;
   display: flex;
@@ -46,17 +85,11 @@ a {
   width: 30px;
   height: 30px;
   align-self: center;
-
-  justify-content: center;
-  border: none;
-  text-align: center;
-}
-
-.color-box.mth {
   font-size: 12px;
   display: flex;
   align-self: center;
 }
+
 
 .col-xl-10 {
   padding: 0%;
@@ -70,6 +103,8 @@ a {
 }
 .card-body {
   margin-right: 0;
+  box-shadow: 0px 4px 8px rgba(69, 69, 67, 0.14);
+
   padding: 0.2rem;
 }
 .card-text {
@@ -84,17 +119,21 @@ a {
   margin-left: 2%;
 }
 .card {
+  border: none;
+  background-color: #FAFAFA;
   margin-bottom: 1%;
   margin-top: 1%;
   margin-right: 0%;
 }
 
-.col .ss {
+.col .person-list {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
 }
+
+
 
 .color-list {
   display: flex;

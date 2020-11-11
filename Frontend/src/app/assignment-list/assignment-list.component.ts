@@ -1,10 +1,10 @@
+import { QueueviewserviceService } from './../queueviewservice.service';
 import { AssignmentService } from './shared/assignment.service';
-import { MockCardsService } from './../service/mock-cards.service';
-import { MockAssignmentService } from './../service/mock-assignment.service';
 import { Assignment, AssignmentResponse, CardList, CardObj } from './shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 export interface CardData {
   cardName: string;
@@ -13,6 +13,7 @@ export interface CardData {
 }
 
 export interface CardDetail {
+  assignmentId: number;
   assignmentName: string;
   billableTime: number;
   completedStatus: boolean;
@@ -26,7 +27,11 @@ export interface CardDetail {
   templateUrl: './assignment-list.component.html',
   styleUrls: ['./assignment-list.component.css']
 })
-export class AssignmentListComponent implements OnInit {
+export class AssignmentListComponent implements OnInit , DoCheck {
+  @Input() assignmentForm: any;
+  @Input() isReloadAssignment: boolean;
+  @Output() isReloadAssignmentChange = new EventEmitter<boolean>();
+  @Output() updateDelete = new EventEmitter<any>();
   assignmentsearchText = '';
   completedStatusCheck = undefined;
   assignments: AssignmentResponse[] = [];
@@ -39,17 +44,32 @@ export class AssignmentListComponent implements OnInit {
   result = [];
   cObj = [];
   modalReference: NgbModalRef;
-
+  kevin = false;
+  completeStatus = false;
+  assigmentId;
+  status;
+  completedStatus ;
+  indexSelected;
+  collapesdId ;
   public isCollapsed = true;
 
-  constructor(private assignmentService: AssignmentService,
-    private mockAssignments: MockAssignmentService,
-    private mockCards: MockCardsService,
-    private modalService: NgbModal) { }
+
+  constructor(private qv: QueueviewserviceService , private assignmentService: AssignmentService,
+              private modalService: NgbModal, private router: Router) { }
 
   ngOnInit(): void {
     // this.getAllAssignmentCards();
+    console.log('ngOnInit');
     this.getAllCards();
+  }
+
+  ngDoCheck(): void{
+    console.log('assign-list - ngDoCheck', this.isReloadAssignment);
+    if (this.isReloadAssignment === true){
+      this.getAllCards();
+      // this.isReloadAssignment = false;
+      // this.isReLoadChange.emit(this.isReloadAssignment);
+    }
   }
 
   open(content): void {
@@ -58,7 +78,54 @@ export class AssignmentListComponent implements OnInit {
 
   close(): void {
     this.modalReference.close();
+    console.log('close');
+    this.getAllCards();
   }
+
+  updateDeleteStatus(id: string): void {
+    const deleteStatus = true;
+    const assignmentId = id;
+    // debugger;
+    this.status = {
+        deletedStatus: deleteStatus,
+      };
+    try {
+        this.assignmentService.updateDeleteStatusAssignment(assignmentId, this.status)
+        .subscribe((r) => {
+          console.log('Update Delete assignment', r);
+          // this.result[index].deletedStatus = deleteStatus;
+          this.getAllCards();
+          this.updateDelete.emit();
+        });
+        console.log('id', id);
+        console.log('Delete status', this.status);
+        alert('Delete success');
+
+      } catch (error) {
+        alert('Delete fail');
+      }
+
+  }
+
+
+  updateStatus(index,id: string, statusChange: boolean): void {
+    this.status = {
+      completedStatus: statusChange,
+      };
+    this.assignmentService.updateCompleteAssignment(id, this.status)
+        .subscribe((r) => {
+          console.log('result assignment',r);
+          this.result[index].completedStatus = statusChange;
+        });
+    // console.log('id=', id);
+    // console.log('status=' , this.status);
+
+
+
+  }
+
+
+
 
   getAllAssignmentCards(): void {
     try {
@@ -71,24 +138,49 @@ export class AssignmentListComponent implements OnInit {
           ,
           (error) => {
             console.log('Get Assignment error: ', error);
-            this.assignments = this.mockAssignments.getAllAssignments();
           }
         );
     } catch (error) {
       console.error('GET all assignments fail');
     }
   }
+  toggle(index,id: string, status: boolean): void {
+    let value1 ;
+
+    if (status === true){
+      this.completedStatus = false;
+      value1 = 'undone';
+    }
+    if (status === false){
+      this.completedStatus = true;
+
+      value1 = 'done';
+    }
+    this.updateStatus(index,id, this.completedStatus);
+    console.log('completedStatus', this.completedStatus);
+    alert('Change completed status to ' + value1);
+
+  }
+
+  test2(){
+    console.log('test2');
+    this.qv.settest(this.kevin);
+    this.kevin = !this.kevin;
+  }
+
+  collapsed(id: string): void{
+    this.collapesdId = id;
+  }
+
 
   getAllCards(): void {
     try {
       this.assignmentService
         .getAllCards()
         .subscribe((res) => {
+          this.result = [];
           this.cards = res;
-
           // console.log('cards', this.cards);
-
-
           this.cards.forEach(element => {
             // clear
             this.cObj = [];
@@ -101,41 +193,21 @@ export class AssignmentListComponent implements OnInit {
               this.cObj.push(cardObj);
             });
             const cardDetail = {
+              assignmentId: element.assignmentId,
               assignmentName: element.assignmentName,
               billableTime: element.billableTime,
               completedStatus: element.completedStatus,
               estimateTime: element.estimateTime,
               totalActualTime: element.totalActualTime,
               cardObj: this.cObj,
-            }
+            };
             this.result.push(cardDetail);
           });
-          // console.log('result', this.result);
-        }, (error) => {
-          console.log('Get cards error: ', error);
-          this.cards = this.mockCards.getAllCards();
-          this.cards.forEach(element => {
-            // clear
-            this.cObj = [];
-            element.cardObj.forEach(el => {
-              const cardObj = {
-                cardName: el.cardName,
-                cardActualTime: el.cardActualTime,
-                cardDate: el.cardDate
-              };
-              this.cObj.push(cardObj);
-            });
-            const cardDetail = {
-              assignmentName: element.assignmentName,
-              billableTime: element.billableTime,
-              completedStatus: element.completedStatus,
-              estimateTime: element.estimateTime,
-              totalActualTime: element.totalActualTime,
-              cardObj: this.cObj,
-            }
-            this.result.push(cardDetail);
-          });
-          // console.log('result', this.result);
+          console.log('result', this.result);
+          if (this.isReloadAssignment === true){
+            this.isReloadAssignment = false;
+            this.isReloadAssignmentChange.emit(this.isReloadAssignment);
+          }
         }
         );
     } catch (error) {

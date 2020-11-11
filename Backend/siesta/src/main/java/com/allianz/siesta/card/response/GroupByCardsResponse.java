@@ -1,15 +1,10 @@
 package com.allianz.siesta.card.response;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
 
 public class GroupByCardsResponse {
     private Double totalActualTime;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
     private Date cardDate;
 
     private List card;

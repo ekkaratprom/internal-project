@@ -4,6 +4,7 @@ import com.allianz.siesta.assignment.Assignment;
 import com.allianz.siesta.assignment.AssignmentRepository;
 import com.allianz.siesta.card.Card;
 import com.allianz.siesta.card.CardRepository;
+import com.allianz.siesta.card.exception.CardNotFoundException;
 import com.allianz.siesta.card.request.CardRequest;
 import com.allianz.siesta.card.request.DeleteStatusRequest;
 import com.allianz.siesta.card.request.UpdateCardRequest;
@@ -16,9 +17,11 @@ import com.allianz.siesta.card.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CardServiceImpl implements CardService{
@@ -161,16 +164,17 @@ public class CardServiceImpl implements CardService{
                         (Double)card[0],
                         (Date)card[1]
                 );
-                List<Card> userCard = cardRepository.getCardByUserId(user.getId(), cardDate);
-                //Card[]
+                List<Object[]> userCard = cardRepository.getCardByUserId(user.getId(), cardDate);
+
                 userResponse.getCards().add(groupByCardsResponse);
+                //Card[]
                 groupByCardsResponse.setCard(new ArrayList());
-                for (Card userCards : userCard) {
+                for (Object[] userCards : userCard) {
                     CardUserResponse cardUserResponse = new CardUserResponse(
-                            userCards.getId(),
-                            userCards.getCardName(),
-                            userCards.getActualTime(),
-                            userCards.getCreateDate()
+                            (BigInteger)userCards[0],
+                            (String)userCards[1],
+                            (Double)userCards[2],
+                            (Date)userCards[3]
                     );
 
                     groupByCardsResponse.getCard().add(cardUserResponse);
@@ -186,7 +190,8 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
-    public Card updateCard(UpdateCardRequest updateCardRequest, Long id) {
+    public Card updateCard(UpdateCardRequest updateCardRequest, Long id) throws CardNotFoundException {
+        verifyCardId(id);
         Card card = cardRepository.getOne(id);
 
         if (updateCardRequest.getActualTime() != null) {
@@ -198,7 +203,8 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
-    public Card deleteCard(DeleteStatusRequest deleteStatusRequest, Long id) {
+    public Card deleteCard(DeleteStatusRequest deleteStatusRequest, Long id) throws CardNotFoundException {
+        verifyCardId(id);
         Card card = cardRepository.getOne(id);
 
         if (deleteStatusRequest.getDeletedStatus() != null) {
@@ -207,4 +213,10 @@ public class CardServiceImpl implements CardService{
 
         return cardRepository.save(card);
     }
+
+    //check assignmentId
+    private Card verifyCardId (Long id) throws CardNotFoundException {
+        return cardRepository.findById(id).orElseThrow(() ->
+                new CardNotFoundException("error"));
+    };
 }

@@ -7,3 +7,20 @@
   padding: 20px;
   background-color: #ffffff;
 }
+
+
+.queueview{
+  background-image: url(data:https://www.freepik.com/free-photo/mountains-nature-landscape_1253947.htm#page=1&query=mountain&position=16);
+}
+
+.vl {
+  border-left: 2px solid #CECECE;
+  height: 100%;
+  position: absolute;
+  right: 0%;
+  margin-top: 5%;
+  top: 0;
+}
+.available-time{
+  padding: 0 2rem;
+}

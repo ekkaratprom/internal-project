@@ -2,6 +2,7 @@ import { AssignmentService } from './../assignment-list/shared/assignment.servic
 import { Assignment } from './../assignment-list/shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-assignment-form',
@@ -11,21 +12,26 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class AssignmentFormComponent implements OnInit {
   @Output() assignmentcardChange = new EventEmitter();
   @Output() submitCompleted = new EventEmitter();
+  @Output() newAssignment: EventEmitter<any> = new EventEmitter<any>();
   assignment: Assignment;
   projectList = [];
-  constructor(private assignmentService: AssignmentService) { }
+
+
+  constructor(private assignmentService: AssignmentService, private router: Router) { }
 
 
   public addAssignment = new FormGroup({
     assignmentName: new FormControl(null, Validators.compose([
       Validators.required,
+      Validators.pattern('[\\w\\-\\s\\/]+')
     ])),
     billableTime: new FormControl(null, Validators.compose([
-      Validators.pattern('^[0-9].*$')
+      Validators.required,
+      Validators.pattern('^[1-9].*$'),
     ])),
     estimateTime: new FormControl(null, Validators.compose([
       Validators.required,
-      Validators.pattern('^[0-9].*$')
+      Validators.pattern('^[1-9].*$'),
     ])),
     projectId: new FormControl('1', Validators.compose([
       Validators.required,
@@ -52,6 +58,8 @@ export class AssignmentFormComponent implements OnInit {
       .subscribe((r) => {
         console.log(r);
         this.submitCompleted.emit();
+        // this.newAssignment.emit(this.assignment);
+        console.log('newAssignment', this.newAssignment);
       });
   }
 

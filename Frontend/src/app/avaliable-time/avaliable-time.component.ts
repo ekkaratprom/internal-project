@@ -1,7 +1,8 @@
+import { Position } from './shared/availiability-model';
+import { QueueviewserviceService } from './../queueviewservice.service';
 import { AvailabilityService } from './shared/availability.service';
 import { MockAvaliabilityService } from './../service/mock-avaliability.service';
-import { AssignmentResponse } from './../assignment-list/shared/assignment-model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -10,22 +11,28 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./avaliable-time.component.css']
 })
 
-export class AvaliableTimeComponent implements OnInit {
+export class AvaliableTimeComponent implements OnInit, DoCheck {
   private _date;
   startDate;
   endDate;
+  test3;
   searchText = '';
   positionCheck = undefined;
   skillsetCheck = undefined;
   completedStatusCheck = undefined;
   modalReference: NgbModalRef;
-  color = [0, 3, 6, 8, 4, 6, 8, 1, 2, 4, 0, 2, 7, 1, 5, 8, 9, 2, 2, 8];
   users;
   cards;
   avaliableLists = [];
   dateList = [];
+  position = [];
+  skill = [];
   data;
   data2;
+  dateSent;
+  indexSelected: number;
+  itemSelected: number;
+  isLoading = true;
 
   // @Input() avaliable: Observable<any>;
 
@@ -40,22 +47,42 @@ export class AvaliableTimeComponent implements OnInit {
     this.avaliableLists = [];
     this.avaliableList();
   }
+  @Input() isReLoad: boolean;
+  @Output() isReLoadChange = new EventEmitter<boolean>();
 
+  @Output() dateOnNextBack = new EventEmitter();
+  @Output() availableListFunc = new EventEmitter();
+  @Output() submitedLeft = new EventEmitter();
+
+  // tslint:disable-next-line: adjacent-overload-signatures
   get date(): any {
     if (!this._date) { return new Date(); }
     return this._date;
   }
 
   constructor(private modalService: NgbModal,
+    private qv: QueueviewserviceService,
     private availibilityService: AvailabilityService,
     private mockAvailibility: MockAvaliabilityService,
   ) { }
 
   ngOnInit(): void {
-    // this.avaliable = Observable
-    //   .interval(1000)
-    //   .startWith(0).switchMap(() => this.availibilityService.getUserAvailiability());
+    this.qv.getTest().subscribe((val) => {
+      console.log(val);
+    });
+    this.getAllPosition();
+    this.getAllSkill();
   }
+
+  ngDoCheck(): void{
+    // console.log('ngDoCheck', this.isReLoad);
+    if (this.isReLoad === true){
+      this.avaliableList();
+      this.isReLoad = false;
+      this.isReLoadChange.emit(this.isReLoad);
+    }
+  }
+
   nextweek(): void {
     const p = this.dateList[0];
     p.setDate(p.getDate() + 6);
@@ -73,6 +100,8 @@ export class AvaliableTimeComponent implements OnInit {
     this.endDate = this.dateList[19];
     console.log('start', this.startDate);
     console.log('end', this.endDate);
+    this.dateOnNextBack.emit(this.startDate);
+    this.avaliableList();
   }
 
   previousweek(): void {
@@ -92,6 +121,8 @@ export class AvaliableTimeComponent implements OnInit {
     this.endDate = this.dateList[19];
     console.log('start', this.startDate);
     console.log('end', this.endDate);
+    this.dateOnNextBack.emit(this.startDate);
+    this.avaliableList();
   }
 
   addDateList(): void {
@@ -114,11 +145,13 @@ export class AvaliableTimeComponent implements OnInit {
   }
 
   avaliableList(): void {
-    console.log('this.dateList', this.dateList);
+    //console.log('this.dateList', this.dateList);
+    this.isLoading = true;
     this.avaliableLists = [];
     this.availibilityService
       .getUserAvailiability()
       .subscribe((res) => {
+        this.isLoading = false;
         this.users = res;
         this.users.map(user => {
           const userList = JSON.parse(JSON.stringify(user));
@@ -141,19 +174,52 @@ export class AvaliableTimeComponent implements OnInit {
             if (!status) { userList.cards = [...userList.cards, cardTemp]; }
           });
           this.avaliableLists = [...this.avaliableLists, userList];
+          this.availableListFunc.emit();
         });
-        console.log('***avaliableList', this.avaliableLists);
+        //console.log('***avaliableList', this.avaliableLists);
       });
   }
 
   open(content, result): void {
-    // debugger;
+
     this.data = result;
     // this.data2 = result2;
-    this.modalReference = this.modalService.open(content, { size: 'sm' });
+    this.modalReference = this.modalService.open(content, { size: 'md' });
   }
 
   close(): void {
     this.modalReference.close();
+    this.avaliableList();
+    this.submitedLeft.emit();
   }
+
+  updateCardList(): void {
+    this.avaliableList();
+  }
+
+  // tslint:disable-next-line: typedef
+  updateItem(newItem: any) {
+    this.avaliableLists[this.indexSelected] = newItem;
+  }
+
+  getAllPosition(): void {
+    try {
+      this.availibilityService.getAllPosition().subscribe((res) => {
+        this.position = res;
+      });
+    } catch (error) {
+      console.error('GET all position fail');
+    }
+  }
+
+  getAllSkill(): void {
+    try {
+      this.availibilityService.getAllSkill().subscribe((res) => {
+        this.skill = res;
+      });
+    } catch (error) {
+      console.error('GET all position fail');
+    }
+  }
+
 }

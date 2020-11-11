@@ -1,5 +1,5 @@
 import { environment } from './../../../environments/environment';
-import { UserResponse } from './availiability-model';
+import { Actual, UserResponse, Skill, Skills,DeleteStatus } from './availiability-model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -19,6 +19,28 @@ export class AvailabilityService {
 
   getUserAvailiability(): Observable<UserResponse> {
     return this.http.get<UserResponse>(`${environment.apiUrl}` + 'v1/availabletime');
+  }
+
+  updateCard(id: any, actual: any): Observable<HttpResponse<Actual[]>> {
+    return this.http.patch<Actual[]>(`${environment.apiUrl}v1/${id}/updatecard`, actual, {
+      observe: 'response',
+    });
+  }
+
+  updateDeleteStatusCard(id: any, status: any): Observable<HttpResponse<DeleteStatus[]>> {
+    // /siesta/api/v1/{id}/updatedeletestatus
+
+    return this.http.patch<DeleteStatus[]>(`${environment.apiUrl}v1/${id}/updatedeletestatus`, status, {
+      observe: 'response',
+    });
+  }
+
+  getAllPosition(): Observable<Position[]> {
+    return this.http.get<Position[]>(`${environment.apiUrl}` + 'v1/getallposition');
+  }
+
+  getAllSkill(): Observable<Skills[]> {
+    return this.http.get<Skills[]>(`${environment.apiUrl}` + 'v1/skill');
   }
 
 

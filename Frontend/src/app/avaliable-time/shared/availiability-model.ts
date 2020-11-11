@@ -19,8 +19,30 @@ export type Card = {
     createDate: string;
 }
 
-export type Skill = {
+
+
+
+export type Actual = {
+    actualTime: number;
+}
+
+export type DeleteStatus = {
+  deletedStatus: boolean;
+}
+
+
+export type Position = {
+    id: number;
+    positionName: string;
+}
+
+export type Skills = {
+    id: number;
     skillName: string;
     iconPath: string;
 }
 
+export type Skill = {
+    skillName: string;
+    iconPath: string;
+}
