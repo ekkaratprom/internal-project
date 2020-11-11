@@ -8,12 +8,22 @@ public class CardUserResponse {
     private String cardName;
     private Double actualTime;
     private Date createDate;
+    private String assignmentName;
 
-    public CardUserResponse(BigInteger cardId, String cardName, Double actualTime, Date createDate) {
+    public CardUserResponse(BigInteger cardId, String cardName, Double actualTime, Date createDate, String assignmentName) {
         this.cardId = cardId;
         this.cardName = cardName;
         this.actualTime = actualTime;
         this.createDate = createDate;
+        this.assignmentName = assignmentName;
+    }
+
+    public String getAssignmentName() {
+        return assignmentName;
+    }
+
+    public void setAssignmentName(String assignmentName) {
+        this.assignmentName = assignmentName;
     }
 
     public BigInteger getCardId() {

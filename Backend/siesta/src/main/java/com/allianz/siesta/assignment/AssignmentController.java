@@ -1,6 +1,7 @@
 package com.allianz.siesta.assignment;
 
 import com.allianz.siesta.assignment.exception.AssignmentNotFoundException;
+import com.allianz.siesta.assignment.exception.DeletedStatusException;
 import com.allianz.siesta.assignment.request.AssignmentRequest;
 import com.allianz.siesta.assignment.request.DeleteStatusRequest;
 import com.allianz.siesta.assignment.service.AssignmentService;
@@ -18,10 +19,10 @@ public class AssignmentController {
     @Autowired
     private AssignmentService assignmentService;
 
-    @ResponseStatus(HttpStatus.CREATED)
+
     @PostMapping(value = "/v1/addAssignment")
-    public Assignment addAssignment(@RequestBody AssignmentRequest assignmentRequest) {
-        return assignmentService.addAssignment(assignmentRequest);
+    public ResponseEntity<Assignment> addAssignment(@RequestBody AssignmentRequest assignmentRequest) throws ProjectNotFoundException {
+        return ResponseEntity.accepted().body(assignmentService.addAssignment(assignmentRequest));
     }
 
 
@@ -40,7 +41,7 @@ public class AssignmentController {
 
 
     @PatchMapping(value = "/v1/{id}/deleteassignment")
-    public ResponseEntity<Assignment> deleteAssignment (@PathVariable(value = "id") Long id, @RequestBody DeleteStatusRequest deleteStatusRequest) throws AssignmentNotFoundException {
+    public ResponseEntity<Assignment> deleteAssignment (@PathVariable(value = "id") Long id, @RequestBody DeleteStatusRequest deleteStatusRequest) throws AssignmentNotFoundException, DeletedStatusException {
         return ResponseEntity.accepted().body(assignmentService.deleteAssignment(deleteStatusRequest, id));
     }
 

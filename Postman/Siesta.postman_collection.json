@@ -1,0 +1,677 @@
+{
+	"info": {
+		"_postman_id": "88c559b2-3cee-4340-84c1-a8f62ca37e14",
+		"name": "Siesta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetAllCard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "789f17f3-d9b6-4097-80da-ad5ed683d3a4",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://10.187.1.33:8081/siesta/api/v1/card",
+					"protocol": "http",
+					"host": [
+						"10",
+						"187",
+						"1",
+						"33"
+					],
+					"port": "8081",
+					"path": [
+						"siesta",
+						"api",
+						"v1",
+						"card"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllAvailableTime",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f965242b-3d39-46ee-81ae-8560315cba40",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://10.187.1.33:8081/siesta/api/v1/availabletime",
+					"protocol": "http",
+					"host": [
+						"10",
+						"187",
+						"1",
+						"33"
+					],
+					"port": "8081",
+					"path": [
+						"siesta",
+						"api",
+						"v1",
+						"availabletime"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllAssignments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e358737e-2bbd-4f87-8663-c34647599cee",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"check index zero contain projectId = 1 and projectName = siesta\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].project.id).to.eql(1);\r",
+							"    pm.expect(jsonData[0].project.projectName).to.eql(\"siesta\");\r",
+							"});\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://10.187.1.33:8081/siesta/api/v1/assignment",
+					"protocol": "http",
+					"host": [
+						"10",
+						"187",
+						"1",
+						"33"
+					],
+					"port": "8081",
+					"path": [
+						"siesta",
+						"api",
+						"v1",
+						"assignment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindUserFindId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "345d8a2e-a2f2-43a0-b2d7-a981b86e4f7d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check firstName = Atcharee\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.firstName).to.eql(\"Atcharee\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check id = 10\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(10);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"check positionName = QA\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.position.positionName).to.eql(\"QA\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://10.187.1.33:8081/siesta/api/v1/user/:id",
+					"protocol": "http",
+					"host": [
+						"10",
+						"187",
+						"1",
+						"33"
+					],
+					"port": "8081",
+					"path": [
+						"siesta",
+						"api",
+						"v1",
+						"user",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeletedAssignment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "96644cf1-b278-4da6-ac06-d8eb7305f64b",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check deletedStatus = true\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.deletedStatus).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"deletedStatus\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.187.1.33:8081/siesta/api/v1/:id/deleteassignment",
+					"protocol": "http",
+					"host": [
+						"10",
+						"187",
+						"1",
+						"33"
+					],
+					"port": "8081",
+					"path": [
+						"siesta",
+						"api",
+						"v1",
+						":id",
+						"deleteassignment"
+					],
+					"query": [
+						{
+							"key": null,
+							"value": "",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateAssignment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "517fdec8-cf82-4a56-859c-16cfd9c91180",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check assignmentName = test patch api\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.assignmentName).to.eql(\"test patch api\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check billableTime = 10\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.billableTime).to.eql(10);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check completedStatus = false\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.completedStatus).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check estimateTime = 10\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.estimateTime).to.eql(10);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check projectId = 1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.project.id).to.eql(1);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"assignmentName\": \"test patch api\",\r\n  \"billableTime\": 10,\r\n  \"completedStatus\": false,\r\n  \"estimateTime\": 10,\r\n  \"projectId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.187.1.33:8081/siesta/api/v1/:id/updateassignment",
+					"protocol": "http",
+					"host": [
+						"10",
+						"187",
+						"1",
+						"33"
+					],
+					"port": "8081",
+					"path": [
+						"siesta",
+						"api",
+						"v1",
+						":id",
+						"updateassignment"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllSkillSets",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d5dc6f70-f2e2-4489-b08a-ba0c9ea6df03",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://10.187.1.33:8081/siesta/api/v1/skillset",
+					"protocol": "http",
+					"host": [
+						"10",
+						"187",
+						"1",
+						"33"
+					],
+					"port": "8081",
+					"path": [
+						"siesta",
+						"api",
+						"v1",
+						"skillset"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a523091-f9ff-4d04-8268-a03f92bf8822",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://10.187.1.33:8081/siesta/api/v1/user",
+					"protocol": "http",
+					"host": [
+						"10",
+						"187",
+						"1",
+						"33"
+					],
+					"port": "8081",
+					"path": [
+						"siesta",
+						"api",
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllSkill",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e81c4e3e-e4bb-42f8-8ca0-c3e67e1c0376",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://10.187.1.33:8081/siesta/api/v1/skill",
+					"protocol": "http",
+					"host": [
+						"10",
+						"187",
+						"1",
+						"33"
+					],
+					"port": "8081",
+					"path": [
+						"siesta",
+						"api",
+						"v1",
+						"skill"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllProject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "55d4ace0-2cd3-4fc8-97ca-0b487ca135d9",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://10.187.1.33:8081/siesta/api/v1/project",
+					"protocol": "http",
+					"host": [
+						"10",
+						"187",
+						"1",
+						"33"
+					],
+					"port": "8081",
+					"path": [
+						"siesta",
+						"api",
+						"v1",
+						"project"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateCard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2c43b7c6-e8d1-4da6-a1c7-5779a342f49d",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check billableTime = 10\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.actualTime).to.eql(4);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"actualTime\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.187.1.33:8081/siesta/api/v1/:id/updatecard",
+					"protocol": "http",
+					"host": [
+						"10",
+						"187",
+						"1",
+						"33"
+					],
+					"port": "8081",
+					"path": [
+						"siesta",
+						"api",
+						"v1",
+						":id",
+						"updatecard"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeletedCard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b3f225e1-6990-47d7-841a-27d076138291",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check deletedStatus is False\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.deletedStatus).to.eql(true);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"deletedStatus\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.187.1.33:8081/siesta/api/v1/:id/updatedeletestatus",
+					"protocol": "http",
+					"host": [
+						"10",
+						"187",
+						"1",
+						"33"
+					],
+					"port": "8081",
+					"path": [
+						"siesta",
+						"api",
+						"v1",
+						":id",
+						"updatedeletestatus"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

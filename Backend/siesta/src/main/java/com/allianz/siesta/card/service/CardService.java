@@ -8,7 +8,6 @@ import com.allianz.siesta.card.request.UpdateCardRequest;
 import com.allianz.siesta.card.response.AssignmentResponse;
 import com.allianz.siesta.card.response.UserResponse;
 
-import java.util.Optional;
 
 public interface CardService {
 

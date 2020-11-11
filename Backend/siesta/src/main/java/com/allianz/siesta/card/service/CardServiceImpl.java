@@ -42,70 +42,41 @@ public class CardServiceImpl implements CardService{
     @Override
     public Iterable<AssignmentResponse> getAllCards() {
         List<AssignmentResponse> assignmentResponseList = new ArrayList<>();
-        Iterable<Assignment> assignments = assignmentRepository.findAll();
+        List<Assignment> assignments = assignmentRepository.findByDeletedStatus(Boolean.FALSE);
         for (Assignment assignment : assignments) {
+
 
             Double totalActualTime = assignmentRepository.getTotalActualTime(assignment.getId());
             List<Card> cardList = cardRepository.getCardByAssignmentId(assignment.getId());
 
-            AssignmentResponse assignmentResponse = new AssignmentResponse(
-                    assignment.getAssignmentName(),
-                    assignment.getBillableTime(),
-                    assignment.getEstimateTime(),
-                    assignment.getCompletedStatus(),
-                    totalActualTime
-            );
-
-            assignmentResponse.setCardObj(new ArrayList());
-            for (Card card : cardList) {
-                CardResponse cardResponse = new CardResponse(
-                        card.getCardName(),
-                        card.getActualTime(),
-                        card.getCardDate()
+                AssignmentResponse assignmentResponse = new AssignmentResponse(
+                        assignment.getId(),
+                        assignment.getAssignmentName(),
+                        assignment.getBillableTime(),
+                        assignment.getEstimateTime(),
+                        assignment.getCompletedStatus(),
+                        totalActualTime
                 );
-                cardResponse.setCardId(card.getId());
 
-                assignmentResponse.getCardObj().add(cardResponse);
+                assignmentResponse.setCardObj(new ArrayList());
+                for (Card card : cardList) {
+                    CardResponse cardResponse = new CardResponse(
+                            card.getCardName(),
+                            card.getActualTime(),
+                            card.getCardDate()
+                    );
+                    cardResponse.setCardId(card.getId());
 
+                    assignmentResponse.getCardObj().add(cardResponse);
+
+                }
+
+                assignmentResponseList.add(assignmentResponse);
             }
-            assignmentResponseList.add(assignmentResponse);
-        }
+
         return assignmentResponseList;
     }
 
-
-//    @Override
-//    public Iterable<AssignmentRes> getAllCardsWithQuery() {
-//        List<AssignmentRes> assignmentResList = new ArrayList<>();
-//        Iterable<Assignment> assignments = assignmentRepository.findByDeletedStatus(false);
-//        for (Assignment assignment : assignments) {
-//            AssignmentRes assignmentRes = new AssignmentRes(
-//                    assignment.getAssignmentName(),
-//                    assignment.getBillableTime(),
-//                    assignment.getEstimateTime(),
-//                    assignment.getCompletedStatus()
-//            );
-//
-//            assignmentRes.setCardObj(new ArrayList());
-//            Double amtActualTime = 0d;
-//            for (Card card : assignment.getCards()) {
-//                // skip deleted cards
-//                if (card.getDeletedStatus() == false) {
-//                    CardResponse cardResponse = new CardResponse(
-//                            card.getCardName(),
-//                            card.getActualTime(),
-//                            card.getCardDate()
-//                    );
-//                    assignmentRes.getCardObj().add(cardResponse);
-//                    amtActualTime += card.getActualTime();
-//                }
-//            }
-//
-//            assignmentRes.setActualTime(amtActualTime);
-//            assignmentResList.add(assignmentRes);
-//        }
-//        return assignmentResList;
-//    }
 
     @Override
     public Card addCard(CardRequest cardRequest) {
@@ -118,19 +89,6 @@ public class CardServiceImpl implements CardService{
         return cardRepository.save(card);
     }
 
-//    @Override
-//    public Iterable<CardListResponse> findCardListByAssignmentId(Long assignmentId) {
-//        List<CardListResponse> cardListResponseList = new ArrayList<>();
-//        Iterable<Card> cards =  cardRepository.findCardListByAssignmentId(assignmentId);
-//        for (Card card : cards) {
-//            CardListResponse cardListResponse = new CardListResponse(
-//                    card.getId(),
-//                    card.getCardName()
-//            );
-//            cardListResponseList.add(cardListResponse);
-//        }
-//        return cardListResponseList;
-//    }
 
     @Override
     public Iterable<UserResponse> getAllAvailableTime() {
@@ -174,7 +132,8 @@ public class CardServiceImpl implements CardService{
                             (BigInteger)userCards[0],
                             (String)userCards[1],
                             (Double)userCards[2],
-                            (Date)userCards[3]
+                            (Date)userCards[3],
+                            (String)userCards[4]
                     );
 
                     groupByCardsResponse.getCard().add(cardUserResponse);
