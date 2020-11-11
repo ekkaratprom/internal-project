@@ -16,7 +16,9 @@ public class CardResponse {
         this.cardName = cardName;
         this.cardActualTime = cardActualTime;
         this.cardDate = cardDate;
+
     }
+
 
     public Long getCardId() {
         return cardId;

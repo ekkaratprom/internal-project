@@ -1,9 +1,11 @@
 package com.allianz.siesta.card.response;
 
 
+import java.math.BigInteger;
 import java.util.List;
 
 public class AssignmentResponse {
+    private Long assignmentId;
     private String assignmentName;
     private Double billableTime;
     private Double estimateTime;
@@ -11,12 +13,22 @@ public class AssignmentResponse {
     private Double totalActualTime;
     private List cardObj;
 
-    public AssignmentResponse(String assignmentName, Double billableTime, Double estimateTime, Boolean completedStatus, Double totalActualTime) {
+
+    public AssignmentResponse(Long assignmentId, String assignmentName, Double billableTime, Double estimateTime, Boolean completedStatus, Double totalActualTime) {
+        this.assignmentId = assignmentId;
         this.assignmentName = assignmentName;
         this.billableTime = billableTime;
         this.estimateTime = estimateTime;
         this.completedStatus = completedStatus;
         this.totalActualTime = totalActualTime;
+    }
+
+    public Long getAssignmentId() {
+        return assignmentId;
+    }
+
+    public void setAssignmentId(Long assignmentId) {
+        this.assignmentId = assignmentId;
     }
 
     public Boolean getCompletedStatus() {
