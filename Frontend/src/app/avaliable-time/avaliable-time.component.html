@@ -57,12 +57,13 @@
               <h6 class="position">{{ r.position }}</h6>
               <br />
               <p *ngFor="let index of r['skills']" class="card-text">
-                <img style="width: 1rem" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
+                <img style="width: 1rem; margin-right: 5px;" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
               </p>
             </div>
           </div>
         </div>
         <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center">
+          <div class="col">
           <li class="color-box" *ngFor="let item of r['cards']"
             [ngStyle]="{ backgroundColor: item.totalActualTime | color }"
             (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
@@ -78,6 +79,24 @@
               <!-- {{ index }} -->
             </div>
           </li>
+        </div>
+        <div class="col">
+          <li class="color-box" *ngFor="let item of r['cards']"
+            [ngStyle]="{ backgroundColor: item.totalActualTime | color }"
+            (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
+
+            <ng-template #content let-modal>
+              <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)" (submitCompleted)="close()"
+                (submitUpdateCardCompleted)="updateCardList()">
+              </app-avaliable-form>
+            </ng-template>
+
+            <div class="text-in-box">
+              {{ item.totalActualTime }}
+              <!-- {{ index }} -->
+            </div>
+          </li>
+        </div>
         </div>
       </div>
     </div>
