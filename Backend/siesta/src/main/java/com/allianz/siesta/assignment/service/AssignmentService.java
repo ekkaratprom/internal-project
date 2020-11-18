@@ -9,11 +9,14 @@ import com.allianz.siesta.assignment.request.DeleteStatusRequest;
 import com.allianz.siesta.project.Project;
 import com.allianz.siesta.project.exception.ProjectNotFoundException;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface AssignmentService {
 
     Assignment addAssignment(AssignmentRequest assignmentRequest) throws ProjectNotFoundException;
+
+    List<AssignmentRequest> addAssignments(List<AssignmentRequest> assignmentRequestList);
 
     Iterable<Assignment> getAllAssignments();
 
@@ -21,5 +24,5 @@ public interface AssignmentService {
 
     Assignment deleteAssignment(DeleteStatusRequest deleteStatusRequest, Long id) throws AssignmentNotFoundException, DeletedStatusException;
 
-    Assignment updateAssignment(AssignmentRequest assignmentRequest, Long id) throws AssignmentNotFoundException, ProjectNotFoundException;
+    Assignment updateAssignment(AssignmentRequest assignmentRequest, String id) throws AssignmentNotFoundException, ProjectNotFoundException;
 }

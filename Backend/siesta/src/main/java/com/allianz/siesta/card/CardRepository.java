@@ -6,15 +6,16 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public interface CardRepository extends JpaRepository <Card, Long> {
 
     Iterable<Card> findCardListByAssignmentId(Long assignmentId);
 
-    @Query(value="SELECT * FROM CARD " +
+    @Query(value="SELECT card_name, actual_time, card_date, id FROM CARD " +
             "WHERE deleted_status IS FALSE " +
             "AND assignment_id = :id ", nativeQuery = true)
-    List<Card> getCardByAssignmentId(@Param("id") Long id);
+    List<Object[]> getCardByAssignmentId(@Param("id") Long id);
 
     @Query(value = "SELECT SUM(COALESCE(actual_time,0.0)) AS totalActualTime, " +
             "DATE(card_date) AS cardDate " +

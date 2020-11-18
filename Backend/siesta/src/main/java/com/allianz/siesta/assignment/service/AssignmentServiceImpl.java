@@ -12,11 +12,15 @@ import com.allianz.siesta.card.CardRepository;
 import com.allianz.siesta.project.Project;
 import com.allianz.siesta.project.ProjectRepository;
 import com.allianz.siesta.project.exception.ProjectNotFoundException;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.logging.Logger;
 
 import static org.hibernate.query.criteria.internal.ValueHandlerFactory.isBoolean;
 
@@ -37,9 +41,22 @@ public class AssignmentServiceImpl implements AssignmentService {
     public Assignment addAssignment(AssignmentRequest assignmentRequest) throws ProjectNotFoundException {
         verifyProjectId(assignmentRequest.getProjectId());
 
-        Assignment assignment = assignmentRequest.assignmentRequest();
-        assignment.setDeletedStatus(false);
+            Assignment assignment = assignmentRequest.assignmentRequest();
+            assignment.setDeletedStatus(false);
+
+
         return assignmentRepository.save(assignment);
+    }
+
+    @Override
+    public List<AssignmentRequest> addAssignments(List<AssignmentRequest> assignmentRequestList){
+        for (AssignmentRequest assignmentRequest : assignmentRequestList) {
+            Assignment assignment = assignmentRequest.assignmentRequest();
+            assignment.setDeletedStatus(false);
+
+            assignmentRepository.save(assignment);
+        }
+        return assignmentRequestList;
     }
 
     @Override
@@ -65,9 +82,10 @@ public class AssignmentServiceImpl implements AssignmentService {
     @Override
     public Assignment deleteAssignment(DeleteStatusRequest deleteStatusRequest, Long id) throws AssignmentNotFoundException, DeletedStatusException {
         //check assignmentId
-        verifyAssignmentId(id);
+//        verifyAssignmentId(id);
+//        validateId(id);
 
-        //check value = boolean
+//        check value = boolean
 //        verifyDeletedStatus(deleteStatusRequest.getDeletedStatus());
 
         Assignment assignmentOptional = assignmentRepository.getOne(id);
@@ -79,16 +97,15 @@ public class AssignmentServiceImpl implements AssignmentService {
             cardRepository.save(card);
         }
 
-
         assignmentOptional.setDeletedStatus(deleteStatusRequest.getDeletedStatus());
         return assignmentRepository.save(assignmentOptional);
 
     }
 
     @Override
-    public Assignment updateAssignment(AssignmentRequest assignmentRequest, Long id) throws AssignmentNotFoundException, ProjectNotFoundException {
+    public Assignment updateAssignment(AssignmentRequest assignmentRequest, String assignmentId) throws AssignmentNotFoundException, ProjectNotFoundException {
         //check assignmentId
-        verifyAssignmentId(id);
+        Long id = verifyAssignmentId(assignmentId);
         Assignment assignment = assignmentRepository.getOne(id);
 
         if (assignmentRequest.getAssignmentName() != null) {
@@ -122,12 +139,35 @@ public class AssignmentServiceImpl implements AssignmentService {
                 new ProjectNotFoundException("error"));
     }
 
+//    private Long validateId (String id) throws AssignmentNotFoundException {
+//        if ((null == id)){
+//            throw new AssignmentNotFoundException("Id is emply");}
+//
+//        Long assignmentId = 0L;
+//        try {
+//            assignmentId = Long.parseLong(String.valueOf(id));
+//        }
+//        catch (NumberFormatException e) {
+//            throw new AssignmentNotFoundException("Incorrect data format");
+//        }
+//        return id;
+//    }
+
+
+
     //check assignmentId
-    private Assignment verifyAssignmentId (Long id) throws AssignmentNotFoundException {
-        return assignmentRepository.findById(id).orElseThrow(() ->
-                new AssignmentNotFoundException("error"));
+    private Long verifyAssignmentId (String assingmentId) throws AssignmentNotFoundException {
+      Long id =  0L;
+        try {
+           id =  Long.parseLong(assingmentId);
+        } catch (Exception e) {
+            throw  new AssignmentNotFoundException("Assignment not found!");
+        }
+        return id;
     }
 
-//    private boolean verifyDeletedStatus (Boolean deletedStatus) throws DeletedStatusException {
-//        if (isBoolean(deletedStatus)
+    private boolean verifyDeletedStatus (Boolean deletedStatus) throws DeletedStatusException {
+        return Optional.of(isBoolean(deletedStatus)).orElseThrow(() ->
+                    new DeletedStatusException("error"));
+    }
 }

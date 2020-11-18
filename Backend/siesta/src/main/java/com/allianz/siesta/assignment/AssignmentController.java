@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping(value = "/api")
@@ -23,6 +25,11 @@ public class AssignmentController {
     @PostMapping(value = "/v1/addAssignment")
     public ResponseEntity<Assignment> addAssignment(@RequestBody AssignmentRequest assignmentRequest) throws ProjectNotFoundException {
         return ResponseEntity.accepted().body(assignmentService.addAssignment(assignmentRequest));
+    }
+
+    @PostMapping(value = "/v2/addAssignment")
+    public ResponseEntity<List<AssignmentRequest>> addAssignments(@RequestBody List<AssignmentRequest> assignmentRequestList)  {
+        return ResponseEntity.accepted().body(assignmentService.addAssignments(assignmentRequestList));
     }
 
 
@@ -47,7 +54,7 @@ public class AssignmentController {
 
 
     @PatchMapping(value = "/v1/{id}/updateassignment")
-    public ResponseEntity<Assignment> updateAssignment(@PathVariable(value = "id") Long id, @RequestBody AssignmentRequest assignmentRequest) throws AssignmentNotFoundException, ProjectNotFoundException {
+    public ResponseEntity<Assignment> updateAssignment(@PathVariable(value = "id") String id, @RequestBody AssignmentRequest assignmentRequest) throws AssignmentNotFoundException, ProjectNotFoundException {
         return ResponseEntity.accepted().body(assignmentService.updateAssignment(assignmentRequest, id));
     }
 }

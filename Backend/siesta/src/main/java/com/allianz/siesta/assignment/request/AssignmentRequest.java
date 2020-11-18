@@ -2,13 +2,26 @@ package com.allianz.siesta.assignment.request;
 
 import com.allianz.siesta.assignment.Assignment;
 import com.allianz.siesta.project.Project;
+import liquibase.exception.DatabaseException;
+
+import java.util.Date;
 
 public class AssignmentRequest {
     private String assignmentName;
     private Double estimateTime;
     private Double billableTime;
     private Boolean completedStatus;
+    private Date endDate;
     private Long projectId;
+
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 
     public String getAssignmentName() {
         return assignmentName;
@@ -56,6 +69,7 @@ public class AssignmentRequest {
         assignment.setBillableTime(billableTime);
         assignment.setEstimateTime(estimateTime);
         assignment.setCompletedStatus(completedStatus);
+        assignment.setEndDate(endDate);
         assignment.setProject(new Project(projectId));
 
         return assignment;

@@ -16,8 +16,5 @@ public class AssignmentNotFoundExceptionHandle {
     }
 
 
-    @ResponseBody
-    @ExceptionHandler({DeletedStatusException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    String deletedStatusExceptionHandler(DeletedStatusException ex) {return ex.getMessage();}
+
 }

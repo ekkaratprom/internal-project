@@ -9,11 +9,14 @@ import com.allianz.siesta.card.response.AssignmentResponse;
 import com.allianz.siesta.card.response.UserResponse;
 
 
+
+
 public interface CardService {
 
     Iterable<AssignmentResponse> getAllCards();
 
     Card addCard(CardRequest cardRequest);
+
 
     Iterable<UserResponse> getAllAvailableTime();
 

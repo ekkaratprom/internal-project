@@ -11,5 +11,8 @@ public class AssignmentNotFoundException extends Exception {
         super("Assignment not found!");
     }
 
+    public AssignmentNotFoundException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
 }

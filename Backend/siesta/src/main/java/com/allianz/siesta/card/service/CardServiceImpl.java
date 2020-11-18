@@ -21,7 +21,6 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CardServiceImpl implements CardService{
@@ -37,7 +36,7 @@ public class CardServiceImpl implements CardService{
 
     @Autowired
     private UserRepository userRepository;
-    
+
 
     @Override
     public Iterable<AssignmentResponse> getAllCards() {
@@ -47,7 +46,7 @@ public class CardServiceImpl implements CardService{
 
 
             Double totalActualTime = assignmentRepository.getTotalActualTime(assignment.getId());
-            List<Card> cardList = cardRepository.getCardByAssignmentId(assignment.getId());
+            List<Object[]> cardList = cardRepository.getCardByAssignmentId(assignment.getId());
 
                 AssignmentResponse assignmentResponse = new AssignmentResponse(
                         assignment.getId(),
@@ -55,17 +54,18 @@ public class CardServiceImpl implements CardService{
                         assignment.getBillableTime(),
                         assignment.getEstimateTime(),
                         assignment.getCompletedStatus(),
+                        assignment.getEndDate(),
                         totalActualTime
                 );
 
                 assignmentResponse.setCardObj(new ArrayList());
-                for (Card card : cardList) {
+                for (Object[] card : cardList) {
                     CardResponse cardResponse = new CardResponse(
-                            card.getCardName(),
-                            card.getActualTime(),
-                            card.getCardDate()
+                            (BigInteger)card[3],
+                            (String)card[0],
+                            (Double) card[1],
+                            (Date)card[2]
                     );
-                    cardResponse.setCardId(card.getId());
 
                     assignmentResponse.getCardObj().add(cardResponse);
 
@@ -90,6 +90,7 @@ public class CardServiceImpl implements CardService{
     }
 
 
+
     @Override
     public Iterable<UserResponse> getAllAvailableTime() {
         List<UserResponse> userResponseList = new ArrayList<>();
@@ -102,7 +103,7 @@ public class CardServiceImpl implements CardService{
                     user.getId(),
                     user.getPosition().getPositionName()
             );
-            //skils
+            //skills
             userResponse.setSkills(new ArrayList());
             for (Technician technician : techniciansList){
                 SkillResponse skillResponse = new SkillResponse(
