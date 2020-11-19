@@ -2,10 +2,12 @@ package com.allianz.siesta.card.service;
 
 import com.allianz.siesta.assignment.Assignment;
 import com.allianz.siesta.assignment.AssignmentRepository;
+import com.allianz.siesta.assignment.exception.AssignmentIdException;
 import com.allianz.siesta.assignment.exception.AssignmentNotFoundException;
 import com.allianz.siesta.assignment.request.AssignmentRequest;
 import com.allianz.siesta.card.Card;
 import com.allianz.siesta.card.CardRepository;
+import com.allianz.siesta.card.exception.CardIdException;
 import com.allianz.siesta.card.exception.CardNotFoundException;
 import com.allianz.siesta.card.request.CardRequest;
 import com.allianz.siesta.card.request.DeleteStatusRequest;
@@ -131,17 +133,6 @@ public class CardServiceImpl implements CardService{
         return cardRequestList;
     }
 
-//    @Override
-//    public List<AssignmentRequest> addAssignments(List<AssignmentRequest> assignmentRequestList){
-//        for (AssignmentRequest assignmentRequest : assignmentRequestList) {
-//            Assignment assignment = assignmentRequest.assignmentRequest();
-//            assignment.setDeletedStatus(false);
-//
-//            assignmentRepository.save(assignment);
-//        }
-//        return assignmentRequestList;
-//    }
-
     @Override
     public Iterable<UserResponse> getAllAvailableTime() {
         List<UserResponse> userResponseList = new ArrayList<>();
@@ -202,8 +193,10 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
-    public Card updateCard(UpdateCardRequest updateCardRequest, Long id) throws CardNotFoundException {
-        verifyCardId(id);
+    public Card updateCard(UpdateCardRequest updateCardRequest, String cardId) throws CardIdException, CardNotFoundException {
+        Long id = verifyCardId(cardId);
+        verifyCardIdIsExist(id);
+
         Card card = cardRepository.getOne(id);
 
         if (updateCardRequest.getEstimateTime() != null) {
@@ -219,8 +212,10 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
-    public Card deleteCard(DeleteStatusRequest deleteStatusRequest, Long id) throws CardNotFoundException {
-        verifyCardId(id);
+    public Card deleteCard(DeleteStatusRequest deleteStatusRequest, String cardId) throws CardIdException, CardNotFoundException {
+        Long id = verifyCardId(cardId);
+        verifyCardIdIsExist(id);
+
         Card card = cardRepository.getOne(id);
 
         if (deleteStatusRequest.getDeletedStatus() != null) {
@@ -229,9 +224,20 @@ public class CardServiceImpl implements CardService{
 
         return cardRepository.save(card);
     }
-
+    
     //check verifyCardId
-    private Card verifyCardId (Long id) throws CardNotFoundException {
+    private Long verifyCardId (String cardId) throws CardIdException {
+        Long id =  0L;
+        try {
+            id =  Long.parseLong(cardId);
+        } catch (Exception e) {
+            throw  new CardIdException("error");
+        }
+        return id;
+    }
+
+    //check cardIdIsExist
+    private Card verifyCardIdIsExist (Long id) throws CardNotFoundException {
         return cardRepository.findById(id).orElseThrow(() ->
                 new CardNotFoundException("error"));
     };

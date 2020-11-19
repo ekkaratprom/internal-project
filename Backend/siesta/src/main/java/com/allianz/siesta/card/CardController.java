@@ -1,6 +1,7 @@
 package com.allianz.siesta.card;
 
 import com.allianz.siesta.assignment.exception.AssignmentNotFoundException;
+import com.allianz.siesta.card.exception.CardIdException;
 import com.allianz.siesta.card.exception.CardNotFoundException;
 import com.allianz.siesta.card.request.CardRequest;
 import com.allianz.siesta.card.request.DeleteStatusRequest;
@@ -45,13 +46,13 @@ public class CardController {
 
 
     @PatchMapping(path = "/v1/{id}/updatecard")
-    public ResponseEntity<Card> updateCard(@PathVariable (value = "id") Long id, @RequestBody UpdateCardRequest updateCardRequest) throws CardNotFoundException {
+    public ResponseEntity<Card> updateCard(@PathVariable (value = "id") String id, @RequestBody UpdateCardRequest updateCardRequest) throws CardIdException, CardNotFoundException {
         return ResponseEntity.accepted().body(cardService.updateCard(updateCardRequest, id));
     }
 
 
     @PatchMapping(path = "/v1/{id}/updatedeletestatus")
-    public ResponseEntity<Card> deleteCard(@PathVariable (value = "id") Long id, @RequestBody DeleteStatusRequest deleteStatusRequest) throws CardNotFoundException{
+    public ResponseEntity<Card> deleteCard(@PathVariable (value = "id") String id, @RequestBody DeleteStatusRequest deleteStatusRequest) throws CardIdException, CardNotFoundException{
         return ResponseEntity.accepted().body(cardService.deleteCard(deleteStatusRequest, id));
     }
 

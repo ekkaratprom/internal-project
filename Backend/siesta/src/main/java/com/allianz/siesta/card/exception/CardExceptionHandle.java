@@ -14,4 +14,11 @@ public class CardExceptionHandle {
     String cardNotFoundExceptionHandler(CardNotFoundException ex){
         return ex.getMessage();
     }
+
+    @ResponseBody
+    @ExceptionHandler({CardIdException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String cardIdExceptionHandler(CardIdException ex){
+        return ex.getMessage();
+    }
 }

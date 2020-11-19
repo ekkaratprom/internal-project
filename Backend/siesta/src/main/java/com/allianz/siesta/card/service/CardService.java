@@ -2,6 +2,7 @@ package com.allianz.siesta.card.service;
 
 import com.allianz.siesta.assignment.exception.AssignmentNotFoundException;
 import com.allianz.siesta.card.Card;
+import com.allianz.siesta.card.exception.CardIdException;
 import com.allianz.siesta.card.exception.CardNotFoundException;
 import com.allianz.siesta.card.request.CardRequest;
 import com.allianz.siesta.card.request.DeleteStatusRequest;
@@ -23,8 +24,8 @@ public interface CardService {
 
     Iterable<UserResponse> getAllAvailableTime();
 
-    Card updateCard(UpdateCardRequest updateCardRequest, Long id) throws CardNotFoundException;
+    Card updateCard(UpdateCardRequest updateCardRequest, String id) throws CardNotFoundException, CardIdException;
 
-    Card deleteCard(DeleteStatusRequest deleteStatusRequest, Long id) throws CardNotFoundException;
+    Card deleteCard(DeleteStatusRequest deleteStatusRequest, String id) throws CardNotFoundException, CardIdException;
 
 }
