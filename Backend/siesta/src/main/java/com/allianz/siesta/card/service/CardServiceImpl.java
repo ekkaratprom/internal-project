@@ -101,6 +101,7 @@ public class CardServiceImpl implements CardService{
     @Override
     public Card addCard(CardRequest cardRequest) {
         Card card = cardRequest.cardRequest();
+        card.setActualTime(0d);
         card.setCompletedStatus(false);
         card.setDeletedStatus(false);
         card.setCreateDate(new Date());
@@ -113,6 +114,7 @@ public class CardServiceImpl implements CardService{
     public List<CardRequest> addCards(List<CardRequest> cardRequestList) {
         for (CardRequest cardRequest : cardRequestList) {
             Card card = cardRequest.cardRequest();
+            card.setActualTime(0d);
             card.setCompletedStatus(false);
             card.setDeletedStatus(false);
             card.setCreateDate(new Date());
