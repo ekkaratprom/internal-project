@@ -25,11 +25,12 @@ public interface CardRepository extends JpaRepository <Card, Long> {
             "GROUP BY DATE(card_date) ", nativeQuery = true)
     List<Object[]> getTotalActualTimeGroupByCardDate(@Param("id") Long id);
 
-    @Query(value = "SELECT c.id, c.card_name, c.actual_time, c.create_date, a.assignment_name FROM card c, assignment a " +
+    @Query(value = "SELECT c.id, c.card_name, c.estimate_time, c.actual_time, c.create_date, a.assignment_name FROM card c, assignment a " +
             "WHERE c.deleted_status IS FALSE " +
             "AND c.assignment_id = a.id " +
             "AND c.user_id = :id " +
             "AND c.card_date = :cardDate", nativeQuery = true)
     List<Object[]> getCardByUserId(@Param("id") Long id, @Param("cardDate") Date cardDate);
+
 
 }

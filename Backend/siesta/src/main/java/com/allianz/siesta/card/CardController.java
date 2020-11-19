@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping(value = "/api")
@@ -28,6 +30,11 @@ public class CardController {
     @PostMapping(path = "/v1/addcard")
     public ResponseEntity<Card> addCard(@RequestBody CardRequest cardRequest) {
         return ResponseEntity.accepted().body(cardService.addCard(cardRequest));
+    }
+
+    @PostMapping(path = "/v2/addcards")
+    public ResponseEntity<List<CardRequest>> addCards(@RequestBody List<CardRequest> cardRequestList) {
+        return ResponseEntity.accepted().body(cardService.addCards(cardRequestList));
     }
 
     @GetMapping(path = "/v1/availabletime")

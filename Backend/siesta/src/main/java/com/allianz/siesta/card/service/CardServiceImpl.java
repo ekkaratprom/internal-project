@@ -2,6 +2,7 @@ package com.allianz.siesta.card.service;
 
 import com.allianz.siesta.assignment.Assignment;
 import com.allianz.siesta.assignment.AssignmentRepository;
+import com.allianz.siesta.assignment.request.AssignmentRequest;
 import com.allianz.siesta.card.Card;
 import com.allianz.siesta.card.CardRepository;
 import com.allianz.siesta.card.exception.CardNotFoundException;
@@ -41,22 +42,41 @@ public class CardServiceImpl implements CardService{
     @Override
     public Iterable<AssignmentResponse> getAllCards() {
         List<AssignmentResponse> assignmentResponseList = new ArrayList<>();
-        List<Assignment> assignments = assignmentRepository.findByDeletedStatus(Boolean.FALSE);
-        for (Assignment assignment : assignments) {
+//        List<Assignment> assignments = assignmentRepository.findByDeletedStatus(Boolean.FALSE);
+        List<Object[]> assignments = assignmentRepository.getUndeletedAllAssignment();
+
+        for (Object[] assignment : assignments) {
 
 
-            Double totalActualTime = assignmentRepository.getTotalActualTime(assignment.getId());
-            List<Object[]> cardList = cardRepository.getCardByAssignmentId(assignment.getId());
 
-                AssignmentResponse assignmentResponse = new AssignmentResponse(
-                        assignment.getId(),
-                        assignment.getAssignmentName(),
-                        assignment.getBillableTime(),
-                        assignment.getEstimateTime(),
-                        assignment.getCompletedStatus(),
-                        assignment.getEndDate(),
-                        totalActualTime
-                );
+//            Double totalActualTime = assignmentRepository.getTotalActualTime(assignment.getId());
+//            List<Object[]> cardList = cardRepository.getCardByAssignmentId(assignment.getId());
+//
+//                AssignmentResponse assignmentResponse = new AssignmentResponse(
+//                        assignment.getId(),
+//                        assignment.getAssignmentName(),
+//                        assignment.getBillableTime(),
+//                        assignment.getEstimateTime(),
+//                        assignment.getCompletedStatus(),
+//                        assignment.getEndDate(),
+//                        totalActualTime
+//                );
+           BigInteger assignmentId = (BigInteger)assignment[0];
+           Long id = 0L;
+           id = assignmentId.longValue();
+
+            Double totalActualTime = assignmentRepository.getTotalActualTime(id);
+            List<Object[]> cardList = cardRepository.getCardByAssignmentId(id);
+
+            AssignmentResponse assignmentResponse = new AssignmentResponse(
+                    id,
+                    (String)assignment[1],
+                    (Double)assignment[2],
+                    (Double)assignment[3],
+                    (Boolean)assignment[4],
+                    (Date)assignment[5],
+                    totalActualTime
+            );
 
                 assignmentResponse.setCardObj(new ArrayList());
                 for (Object[] card : cardList) {
@@ -89,7 +109,30 @@ public class CardServiceImpl implements CardService{
         return cardRepository.save(card);
     }
 
+    @Override
+    public List<CardRequest> addCards(List<CardRequest> cardRequestList) {
+        for (CardRequest cardRequest : cardRequestList) {
+            Card card = cardRequest.cardRequest();
+            card.setCompletedStatus(false);
+            card.setDeletedStatus(false);
+            card.setCreateDate(new Date());
+            card.setAssignedStatus(true);
 
+            cardRepository.save(card);
+        }
+        return cardRequestList;
+    }
+
+//    @Override
+//    public List<AssignmentRequest> addAssignments(List<AssignmentRequest> assignmentRequestList){
+//        for (AssignmentRequest assignmentRequest : assignmentRequestList) {
+//            Assignment assignment = assignmentRequest.assignmentRequest();
+//            assignment.setDeletedStatus(false);
+//
+//            assignmentRepository.save(assignment);
+//        }
+//        return assignmentRequestList;
+//    }
 
     @Override
     public Iterable<UserResponse> getAllAvailableTime() {
@@ -133,8 +176,9 @@ public class CardServiceImpl implements CardService{
                             (BigInteger)userCards[0],
                             (String)userCards[1],
                             (Double)userCards[2],
-                            (Date)userCards[3],
-                            (String)userCards[4]
+                            (Double)userCards[3],
+                            (Date)userCards[4],
+                            (String)userCards[5]
                     );
 
                     groupByCardsResponse.getCard().add(cardUserResponse);
@@ -153,6 +197,10 @@ public class CardServiceImpl implements CardService{
     public Card updateCard(UpdateCardRequest updateCardRequest, Long id) throws CardNotFoundException {
         verifyCardId(id);
         Card card = cardRepository.getOne(id);
+
+        if (updateCardRequest.getEstimateTime() != null) {
+            card.setEstimateTime(updateCardRequest.getEstimateTime());
+        }
 
         if (updateCardRequest.getActualTime() != null) {
             card.setActualTime(updateCardRequest.getActualTime());

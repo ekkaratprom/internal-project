@@ -8,7 +8,7 @@ import com.allianz.siesta.card.request.UpdateCardRequest;
 import com.allianz.siesta.card.response.AssignmentResponse;
 import com.allianz.siesta.card.response.UserResponse;
 
-
+import java.util.List;
 
 
 public interface CardService {
@@ -16,6 +16,8 @@ public interface CardService {
     Iterable<AssignmentResponse> getAllCards();
 
     Card addCard(CardRequest cardRequest);
+
+    List<CardRequest> addCards(List<CardRequest> cardRequestList);
 
 
     Iterable<UserResponse> getAllAvailableTime();
