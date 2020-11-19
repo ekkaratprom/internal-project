@@ -156,14 +156,15 @@ public class CardServiceImpl implements CardService{
             }
 
             //Cards[]
-            List<Object[]> cardList = cardRepository.getTotalActualTimeGroupByCardDate(user.getId());
+            List<Object[]> cardList = cardRepository.getTotalEstimateAndActualTimeGroupByCardDate(user.getId());
 
             userResponse.setCards(new ArrayList());
             for (Object[] card : cardList) {
-                Date cardDate = (Date)card[1];
+                Date cardDate = (Date)card[2];
                 GroupByCardsResponse groupByCardsResponse = new GroupByCardsResponse(
                         (Double)card[0],
-                        (Date)card[1]
+                        (Double)card[1],
+                        (Date)card[2]
                 );
                 List<Object[]> userCard = cardRepository.getCardByUserId(user.getId(), cardDate);
 
@@ -224,17 +225,21 @@ public class CardServiceImpl implements CardService{
 
         return cardRepository.save(card);
     }
-    
+
     //check verifyCardId
     private Long verifyCardId (String cardId) throws CardIdException {
+        if (null == cardId) {
+            throw new CardIdException("CardId is emply");
+        }
         Long id =  0L;
         try {
             id =  Long.parseLong(cardId);
         } catch (Exception e) {
-            throw  new CardIdException("error");
+            throw  new CardIdException("CardId wrong format!");
         }
         return id;
     }
+
 
     //check cardIdIsExist
     private Card verifyCardIdIsExist (Long id) throws CardNotFoundException {
