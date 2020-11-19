@@ -26,4 +26,7 @@ public interface AssignmentRepository extends JpaRepository <Assignment, Long> {
             "GROUP BY  a.id, a.assignment_name, a.billable_time, a.estimate_time", nativeQuery = true)
     Double getTotalActualTime(@Param("id") Long id);
 
+    @Query(value = "SELECT id, assignment_name, billable_time, estimate_time, completed_status, end_date FROM assignment WHERE deleted_status IS FALSE", nativeQuery = true)
+    List<Object[]> getUndeletedAllAssignment();
+
 }

@@ -4,7 +4,6 @@ import com.allianz.siesta.assignment.Assignment;
 import com.allianz.siesta.assignment.AssignmentListResponse;
 import com.allianz.siesta.assignment.AssignmentRepository;
 import com.allianz.siesta.assignment.exception.AssignmentNotFoundException;
-import com.allianz.siesta.assignment.exception.DeletedStatusException;
 import com.allianz.siesta.assignment.request.AssignmentRequest;
 import com.allianz.siesta.assignment.request.DeleteStatusRequest;
 import com.allianz.siesta.card.Card;
@@ -12,17 +11,11 @@ import com.allianz.siesta.card.CardRepository;
 import com.allianz.siesta.project.Project;
 import com.allianz.siesta.project.ProjectRepository;
 import com.allianz.siesta.project.exception.ProjectNotFoundException;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.logging.Logger;
-
-import static org.hibernate.query.criteria.internal.ValueHandlerFactory.isBoolean;
 
 
 @Service
@@ -48,16 +41,16 @@ public class AssignmentServiceImpl implements AssignmentService {
         return assignmentRepository.save(assignment);
     }
 
-    @Override
-    public List<AssignmentRequest> addAssignments(List<AssignmentRequest> assignmentRequestList){
-        for (AssignmentRequest assignmentRequest : assignmentRequestList) {
-            Assignment assignment = assignmentRequest.assignmentRequest();
-            assignment.setDeletedStatus(false);
-
-            assignmentRepository.save(assignment);
-        }
-        return assignmentRequestList;
-    }
+//    @Override
+//    public List<AssignmentRequest> addAssignments(List<AssignmentRequest> assignmentRequestList){
+//        for (AssignmentRequest assignmentRequest : assignmentRequestList) {
+//            Assignment assignment = assignmentRequest.assignmentRequest();
+//            assignment.setDeletedStatus(false);
+//
+//            assignmentRepository.save(assignment);
+//        }
+//        return assignmentRequestList;
+//    }
 
     @Override
     public Iterable<Assignment> getAllAssignments(){
@@ -80,7 +73,7 @@ public class AssignmentServiceImpl implements AssignmentService {
     }
 
     @Override
-    public Assignment deleteAssignment(DeleteStatusRequest deleteStatusRequest, Long id) throws AssignmentNotFoundException, DeletedStatusException {
+    public Assignment deleteAssignment(DeleteStatusRequest deleteStatusRequest, Long id) throws AssignmentNotFoundException {
         //check assignmentId
 //        verifyAssignmentId(id);
 //        validateId(id);
@@ -161,13 +154,11 @@ public class AssignmentServiceImpl implements AssignmentService {
         try {
            id =  Long.parseLong(assingmentId);
         } catch (Exception e) {
-            throw  new AssignmentNotFoundException("Assignment not found!");
+            throw  new AssignmentNotFoundException("error");
         }
         return id;
     }
 
-    private boolean verifyDeletedStatus (Boolean deletedStatus) throws DeletedStatusException {
-        return Optional.of(isBoolean(deletedStatus)).orElseThrow(() ->
-                    new DeletedStatusException("error"));
-    }
+//    private Assignment (Long id) throws
+
 }
