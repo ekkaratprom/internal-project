@@ -73,7 +73,7 @@ export class AssignmentListComponent implements OnInit , DoCheck {
   }
 
   open(content): void {
-    this.modalReference = this.modalService.open(content, { size: 'sm' });
+    this.modalReference = this.modalService.open(content, { size: 'md' });
   }
 
   close(): void {

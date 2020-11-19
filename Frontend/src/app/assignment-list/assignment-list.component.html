@@ -63,85 +63,68 @@
               <mat-progress-bar
                 mode="determinate"
                 value="{{ (r.totalActualTime / r.estimateTime) * 100 }}"
-              ></mat-progress-bar>
+              >
+              </mat-progress-bar>
             </span>
           </div>
-          <div>
-            End date : {{ r.endDate | date: "dd/MM/yyyy" }}
-          </div>
+          <div>End date : {{ r.endDate | date: "dd/MM/yyyy" }}</div>
 
           <div class="d-flex" title="billable time">
-            <div class="d-flex">
-              <i class="material-icons md-18">ic_monetization_on</i>
-              <p>
-                <!-- Billable Time: -->
-                {{ r.billableTime }} Hrs
-              </p>
-            </div>
+            <div class="icon-time">
+              <div class="d-flex child">
+                <i class="material-icons md-18">ic_monetization_on</i>
+                <p>
+                  <!-- Billable Time: -->
+                  {{ r.billableTime }} Hrs
+                </p>
+              </div>
 
-            <div class="d-flex" title="estimate time">
-              <i class="material-icons md-18">ic_query_builder</i>
-              <p>
-                <!-- Estimate Time: -->
-                {{ r.estimateTime }} Hrs
-              </p>
-            </div>
+              <div class="d-flex child" title="estimate time">
+                <i class="material-icons md-18">ic_query_builder</i>
+                <p>
+                  <!-- Estimate Time: -->
+                  {{ r.estimateTime }} Hrs
+                </p>
+              </div>
 
-            <div class="d-flex" title="actual time">
-              <i class="material-icons md-18">ic_watch_later</i>
-              <p>
-                <!-- Actual Time: -->
-                {{ r.totalActualTime }} Hrs
-              </p>
-            </div>
-
-            <!-- <div *ngIf="r['cardObj'].length > 0">
-              <span
-                (click)="isCollapsed = !isCollapsed; collapsed(r.assignmentId)"
-                [attr.aria-expanded]="!isCollapsed"
-                aria-controls="collapse"
-              >
-                <mat-icon class="cursor">expand_more</mat-icon>
-              </span>
-            </div> -->
-          </div>
-
-          <!-- <div id="collapse" [ngbCollapse]="isCollapsed">
-            <div *ngIf="r.assignmentId == collapesdId">
-              <div class="card childCard" *ngFor="let co of r['cardObj']">
-                <div class="card-body">
-                  <div class="d-flex">
-                    <p>Card : {{ co.cardName }}</p>
-                    <p>Date :{{ co.cardDate | date: "dd/MM/yyyy" }}</p>
-                    <p>Actual Time : {{ co.cardActualTime }} Hrs.</p>
-                  </div>
-                </div>
+              <div class="d-flex child" title="actual time">
+                <i class="material-icons md-18">ic_watch_later</i>
+                <p>
+                  <!-- Actual Time: -->
+                  {{ r.totalActualTime }} Hrs
+                </p>
               </div>
             </div>
-          </div> -->
+            <div *ngIf="r['cardObj'].length > 0">
+              <button
+                (click)="r.isCollapsed = !r.isCollapsed"
+                [attr.aria-expanded]="!r.isCollapsed"
+                aria-controls="collapseExample"
+                class="dropdown"
+              >
+                <mat-icon class="fa" aria-hidden="true" class="cursor"
+                  >expand_more</mat-icon
+                >
+              </button>
+            </div>
+          </div>
 
-          <div *ngIf="r['cardObj'].length > 0">
-            <div class="row mt-4">
-              <div class="col-12">
-                <div>
-                  <button
-                    (click)="r.isCollapsed = !r.isCollapsed"
-                    [attr.aria-expanded]="!r.isCollapsed"
-                    aria-controls="collapseExample"
-                  >
-                    <!-- <i class="fa" aria-hidden="true"></i> -->
-                    <mat-icon class="fa" aria-hidden="true" class="cursor"
-                      >expand_more</mat-icon
-                    >
-                  </button>
+          <div class="row mt-4">
+            <div class="col-12">
+              <div></div>
+
+              <div [ngbCollapse]="r.isCollapsed">
+                <div class="row">
+                  <p class="row">Card</p>
+                  <p class="row">Date</p>
+                  <p class="row">Actual Time</p>
                 </div>
-
-                <div [ngbCollapse]="r.isCollapsed">
-                  <div *ngFor="let co of r['cardObj']">
-                    <p>Card : {{ co.cardName }}</p>
-                    <p>Date :{{ co.cardDate | date: "dd/MM/yyyy" }}</p>
-                    <p>Actual Time : {{ co.cardActualTime }} Hrs.</p>
-                  </div>
+                <div *ngFor="let co of r['cardObj']" class="row subcard">
+                  <p class="row mt-2 mb-2">{{ co.cardName }}</p>
+                  <p class="row mt-2 mb-2">
+                    {{ co.cardDate | date: "dd/MM/yyyy" }}
+                  </p>
+                  <p class="row mt-2 mb-2">{{ co.cardActualTime }} Hrs.</p>
                 </div>
               </div>
             </div>
