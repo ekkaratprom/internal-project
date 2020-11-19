@@ -51,7 +51,7 @@ export class AssignmentListComponent implements OnInit , DoCheck {
   completedStatus ;
   indexSelected;
   collapesdId ;
-  public isCollapsed = true;
+  public isCollapsed: boolean = true;
 
 
   constructor(private qv: QueueviewserviceService , private assignmentService: AssignmentService,
@@ -188,7 +188,7 @@ export class AssignmentListComponent implements OnInit , DoCheck {
               const cardObj = {
                 cardName: c.cardName,
                 cardActualTime: c.cardActualTime,
-                cardDate: c.cardDate
+                cardDate: c.cardDate,
               };
               this.cObj.push(cardObj);
             });
@@ -199,6 +199,7 @@ export class AssignmentListComponent implements OnInit , DoCheck {
               completedStatus: element.completedStatus,
               estimateTime: element.estimateTime,
               totalActualTime: element.totalActualTime,
+              isCollapsed : true,
               cardObj: this.cObj,
             };
             this.result.push(cardDetail);

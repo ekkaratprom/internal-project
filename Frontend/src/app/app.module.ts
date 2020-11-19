@@ -17,9 +17,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { MatIconModule } from '@angular/material/icon';
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CardFormComponent } from './card-form/card-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -27,6 +29,8 @@ import { QueueViewComponent } from './queue-view/queue-view.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { AvaliableTimeComponent } from './avaliable-time/avaliable-time.component';
 import { AssignmentFormComponent } from './assignment-form/assignment-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -56,13 +60,16 @@ import { AssignmentFormComponent } from './assignment-form/assignment-form.compo
     ColorPipe,
     AssignmentPipe],
   imports: [
+    MatProgressBarModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    MatIconModule,
     ReactiveFormsModule,
     MDBBootstrapModule.forRoot(),
-    NgbModule],
+    NgbModule,
+    BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
