@@ -1,6 +1,5 @@
 package com.allianz.siesta.card.exception;
 
-import com.allianz.siesta.assignment.exception.AssignmentNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

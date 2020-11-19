@@ -3,11 +3,13 @@ package com.allianz.siesta.assignment.service;
 import com.allianz.siesta.assignment.Assignment;
 import com.allianz.siesta.assignment.AssignmentListResponse;
 import com.allianz.siesta.assignment.AssignmentRepository;
+import com.allianz.siesta.assignment.exception.AssignmentIdException;
 import com.allianz.siesta.assignment.exception.AssignmentNotFoundException;
 import com.allianz.siesta.assignment.request.AssignmentRequest;
 import com.allianz.siesta.assignment.request.DeleteStatusRequest;
 import com.allianz.siesta.card.Card;
 import com.allianz.siesta.card.CardRepository;
+import com.allianz.siesta.card.exception.CardNotFoundException;
 import com.allianz.siesta.project.Project;
 import com.allianz.siesta.project.ProjectRepository;
 import com.allianz.siesta.project.exception.ProjectNotFoundException;
@@ -73,13 +75,10 @@ public class AssignmentServiceImpl implements AssignmentService {
     }
 
     @Override
-    public Assignment deleteAssignment(DeleteStatusRequest deleteStatusRequest, Long id) throws AssignmentNotFoundException {
+    public Assignment deleteAssignment(DeleteStatusRequest deleteStatusRequest, String assignmentId) throws AssignmentIdException, AssignmentNotFoundException {
         //check assignmentId
-//        verifyAssignmentId(id);
-//        validateId(id);
-
-//        check value = boolean
-//        verifyDeletedStatus(deleteStatusRequest.getDeletedStatus());
+        Long id = verifyAssignmentId(assignmentId);
+        verifyAssignmentIdIsExist(id);
 
         Assignment assignmentOptional = assignmentRepository.getOne(id);
 
@@ -96,9 +95,10 @@ public class AssignmentServiceImpl implements AssignmentService {
     }
 
     @Override
-    public Assignment updateAssignment(AssignmentRequest assignmentRequest, String assignmentId) throws AssignmentNotFoundException, ProjectNotFoundException {
+    public Assignment updateAssignment(AssignmentRequest assignmentRequest, String assignmentId) throws AssignmentIdException, ProjectNotFoundException, AssignmentNotFoundException {
         //check assignmentId
         Long id = verifyAssignmentId(assignmentId);
+        verifyAssignmentIdIsExist(id);
         Assignment assignment = assignmentRepository.getOne(id);
 
         if (assignmentRequest.getAssignmentName() != null) {
@@ -132,33 +132,23 @@ public class AssignmentServiceImpl implements AssignmentService {
                 new ProjectNotFoundException("error"));
     }
 
-//    private Long validateId (String id) throws AssignmentNotFoundException {
-//        if ((null == id)){
-//            throw new AssignmentNotFoundException("Id is emply");}
-//
-//        Long assignmentId = 0L;
-//        try {
-//            assignmentId = Long.parseLong(String.valueOf(id));
-//        }
-//        catch (NumberFormatException e) {
-//            throw new AssignmentNotFoundException("Incorrect data format");
-//        }
-//        return id;
-//    }
-
-
 
     //check assignmentId
-    private Long verifyAssignmentId (String assingmentId) throws AssignmentNotFoundException {
+    private Long verifyAssignmentId (String assingmentId) throws AssignmentIdException {
       Long id =  0L;
         try {
            id =  Long.parseLong(assingmentId);
         } catch (Exception e) {
-            throw  new AssignmentNotFoundException("error");
+            throw  new AssignmentIdException("error");
         }
         return id;
     }
 
-//    private Assignment (Long id) throws
+    private Assignment verifyAssignmentIdIsExist (Long id) throws AssignmentNotFoundException {
+        return assignmentRepository.findById(id).orElseThrow(() ->
+                new AssignmentNotFoundException("error"));
+    };
+
+
 
 }

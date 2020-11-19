@@ -222,7 +222,7 @@ public class CardServiceImpl implements CardService{
         return cardRepository.save(card);
     }
 
-    //check assignmentId
+    //check verifyCardId
     private Card verifyCardId (Long id) throws CardNotFoundException {
         return cardRepository.findById(id).orElseThrow(() ->
                 new CardNotFoundException("error"));
