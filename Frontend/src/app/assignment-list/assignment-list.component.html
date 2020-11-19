@@ -58,7 +58,7 @@
 
           <hr class="solid" />
           <div class="progress1">
-            <span>progress :</span>
+            <span>Progress :</span>
             <span class="progress-bar1">
               <mat-progress-bar
                 mode="determinate"
@@ -66,7 +66,10 @@
               ></mat-progress-bar>
             </span>
           </div>
-          <div>end date :</div>
+          <div>
+            End date : {{ r.endDate | date: "dd/MM/yyyy" }}
+          </div>
+
           <div class="d-flex" title="billable time">
             <div class="d-flex">
               <i class="material-icons md-18">ic_monetization_on</i>
@@ -135,13 +138,11 @@
 
                 <div [ngbCollapse]="r.isCollapsed">
                   <div *ngFor="let co of r['cardObj']">
-
                     <p>Card : {{ co.cardName }}</p>
                     <p>Date :{{ co.cardDate | date: "dd/MM/yyyy" }}</p>
                     <p>Actual Time : {{ co.cardActualTime }} Hrs.</p>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>

@@ -198,6 +198,7 @@ export class AssignmentListComponent implements OnInit , DoCheck {
               billableTime: element.billableTime,
               completedStatus: element.completedStatus,
               estimateTime: element.estimateTime,
+              endDate: element.endDate,
               totalActualTime: element.totalActualTime,
               isCollapsed : true,
               cardObj: this.cObj,
