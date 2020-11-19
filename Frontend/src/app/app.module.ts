@@ -20,7 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
 import { HttpClientModule } from '@angular/common/http';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CardFormComponent } from './card-form/card-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
