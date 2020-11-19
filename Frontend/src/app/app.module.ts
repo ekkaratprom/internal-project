@@ -29,6 +29,7 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
 import { AvaliableTimeComponent } from './avaliable-time/avaliable-time.component';
 import { AssignmentFormComponent } from './assignment-form/assignment-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     MDBBootstrapModule.forRoot(),
     NgbModule,
-    BrowserAnimationsModule],
+    BrowserAnimationsModule,
+    MatIconModule],
   providers: [],
   bootstrap: [AppComponent],
 })

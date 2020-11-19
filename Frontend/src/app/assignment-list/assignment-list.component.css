@@ -14,7 +14,7 @@ p {
 hr {
   margin: 2% 0;
 }
-.material-icons.md-18.cursor {
+.cursor {
   font-size: 12px;
   justify-content: center;
   display: contents;
@@ -26,7 +26,6 @@ hr {
 }
 .progress-bar1{
     width: 220px;
-
     margin-left: 8px;
     align-self: center;
 }
@@ -36,13 +35,12 @@ hr {
   display: contents;
   cursor: context-menu;
 }
-.material-icons.md-18.sd {
-  font-size: 15px;
-  justify-content: center;
+.icon-complete {
+  font-size: 16px;
   cursor: pointer;
   color: #000;
 }
-.material-icons.md-18.sd:hover {
+.icon-complete:hover {
   color: #000;
 }
 
@@ -143,3 +141,11 @@ hr {
 .card{
   border: none;
 }
+/*
+.btn-and-list{
+  display: flex;
+}
+
+.btn-child{
+  justify-content: flex-end;
+} */
