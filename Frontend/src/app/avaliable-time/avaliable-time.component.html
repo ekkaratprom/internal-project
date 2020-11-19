@@ -65,8 +65,7 @@
         <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center">
           <div class="col big-color-box ">
             <div class="row color-box-list">
-              <li class="color-box" *ngFor="let item of r['cards']"
-                [ngStyle]="{ backgroundColor: item.totalActualTime | color }"
+              <li class="color-box-top" *ngFor="let item of r['cards']"
                 (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
 
                 <ng-template #content let-modal>
