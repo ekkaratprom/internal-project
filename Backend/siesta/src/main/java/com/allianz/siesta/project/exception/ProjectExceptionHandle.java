@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class ProjectNotFoundExceptionHandle {
+public class ProjectExceptionHandle {
     @ResponseBody
     @ExceptionHandler({ProjectNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
