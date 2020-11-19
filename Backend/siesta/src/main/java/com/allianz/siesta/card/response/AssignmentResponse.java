@@ -12,9 +12,10 @@ public class AssignmentResponse {
     private Boolean completedStatus;
     private Date endDate;
     private Double totalActualTime;
+    private Double totalEstimateTime;
     private List cardObj;
 
-    public AssignmentResponse(Long assignmentId, String assignmentName, Double billableTime, Double estimateTime, Boolean completedStatus, Date endDate, Double totalActualTime) {
+    public AssignmentResponse(Long assignmentId, String assignmentName, Double billableTime, Double estimateTime, Boolean completedStatus, Date endDate, Double totalActualTime, Double totalEstimateTime) {
         this.assignmentId = assignmentId;
         this.assignmentName = assignmentName;
         this.billableTime = billableTime;
@@ -22,6 +23,15 @@ public class AssignmentResponse {
         this.completedStatus = completedStatus;
         this.endDate = endDate;
         this.totalActualTime = totalActualTime;
+        this.totalEstimateTime = totalEstimateTime;
+    }
+
+    public Double getTotalEstimateTime() {
+        return totalEstimateTime;
+    }
+
+    public void setTotalEstimateTime(Double totalEstimateTime) {
+        this.totalEstimateTime = totalEstimateTime;
     }
 
     public Date getEndDate() {

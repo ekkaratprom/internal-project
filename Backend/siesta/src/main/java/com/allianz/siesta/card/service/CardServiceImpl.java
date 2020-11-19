@@ -51,7 +51,6 @@ public class CardServiceImpl implements CardService{
         for (Object[] assignment : assignments) {
 
 
-
 //            Double totalActualTime = assignmentRepository.getTotalActualTime(assignment.getId());
 //            List<Object[]> cardList = cardRepository.getCardByAssignmentId(assignment.getId());
 //
@@ -64,30 +63,33 @@ public class CardServiceImpl implements CardService{
 //                        assignment.getEndDate(),
 //                        totalActualTime
 //                );
-           BigInteger assignmentId = (BigInteger)assignment[0];
-           Long id = 0L;
-           id = assignmentId.longValue();
+            BigInteger assignmentId = (BigInteger) assignment[0];
+            Long id = 0L;
+            id = assignmentId.longValue();
 
-            Double totalActualTime = assignmentRepository.getTotalActualTime(id);
+            List<Object[]> timeList = assignmentRepository.getTotalEstimateAndActualTime(id);
             List<Object[]> cardList = cardRepository.getCardByAssignmentId(id);
+            for (Object[] time : timeList) {
 
-            AssignmentResponse assignmentResponse = new AssignmentResponse(
-                    id,
-                    (String)assignment[1],
-                    (Double)assignment[2],
-                    (Double)assignment[3],
-                    (Boolean)assignment[4],
-                    (Date)assignment[5],
-                    totalActualTime
-            );
+                AssignmentResponse assignmentResponse = new AssignmentResponse(
+                        id,
+                        (String) assignment[1],
+                        (Double) assignment[2],
+                        (Double) assignment[3],
+                        (Boolean) assignment[4],
+                        (Date) assignment[5],
+                        (Double)time[0],
+                        (Double)time[1]
+                );
+
 
                 assignmentResponse.setCardObj(new ArrayList());
                 for (Object[] card : cardList) {
                     CardResponse cardResponse = new CardResponse(
-                            (BigInteger)card[3],
-                            (String)card[0],
+                            (BigInteger) card[3],
+                            (String) card[0],
                             (Double) card[1],
-                            (Date)card[2]
+                            (Date) card[2]
                     );
 
                     assignmentResponse.getCardObj().add(cardResponse);
@@ -96,6 +98,7 @@ public class CardServiceImpl implements CardService{
 
                 assignmentResponseList.add(assignmentResponse);
             }
+        }
 
         return assignmentResponseList;
     }
