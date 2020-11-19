@@ -1,5 +1,6 @@
 package com.allianz.siesta.card.service;
 
+import com.allianz.siesta.assignment.exception.AssignmentNotFoundException;
 import com.allianz.siesta.card.Card;
 import com.allianz.siesta.card.exception.CardNotFoundException;
 import com.allianz.siesta.card.request.CardRequest;
@@ -15,9 +16,9 @@ public interface CardService {
 
     Iterable<AssignmentResponse> getAllCards();
 
-    Card addCard(CardRequest cardRequest);
+    Card addCard(CardRequest cardRequest) throws AssignmentNotFoundException;
 
-    List<CardRequest> addCards(List<CardRequest> cardRequestList);
+    List<CardRequest> addCards(List<CardRequest> cardRequestList) throws AssignmentNotFoundException;
 
 
     Iterable<UserResponse> getAllAvailableTime();

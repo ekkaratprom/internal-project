@@ -2,6 +2,7 @@ package com.allianz.siesta.card.service;
 
 import com.allianz.siesta.assignment.Assignment;
 import com.allianz.siesta.assignment.AssignmentRepository;
+import com.allianz.siesta.assignment.exception.AssignmentNotFoundException;
 import com.allianz.siesta.assignment.request.AssignmentRequest;
 import com.allianz.siesta.card.Card;
 import com.allianz.siesta.card.CardRepository;
@@ -99,7 +100,9 @@ public class CardServiceImpl implements CardService{
 
 
     @Override
-    public Card addCard(CardRequest cardRequest) {
+    public Card addCard(CardRequest cardRequest) throws AssignmentNotFoundException {
+        verifyAssignmentIdIsExist(cardRequest.getAssignmentId());
+
         Card card = cardRequest.cardRequest();
         card.setActualTime(0d);
         card.setCompletedStatus(false);
@@ -111,8 +114,11 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
-    public List<CardRequest> addCards(List<CardRequest> cardRequestList) {
+    public List<CardRequest> addCards(List<CardRequest> cardRequestList) throws AssignmentNotFoundException {
         for (CardRequest cardRequest : cardRequestList) {
+
+            verifyAssignmentIdIsExist(cardRequest.getAssignmentId());
+
             Card card = cardRequest.cardRequest();
             card.setActualTime(0d);
             card.setCompletedStatus(false);
@@ -228,5 +234,11 @@ public class CardServiceImpl implements CardService{
     private Card verifyCardId (Long id) throws CardNotFoundException {
         return cardRepository.findById(id).orElseThrow(() ->
                 new CardNotFoundException("error"));
+    };
+
+    //check AssignmentIdISExist
+    private Assignment verifyAssignmentIdIsExist (Long id) throws AssignmentNotFoundException {
+        return assignmentRepository.findById(id).orElseThrow(() ->
+                new AssignmentNotFoundException("error"));
     };
 }
