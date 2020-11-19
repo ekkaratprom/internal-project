@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class AssignmentIdException extends Exception {
 
     public AssignmentIdException(String message) {
-        super("Wrong data format!");
+        super(message);
     }
 
     public AssignmentIdException(String message, Throwable cause) {

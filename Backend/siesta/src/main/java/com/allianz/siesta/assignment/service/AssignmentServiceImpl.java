@@ -129,24 +129,27 @@ public class AssignmentServiceImpl implements AssignmentService {
     //check projectId
     private Project verifyProjectId (Long id) throws ProjectNotFoundException {
         return projectRepository.findById(id).orElseThrow(() ->
-                new ProjectNotFoundException("error"));
+                new ProjectNotFoundException("ProjectId not found!"));
     }
 
 
     //check assignmentId
-    private Long verifyAssignmentId (String assingmentId) throws AssignmentIdException {
+    private Long verifyAssignmentId (String assignmentId) throws AssignmentIdException {
+        if (null == assignmentId) {
+            throw new AssignmentIdException("AssignmentId is emply");
+        }
       Long id =  0L;
         try {
-           id =  Long.parseLong(assingmentId);
+           id =  Long.parseLong(assignmentId);
         } catch (Exception e) {
-            throw  new AssignmentIdException("error");
+            throw  new AssignmentIdException("AssignmentId wrong format!");
         }
         return id;
     }
 
     private Assignment verifyAssignmentIdIsExist (Long id) throws AssignmentNotFoundException {
         return assignmentRepository.findById(id).orElseThrow(() ->
-                new AssignmentNotFoundException("error"));
+                new AssignmentNotFoundException("AssignmentId not found!"));
     };
 
 

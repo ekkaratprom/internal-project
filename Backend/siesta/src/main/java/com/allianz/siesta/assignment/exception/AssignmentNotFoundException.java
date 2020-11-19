@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class AssignmentNotFoundException extends Exception {
 
     public AssignmentNotFoundException(String message) {
-        super("Assignment Not Found!");
+        super(message);
     }
 }
