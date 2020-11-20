@@ -74,9 +74,8 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
     this.getAllSkill();
   }
 
-  ngDoCheck(): void{
-    // console.log('ngDoCheck', this.isReLoad);
-    if (this.isReLoad === true){
+  ngDoCheck(): void {
+    if (this.isReLoad === true) {
       this.avaliableList();
       this.isReLoad = false;
       this.isReLoadChange.emit(this.isReLoad);
@@ -159,7 +158,6 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
           this.dateList.map(date => {
             const cardTemp = {
               'totalActualTime': 0,
-              'totalEstimateTime': 0,
               'cardDate': date,
               'card': []
             };

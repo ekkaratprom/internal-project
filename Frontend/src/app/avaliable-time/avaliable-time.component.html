@@ -1,107 +1,108 @@
-<div>
-  <span class="form-group">
-    <label for="search-text" style="font-weight: bold; font-size: 0.8rem">Available Time</label>
-    <br />
-    <input type="text" class="form-control" style="margin-right: 2vw" id="assignment-search-text"
-      [(ngModel)]="searchText" placeholder="All Person" />
-  </span>
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
+    <span class="form-group available-font">
+      <label for="search-text">Available Time</label>
+    </span>
+  </div>
+</div>
+<div class="row mb-3">
+  <div class="col-xs-6 col-md-6 col-lg-5 col-xl-5 d-flex align-items-center">
+    <div class="input-group input-group-sm mr-2">
+      <input type="text" class="form-control custom-button" id="assignment-search-text" [(ngModel)]="searchText"
+        placeholder="All Person" />
+    </div>
+    <div class="input-group input-group-sm mr-2">
+      <select class="form-control custom-button" [(ngModel)]="positionCheck">
+        <option [ngValue]="undefined">All Position</option>
+        <option *ngFor="let c of position" value="{{c.positionName }}">
+          {{ c.positionName }}
+        </option>
+      </select>
+    </div>
+    <div class="input-group input-group-sm">
+      <select class="form-control custom-button" [(ngModel)]="skillsetCheck">
+        <option [ngValue]="undefined">All Skillset</option>
+        <option *ngFor="let c of skill" value="{{c.skillName }}">
+          {{ c.skillName }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="col-xs-6 col-md-6 col-lg-7 col-xl-7 d-flex justify-content-end align-items-center">
+    <span class="p-2"> color chart:</span>
+    <img class="colr" src="../../assets/images/color.PNG" />
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3"></div>
+  <div class="col-xs-9 col-md-9 col-lg-9 col-xl-9 pr-0">
+    <div class="d-flex bd-highlight justify-content-between mb-3 pl-2">
+      <a (click)="previousweek()" href="#" class="previous round">&#8249;</a>
+      <div class="top-color-box" *ngFor="let day of dateList">
+        {{ day | date: "EEE" }} <br />
+        {{ day | date: "dd" }} <br />
+        {{ day | date: "MMM" }}
+      </div>
+      <a (click)="nextweek()" href="#" class="next round">&#8250;</a>
+    </div>
+  </div>
+</div>
+<div class="col" style="padding: 0%">
+  <div *ngIf="isLoading === true">
+    <img class="loading" src="../../assets/images/Double Ring-1s-200px.gif" />
+  </div>
+</div>
 
-  <select class="form-control" [(ngModel)]="positionCheck">
-    <option [ngValue]="undefined">All Position</option>
-    <option *ngFor="let c of position" value="{{c.positionName }}">
-      {{ c.positionName }}
-    </option>
-  </select>
-  <select class="form-control" [(ngModel)]="skillsetCheck">
-    <option [ngValue]="undefined">All Skillset</option>
-    <option *ngFor="let c of skill" value="{{c.skillName }}">
-      {{ c.skillName }}
-    </option>
-  </select>
-  <span class="txt"> color chart: </span>
-  <img class="colr" src="../../assets/images/color.PNG" />
-  <div class="row">
-    <div class="col-lg-2 col-xl-2" style="margin-bottom: 5%; padding: 0"></div>
-    <div class="col-lg-10 col-xl-10" style="height: 25px; padding-left: 3%; padding-right: 15px">
-      <div class="d-flex bd-highlight mb-3" style="justify-content: space-between">
-        <a (click)="previousweek()" href="#" class="previous round">&#8249;</a>
-        <div class="top-color-box" *ngFor="let day of dateList">
-          {{ day | date: "EEE" }} <br />
-          {{ day | date: "dd" }} <br />
-          {{ day | date: "MMM" }}
+<div class="row person-list mt-4" *ngFor=" let r of avaliableLists | nameFilter: searchText | positionFilter: positionCheck | skillFilter:
+  skillsetCheck">
+  <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3 d-flex align-items-center">
+    <div class=" card">
+      <div class="card-body">
+        <div class="card-title">
+          <i class="fas">&#xf2bd;</i>
+          <span title={{r.fullName}}>
+            {{ r.fullName | longnameFilter: 12 }}
+          </span>
         </div>
-        <a (click)="nextweek()" href="#" class="next round">&#8250;</a>
+        <h6 class="position">{{ r.position }}</h6>
+        <br />
+        <p *ngFor="let index of r['skills']" class="card-text">
+          <img class="image-skills-size" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
+        </p>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col" style="padding: 0%">
-      <div *ngIf="isLoading === true">
-        <img class="loading" src="../../assets/images/Double Ring-1s-200px.gif" />
-      </div>
-      <div class="col person-list top" *ngFor="
-        let r of avaliableLists
-          | nameFilter: searchText
-          | positionFilter: positionCheck
-          | skillFilter: skillsetCheck
-      ">
-        <div class="col-lg-2 col-xl-2" style="padding: 0%; margin: 0">
-          <div class="card" style="width: 11rem">
-            <div class="card-body">
-              <div class="card-title">
-                <i style="font-size: 12px" class="fas">&#xf2bd;</i>
-                <span title={{r.fullName}}>
-                  {{ r.fullName | longnameFilter: 12 }}
-                </span>
-              </div>
-              <h6 class="position">{{ r.position }}</h6>
-              <br />
-              <p *ngFor="let index of r['skills']" class="card-text">
-                <img style="width: 1rem; margin-right: 5px;" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
-              </p>
-            </div>
-          </div>
+  <div class="col-xs-9 col-md-9 col-lg-9 col-xl-9 ">
+    <div class="row d-flex justify-content-around mb-2 mt-2 pr-2">
+      <mat-icon class="list-icon align-self-center">query_builder</mat-icon>
+      <li class="color-box-top" *ngFor="let item of r['cards']"
+        (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
+        <ng-template #content let-modal>
+          <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)" (submitCompleted)="close()"
+            (submitUpdateCardCompleted)="updateCardList()">
+          </app-avaliable-form>
+        </ng-template>
+        <div class="text-in-box">
+          {{ item.totalActualTime }}
         </div>
-        <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center">
-          <div class="col big-color-box ">
-            <div class="row color-box-list">
-              <mat-icon class="list-icon align-self-center">query_builder</mat-icon>
-              <li class="color-box-top" *ngFor="let item of r['cards']"
-                (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
-
-                <ng-template #content let-modal>
-                  <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)"
-                    (submitCompleted)="close()" (submitUpdateCardCompleted)="updateCardList()">
-                  </app-avaliable-form>
-                </ng-template>
-
-                <div class="text-in-box">
-                  {{ item.totalEstimateTime }}
-                </div>
-              </li>
-            </div>
-            <hr class="solid" />
-            <div class="row color-box-list">
-              <mat-icon class="list-icon align-self-center">alarm_on</mat-icon>
-              <li class="color-box" *ngFor="let item of r['cards']"
-                [ngStyle]="{ backgroundColor: item.totalActualTime | color }"
-                (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
-
-                <ng-template #content let-modal>
-                  <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)"
-                    (submitCompleted)="close()" (submitUpdateCardCompleted)="updateCardList()">
-                  </app-avaliable-form>
-                </ng-template>
-
-                <div class="text-in-box">
-                  {{ item.totalActualTime }}
-                  <!-- {{ index }} -->
-                </div>
-              </li>
-            </div>
-          </div>
+      </li>
+    </div>
+    <div class="row border-bottom"></div>
+    <div class="row d-flex justify-content-around mb-2 mt-2 pr-2">
+      <mat-icon class="list-icon align-self-center">alarm_on</mat-icon>
+      <li class=" color-box" *ngFor="let item of r['cards']"
+        [ngStyle]="{ backgroundColor: item.totalActualTime | color }"
+        (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
+        <ng-template #content let-modal>
+          <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)" (submitCompleted)="close()"
+            (submitUpdateCardCompleted)="updateCardList()">
+          </app-avaliable-form>
+        </ng-template>
+        <div class="text-in-box">
+          {{ item.totalActualTime }}
+          <!-- {{ index }} -->
         </div>
-      </div>
+      </li>
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { AvailabilityService } from './../avaliable-time/shared/availability.service';
-import { Total } from './../avaliable-time/shared/availiability-model';
+import { Actual } from './../avaliable-time/shared/availiability-model';
 import { AssignmentService } from './../assignment-list/shared/assignment.service';
 import { Assignment, CardForm, CardList } from './../assignment-list/shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -19,7 +19,7 @@ export class AvaliableFormComponent implements OnInit {
   @Output() submitCompleted = new EventEmitter();
   @Output() submitUpdateCardCompleted = new EventEmitter();
   card: CardForm;
-  total: Total;
+  actual: Actual;
   modalReference: NgbModalRef;
   projectList = [];
   assignmentList = [];
@@ -49,11 +49,7 @@ export class AvaliableFormComponent implements OnInit {
 
   public editCard = new FormGroup({
     cardActualTime: new FormControl(null, Validators.compose([
-      Validators.pattern('^[1-9].*$'),
-      Validators.max(24),
-      Validators.min(1)
-    ])),
-    cardEstimateTime: new FormControl(null, Validators.compose([
+      Validators.required,
       Validators.pattern('^[1-9].*$'),
       Validators.max(24),
       Validators.min(1)
@@ -129,17 +125,16 @@ export class AvaliableFormComponent implements OnInit {
       alert('Edit Success');
       const cardId = card;
 
-      this.total = {
+      this.actual = {
         actualTime: parseFloat(this.editCard.get('cardActualTime').value),
-        estimateTime: parseFloat(this.editCard.get('cardEstimateTime').value),
       };
-      console.log('Total :', this.total);
+      console.log('actual :', this.actual);
       console.log('cardId :', cardId);
 
-      this.availabilityService.updateCard(cardId, this.total)
+      this.availabilityService.updateCard(cardId, this.actual)
         .subscribe((r) => {
           console.log(r);
-          console.log('***Total time:', this.total);
+          console.log('***actual time:', this.actual);
         });
     }
   }
@@ -149,17 +144,16 @@ export class AvaliableFormComponent implements OnInit {
     alert('Edit Success');
     const cardId = card;
 
-    this.total = {
+    this.actual = {
       actualTime: parseFloat(this.editCard.get('cardActualTime').value),
-      estimateTime: parseFloat(this.editCard.get('cardEstimateTime').value),
     };
-    console.log('Total time :', this.total);
+    console.log('actual :', this.actual);
     console.log('cardId :', cardId);
 
-    this.availabilityService.updateCard(cardId, this.total)
+    this.availabilityService.updateCard(cardId, this.actual)
       .subscribe((r) => {
         console.log(r);
-        console.log('***Total time:', this.total);
+        console.log('***actual time:', this.actual);
       });
   }
 

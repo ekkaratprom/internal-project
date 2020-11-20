@@ -21,7 +21,6 @@ export interface CardDetail {
   totalActualTime: number;
 }
 
-
 @Component({
   selector: 'app-assignment-list',
   templateUrl: './assignment-list.component.html',
@@ -51,7 +50,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
   completedStatus;
   indexSelected;
   collapesdId;
-  public isCollapsed: boolean = true;
+  public isCollapsed = true;
 
 
   constructor(private qv: QueueviewserviceService, private assignmentService: AssignmentService,
@@ -73,7 +72,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
   }
 
   open(content): void {
-    this.modalReference = this.modalService.open(content, { size: 'md' });
+    this.modalReference = this.modalService.open(content, { size: 'sm' });
   }
 
   close(): void {
@@ -188,7 +187,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
               const cardObj = {
                 cardName: c.cardName,
                 cardActualTime: c.cardActualTime,
-                cardDate: c.cardDate,
+                cardDate: c.cardDate
               };
               this.cObj.push(cardObj);
             });
@@ -198,9 +197,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
               billableTime: element.billableTime,
               completedStatus: element.completedStatus,
               estimateTime: element.estimateTime,
-              endDate: element.endDate,
               totalActualTime: element.totalActualTime,
-              isCollapsed: true,
               cardObj: this.cObj,
             };
             this.result.push(cardDetail);
