@@ -37,6 +37,7 @@ hr {
 }
 .icon-complete {
   font-size: 16px;
+  justify-content: center;
   cursor: pointer;
   color: #000;
 }
