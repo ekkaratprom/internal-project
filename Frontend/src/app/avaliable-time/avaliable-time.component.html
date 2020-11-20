@@ -65,7 +65,7 @@
         <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center">
           <div class="col big-color-box ">
             <div class="row color-box-list">
-              <mat-icon class="list-icon">query_builder</mat-icon>
+              <mat-icon class="list-icon align-self-center">query_builder</mat-icon>
               <li class="color-box-top" *ngFor="let item of r['cards']"
                 (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
 
@@ -82,7 +82,7 @@
             </div>
             <hr class="solid" />
             <div class="row color-box-list">
-              <mat-icon class="list-icon">alarm_on</mat-icon>
+              <mat-icon class="list-icon align-self-center">alarm_on</mat-icon>
               <li class="color-box" *ngFor="let item of r['cards']"
                 [ngStyle]="{ backgroundColor: item.totalActualTime | color }"
                 (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
