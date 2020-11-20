@@ -14,26 +14,34 @@ p {
 hr {
   margin: 2% 0;
 }
-.material-icons.md-18.cursor {
+.cursor {
   font-size: 12px;
   justify-content: center;
   display: contents;
   cursor: pointer;
 }
-
+.progress1{
+  display: flex;
+  flex-direction: row;
+}
+.progress-bar1{
+    width: 220px;
+    margin-left: 8px;
+    align-self: center;
+}
 .material-icons.md-18 {
   font-size: 12px;
   justify-content: center;
   display: contents;
   cursor: context-menu;
 }
-.material-icons.md-18.sd {
-  font-size: 15px;
+.icon-complete {
+  font-size: 16px;
   justify-content: center;
   cursor: pointer;
   color: #000;
 }
-.material-icons.md-18.sd:hover {
+.icon-complete:hover {
   color: #000;
 }
 
@@ -51,9 +59,28 @@ hr {
   display: flex;
   flex-direction: row;
 }
+.icon-time{
+  display: flex;
+}
+.child{
+  width: 30%;
+}
+
+.list-group{
+  width: 100%;
+  padding: 12px 0;
+}
+.dropdown{
+  background-color:  #FAFAFA ;
+  width: 50px;
+  height: 25px;
+  border: none;
+  margin-left: auto;
+}
 
 .assignment-part {
   display: flex;
+  padding-left: 10px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -113,12 +140,15 @@ hr {
 .no {
   background-color: red;
 }
+.assignmentsearch{
+  width: 100%;
+}
 
 .btn {
   border: 1px solid #ced4da;
   height: 40px;
   padding: 0%;
-  width: 320px;
+  width: 100%;
   border: none;
   box-shadow: 0px 4px 8px rgba(69, 69, 67, 0.14);
   margin: 3%;
@@ -131,6 +161,16 @@ hr {
   padding: 0.2rem;
 }
 
+.subcard{
+  box-shadow: 0px 4px 8px rgba(69, 69, 67, 0.14);
+  border: none;
+  border-radius: 10px;
+  margin: 5px 0;
+}
 .card{
   border: none;
+}
+
+.list-group-item{
+  padding: 12px 0;
 }

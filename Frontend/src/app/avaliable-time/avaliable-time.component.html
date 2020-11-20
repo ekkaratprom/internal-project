@@ -57,27 +57,49 @@
               <h6 class="position">{{ r.position }}</h6>
               <br />
               <p *ngFor="let index of r['skills']" class="card-text">
-                <img style="width: 1rem" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
+                <img style="width: 1rem; margin-right: 5px;" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
               </p>
             </div>
           </div>
         </div>
         <div class="col-lg-10 col-xl-10 color-list" style="display: flex; align-items: center">
-          <li class="color-box" *ngFor="let item of r['cards']"
-            [ngStyle]="{ backgroundColor: item.totalActualTime | color }"
-            (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
+          <div class="col big-color-box ">
+            <div class="row color-box-list">
+              <mat-icon class="list-icon align-self-center">query_builder</mat-icon>
+              <li class="color-box-top" *ngFor="let item of r['cards']"
+                (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
 
-            <ng-template #content let-modal>
-              <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)" (submitCompleted)="close()"
-                (submitUpdateCardCompleted)="updateCardList()">
-              </app-avaliable-form>
-            </ng-template>
+                <ng-template #content let-modal>
+                  <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)"
+                    (submitCompleted)="close()" (submitUpdateCardCompleted)="updateCardList()">
+                  </app-avaliable-form>
+                </ng-template>
 
-            <div class="text-in-box">
-              {{ item.totalActualTime }}
-              <!-- {{ index }} -->
+                <div class="text-in-box">
+                  {{ item.totalEstimateTime }}
+                </div>
+              </li>
             </div>
-          </li>
+            <hr class="solid" />
+            <div class="row color-box-list">
+              <mat-icon class="list-icon align-self-center">alarm_on</mat-icon>
+              <li class="color-box" *ngFor="let item of r['cards']"
+                [ngStyle]="{ backgroundColor: item.totalActualTime | color }"
+                (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
+
+                <ng-template #content let-modal>
+                  <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)"
+                    (submitCompleted)="close()" (submitUpdateCardCompleted)="updateCardList()">
+                  </app-avaliable-form>
+                </ng-template>
+
+                <div class="text-in-box">
+                  {{ item.totalActualTime }}
+                  <!-- {{ index }} -->
+                </div>
+              </li>
+            </div>
+          </div>
         </div>
       </div>
     </div>

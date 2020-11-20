@@ -32,7 +32,7 @@
           <div class="form-group mx-sm-3 mb-2">
             <div class="txt cardd">Card</div>
             <!-- <div>Actual time</div> -->
-            <label class="txt actualtime">Actual Time</label>
+            <label class="txt actualtime">Estimate Time per day</label>
 
             <input
               type="text"
@@ -112,6 +112,17 @@
             [formGroup]="editCard"
             (keydown)="keyDownFunction($event, item.cardId)"
           >
+            <label class="txt actualtime">Estimate</label>
+            <input
+              type="number"
+              class="form-control editInput"
+              id="input_card_estimate_time_{{ i }}"
+              max="16"
+              maxlength="2"
+              placeholder="{{ item.estimateTime }}"
+              formControlName="cardEstimateTime"
+            />
+            <label class="txt actualtime">Actualtime</label>
             <input
               type="number"
               class="form-control editInput"

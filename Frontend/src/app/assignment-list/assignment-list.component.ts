@@ -27,7 +27,7 @@ export interface CardDetail {
   templateUrl: './assignment-list.component.html',
   styleUrls: ['./assignment-list.component.css']
 })
-export class AssignmentListComponent implements OnInit , DoCheck {
+export class AssignmentListComponent implements OnInit, DoCheck {
   @Input() assignmentForm: any;
   @Input() isReloadAssignment: boolean;
   @Output() isReloadAssignmentChange = new EventEmitter<boolean>();
@@ -48,14 +48,14 @@ export class AssignmentListComponent implements OnInit , DoCheck {
   completeStatus = false;
   assigmentId;
   status;
-  completedStatus ;
+  completedStatus;
   indexSelected;
-  collapesdId ;
-  public isCollapsed = true;
+  collapesdId;
+  public isCollapsed: boolean = true;
 
 
-  constructor(private qv: QueueviewserviceService , private assignmentService: AssignmentService,
-              private modalService: NgbModal, private router: Router) { }
+  constructor(private qv: QueueviewserviceService, private assignmentService: AssignmentService,
+    private modalService: NgbModal, private router: Router) { }
 
   ngOnInit(): void {
     // this.getAllAssignmentCards();
@@ -63,9 +63,9 @@ export class AssignmentListComponent implements OnInit , DoCheck {
     this.getAllCards();
   }
 
-  ngDoCheck(): void{
+  ngDoCheck(): void {
     console.log('assign-list - ngDoCheck', this.isReloadAssignment);
-    if (this.isReloadAssignment === true){
+    if (this.isReloadAssignment === true) {
       this.getAllCards();
       // this.isReloadAssignment = false;
       // this.isReLoadChange.emit(this.isReloadAssignment);
@@ -73,7 +73,7 @@ export class AssignmentListComponent implements OnInit , DoCheck {
   }
 
   open(content): void {
-    this.modalReference = this.modalService.open(content, { size: 'sm' });
+    this.modalReference = this.modalService.open(content, { size: 'md' });
   }
 
   close(): void {
@@ -87,36 +87,36 @@ export class AssignmentListComponent implements OnInit , DoCheck {
     const assignmentId = id;
     // debugger;
     this.status = {
-        deletedStatus: deleteStatus,
-      };
+      deletedStatus: deleteStatus,
+    };
     try {
-        this.assignmentService.updateDeleteStatusAssignment(assignmentId, this.status)
+      this.assignmentService.updateDeleteStatusAssignment(assignmentId, this.status)
         .subscribe((r) => {
           console.log('Update Delete assignment', r);
           // this.result[index].deletedStatus = deleteStatus;
           this.getAllCards();
           this.updateDelete.emit();
         });
-        console.log('id', id);
-        console.log('Delete status', this.status);
-        alert('Delete success');
+      console.log('id', id);
+      console.log('Delete status', this.status);
+      alert('Delete success');
 
-      } catch (error) {
-        alert('Delete fail');
-      }
+    } catch (error) {
+      alert('Delete fail');
+    }
 
   }
 
 
-  updateStatus(index,id: string, statusChange: boolean): void {
+  updateStatus(index, id: string, statusChange: boolean): void {
     this.status = {
       completedStatus: statusChange,
-      };
+    };
     this.assignmentService.updateCompleteAssignment(id, this.status)
-        .subscribe((r) => {
-          console.log('result assignment',r);
-          this.result[index].completedStatus = statusChange;
-        });
+      .subscribe((r) => {
+        console.log('result assignment', r);
+        this.result[index].completedStatus = statusChange;
+      });
     // console.log('id=', id);
     // console.log('status=' , this.status);
 
@@ -144,31 +144,31 @@ export class AssignmentListComponent implements OnInit , DoCheck {
       console.error('GET all assignments fail');
     }
   }
-  toggle(index,id: string, status: boolean): void {
-    let value1 ;
+  toggle(index, id: string, status: boolean): void {
+    let value1;
 
-    if (status === true){
+    if (status === true) {
       this.completedStatus = false;
       value1 = 'undone';
     }
-    if (status === false){
+    if (status === false) {
       this.completedStatus = true;
 
       value1 = 'done';
     }
-    this.updateStatus(index,id, this.completedStatus);
+    this.updateStatus(index, id, this.completedStatus);
     console.log('completedStatus', this.completedStatus);
     alert('Change completed status to ' + value1);
 
   }
 
-  test2(){
+  test2() {
     console.log('test2');
     this.qv.settest(this.kevin);
     this.kevin = !this.kevin;
   }
 
-  collapsed(id: string): void{
+  collapsed(id: string): void {
     this.collapesdId = id;
   }
 
@@ -188,7 +188,7 @@ export class AssignmentListComponent implements OnInit , DoCheck {
               const cardObj = {
                 cardName: c.cardName,
                 cardActualTime: c.cardActualTime,
-                cardDate: c.cardDate
+                cardDate: c.cardDate,
               };
               this.cObj.push(cardObj);
             });
@@ -198,13 +198,15 @@ export class AssignmentListComponent implements OnInit , DoCheck {
               billableTime: element.billableTime,
               completedStatus: element.completedStatus,
               estimateTime: element.estimateTime,
+              endDate: element.endDate,
               totalActualTime: element.totalActualTime,
+              isCollapsed: true,
               cardObj: this.cObj,
             };
             this.result.push(cardDetail);
           });
           console.log('result', this.result);
-          if (this.isReloadAssignment === true){
+          if (this.isReloadAssignment === true) {
             this.isReloadAssignment = false;
             this.isReloadAssignmentChange.emit(this.isReloadAssignment);
           }

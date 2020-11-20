@@ -1,5 +1,5 @@
 import { environment } from './../../../environments/environment';
-import { Actual, UserResponse, Skill, Skills,DeleteStatus } from './availiability-model';
+import { Total, UserResponse, Skill, Skills,DeleteStatus } from './availiability-model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -21,8 +21,8 @@ export class AvailabilityService {
     return this.http.get<UserResponse>(`${environment.apiUrl}` + 'v1/availabletime');
   }
 
-  updateCard(id: any, actual: any): Observable<HttpResponse<Actual[]>> {
-    return this.http.patch<Actual[]>(`${environment.apiUrl}v1/${id}/updatecard`, actual, {
+  updateCard(id: any, actual: any): Observable<HttpResponse<Total[]>> {
+    return this.http.patch<Total[]>(`${environment.apiUrl}v1/${id}/updatecard`, actual, {
       observe: 'response',
     });
   }

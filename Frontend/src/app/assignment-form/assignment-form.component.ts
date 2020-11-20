@@ -3,6 +3,7 @@ import { Assignment } from './../assignment-list/shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-assignment-form',
@@ -15,9 +16,11 @@ export class AssignmentFormComponent implements OnInit {
   @Output() newAssignment: EventEmitter<any> = new EventEmitter<any>();
   assignment: Assignment;
   projectList = [];
+  endDatePick: NgbDateStruct;
+  today = this.calendar.getToday();
 
 
-  constructor(private assignmentService: AssignmentService, private router: Router) { }
+  constructor(private assignmentService: AssignmentService, private router: Router, private calendar: NgbCalendar) { }
 
 
   public addAssignment = new FormGroup({
@@ -43,12 +46,13 @@ export class AssignmentFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-
+    const date = `${this.endDatePick.year}-${this.endDatePick.month}-${this.endDatePick.day}`;
     this.assignment = {
       assignmentName: this.addAssignment.get('assignmentName').value,
       billableTime: parseFloat(this.addAssignment.get('billableTime').value),
       estimateTime: parseFloat(this.addAssignment.get('estimateTime').value),
       completedStatus: false,
+      endDate: date,
       // tslint:disable-next-line: radix
       projectId: parseInt(this.addAssignment.get('projectId').value),
     };
