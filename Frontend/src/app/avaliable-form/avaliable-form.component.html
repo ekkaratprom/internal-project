@@ -1,7 +1,9 @@
 <div class="card">
   <form class="form-inline" [formGroup]="addCard" (ngSubmit)="onSubmit()">
     <div>
-      <span class="close head" title="Exit" (click)="updateComplete()">&times;</span>
+      <span class="close head" title="Exit" (click)="updateComplete()"
+        >&times;</span
+      >
     </div>
     <div class="card-body" style="border: none">
       <h6>Create Card :</h6>
@@ -10,10 +12,17 @@
           <div class="assignment">Assignment</div>
           <div class="form-group mx-sm-3 mb-2">
             <div>
-              <select class="form-control" id="input_assignment_id" formControlName="assignmentId"
-                placeholder="choose your assignment">
+              <select
+                class="form-control"
+                id="input_assignment_id"
+                formControlName="assignmentId"
+                placeholder="choose your assignment"
+              >
                 <option [ngValue]="null">choose your assignment</option>
-                <option *ngFor="let c of rAssignmentList" value="{{ c.assignmentId }}">
+                <option
+                  *ngFor="let c of rAssignmentList"
+                  value="{{ c.assignmentId }}"
+                >
                   {{ c.assignmentName }}
                 </option>
               </select>
@@ -25,25 +34,48 @@
             <!-- <div>Actual time</div> -->
             <label class="txt actualtime">Estimate Time per day</label>
 
-            <input type="text" class="form-control" id="input_card_name" placeholder="type your card..."
-              formControlName="cardName" />
+            <input
+              type="text"
+              class="form-control"
+              id="input_card_name"
+              placeholder="type your card..."
+              formControlName="cardName"
+            />
 
-            <input type="number" class="form-control" id="input_actual_time" placeholder="0"
-              formControlName="actualTime" />
+            <input
+              type="number"
+              class="form-control"
+              id="input_actual_time"
+              placeholder="0"
+              formControlName="actualTime"
+            />
             <!-- <p>Actual Time</p> -->
-            <div *ngIf="addCard.get('cardName').hasError('pattern')" class="error">
+            <div
+              *ngIf="addCard.get('cardName').hasError('pattern')"
+              class="error"
+            >
               Card name has invalid characters.
             </div>
-            <div *ngIf="addCard.get('actualTime').hasError('max')" class="error">
+            <div
+              *ngIf="addCard.get('actualTime').hasError('max')"
+              class="error"
+            >
               Actual time must be 1 to 24.
             </div>
-            <div *ngIf="addCard.get('actualTime').hasError('min')" class="error">
+            <div
+              *ngIf="addCard.get('actualTime').hasError('min')"
+              class="error"
+            >
               Actual time must be 1 to 24.
             </div>
           </div>
 
-          <button [disabled]="addCard.status === 'INVALID'" type="submit" class="btn btn-primary bottom"
-            (onClick)="onSubmit()">
+          <button
+            [disabled]="addCard.status === 'INVALID'"
+            type="submit"
+            class="btn btn-primary bottom"
+            (onClick)="onSubmit()"
+          >
             Submit
           </button>
         </div>
@@ -70,19 +102,54 @@
               {{ item.assignmentName }}
             </div>
           </div>
-          <span class="close" (click)="updateDeleteStatus(item.cardId)" title="Delete Card">&times;</span>
-          <form [formGroup]="editCard" (keydown)="keyDownFunction($event, item.cardId)">
-            <input type="number" class="form-control editInput" id="input_card_actual_time_{{ i }}" max="16"
-              maxlength="2" placeholder="{{ item.actualTime }}" formControlName="cardActualTime" />
-            <button class="btn btn-primary bottom editbtn" [disabled]="editCard.status === 'INVALID'"
-              (click)="updateFunction(item.cardId)">
+          <span
+            class="close"
+            (click)="updateDeleteStatus(item.cardId)"
+            title="Delete Card"
+            >&times;</span
+          >
+          <form
+            [formGroup]="editCard"
+            (keydown)="keyDownFunction($event, item.cardId)"
+          >
+            <label class="txt actualtime">Estimate</label>
+            <input
+              type="number"
+              class="form-control editInput"
+              id="input_card_estimate_time_{{ i }}"
+              max="16"
+              maxlength="2"
+              placeholder="{{ item.estimateTime }}"
+              formControlName="cardEstimateTime"
+            />
+            <label class="txt actualtime">Actualtime</label>
+            <input
+              type="number"
+              class="form-control editInput"
+              id="input_card_actual_time_{{ i }}"
+              max="16"
+              maxlength="2"
+              placeholder="{{ item.actualTime }}"
+              formControlName="cardActualTime"
+            />
+            <button
+              class="btn btn-primary bottom editbtn"
+              [disabled]="editCard.status === 'INVALID'"
+              (click)="updateFunction(item.cardId)"
+            >
               Update
             </button>
 
-            <div *ngIf="editCard.get('cardActualTime').hasError('max')" class="error">
+            <div
+              *ngIf="editCard.get('cardActualTime').hasError('max')"
+              class="error"
+            >
               Actual time must be 1 to 24.
             </div>
-            <div *ngIf="editCard.get('cardActualTime').hasError('min')" class="error">
+            <div
+              *ngIf="editCard.get('cardActualTime').hasError('min')"
+              class="error"
+            >
               Actual time must be 1 to 24.
             </div>
           </form>

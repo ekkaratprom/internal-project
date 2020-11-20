@@ -27,28 +27,33 @@ export class MockAvaliabilityService {
     cards: [
       {
         totalActualTime: 8,
+        totalEstimateTime: 9,
         cardDate: '2020-10-20T05:36:51.271Z',
         card: [{
           cardName: 'Fix bug form',
           actualTime: 4,
+          estimateTime: 4,
           cardId: 1,
           createDate: '2020-10-20T05:36:51.271Z'
         },
         {
           cardName: 'Fix bug',
           actualTime: 1,
+          estimateTime: 1,
           cardId: 2,
           createDate: '2020-10-20T05:36:51.271Z',
         },
         {
           cardName: 'Fix bug',
           actualTime: 1,
+          estimateTime: 1,
           cardId: 3,
           createDate: '2020-10-20T05:36:51.271Z',
         },
         {
           cardName: 'Fix bug',
           actualTime: 2,
+          estimateTime: 1,
           cardId: 3,
           createDate: '2020-10-20T05:36:51.271Z',
         }
@@ -78,16 +83,19 @@ export class MockAvaliabilityService {
     cards: [
       {
         totalActualTime: 5,
+        totalEstimateTime: 9,
         cardDate: '2020-10-20T05:36:51.271Z',
         card: [{
           cardName: 'Fix bug form',
           actualTime: 4,
+          estimateTime: 1,
           cardId: 1,
           createDate: '2020-10-20T05:36:51.271Z'
         },
         {
           cardName: 'Fix bug',
           actualTime: 1,
+          estimateTime: 1,
           cardId: 2,
           createDate: '2020-10-20T05:36:51.271Z',
         },
@@ -118,22 +126,26 @@ export class MockAvaliabilityService {
     cards: [
       {
         totalActualTime: 6,
+        totalEstimateTime: 9,
         cardDate: '2020-10-20T05:36:51.271Z',
         card: [{
           cardName: 'Fix bug',
           actualTime: 4,
+          estimateTime: 1,
           cardId: 1,
           createDate: '2020-10-20T05:36:51.271Z'
         },
         {
           cardName: 'Fix bug',
           actualTime: 1,
+          estimateTime: 1,
           cardId: 2,
           createDate: '2020-10-20T05:36:51.271Z',
         },
         {
           cardName: 'Fix bug',
           actualTime: 1,
+          estimateTime: 1,
           cardId: 3,
           createDate: '2020-10-20T05:36:51.271Z',
         },
@@ -141,22 +153,26 @@ export class MockAvaliabilityService {
       },
       {
         totalActualTime: 8,
+        totalEstimateTime: 9,
         cardDate: '2020-10-21T05:36:51.271Z',
         card: [{
           cardName: 'Fix bug',
           actualTime: 4,
+          estimateTime: 1,
           cardId: 1,
           createDate: '2020-10-21T05:36:51.271Z'
         },
         {
           cardName: 'Fix bug',
           actualTime: 2,
+          estimateTime: 1,
           cardId: 2,
           createDate: '2020-10-21T05:36:51.271Z',
         },
         {
           cardName: 'Fix bug',
           actualTime: 2,
+          estimateTime: 1,
           cardId: 3,
           createDate: '2020-10-21T05:36:51.271Z',
         },
@@ -164,22 +180,26 @@ export class MockAvaliabilityService {
       },
       {
         totalActualTime: 8,
+        totalEstimateTime: 9,
         cardDate: '2020-10-23T05:36:51.271Z',
         card: [{
           cardName: 'Fix bug',
           actualTime: 4,
+          estimateTime: 1,
           cardId: 1,
           createDate: '2020-10-23T05:36:51.271Z'
         },
         {
           cardName: 'Fix bug',
           actualTime: 2,
+          estimateTime: 1,
           cardId: 2,
           createDate: '2020-10-23T05:36:51.271Z',
         },
         {
           cardName: 'Fix bug',
           actualTime: 2,
+          estimateTime: 1,
           cardId: 3,
           createDate: '2020-10-23T05:36:51.271Z',
         },
@@ -187,10 +207,12 @@ export class MockAvaliabilityService {
       },
       {
         totalActualTime: 8,
+        totalEstimateTime: 9,
         cardDate: '2020-10-21T05:36:51.271Z',
         card: [{
           cardName: 'Fix bug',
           actualTime: 8,
+          estimateTime: 1,
           cardId: 1,
           createDate: '2020-10-21T05:36:51.271Z'
         },

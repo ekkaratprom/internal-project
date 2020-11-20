@@ -73,7 +73,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
   }
 
   open(content): void {
-    this.modalReference = this.modalService.open(content, { size: 'sm' });
+    this.modalReference = this.modalService.open(content, { size: 'md' });
   }
 
   close(): void {
@@ -198,6 +198,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
               billableTime: element.billableTime,
               completedStatus: element.completedStatus,
               estimateTime: element.estimateTime,
+              endDate: element.endDate,
               totalActualTime: element.totalActualTime,
               isCollapsed: true,
               cardObj: this.cObj,
