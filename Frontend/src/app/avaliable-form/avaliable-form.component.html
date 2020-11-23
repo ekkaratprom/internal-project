@@ -45,9 +45,9 @@
             <input
               type="number"
               class="form-control"
-              id="input_actual_time"
+              id="input_estimate_time"
               placeholder="0"
-              formControlName="actualTime"
+              formControlName="estimateTime"
             />
             <!-- <p>Actual Time</p> -->
             <div
@@ -57,27 +57,169 @@
               Card name has invalid characters.
             </div>
             <div
-              *ngIf="addCard.get('actualTime').hasError('max')"
+              *ngIf="addCard.get('estimateTime').hasError('max')"
               class="error"
             >
-              Actual time must be 1 to 24.
+              Estimate time must be 1 to 24.
             </div>
             <div
-              *ngIf="addCard.get('actualTime').hasError('min')"
+              *ngIf="addCard.get('estimateTime').hasError('min')"
               class="error"
             >
-              Actual time must be 1 to 24.
+              Estimate time must be 1 to 24.
             </div>
           </div>
 
-          <button
-            [disabled]="addCard.status === 'INVALID'"
-            type="submit"
-            class="btn btn-primary bottom"
-            (onClick)="onSubmit()"
-          >
-            Submit
-          </button>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="calenderPicker(true)"
+            >
+              one day
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="calenderPicker(false)"
+            >
+              Period time
+            </button>
+          </div>
+
+          <div *ngIf="pickerDisplayDay == true">
+            <form class="form-inline">
+              <div class="form-group">
+                <div class="input-group">
+                  <input
+                    class="form-control"
+                    placeholder="{{ selectDate | date: 'yyyy-MM-dd' }}"
+                    name="dp"
+                    [(ngModel)]="dayPick"
+                    ngbDatepicker
+                    [footerTemplate]="footerTemplate"
+                    #d="ngbDatepicker"
+                  />
+                  <div class="input-group-append">
+                    <button
+                      class="btn btn-outline-secondary calendar"
+                      (click)="d.toggle()"
+                      type="button"
+                    ></button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <ng-template #footerTemplate>
+              <hr class="my-0" />
+              <button
+                class="btn btn-primary btn-sm m-2 float-left"
+                (click)="dayPick = today; d.close()"
+              >
+                Today
+              </button>
+              <button
+                class="btn btn-secondary btn-sm m-2 float-right"
+                (click)="d.close()"
+              >
+                Close
+              </button>
+            </ng-template>
+
+            <button
+              [disabled]="addCard.status === 'INVALID'"
+              type="submit"
+              class="btn btn-primary bottom"
+              (onClick)="onSubmit()"
+            >
+              Submit
+            </button>
+          </div>
+
+          <div *ngIf="pickerDisplayDay == false">
+            <form class="form-inline">
+              <div class="form-group hidden">
+                <div class="input-group">
+                  <input
+                    name="datepicker"
+                    class="form-control"
+                    ngbDatepicker
+                    #datepicker="ngbDatepicker"
+                    [autoClose]="'outside'"
+                    (dateSelect)="onDateSelection($event)"
+                    [displayMonths]="2"
+                    [dayTemplate]="t"
+                    outsideDays="hidden"
+                    [startDate]="fromDate!"
+                    tabindex="-1"
+                  />
+                  <ng-template #t let-date let-focused="focused">
+                    <span
+                      class="custom-day"
+                      [class.focused]="focused"
+                      [class.range]="isRange(date)"
+                      [class.faded]="isHovered(date) || isInside(date)"
+                      (mouseenter)="hoveredDate = date"
+                      (mouseleave)="hoveredDate = null"
+                    >
+                      {{ date.day }}
+                    </span>
+                  </ng-template>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <input
+                    #dpFromDate
+                    class="form-control"
+                    placeholder="yyyy-mm-dd"
+                    name="dpFromDate"
+                    [value]="formatter.format(fromDate)"
+                    (input)="
+                      fromDate = validateInput(fromDate, dpFromDate.value)
+                    "
+                  />
+                  <div class="input-group-append">
+                    <button
+                      class="btn btn-outline-secondary calendar"
+                      (click)="datepicker.toggle()"
+                      type="button"
+                    ></button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group ml-2">
+                <div class="input-group">
+                  <input
+                    #dpToDate
+                    class="form-control"
+                    placeholder="yyyy-mm-dd"
+                    name="dpToDate"
+                    [value]="formatter.format(toDate)"
+                    (input)="toDate = validateInput(toDate, dpToDate.value)"
+                  />
+                  <div class="input-group-append">
+                    <button
+                      class="btn btn-outline-secondary calendar"
+                      (click)="datepicker.toggle()"
+                      type="button"
+                    ></button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <button
+              [disabled]="addCard.status === 'INVALID'"
+              type="submit"
+              class="btn btn-primary bottom"
+              (onClick)="onSubmitPeriod()"
+            >
+              Submit
+            </button>
+          </div>
+
         </div>
       </div>
     </div>

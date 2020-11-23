@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { ThemePalette } from '@angular/material/core';
 
 export interface CardData {
   cardName: string;
@@ -27,7 +28,7 @@ export interface CardDetail {
   templateUrl: './assignment-list.component.html',
   styleUrls: ['./assignment-list.component.css']
 })
-export class AssignmentListComponent implements OnInit , DoCheck {
+export class AssignmentListComponent implements OnInit, DoCheck {
   @Input() assignmentForm: any;
   @Input() isReloadAssignment: boolean;
   @Output() isReloadAssignmentChange = new EventEmitter<boolean>();
@@ -48,24 +49,31 @@ export class AssignmentListComponent implements OnInit , DoCheck {
   completeStatus = false;
   assigmentId;
   status;
-  completedStatus ;
+  completedStatus;
   indexSelected;
-  collapesdId ;
+  collapesdId;
   public isCollapsed: boolean = true;
 
+  value;
+  colorwarn: ThemePalette = 'warn';
+  today;
+  colorprim : ThemePalette = 'primary';
 
-  constructor(private qv: QueueviewserviceService , private assignmentService: AssignmentService,
-              private modalService: NgbModal, private router: Router) { }
+  constructor(private qv: QueueviewserviceService, private assignmentService: AssignmentService,
+    private modalService: NgbModal, private router: Router) { }
 
   ngOnInit(): void {
     // this.getAllAssignmentCards();
-    console.log('ngOnInit');
+    // console.log('ngOnInit');
     this.getAllCards();
+    this.today = new Date();
+    console.log('Today',this.today);
+
   }
 
-  ngDoCheck(): void{
-    console.log('assign-list - ngDoCheck', this.isReloadAssignment);
-    if (this.isReloadAssignment === true){
+  ngDoCheck(): void {
+    // console.log('assign-list - ngDoCheck', this.isReloadAssignment);
+    if (this.isReloadAssignment === true) {
       this.getAllCards();
       // this.isReloadAssignment = false;
       // this.isReLoadChange.emit(this.isReloadAssignment);
@@ -76,10 +84,13 @@ export class AssignmentListComponent implements OnInit , DoCheck {
     this.modalReference = this.modalService.open(content, { size: 'md' });
   }
 
+  submit(): void {
+    this.getAllCards();
+  }
+
   close(): void {
     this.modalReference.close();
     console.log('close');
-    this.getAllCards();
   }
 
   updateDeleteStatus(id: string): void {
@@ -87,36 +98,36 @@ export class AssignmentListComponent implements OnInit , DoCheck {
     const assignmentId = id;
     // debugger;
     this.status = {
-        deletedStatus: deleteStatus,
-      };
+      deletedStatus: deleteStatus,
+    };
     try {
-        this.assignmentService.updateDeleteStatusAssignment(assignmentId, this.status)
+      this.assignmentService.updateDeleteStatusAssignment(assignmentId, this.status)
         .subscribe((r) => {
           console.log('Update Delete assignment', r);
           // this.result[index].deletedStatus = deleteStatus;
           this.getAllCards();
           this.updateDelete.emit();
         });
-        console.log('id', id);
-        console.log('Delete status', this.status);
-        alert('Delete success');
+      console.log('id', id);
+      console.log('Delete status', this.status);
+      alert('Delete success');
 
-      } catch (error) {
-        alert('Delete fail');
-      }
+    } catch (error) {
+      alert('Delete fail');
+    }
 
   }
 
 
-  updateStatus(index,id: string, statusChange: boolean): void {
+  updateStatus(index, id: string, statusChange: boolean): void {
     this.status = {
       completedStatus: statusChange,
-      };
+    };
     this.assignmentService.updateCompleteAssignment(id, this.status)
-        .subscribe((r) => {
-          console.log('result assignment',r);
-          this.result[index].completedStatus = statusChange;
-        });
+      .subscribe((r) => {
+        console.log('result assignment', r);
+        this.result[index].completedStatus = statusChange;
+      });
     // console.log('id=', id);
     // console.log('status=' , this.status);
 
@@ -144,32 +155,40 @@ export class AssignmentListComponent implements OnInit , DoCheck {
       console.error('GET all assignments fail');
     }
   }
-  toggle(index,id: string, status: boolean): void {
-    let value1 ;
+  toggle(index, id: string, status: boolean): void {
+    let value1;
 
-    if (status === true){
+    if (status === true) {
       this.completedStatus = false;
       value1 = 'undone';
     }
-    if (status === false){
+    if (status === false) {
       this.completedStatus = true;
 
       value1 = 'done';
     }
-    this.updateStatus(index,id, this.completedStatus);
+    this.updateStatus(index, id, this.completedStatus);
     console.log('completedStatus', this.completedStatus);
     alert('Change completed status to ' + value1);
 
   }
 
-  test2(){
+  test2() {
     console.log('test2');
     this.qv.settest(this.kevin);
     this.kevin = !this.kevin;
   }
 
-  collapsed(id: string): void{
+  collapsed(id: string): void {
     this.collapesdId = id;
+  }
+
+  compareMoreThanEndDate(endDate: any): boolean{
+    const date1 = new Date(this.today);
+    const date2 = new Date(endDate);
+    if (date2.getTime() <= date1.getTime()){
+      return true;
+    }else { return false; }
   }
 
 
@@ -200,13 +219,14 @@ export class AssignmentListComponent implements OnInit , DoCheck {
               estimateTime: element.estimateTime,
               endDate: element.endDate,
               totalActualTime: element.totalActualTime,
-              isCollapsed : true,
+              totalEstimateTime: element.totalEstimateTime,
+              isCollapsed: true,
               cardObj: this.cObj,
             };
             this.result.push(cardDetail);
           });
           console.log('result', this.result);
-          if (this.isReloadAssignment === true){
+          if (this.isReloadAssignment === true) {
             this.isReloadAssignment = false;
             this.isReloadAssignmentChange.emit(this.isReloadAssignment);
           }

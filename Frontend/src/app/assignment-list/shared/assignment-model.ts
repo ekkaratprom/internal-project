@@ -57,12 +57,19 @@ export type AssignmentList = {
 };
 
 export type CardForm = {
-  actualTime: number,
-  assignmentId: number,
-  cardDate: Date,
-  cardName: string,
-  userId: number,
+  // estimateTime: number,
+  // assignmentId: number,
+  // cardDate: Date,
+  // cardName: string,
+  // userId: number,
+
+  assignmentId: number;
+  cardDate: string;
+  cardName: string;
+  estimateTime: number;
+  userId: number;
 };
+
 
 export type DeletedStatusAssignment = {
   deletedStatus: boolean;

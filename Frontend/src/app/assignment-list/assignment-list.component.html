@@ -19,7 +19,9 @@
   </div>
 
   <ng-template #content let-modal>
-    <app-assignment-form (submitCompleted)="close()"></app-assignment-form>
+    <app-assignment-form
+      (submitCompleted)="close(); submit()"
+    ></app-assignment-form>
   </ng-template>
   <button (click)="open(content)" class="btn btn-lg me-btn-add">
     + assignment
@@ -57,16 +59,38 @@
           </p>
 
           <hr class="solid" />
-          <div class="progress1">
-            <span>Progress :</span>
-            <span class="progress-bar1">
-              <mat-progress-bar
-                mode="determinate"
-                value="{{ (r.totalActualTime / r.estimateTime) * 100 }}"
-              >
-              </mat-progress-bar>
-            </span>
+
+          <div *ngIf="compareMoreThanEndDate(r.endDate) == true">
+            <div>Today {{ today | date: "yMMdd" }}</div>
+            <div>r.endDate {{ r.endDate | date: "yMMdd" }}</div>
+
+            <div class="progress1">
+              <span>Progress :</span>
+              <span class="progress-bar1">
+                <mat-progress-bar
+                  [color]="colorwarn"
+                  mode="determinate"
+                  value="{{ (r.totalActualTime / r.estimateTime) * 100 }}"
+                >
+                </mat-progress-bar>
+              </span>
+            </div>
           </div>
+
+          <div *ngIf="compareMoreThanEndDate(r.endDate) == false">
+            <div class="progress1">
+              <span>Progress :</span>
+              <span class="progress-bar1">
+                <mat-progress-bar
+                  [color]="colorprim"
+                  mode="determinate"
+                  value="{{ (r.totalActualTime / r.estimateTime) * 100 }}"
+                >
+                </mat-progress-bar>
+              </span>
+            </div>
+          </div>
+
           <div>End date : {{ r.endDate | date: "dd/MM/yyyy" }}</div>
 
           <div class="d-flex" title="billable time">
@@ -87,14 +111,28 @@
                 </p>
               </div>
 
-              <div class="d-flex child" title="actual time">
-                <i class="material-icons md-18">ic_watch_later</i>
-                <p>
-                  <!-- Actual Time: -->
-                  {{ r.totalActualTime }} Hrs
-                </p>
+              <div *ngIf="r.totalActualTime == null || r.totalActualTime == 0">
+                <div class="d-flex child" title="actual time">
+                  <i class="material-icons md-18">ic_watch_later</i>
+                  <p>
+                    <!-- Actual Time: -->
+                    0 Hr
+                  </p>
+                </div>
+              </div>
+
+              <div *ngIf="r.totalActualTime !== null || r.totalActualTime >= 0">
+                <div class="d-flex child" title="actual time">
+                  <i class="material-icons md-18">ic_watch_later</i>
+                  <p>
+                    <!-- Actual Time: -->
+                    {{ r.totalActualTime }} Hrs
+                  </p>
+                </div>
               </div>
             </div>
+
+
             <div *ngIf="r['cardObj'].length > 0">
               <button
                 (click)="r.isCollapsed = !r.isCollapsed"

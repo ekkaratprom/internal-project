@@ -63,7 +63,7 @@ export class AssignmentFormComponent implements OnInit {
         console.log(r);
         this.submitCompleted.emit();
         // this.newAssignment.emit(this.assignment);
-        console.log('newAssignment', this.newAssignment);
+        // console.log('newAssignment', this.newAssignment);
       });
   }
 
