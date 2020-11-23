@@ -60,9 +60,9 @@
 
           <hr class="solid" />
 
-          <div *ngIf="compareMoreThanEndDate(r.endDate) == true">
-            <div>Today {{ today | date: "yMMdd" }}</div>
-            <div>r.endDate {{ r.endDate | date: "yMMdd" }}</div>
+          <div *ngIf="compareMoreThanEndDate(r.endDate) == true || r.totalActualTime > r.estimateTime">
+            <!-- <div>Today {{ today | date: "yMMdd" }}</div>
+            <div>r.endDate {{ r.endDate | date: "yMMdd" }}</div> -->
 
             <div class="progress1">
               <span>Progress :</span>
@@ -77,7 +77,7 @@
             </div>
           </div>
 
-          <div *ngIf="compareMoreThanEndDate(r.endDate) == false">
+          <div *ngIf="compareMoreThanEndDate(r.endDate) == false && r.totalActualTime <= r.estimateTime">
             <div class="progress1">
               <span>Progress :</span>
               <span class="progress-bar1">
