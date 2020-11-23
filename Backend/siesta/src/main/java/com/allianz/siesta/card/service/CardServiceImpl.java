@@ -78,8 +78,8 @@ public class CardServiceImpl implements CardService{
                         (Double) assignment[3],
                         (Boolean) assignment[4],
                         (Date) assignment[5],
-                        (Double)time[0],
-                        (Double)time[1]
+                        (Double)time[1],
+                        (Double)time[0]
                 );
 
 
@@ -247,12 +247,12 @@ public class CardServiceImpl implements CardService{
     //check cardIdIsExist
     private Card verifyCardIdIsExist (Long id) throws CardNotFoundException {
         return cardRepository.findById(id).orElseThrow(() ->
-                new CardNotFoundException("error"));
+                new CardNotFoundException("CardId not found!"));
     };
 
     //check AssignmentIdISExist
     private Assignment verifyAssignmentIdIsExist (Long id) throws AssignmentNotFoundException {
         return assignmentRepository.findById(id).orElseThrow(() ->
-                new AssignmentNotFoundException("error"));
+                new AssignmentNotFoundException("CardId not found!"));
     };
 }
