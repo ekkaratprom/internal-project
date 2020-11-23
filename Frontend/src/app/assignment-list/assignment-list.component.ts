@@ -22,6 +22,7 @@ export interface CardDetail {
   totalActualTime: number;
 }
 
+
 @Component({
   selector: 'app-assignment-list',
   templateUrl: './assignment-list.component.html',
@@ -206,7 +207,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
               const cardObj = {
                 cardName: c.cardName,
                 cardActualTime: c.cardActualTime,
-                cardDate: c.cardDate
+                cardDate: c.cardDate,
               };
               this.cObj.push(cardObj);
             });
@@ -216,6 +217,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
               billableTime: element.billableTime,
               completedStatus: element.completedStatus,
               estimateTime: element.estimateTime,
+              endDate: element.endDate,
               totalActualTime: element.totalActualTime,
               totalEstimateTime: element.totalEstimateTime,
               isCollapsed: true,
