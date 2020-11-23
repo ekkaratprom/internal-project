@@ -1,34 +1,35 @@
 export type Assignment = {
-    assignmentName: string;
-    projectId: number;
-    estimateTime: number;
-    billableTime: number;
-    completedStatus?: boolean;
+  assignmentName: string;
+  projectId: number;
+  estimateTime: number;
+  endDate: string;
+  billableTime: number;
+  completedStatus?: boolean;
 };
 
 export type Project = {
-    projectId: number;
-    projectName: string;
+  projectId: number;
+  projectName: string;
 }
 
 export type AssignmentResponse = {
-  id:              number;
+  id: number;
   assignmentName?: string;
-  billableTime?:    number;
-  estimateTime?:    number;
-  actualTime?:      number;
+  billableTime?: number;
+  estimateTime?: number;
+  actualTime?: number;
   completedStatus?: boolean;
-  deletedStatus:   boolean;
-  project?:         Project;
+  deletedStatus: boolean;
+  project?: Project;
 };
 
 export type CardList = {
-    assignmentName?: string;
-    billableTime?: number;
-    estimateTime?: number;
-    completedStatus: boolean;
-    totalActualTime?: number;
-    cardObj: CardObj[];
+  assignmentName?: string;
+  billableTime?: number;
+  estimateTime?: number;
+  completedStatus: boolean;
+  totalActualTime?: number;
+  cardObj: CardObj[];
 }
 
 export type CardLists = {
@@ -42,24 +43,31 @@ export type CardLists = {
 }
 
 export type CardObj = {
-    cardName: string;
-    cardActualTime: number;
-    cardDate: string;
+  cardName: string;
+  cardActualTime: number;
+  cardDate: string;
 }
 
 
 export type AssignmentList = {
-    id: number,
-    assignmentName?: string,
+  id: number,
+  assignmentName?: string,
 }
 
 export type CardForm = {
-    actualTime: number,
-    assignmentId: number,
-    cardDate: Date,
-    cardName: string,
-    userId: number,
-}
+  // estimateTime: number,
+  // assignmentId: number,
+  // cardDate: Date,
+  // cardName: string,
+  // userId: number,
+
+  assignmentId: number;
+  cardDate: string;
+  cardName: string;
+  estimateTime: number;
+  userId: number;
+};
+
 
 export type DeletedStatusAssignment = {
   deletedStatus: boolean;

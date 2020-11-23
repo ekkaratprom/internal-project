@@ -28,12 +28,12 @@ export class DatepickerComponent implements OnInit , OnChanges{
   }
 
   ngOnInit(): void {
-    console.log('datep',this.datep);
+    // console.log('datep',this.datep);
   }
 
   ngOnChanges(changes) {
     // changes.prop contains the old and the new value...
-    console.log(changes)
+    // console.log(changes)
     if (this.datep){
     this.month = this.monthlist[this.datep.getMonth()];
     console.log(this.datep);
@@ -55,8 +55,8 @@ export class DatepickerComponent implements OnInit , OnChanges{
     this.weekChange.emit(this.weekdays);
     this.dateChange.emit(this.DMY);
 
-    console.log('child', this.weekdays)
-    console.log('date', this.DMY)
+    // console.log('child', this.weekdays)
+    // console.log('date', this.DMY)
     // this.fullweekdays.splice(this.date, 1, `${this.DMY.year}-${this.DMY.month}-${this.DMY.day}`);
     for (let i = 0; i < 7; i++) {
       if (i < this.date) {

@@ -158,6 +158,7 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
           this.dateList.map(date => {
             const cardTemp = {
               'totalActualTime': 0,
+              'totalEstimateTime': 0,
               'cardDate': date,
               'card': []
             };

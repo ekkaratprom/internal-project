@@ -24,7 +24,7 @@
   </div>
 </div>
 <ng-template #content let-modal>
-  <app-assignment-form (submitCompleted)="close()"></app-assignment-form>
+  <app-assignment-form (submitCompleted)="close(); submit()"></app-assignment-form>
 </ng-template>
 <div class="row">
   <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
@@ -58,19 +58,39 @@
             </mat-progress-bar>
           </span>
         </div> -->
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center"
+          *ngIf="compareMoreThanEndDate(r.endDate) == true || r.totalActualTime > r.estimateTime">
           <!-- <div>progress:</div> -->
           <div>
             <p class="card-text card-text-padding">progress:</p>
           </div>
           <div class="ml-2 progress-bar1">
-            <mat-progress-bar mode="determinate" value="{{r.totalActualTime / r.estimateTime *100 }}">
+            <mat-progress-bar [color]="colorwarn" mode="determinate"
+              value="{{r.totalActualTime / r.estimateTime *100 }}">
             </mat-progress-bar>
           </div>
         </div>
-        <div>
-          <p class="card-text card-text-padding">end date:</p>
+
+        <div class="d-flex justify-content-between align-items-center"
+          *ngIf="compareMoreThanEndDate(r.endDate) == false && r.totalActualTime <= r.estimateTime">
+          <!-- <div>progress:</div> -->
+          <div>
+            <p class="card-text card-text-padding">progress:</p>
+          </div>
+          <div class="ml-2 progress-bar1">
+            <mat-progress-bar [color]="colorprim" mode="determinate"
+              value="{{r.totalActualTime / r.estimateTime *100 }}">
+            </mat-progress-bar>
+          </div>
         </div>
+
+
+        <div>
+          <p class="card-text card-text-padding">end date: {{ r.endDate | date: "dd/MM/yyyy" }} </p>
+        </div>
+
+
+
         <div class="d-flex justify-content-around align-items-center">
 
           <!-- Billable Time: -->
@@ -102,7 +122,8 @@
             <div class="ml-1">Hrs</div>
           </div>
           <!-- Actual Time -->
-          <div class="d-flex justify-content-between align-items-center" title="actual time">
+          <div class="d-flex justify-content-between align-items-center" title="actual time"
+            *ngIf="r.totalActualTime !== null && r.totalActualTime >= 0">
             <!-- <i class="material-icons md-18">ic_watch_later</i> -->
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock-fill" fill="currentColor"
               xmlns="http://www.w3.org/2000/svg">
@@ -112,9 +133,23 @@
             <div class="ml-1">{{ r.totalActualTime }}</div>
             <div class="ml-1">Hrs</div>
           </div>
-          <div class="d-flex justify-content-end">
-            <p (click)="isCollapsed = !isCollapsed ; collapsed(r.assignmentId)" [attr.aria-expanded]="!isCollapsed"
-              aria-controls="collapse">
+
+
+          <div class="d-flex justify-content-between align-items-center" title="actual time"
+            *ngIf="r.totalActualTime == null && r.totalActualTime == 0">
+            <!-- <i class="material-icons md-18">ic_watch_later</i> -->
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock-fill" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+            </svg>
+            <div class="ml-1">0</div>
+            <div class="ml-1">Hrs</div>
+          </div>
+
+
+          <div class="d-flex justify-content-end" *ngIf="r['cardObj'].length > 0">
+            <p (click)="r.isCollapsed = !r.isCollapsed" [attr.aria-expanded]="!r.isCollapsed" aria-controls="collapse">
               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
@@ -128,8 +163,8 @@
         <!-- row -->
 
         <!-- check -->
-        <div id="collapse" [ngbCollapse]="isCollapsed">
-          <div *ngIf="(r.assignmentId == collapesdId)">
+        <div id="collapse" [ngbCollapse]="r.isCollapsed">
+          <div>
             <div class="card childCard" *ngFor="let co of r['cardObj']">
               <div class="card-body mb-2 car-background">
                 <div class="d-flex justify-content-between d-flex flex-wrap">

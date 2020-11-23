@@ -20,14 +20,17 @@ export type Card = {
 }
 
 
-
+export type Total = {
+    actualTime: number;
+    estimateTime: number;
+}
 
 export type Actual = {
     actualTime: number;
 }
 
 export type DeleteStatus = {
-  deletedStatus: boolean;
+    deletedStatus: boolean;
 }
 
 

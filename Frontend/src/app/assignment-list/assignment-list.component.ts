@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { ThemePalette } from '@angular/material/core';
 
 export interface CardData {
   cardName: string;
@@ -50,20 +51,27 @@ export class AssignmentListComponent implements OnInit, DoCheck {
   completedStatus;
   indexSelected;
   collapesdId;
-  public isCollapsed = true;
+  public isCollapsed: boolean = true;
 
+  value;
+  colorwarn: ThemePalette = 'warn';
+  today;
+  colorprim: ThemePalette = 'primary';
 
   constructor(private qv: QueueviewserviceService, private assignmentService: AssignmentService,
     private modalService: NgbModal, private router: Router) { }
 
   ngOnInit(): void {
     // this.getAllAssignmentCards();
-    console.log('ngOnInit');
+    // console.log('ngOnInit');
     this.getAllCards();
+    this.today = new Date();
+    console.log('Today', this.today);
+
   }
 
   ngDoCheck(): void {
-    console.log('assign-list - ngDoCheck', this.isReloadAssignment);
+    // console.log('assign-list - ngDoCheck', this.isReloadAssignment);
     if (this.isReloadAssignment === true) {
       this.getAllCards();
       // this.isReloadAssignment = false;
@@ -72,13 +80,16 @@ export class AssignmentListComponent implements OnInit, DoCheck {
   }
 
   open(content): void {
-    this.modalReference = this.modalService.open(content, { size: 'sm' });
+    this.modalReference = this.modalService.open(content, { size: 'md' });
+  }
+
+  submit(): void {
+    this.getAllCards();
   }
 
   close(): void {
     this.modalReference.close();
     console.log('close');
-    this.getAllCards();
   }
 
   updateDeleteStatus(id: string): void {
@@ -171,6 +182,14 @@ export class AssignmentListComponent implements OnInit, DoCheck {
     this.collapesdId = id;
   }
 
+  compareMoreThanEndDate(endDate: any): boolean {
+    const date1 = new Date(this.today);
+    const date2 = new Date(endDate);
+    if (date2.getTime() <= date1.getTime()) {
+      return true;
+    } else { return false; }
+  }
+
 
   getAllCards(): void {
     try {
@@ -198,6 +217,8 @@ export class AssignmentListComponent implements OnInit, DoCheck {
               completedStatus: element.completedStatus,
               estimateTime: element.estimateTime,
               totalActualTime: element.totalActualTime,
+              totalEstimateTime: element.totalEstimateTime,
+              isCollapsed: true,
               cardObj: this.cObj,
             };
             this.result.push(cardDetail);
