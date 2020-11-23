@@ -1,60 +1,51 @@
 export type UserResponse = {
-  userId: number;
-  fullName: string;
-  position: string;
-  skills: Skill[];
-  cards: Cards[];
+    userId: number;
+    fullName: string;
+    position: string;
+    skills: Skill[];
+    cards: Cards[];
 }
 
 export type Cards = {
-  totalActualTime: number;
-  totalEstimateTime: number;
-  cardDate: string;
-  card: Card[];
+    totalActualTime: number;
+    cardDate: string;
+    card: Card[];
 }
 
 export type Card = {
-  cardName: string;
-  estimateTime: number | null;
-  actualTime: number | null;
-  cardId: number;
-  createDate: string;
+    cardName: string;
+    actualTime: number;
+    cardId: number;
+    createDate: string;
 }
-
-
 
 
 export type Total = {
-  actualTime: number;
-  estimateTime: number;
+    actualTime: number;
+    estimateTime: number;
+}
+
+export type Actual = {
+    actualTime: number;
 }
 
 export type DeleteStatus = {
-  deletedStatus: boolean;
+    deletedStatus: boolean;
 }
 
 
 export type Position = {
-  id: number;
-  positionName: string;
+    id: number;
+    positionName: string;
 }
 
 export type Skills = {
-  id: number;
-  skillName: string;
-  iconPath: string;
+    id: number;
+    skillName: string;
+    iconPath: string;
 }
 
 export type Skill = {
-  skillName: string;
-  iconPath: string;
+    skillName: string;
+    iconPath: string;
 }
-
-
-
-
-
-
-
-
-

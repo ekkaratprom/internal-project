@@ -17,8 +17,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { MatIconModule } from '@angular/material/icon';
 import { AppComponent } from './app.component';
+import { MatIconModule } from '@angular/material/icon';
 import { CardComponent } from './card/card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -30,7 +30,6 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
 import { AvaliableTimeComponent } from './avaliable-time/avaliable-time.component';
 import { AssignmentFormComponent } from './assignment-form/assignment-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 
 @NgModule({
   declarations: [
@@ -62,10 +61,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     MatProgressBarModule,
     BrowserModule,
+    MatIconModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    MatIconModule,
     ReactiveFormsModule,
     MDBBootstrapModule.forRoot(),
     NgbModule,

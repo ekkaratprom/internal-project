@@ -1,16 +1,14 @@
-<div>
-  <!-- <app-navbar> </app-navbar> -->
-
-  <app-datepicker (dateChange)="collectDate($event)" [datep]="dateSent"></app-datepicker>
-
-  <div class="row">
-    <div class="col-lg-3 col-xl-3">
-      <app-assignment-list [(isReloadAssignment)]="isReloadAssignment" (updateDelete)="setReload(true)"></app-assignment-list>
-      <div class="vl"></div>
-    </div>
-    <div class="col-lg-9 col-xl-9 available-time">
-      <app-avaliable-time [(isReLoad)]="isReLoad" (dateChange)="collectDate($event)" (submitedLeft)="setReloadAssignment(true)" (dateOnNextBack)="collectDateOnNextBack($event)"
-        [date]="date"></app-avaliable-time>
-    </div>
+<!-- <app-navbar> </app-navbar> -->
+<app-datepicker (dateChange)="collectDate($event)" [datep]="dateSent"></app-datepicker>
+<div class="row">
+  <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3">
+    <app-assignment-list [(isReloadAssignment)]="isReloadAssignment" (updateDelete)="setReload(true)">
+    </app-assignment-list>
+    <div class="vl"></div>
+  </div>
+  <div class="col-xs-9 col-md-9 col-lg-9 col-xl-9 available-time">
+    <app-avaliable-time [(isReLoad)]="isReLoad" (dateChange)="collectDate($event)"
+      (submitedLeft)="setReloadAssignment(true)" (dateOnNextBack)="collectDateOnNextBack($event)" [date]="date">
+    </app-avaliable-time>
   </div>
 </div>

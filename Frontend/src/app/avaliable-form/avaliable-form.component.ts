@@ -81,8 +81,8 @@ export class AvaliableFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllAssignment();
-    // console.log('************', this.modalValue);
-    // console.log('************', this.modalValue[0].cards);
+    // console.log('**********', this.modalValue);
+    // console.log('**********', this.modalValue[0].cards);
     this.cardsData = [this.modalValue[0].cards];
     this.selectDate = this.modalValue[0].cards.cardDate;
   }
@@ -123,8 +123,8 @@ export class AvaliableFormComponent implements OnInit {
 
   onSubmitPeriod(): void {
     // const dateFormat = new Date('2020-10-30T03:48:49.759Z').toLocaleString('en-GB').substring(0, 10).split('/').join('-');
-    // const startDate = `${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`;
-    // const endDate = `${this.toDate.year}-${this.toDate.month}-${this.toDate.day}`;
+    // const startDate = ${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day};
+    // const endDate = ${this.toDate.year}-${this.toDate.month}-${this.toDate.day};
     // const sd = new Date(startDate);
     // const ed = new Date(endDate);
 

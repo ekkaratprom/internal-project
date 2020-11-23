@@ -57,7 +57,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
   value;
   colorwarn: ThemePalette = 'warn';
   today;
-  colorprim : ThemePalette = 'primary';
+  colorprim: ThemePalette = 'primary';
 
   constructor(private qv: QueueviewserviceService, private assignmentService: AssignmentService,
     private modalService: NgbModal, private router: Router) { }
@@ -67,7 +67,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
     // console.log('ngOnInit');
     this.getAllCards();
     this.today = new Date();
-    console.log('Today',this.today);
+    console.log('Today', this.today);
 
   }
 
@@ -183,12 +183,12 @@ export class AssignmentListComponent implements OnInit, DoCheck {
     this.collapesdId = id;
   }
 
-  compareMoreThanEndDate(endDate: any): boolean{
+  compareMoreThanEndDate(endDate: any): boolean {
     const date1 = new Date(this.today);
     const date2 = new Date(endDate);
-    if (date2.getTime() <= date1.getTime()){
+    if (date2.getTime() <= date1.getTime()) {
       return true;
-    }else { return false; }
+    } else { return false; }
   }
 
 
