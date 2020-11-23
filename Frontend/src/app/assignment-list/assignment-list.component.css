@@ -37,6 +37,7 @@ hr {
 }
 .icon-complete {
   font-size: 16px;
+  justify-content: center;
   cursor: pointer;
   color: #000;
 }
@@ -58,9 +59,28 @@ hr {
   display: flex;
   flex-direction: row;
 }
+.icon-time{
+  display: flex;
+}
+.child{
+  width: 30%;
+}
+
+.list-group{
+  width: 100%;
+  padding: 12px 0;
+}
+.dropdown{
+  background-color:  #FAFAFA ;
+  width: 50px;
+  height: 25px;
+  border: none;
+  margin-left: auto;
+}
 
 .assignment-part {
   display: flex;
+  padding-left: 10px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -120,12 +140,15 @@ hr {
 .no {
   background-color: red;
 }
+.assignmentsearch{
+  width: 100%;
+}
 
 .btn {
   border: 1px solid #ced4da;
   height: 40px;
   padding: 0%;
-  width: 320px;
+  width: 100%;
   border: none;
   box-shadow: 0px 4px 8px rgba(69, 69, 67, 0.14);
   margin: 3%;
@@ -138,14 +161,16 @@ hr {
   padding: 0.2rem;
 }
 
+.subcard{
+  box-shadow: 0px 4px 8px rgba(69, 69, 67, 0.14);
+  border: none;
+  border-radius: 10px;
+  margin: 5px 0;
+}
 .card{
   border: none;
 }
-/*
-.btn-and-list{
-  display: flex;
-}
 
-.btn-child{
-  justify-content: flex-end;
-} */
+.list-group-item{
+  padding: 12px 0;
+}
