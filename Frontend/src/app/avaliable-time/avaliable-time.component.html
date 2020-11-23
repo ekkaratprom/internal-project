@@ -37,12 +37,14 @@
   <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3"></div>
   <div class="col-xs-9 col-md-9 col-lg-9 col-xl-9 pr-0">
     <div class="d-flex bd-highlight justify-content-between mb-3 pl-2">
-      <a (click)="previousweek()" href="#" class="previous round">&#8249;</a>
-      <div class="top-color-box" *ngFor="let day of dateList">
+      <a (click)="previousweek()" href="#" class="previous round pr-1">&#8249;</a>
+
+      <div class="top-color-box pr-3" *ngFor="let day of dateList">
         {{ day | date: "EEE" }} <br />
         {{ day | date: "dd" }} <br />
         {{ day | date: "MMM" }}
       </div>
+
       <a (click)="nextweek()" href="#" class="next round">&#8250;</a>
     </div>
   </div>
@@ -53,7 +55,7 @@
   </div>
 </div>
 
-<div class="row person-list mt-4" *ngFor=" let r of avaliableLists | nameFilter: searchText | positionFilter: positionCheck | skillFilter:
+<div class="row person-list mt-3" *ngFor=" let r of avaliableLists | nameFilter: searchText | positionFilter: positionCheck | skillFilter:
   skillsetCheck">
   <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3 d-flex align-items-center">
     <div class=" card">
@@ -74,8 +76,8 @@
   </div>
   <div class="col-xs-9 col-md-9 col-lg-9 col-xl-9 ">
     <div class="row d-flex justify-content-around mb-2 mt-2 pr-2">
-      <mat-icon class="list-icon align-self-center">query_builder</mat-icon>
-      <li class="color-box-top" *ngFor="let item of r['cards']"
+      <mat-icon class="list-icon align-self-center" title="estimate time">query_builder</mat-icon>
+      <li class="color-box-top" *ngFor="let item of r['cards']" title="estimate time"
         (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
         <ng-template #content let-modal>
           <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)" (submitCompleted)="close()"
@@ -89,9 +91,9 @@
     </div>
     <div class="row border-bottom"></div>
     <div class="row d-flex justify-content-around mb-2 mt-2 pr-2">
-      <mat-icon class="list-icon align-self-center">alarm_on</mat-icon>
+      <mat-icon class="list-icon align-self-center" title="actual time">alarm_on</mat-icon>
       <li class=" color-box" *ngFor="let item of r['cards']"
-        [ngStyle]="{ backgroundColor: item.totalActualTime | color }"
+        [ngStyle]="{ backgroundColor: item.totalActualTime | color }" title="actual time"
         (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
         <ng-template #content let-modal>
           <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)" (submitCompleted)="close()"
