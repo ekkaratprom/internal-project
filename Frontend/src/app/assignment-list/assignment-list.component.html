@@ -121,7 +121,7 @@
                 </div>
               </div>
 
-              <div *ngIf="r.totalActualTime !== null || r.totalActualTime >= 0">
+              <div *ngIf="r.totalActualTime !== null && r.totalActualTime > 0">
                 <div class="d-flex child" title="actual time">
                   <i class="material-icons md-18">ic_watch_later</i>
                   <p>

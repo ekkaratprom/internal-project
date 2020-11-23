@@ -6,6 +6,7 @@ import { Assignment, CardForm, CardList } from './../assignment-list/shared/assi
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-avaliable-form',
@@ -30,6 +31,8 @@ export class AvaliableFormComponent implements OnInit {
   dayPick: NgbDateStruct;
   today = this.calendar.getToday();
   selectDate;
+  diffTimeDay;
+  businessDays;
 
   // cardId;""
 
@@ -128,10 +131,14 @@ export class AvaliableFormComponent implements OnInit {
     const resObj = [];
     const day = this.sd;
     let i = 0;
+    // const diffTime = this.ed.getTime() - this.sd.getTime();
+    // const diffTimeDay = diffTime / (1000 * 3600 * 24);
+    console.log('businessDays', this.businessDays);
 
-    while (i <= (this.ed - this.sd)) {
+    while (i <= this.businessDays) {
+
       if (day.getDay() !== 0 && day.getDay() !== 6) {
-        day.setDate(day.getDate() + 1);
+
         const date = new Date(day);
         this.card = {
           userId: this.modalValue[1].userId,
@@ -143,6 +150,7 @@ export class AvaliableFormComponent implements OnInit {
           assignmentId: parseInt(this.addCard.get('assignmentId').value),
         };
         resObj.push(this.card);
+        day.setDate(day.getDate() + 1);
         i++;
         console.log('resObj', resObj);
       }
@@ -275,6 +283,19 @@ export class AvaliableFormComponent implements OnInit {
 
   }
 
+  calcWorkingDays(startDate, endDate) {
+    let day = moment(startDate);
+    this.businessDays = 0;
+
+    while (day.isSameOrBefore(endDate, 'day')) {
+      if (day.day() !== 0 && day.day() !== 6) { this.businessDays++; }
+      day.add(1, 'd');
+    }
+    return this.businessDays;
+
+
+  }
+
   // period date
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
@@ -294,10 +315,20 @@ export class AvaliableFormComponent implements OnInit {
     this.sd = new Date(startDate);
     this.ed = new Date(endDate);
 
+    this.calcWorkingDays(this.sd, this.ed);
+
+    // const diffTime = this.ed.getDate() - this.sd.getDate();
+    // this.diffTimeDay = diffTime / (1000 * 3600 * 24);
+
     console.log('startDate', this.sd);
     console.log('endDate', this.ed);
-    console.log('range', (this.ed -this.sd));
-    console.log('hover', (this.hoveredDate));
+    // console.log('range', (this.ed - this.sd));
+    // console.log('hover', (this.hoveredDate));
+    // console.log('ed', (this.ed.setDate(this.ed.getDate())));
+    // console.log('sd', (this.sd.setDate(this.sd.getDate())));
+    // console.log('diffTime', diffTime);
+    // console.log('diffTimeDay', this.diffTimeDay);
+
   }
 
   isHovered(date: NgbDate) {
