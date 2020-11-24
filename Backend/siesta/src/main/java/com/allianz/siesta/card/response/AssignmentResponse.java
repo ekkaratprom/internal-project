@@ -15,15 +15,13 @@ public class AssignmentResponse {
     private Double totalEstimateTime;
     private List cardObj;
 
-    public AssignmentResponse(Long assignmentId, String assignmentName, Double billableTime, Double estimateTime, Boolean completedStatus, Date endDate, Double totalActualTime, Double totalEstimateTime) {
+    public AssignmentResponse(Long assignmentId, String assignmentName, Double billableTime, Double estimateTime, Boolean completedStatus, Date endDate) {
         this.assignmentId = assignmentId;
         this.assignmentName = assignmentName;
         this.billableTime = billableTime;
         this.estimateTime = estimateTime;
         this.completedStatus = completedStatus;
         this.endDate = endDate;
-        this.totalActualTime = totalActualTime;
-        this.totalEstimateTime = totalEstimateTime;
     }
 
     public Double getTotalEstimateTime() {

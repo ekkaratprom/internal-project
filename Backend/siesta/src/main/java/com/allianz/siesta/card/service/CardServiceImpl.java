@@ -48,14 +48,13 @@ public class CardServiceImpl implements CardService{
         List<Object[]> assignments = assignmentRepository.getUndeletedAllAssignment();
 
         for (Object[] assignment : assignments) {
-
+            //change BigInt to Long
             BigInteger assignmentId = (BigInteger) assignment[0];
             Long id = assignmentId.longValue();
 
             List<Object[]> timeList = assignmentRepository.getTotalEstimateAndActualTime(id);
-
             List<Object[]> cardList = cardRepository.getCardByAssignmentId(id);
-
+//Issue with subtracting date -1
 //                AssignmentResponse assignmentResponse = new AssignmentResponse(
 //                        assignment.getId(),
 //                        assignment.getAssignmentName(),
@@ -66,29 +65,27 @@ public class CardServiceImpl implements CardService{
 //                        (Double)time[1],
 //                        (Double)time[0]
 //                );
-
-
-            if ((timeList == null) || (timeList.size() == 0)){
-                Object[] time = {0.0,0.0};
-
-                timeList = new ArrayList<>();
-                timeList.add(time);
-            }
-
-
-            for (Object[] time : timeList) {
-
+            //check emply cardobj before loop
+//            if ((timeList == null) || (timeList.size() == 0)){
+//                Object[] time = {0.0,0.0};
+//
+//                timeList = new ArrayList<>();
+//                timeList.add(time);
+//            }
                 AssignmentResponse assignmentResponse = new AssignmentResponse(
                         id,
                         (String) assignment[1],
                         (Double) assignment[2],
                         (Double) assignment[3],
                         (Boolean) assignment[4],
-                        (Date) assignment[5],
-                        (Double)time[1],
-                        (Double)time[0]
+                        (Date) assignment[5]
                 );
 
+                //Loop totalEst&Act of cards
+            for (Object[] time : timeList) {
+                assignmentResponse.setTotalEstimateTime((Double) time[0]);
+                assignmentResponse.setTotalActualTime((Double) time[1]);
+            }
 
                 assignmentResponse.setCardObj(new ArrayList());
                 for (Object[] card : cardList) {
@@ -100,16 +97,11 @@ public class CardServiceImpl implements CardService{
                     );
 
                     assignmentResponse.getCardObj().add(cardResponse);
-
                 }
-
                 assignmentResponseList.add(assignmentResponse);
-            }
         }
-
         return assignmentResponseList;
     }
-
 
     @Override
     public Card addCard(CardRequest cardRequest) throws AssignmentNotFoundException {
@@ -125,6 +117,7 @@ public class CardServiceImpl implements CardService{
         return cardRepository.save(card);
     }
 
+    //for add many cards
     @Override
     public List<CardRequest> addCards(List<CardRequest> cardRequestList) throws AssignmentNotFoundException {
         for (CardRequest cardRequest : cardRequestList) {
