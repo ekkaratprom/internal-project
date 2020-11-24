@@ -48,6 +48,7 @@ export class AvaliableFormComponent implements OnInit {
     private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+    this.onDateUnselect();
   }
 
   public addCard = new FormGroup({
@@ -89,35 +90,39 @@ export class AvaliableFormComponent implements OnInit {
 
   onSubmit(): void {
     // const dateFormat = new Date('2020-10-30T03:48:49.759Z').toLocaleString('en-GB').substring(0, 10).split('/').join('-');
-    let date: any;
 
-    // tslint:disable-next-line: triple-equals
-    if (this.dayPick == undefined) {
-      date = this.selectDate;
-    } else {
-      date = `${this.dayPick.year}-${this.dayPick.month}-${this.dayPick.day}`;
-    }
-    this.card = {
-      userId: this.modalValue[1].userId,
-      // cardDate: this.modalValue[0].cards.cardDate,
-      cardDate: date,
-      cardName: this.addCard.get('cardName').value,
-      estimateTime: parseFloat(this.addCard.get('estimateTime').value),
-      // tslint:disable-next-line: radix
-      assignmentId: parseInt(this.addCard.get('assignmentId').value),
-    };
+    if (this.pickerDisplayDay == true) {
+      let date: any;
 
-    const resObj = Array();
-    resObj.push(this.card);
-    console.log('resObj', resObj);
+      // tslint:disable-next-line: triple-equals
+      if (this.dayPick == undefined) {
+        date = this.selectDate;
+      } else {
+        date = `${this.dayPick.year}-${this.dayPick.month}-${this.dayPick.day}`;
+      }
+      this.card = {
+        userId: this.modalValue[1].userId,
+        // cardDate: this.modalValue[0].cards.cardDate,
+        cardDate: date,
+        cardName: this.addCard.get('cardName').value,
+        estimateTime: parseFloat(this.addCard.get('estimateTime').value),
+        // tslint:disable-next-line: radix
+        assignmentId: parseInt(this.addCard.get('assignmentId').value),
+      };
+
+      const resObj = Array();
+      resObj.push(this.card);
+      console.log('resObj', resObj);
 
 
-    this.assignmentService.addCard(resObj)
-      .subscribe((r) => {
-        console.log(r);
-        // this.router.navigateByUrl('/available-form');
-        this.submitCompleted.emit();
-      });
+      this.assignmentService.addCard(resObj)
+        .subscribe((r) => {
+          console.log(r);
+          // this.router.navigateByUrl('/available-form');
+          this.submitCompleted.emit();
+        });
+
+    } else { this.onSubmitPeriod(); }
 
   }
 
@@ -128,12 +133,12 @@ export class AvaliableFormComponent implements OnInit {
     // const sd = new Date(startDate);
     // const ed = new Date(endDate);
 
-    const resObj = [];
+    const resObjArray = Array();
     const day = this.sd;
     let i = 0;
+
     // const diffTime = this.ed.getTime() - this.sd.getTime();
     // const diffTimeDay = diffTime / (1000 * 3600 * 24);
-    console.log('businessDays', this.businessDays);
 
     while (i <= this.businessDays) {
 
@@ -143,24 +148,23 @@ export class AvaliableFormComponent implements OnInit {
         this.card = {
           userId: this.modalValue[1].userId,
           // cardDate: this.modalValue[0].cards.cardDate,
-          cardDate: date.toLocaleString('en-GB').substring(0, 10).split('/').join('-'),
+          cardDate: date.toISOString().substr(0, 10),
           cardName: this.addCard.get('cardName').value,
           estimateTime: parseFloat(this.addCard.get('estimateTime').value),
           // tslint:disable-next-line: radix
           assignmentId: parseInt(this.addCard.get('assignmentId').value),
         };
-        resObj.push(this.card);
-        day.setDate(day.getDate() + 1);
-        i++;
-        console.log('resObj', resObj);
+        resObjArray.push(this.card);
+
       }
-
-
+      day.setDate(day.getDate() + 1);
+      i++;
     }
 
-    this.assignmentService.addCard(resObj)
+    this.assignmentService.addCard(resObjArray)
       .subscribe((r) => {
         console.log(r);
+        console.log('resObjArray', resObjArray);
         // this.router.navigateByUrl('/available-form');
         this.submitCompleted.emit();
       });
@@ -296,6 +300,20 @@ export class AvaliableFormComponent implements OnInit {
 
   }
 
+  onDateUnselect(): void {
+    const startDate = `${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`;
+    const endDate = `${this.toDate.year}-${this.toDate.month}-${this.toDate.day}`;
+
+    this.sd = new Date(startDate);
+    this.ed = new Date(endDate);
+
+    this.calcWorkingDays(this.sd, this.ed);
+
+    console.log('startDate', this.sd);
+    console.log('endDate', this.ed);
+    console.log('businessDays', this.businessDays);
+  }
+
   // period date
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
@@ -322,12 +340,7 @@ export class AvaliableFormComponent implements OnInit {
 
     console.log('startDate', this.sd);
     console.log('endDate', this.ed);
-    // console.log('range', (this.ed - this.sd));
-    // console.log('hover', (this.hoveredDate));
-    // console.log('ed', (this.ed.setDate(this.ed.getDate())));
-    // console.log('sd', (this.sd.setDate(this.sd.getDate())));
-    // console.log('diffTime', diffTime);
-    // console.log('diffTimeDay', this.diffTimeDay);
+    console.log('businessDays', this.businessDays);
 
   }
 

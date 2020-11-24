@@ -51,7 +51,7 @@
             </button>
           </div>
 
-          <div *ngIf="pickerDisplayDay == true">
+          <div *ngIf="pickerDisplayDay">
             <form class="form-inline">
               <div class="form-group">
                 <div class="input-group">
@@ -74,13 +74,9 @@
               </button>
             </ng-template>
 
-            <button [disabled]="addCard.status === 'INVALID'" type="submit" class="btn btn-primary bottom"
-              (onClick)="onSubmit()">
-              Submit
-            </button>
           </div>
 
-          <div *ngIf="pickerDisplayDay == false">
+          <div *ngIf="!pickerDisplayDay">
             <form class="form-inline">
               <div class="form-group hidden">
                 <div class="input-group">
@@ -120,11 +116,13 @@
               </div>
             </form>
 
-            <button [disabled]="addCard.status === 'INVALID'" type="submit" class="btn btn-primary bottom"
-              (onClick)="onSubmitPeriod()">
+
+          </div>
+
+          <button [disabled]="addCard.status === 'INVALID'" type="submit" class="btn btn-primary bottom"
+              (onClick)="onSubmit()">
               Submit
             </button>
-          </div>
 
         </div>
       </div>
