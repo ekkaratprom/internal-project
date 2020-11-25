@@ -3,8 +3,8 @@
         <div class="card-body">
             <h6>Create Assignment :</h6>
             <div class="card inner">
-                <div class="form-group mx-sm-3 mb-2">
-                    <p>Assignment name</p>
+                <div class="form-group mx-sm-3 mb-2 justify-content-between">
+                    <p>Assignment name:</p>
                     <input type="text" class="form-control" id="input_assignment" placeholder="assignment name.."
                         formControlName="assignmentName" />
                     <div *ngIf="addAssignment.get('assignmentName').hasError('pattern')" class="error">
@@ -12,8 +12,8 @@
                     </div>
                 </div>
 
-                <div class="form-group mx-sm-3 mb-2">
-                    <p>End date</p>
+                <div class="form-group mx-sm-3 mb-2 justify-content-between">
+                    <p>End date:</p>
                     <form class="form-inline">
                         <div class="form-group">
                             <div class="input-group">
@@ -40,8 +40,8 @@
 
                 </div>
 
-                <div class="form-group mx-sm-3 mb-2">
-                    <p>Project name</p>
+                <div class="form-group mx-sm-3 mb-2 justify-content-between">
+                    <h4 class="bold">Project name:</h4>
 
                     <select class="form-control" id="input_project" formControlName="projectId">
                         <option *ngFor="let c of projectList" value="{{ c.projectId }}">
@@ -50,7 +50,7 @@
                     </select>
                 </div>
 
-                <div class="form-group mx-sm-3 mb-2">
+                <div class="form-group mx-sm-3 mb-2 justify-content-between">
                     <p>Billable Time :</p>
                     <input type="number" class="form-control" id="input_billable_time" placeholder="0"
                         formControlName="billableTime" />
@@ -59,7 +59,7 @@
                     </div>
                 </div>
 
-                <div class="form-group mx-sm-3 mb-2">
+                <div class="form-group mx-sm-3 mb-2 justify-content-between">
                     <p>Estimate Time :</p>
                     <input type="number" class="form-control" id="input_estimate_time" placeholder="0"
                         formControlName="estimateTime" />

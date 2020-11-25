@@ -1,31 +1,49 @@
 .close {
   cursor: pointer;
   position: absolute;
-  top: 3%;
-  right: 1%;
+  top: 10px;
+  right: 3px;
   font-size: 15px;
   transform: translate(0%, -50%);
 }
 #input_card_name {
   margin-left: 3%;
-  width: 66%;
+  width: 59%;
   margin-right: 4%;
 }
 .bold {
   font-weight: bolder;
   margin-bottom: 10px;
   display: inline-flex;
-  padding-left: 27px;
+  padding-left: 46px;
 }
+button.calendar,
+button.calendar:active {
+  width: 2.5rem;
+  height: 2rem;
+  align-self: center;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAcCAYAAAAEN20fAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEUSURBVEiJ7ZQxToVAEIY/YCHGxN6XGOIpnpaEsBSeQC9ArZbm9TZ6ADyBNzAhQGGl8Riv4BLAWAgmkpBYkH1b8FWT2WK/zJ8ZJ4qiI6XUI3ANnGKWBnht2/ZBDRK3hgVGNsCd7/ui+JkEIrKtqurLpEWaphd933+IyI3LEIdpCYCiKD6HcuOa/nwOa0ScJEnk0BJg0UTUWJRl6RxCYEzEmomsIlPU3IPW+grIAbquy+q6fluy/28RIBeRMwDXdXMgXLj/B2uimRXpui4D9sBeRLKl+1N+L+t6RwbWrZliTTTr1oxYtzVWiTQAcRxvTX+eJMnlUDaO1vpZRO5NS0x48sIwfPc87xg4B04MCzQi8hIEwe4bl1DnFMCN2zsAAAAASUVORK5CYII=") !important;
+  background-repeat: no-repeat;
+  background-size: 27px;
+  box-sizing: 2px;
+  border: 2px solid #ced4da;
+  background-position: center;
+
+}
+.btn-group{
+  height: 2.5rem;
+  width: 28rem;
+}
+
 
 .btn {
   border: 1px solid #ced4da;
   width: 80%;
-  margin-left: 8%;
+  margin-left: 6%;
 }
 
 #input_estimate_time {
-  width: 15%;
+  width: 30%;
   margin-left: 0%;
 }
 
@@ -34,9 +52,21 @@
   display: inline;
 }
 
+.date-txt{
+  margin-right: 82%;
+
+  font-weight: bold;
+  font-size: 1em;
+}
+.txt.estiamtetime{
+  margin-left: 31%;
+    font-weight: bold;
+    font-size: 1em;
+}
+
 .assignment {
   font-weight: bold;
-  font-size: 63%;
+  font-size: 1em;
   margin-left: 7%;
   margin-top: 2%;
 }
@@ -46,7 +76,7 @@
 
 .bottom {
   right: 0%;
-  margin-left: 6%;
+  margin-left: 9rem;
   margin-bottom: 1.5%;
   margin-top: 1.5%;
   width: 37%;
@@ -61,7 +91,7 @@
 
 #input_assignment_id {
   margin-left: 7%;
-  width: 142%;
+  width: 197%;
   padding-left: 0%;
 }
 
@@ -90,20 +120,39 @@
 .complete {
   margin-top: 5%;
 }
-
 .txt.actualtime {
-  margin-left: 65%;
-  font-weight: bold;
-  font-size: 63%;
+  margin-left: 19%;
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 0;
+  
+}
+
+.txt.actualtimetop {
+  margin-left: 55%;
+    font-weight: bold;
+    font-size: 1em;
+  
 }
 .txt.cardd {
   font-weight: bold;
-  font-size: 63%;
+  font-size: 1em;
   margin-left: 4%;
+}
+.card-name{
+  font-weight: bolder;
+
 }
 .listt {
   padding: 0%;
   font-weight: 400;
+}
+
+.ml{
+  display: inline-block;
+    width: 7rem;
+    margin-bottom: 0rem;
+  margin-left: 18%;
 }
 .error {
   color: red;
@@ -111,11 +160,17 @@
 
 .editInput {
   display: inline-block;
-  margin-right: 2rem;
+    margin-left: 30%;
+    width: 7rem;
 }
 
 .editbtn {
   display: inline-block;
+    margin-left: -1rem;
+    margin-bottom: 0;
+    margin-top: 1.57rem;
+    width: 8rem;
+    height: 2.5rem;
 }
 
 .form-group.hidden {

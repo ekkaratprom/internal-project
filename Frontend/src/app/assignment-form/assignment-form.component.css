@@ -1,6 +1,12 @@
 .bottonx{
-width: 83%;
-margin-left: 7%;
+  width: 94%;
+  margin-left: 3%;
+}
+#input_project{
+  width: 207px;
+}
+.input-group{
+  width: 210px;
 }
 
 .form-control{
@@ -14,7 +20,24 @@ margin-left: 7%;
   padding-bottom: 2%;
   margin-top: 7%;
 }
+.bold{
+  font-weight: bold;
+}
 
 .error {
   color: red;
+}
+
+button.calendar,
+button.calendar:active {
+  width: 3rem;
+  height: 3rem;
+  align-self: center;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAcCAYAAAAEN20fAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEUSURBVEiJ7ZQxToVAEIY/YCHGxN6XGOIpnpaEsBSeQC9ArZbm9TZ6ADyBNzAhQGGl8Riv4BLAWAgmkpBYkH1b8FWT2WK/zJ8ZJ4qiI6XUI3ANnGKWBnht2/ZBDRK3hgVGNsCd7/ui+JkEIrKtqurLpEWaphd933+IyI3LEIdpCYCiKD6HcuOa/nwOa0ScJEnk0BJg0UTUWJRl6RxCYEzEmomsIlPU3IPW+grIAbquy+q6fluy/28RIBeRMwDXdXMgXLj/B2uimRXpui4D9sBeRLKl+1N+L+t6RwbWrZliTTTr1oxYtzVWiTQAcRxvTX+eJMnlUDaO1vpZRO5NS0x48sIwfPc87xg4B04MCzQi8hIEwe4bl1DnFMCN2zsAAAAASUVORK5CYII=") !important;
+  background-repeat: no-repeat;
+  background-size: 26px;
+  box-sizing: 2px;
+  border: 2px solid #ced4da;
+  background-position: center;
+
 }
