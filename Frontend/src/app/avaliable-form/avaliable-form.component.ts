@@ -1,4 +1,4 @@
-import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct, NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AvailabilityService } from './../avaliable-time/shared/availability.service';
 import { Total } from './../avaliable-time/shared/availiability-model';
 import { AssignmentService } from './../assignment-list/shared/assignment.service';
@@ -23,6 +23,7 @@ export class AvaliableFormComponent implements OnInit {
   total: Total;
   modalReference: NgbModalRef;
   projectList = [];
+  closeResult = '';
   assignmentList = [];
   rAssignmentList = [];
   cardsData = [];
@@ -43,7 +44,7 @@ export class AvaliableFormComponent implements OnInit {
   sd;
   ed;
 
-  constructor(private ngbmodal: NgbModal, private assignmentService: AssignmentService,
+  constructor(private ngbmodal: NgbModal, private assignmentService: AssignmentService, private modalService: NgbModal,
     private router: Router, private availabilityService: AvailabilityService,
     private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
     this.fromDate = calendar.getToday();
@@ -91,11 +92,11 @@ export class AvaliableFormComponent implements OnInit {
   onSubmit(): void {
     // const dateFormat = new Date('2020-10-30T03:48:49.759Z').toLocaleString('en-GB').substring(0, 10).split('/').join('-');
 
-    if (this.pickerDisplayDay == true) {
+    if (this.pickerDisplayDay === true) {
       let date: any;
 
       // tslint:disable-next-line: triple-equals
-      if (this.dayPick == undefined) {
+      if (this.dayPick === undefined) {
         date = this.selectDate;
       } else {
         date = `${this.dayPick.year}-${this.dayPick.month}-${this.dayPick.day}`;
@@ -201,6 +202,23 @@ export class AvaliableFormComponent implements OnInit {
     }
   }
 
+  openclosemodal(content) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
   onCancel(): void {
     this.assignmentcardChange.emit('cancel');
   }
@@ -277,7 +295,6 @@ export class AvaliableFormComponent implements OnInit {
         });
       console.log('id', id);
       console.log(' Delete status', this.status);
-      alert('Delete success');
       // this.submitUpdateCardCompleted.emit();
       this.submitCompleted.emit();
 

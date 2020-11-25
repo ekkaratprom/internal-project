@@ -155,7 +155,27 @@
               {{ item.assignmentName }}
             </div>
           </div>
-          <span class="close" (click)="updateDeleteStatus(item.cardId)" title="Delete Card">&times;</span>
+          <span class="close" (click)="openclosemodal(content1)" title="Delete Card">&times;</span>
+
+
+          <ng-template #content1 let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title closemodal-bold" id="modal-basic-title ">Delete confirmation</h4>
+
+              <span (click)="modal.dismiss('Cross click')" class="closemodal" aria-hidden="false">&times;</span>
+
+            </div>
+            <div class="modal-body">
+              Do you want to Delete <span class="closemodal-bold">{{ item.cardName }} </span> Card?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn-closemodal  btn-outline-dark"
+                (click)="modal.close('Save click')">Cancel</button>
+              <button type="button" class="btn-closemodal  btn-outline-primary"
+                (click)="updateDeleteStatus(item.cardId)">Ok</button>
+            </div>
+
+          </ng-template>
 
           <form [formGroup]="editCard" (keydown)="keyDownFunction($event, item.cardId)">
             <div class="row mb-4">

@@ -23,6 +23,9 @@
     </div>
   </div>
 </div>
+
+
+
 <ng-template #content let-modal>
   <app-assignment-form (submitCompleted)="close(); submit()"></app-assignment-form>
 </ng-template>
@@ -37,10 +40,29 @@
     | completedstatusFilter: completedStatusCheck
     | assignmentFilter: assignmentsearchText
     ; index as i">
+
+    <ng-template #content1 let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title bold" id="modal-basic-title ">Delete confirmation</h4>
+
+        <span (click)="modal.dismiss('Cross click')" class="closemodal" aria-hidden="false">&times;</span>
+
+        <!-- <span class="close" (click)="modal.dismiss('Cross click')">&times;</span> -->
+      </div>
+      <div class="modal-body">
+        Do you want to Delete <span class="bold">{{ r.assignmentName }} </span> assignment?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+        <button type="button" class="btn btn-outline-primary" (click)="updateDeleteStatus(r.assignmentId)">Ok</button>
+      </div>
+
+    </ng-template>
+
     <div class="card">
       <div class="card-body">
         <p class="card-text font-weight-bold">
-          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-circle-fill mr-2 cursor "
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-circle-fill mr-2 cursor  "
             fill="currentColor" xmlns="http://www.w3.org/2000/svg"
             title="{{ r.completedStatus | titlecompletedStatusPipe}}"
             (click)="toggle(i,r.assignmentId,r.completedStatus)"
@@ -49,7 +71,8 @@
               d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
           </svg>
           {{ r.assignmentName }}
-          <span class="close" (click)="updateDeleteStatus(r.assignmentId)">&times;</span>
+          <span class="close" (click)="openclosemodal(content1)">&times;</span>
+          <!-- <span class="close" (click)="updateDeleteStatus(r.assignmentId)">&times;</span> -->
         </p>
         <hr />
         <!-- <div class="progress1">
@@ -63,7 +86,7 @@
           *ngIf="compareMoreThanEndDate(r.endDate) == true || r.totalActualTime > r.estimateTime">
           <!-- <div>progress:</div> -->
           <div>
-            <p class="card-text card-text-padding">progress:</p>
+            <p class="card-text card-text-padding ">progress:</p>
           </div>
           <div class="ml-2 progress-bar1">
             <mat-progress-bar [color]="colorwarn" mode="determinate"
@@ -87,7 +110,7 @@
 
 
         <div>
-          <p class="card-text card-text-padding">end date: {{ r.endDate | date: "dd/MM/yyyy" }} </p>
+          <p class="card-text card-text-padding mt-2 mb-2">end date: {{ r.endDate | date: "dd/MM/yyyy" }} </p>
         </div>
 
 
@@ -151,8 +174,8 @@
 
           <div class="d-flex justify-content-end" *ngIf="r['cardObj'].length > 0">
             <p (click)="r.isCollapsed = !r.isCollapsed" [attr.aria-expanded]="!r.isCollapsed" aria-controls="collapse">
-              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down cursor" fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg">
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down cursor mt-2"
+                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
                   d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
               </svg>

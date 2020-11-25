@@ -3,6 +3,9 @@
   flex-direction: row;
   order: 6;
 }
+.cursor{
+  cursor: pointer;
+}
 .col {
   display: flex;
   flex-direction: column;
