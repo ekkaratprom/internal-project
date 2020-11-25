@@ -4,7 +4,7 @@
       <span class="close head" title="Exit" (click)="updateComplete()">&times;</span>
     </div>
     <div class="card-body" style="border: none">
-      <h6>Create Card :</h6>
+      <h4 class="font-weight-bold mb-1 ">Create Card :</h4>
       <div class="card">
         <div class="card-body inner">
           <div class="assignment">Assignment</div>
@@ -23,7 +23,7 @@
           <div class="form-group mx-sm-3 mb-2">
             <div class="txt cardd">Card</div>
             <!-- <div>Actual time</div> -->
-            <label class="txt actualtime">Estimate Time per day</label>
+            <label class="txt actualtimetop ">Estimate Time per day</label>
 
             <input type="text" class="form-control" id="input_card_name" placeholder="type your card..."
               formControlName="cardName" />
@@ -42,20 +42,25 @@
             </div>
           </div>
 
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary" (click)="calenderPicker(true)">
+          <div class="btn-group mt-3 mb-2" role="group" aria-label="Basic example">
+
+            <button type="button" class="btn btn-primary" (click)="calenderPicker(true)">
+
               one day
             </button>
             <button type="button" class="btn btn-secondary" (click)="calenderPicker(false)">
               Period time
             </button>
           </div>
+          <label for="date" class="date-txt">Date</label>
 
           <div *ngIf="pickerDisplayDay">
             <form class="form-inline">
               <div class="form-group">
                 <div class="input-group">
-                  <input class="form-control" placeholder="{{ selectDate | date: 'yyyy-MM-dd' }}" name="dp"
+
+                  <br>
+                  <input id="date" class="form-control" placeholder="{{ selectDate | date: 'yyyy-MM-dd' }}" name="dp"
                     [(ngModel)]="dayPick" ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker" />
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
@@ -114,15 +119,17 @@
                   </div>
                 </div>
               </div>
+
+
             </form>
 
 
           </div>
 
           <button [disabled]="addCard.status === 'INVALID'" type="submit" class="btn btn-primary bottom"
-              (onClick)="onSubmit()">
-              Submit
-            </button>
+            (onClick)="onSubmit()">
+            Submit
+          </button>
 
         </div>
       </div>
@@ -130,14 +137,14 @@
   </form>
   <div>
     <div>
-      <h6 class="card-list-header">Card List :</h6>
+      <h4 class="font-weight-bold ml-4 mb-0 mt-5">Card List :</h4>
     </div>
 
     <div class="form-group mx-sm-3 mb-2 d-flex">
       <div *ngFor="let c of cardsData" class="card-list">
-        <div class="card list" *ngFor="let item of c.card; index as i">
-          <div class="row">
-            <div class="bold col-5">Card name :</div>
+        <div class="card list  mt-3 mb-3" *ngFor="let item of c.card; index as i">
+          <div class="row mt-3">
+            <div class="bold col-5 ">Card name :</div>
             <div class="card-body listt col-7">
               {{ item.cardName }}
             </div>
@@ -149,17 +156,25 @@
             </div>
           </div>
           <span class="close" (click)="updateDeleteStatus(item.cardId)" title="Delete Card">&times;</span>
+
           <form [formGroup]="editCard" (keydown)="keyDownFunction($event, item.cardId)">
-            <label class="txt actualtime">Estimate</label>
-            <input type="number" class="form-control editInput" id="input_card_estimate_time_{{ i }}" max="16"
-              maxlength="2" placeholder="{{ item.estimateTime }}" formControlName="cardEstimateTime" />
-            <label class="txt actualtime">Actualtime</label>
-            <input type="number" class="form-control editInput" id="input_card_actual_time_{{ i }}" max="16"
-              maxlength="2" placeholder="{{ item.actualTime }}" formControlName="cardActualTime" />
-            <button class="btn btn-primary bottom editbtn" [disabled]="editCard.status === 'INVALID'"
-              (click)="updateFunction(item.cardId)">
-              Update
-            </button>
+            <div class="row mb-4">
+              <div class="row">
+                <div class="txt estiamtetime mb-2">Estimate time</div>
+                <input type="number" class="form-control editInput" id="input_card_estimate_time_{{ i }}" max="16"
+                  maxlength="2" placeholder="{{ item.estimateTime }}" formControlName="cardEstimateTime" />
+              </div>
+              <div class="row">
+                <label class="txt actualtime mb-2">Actualtime time</label>
+                <input type="number" class="form-control ml " id="input_card_actual_time_{{ i }}" max="16" maxlength="2"
+                  placeholder="{{ item.actualTime }}" formControlName="cardActualTime" />
+              </div>
+              <button class="btn btn-primary bottom editbtn" [disabled]="editCard.status === 'INVALID'"
+                (click)="updateFunction(item.cardId)">
+                Update
+              </button>
+            </div>
+
 
             <div *ngIf="editCard.get('cardActualTime').hasError('max')" class="error">
               Actual time must be 1 to 24.
