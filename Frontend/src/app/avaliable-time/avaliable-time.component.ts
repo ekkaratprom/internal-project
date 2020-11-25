@@ -33,6 +33,7 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
   indexSelected: number;
   itemSelected: number;
   isLoading = true;
+  public isCollapsed: boolean = true;
 
   // @Input() avaliable: Observable<any>;
 
@@ -151,16 +152,20 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
       .getUserAvailiability()
       .subscribe((res) => {
         this.isLoading = false;
+
         this.users = res;
         this.users.map(user => {
+          user.isCollapsed = true;
           const userList = JSON.parse(JSON.stringify(user));
+
+          console.log('***userList', userList);
           userList.cards = [];
           this.dateList.map(date => {
             const cardTemp = {
               'totalActualTime': 0,
               'totalEstimateTime': 0,
               'cardDate': date,
-              'card': []
+              'card': [],
             };
             let status;
             const dateFormat = new Date(date).toLocaleString('en-GB').substring(0, 10).split('/').join('');
@@ -173,10 +178,11 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
             });
             if (!status) { userList.cards = [...userList.cards, cardTemp]; }
           });
-          this.avaliableLists = [...this.avaliableLists, userList];
+          this.avaliableLists = [...this.avaliableLists, userList ];
           this.availableListFunc.emit();
         });
-        //console.log('***avaliableList', this.avaliableLists);
+        console.log('***avaliableList', this.avaliableLists);
+
       });
   }
 
