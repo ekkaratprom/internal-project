@@ -61,7 +61,7 @@
     <div class=" card">
       <div class="card-body">
         <div class="card-title">
-          <i class="fas">&#xf2bd;</i>
+          <i class="fas mt-2">&#xf2bd;</i>
           <span title={{r.fullName}}>
             {{ r.fullName | longnameFilter: 12 }}
           </span>
@@ -95,11 +95,11 @@
 
 
           <div id="collapse" [ngbCollapse]="r.isCollapsed">
-              <span  *ngFor="let index of r['skills'] ; index as i">
-                <p *ngIf="i>=6" class="card-text">
-                  <img class="image-skills-size" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
-                </p>
-              </span>
+            <span *ngFor="let index of r['skills'] ; index as i">
+              <p *ngIf="i>=6" class="card-text">
+                <img class="image-skills-size" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
+              </p>
+            </span>
 
           </div>
 

@@ -37,6 +37,7 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
 
   // @Input() avaliable: Observable<any>;
 
+
   @Input()
   set date(val: any) {
     if (val.year !== undefined) {
