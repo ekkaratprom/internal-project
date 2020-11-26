@@ -15,7 +15,9 @@
   justify-content: space-around;
   padding-left: 2.5%;
 }
-
+.available-time-header{
+  font-size: 16px;
+}
 .color-box-list{
   width: 100%;
   justify-content: space-between;
@@ -170,7 +172,8 @@ a {
   margin-right: 8px;
 }
 .available-font{
-  font-weight: bold; font-size: 0.8rem
+  font-weight: bold; 
+  font-size: 16px;
 }
 
 .custom-button{
