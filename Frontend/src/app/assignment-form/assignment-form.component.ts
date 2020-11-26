@@ -48,20 +48,33 @@ export class AssignmentFormComponent implements OnInit {
   onSubmit(): void {
     const date = `${this.endDatePick.year}-${this.endDatePick.month}-${this.endDatePick.day}`;
     const day = new Date(date);
+    const fixDate = day.setDate(day.getDate() + 1);
+    const fixDay = new Date(fixDate );
+    let daySent;
+    if(this.endDatePick.day < 10){
+      daySent = fixDay.toISOString().substr(0, 10);
+    }else {
+      daySent = date;
+    }
+
+    console.log('Date', date);
+    console.log('Day', day);
+    console.log('fixDate', fixDate);
+    console.log('fixDay', fixDay);
     this.assignment = {
       assignmentName: this.addAssignment.get('assignmentName').value,
       billableTime: parseFloat(this.addAssignment.get('billableTime').value),
       estimateTime: parseFloat(this.addAssignment.get('estimateTime').value),
       completedStatus: false,
-      endDate: day.toISOString().substr(0, 10),
+      endDate: daySent,
       // tslint:disable-next-line: radix
       projectId: parseInt(this.addAssignment.get('projectId').value),
     };
-    console.log(this.assignment);
+    console.log('assignment', this.assignment);
 
     this.assignmentService.addAssignment(this.assignment)
       .subscribe((r) => {
-        console.log(r);
+        console.log('r',r);
         this.submitCompleted.emit();
         // this.newAssignment.emit(this.assignment);
         // console.log('newAssignment', this.newAssignment);
