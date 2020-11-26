@@ -22,10 +22,7 @@ export class AvaliableFormComponent implements OnInit {
     private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
 
 
-    this.fromDate = new NgbDate(this.y, this.m, this.d);
-    console.log('this.fromDate ', this.fromDate);
-    this.toDate = this.calendar.getNext(this.fromDate, 'd', 10);
-    this.onDateUnselect();
+
   }
   @Input() modalValue: any;
   @Output() itemCardChange = new EventEmitter<number>();
@@ -105,21 +102,26 @@ export class AvaliableFormComponent implements OnInit {
     // console.log('**********', this.modalValue[0].cards);
     this.cardsData = [this.modalValue[0].cards];
     this.selectDate = this.modalValue[0].cards.cardDate;
-    console.log('selectdate', this.selectDate);
+    // console.log('selectdate', this.selectDate);
 
     this.fromDay = new Date(this.selectDate);
     // this.day = this.fromModel(date);
 
-    console.log('date ', this.fromDay);
+    // console.log('date ', this.fromDay);
     this.y = this.fromDay.getFullYear();
-    console.log('year ', this.y);
-    this.m = this.fromDay.getMonth();
-    console.log('month ', this.m);
+    // console.log('year ', this.y);
+    this.m = this.fromDay.getMonth() + 1;
+    // console.log('month ', this.m);
     this.d = this.fromDay.getDate();
-    console.log('day', this.d);
+    // console.log('day', this.d);
 
 
-    console.log('this.fromModel(this.selectDate)', this.fromDay);
+    // console.log('this.fromModel(this.selectDate)', this.fromDay);
+
+    this.fromDate = new NgbDate(this.y, this.m, this.d);
+    // console.log('this.fromDate ', this.fromDate);
+    this.toDate = this.calendar.getNext(this.fromDate, 'd', 10);
+    this.onDateUnselect();
   }
 
   onSubmit(): void {

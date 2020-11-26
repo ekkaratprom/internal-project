@@ -44,11 +44,11 @@
 
           <div class="btn-group mt-3 mb-2" role="group" aria-label="Basic example">
 
-            <button type="button" class="btn btn-primary" (click)="calenderPicker(true)">
+            <button [ngClass]="{'btn-primary' : pickerDisplayDay, 'btn-secondary' : !pickerDisplayDay }" type="button" class="btn " (click)="calenderPicker(true)">
 
-              one day
+              One day
             </button>
-            <button type="button" class="btn btn-secondary" (click)="calenderPicker(false)">
+            <button type="button" [ngClass]="{'btn-secondary' : pickerDisplayDay, 'btn-primary' : !pickerDisplayDay }" class="btn " (click)="calenderPicker(false)">
               Period time
             </button>
           </div>
@@ -185,7 +185,7 @@
                   maxlength="2" placeholder="{{ item.estimateTime }}" formControlName="cardEstimateTime" />
               </div>
               <div class="row">
-                <label class="txt actualtime mb-2">Actualtime time</label>
+                <label class="txt actualtime mb-2">Actual time</label>
                 <input type="number" class="form-control ml " id="input_card_actual_time_{{ i }}" max="16" maxlength="2"
                   placeholder="{{ item.actualTime }}" formControlName="cardActualTime" />
               </div>
