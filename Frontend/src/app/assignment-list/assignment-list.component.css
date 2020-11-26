@@ -48,6 +48,7 @@ hr {
   flex-direction: row;
 }
 
+
 .assignment-part {
   display: flex;
   flex-direction: column;
@@ -128,7 +129,8 @@ hr {
   border: none;
 }
 .available-font{
-  font-weight: bold; font-size: 0.8rem
+  font-weight: bold; 
+  font-size: 16px;
 }
 .card-text-padding{
   padding: 0px;

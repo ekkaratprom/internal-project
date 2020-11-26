@@ -1,10 +1,10 @@
 <div class="card">
     <form class="form-inline" [formGroup]="addAssignment" (ngSubmit)="onSubmit()">
         <div class="card-body">
-            <h6>Create Assignment :</h6>
+            <h6 class="create-assignment-header">Create Assignment :</h6>
             <div class="card inner">
                 <div class="form-group mx-sm-3 mb-2 justify-content-between">
-                    <p>Assignment name:</p>
+                    <p class="bold">Assignment name:</p>
                     <input type="text" class="form-control" id="input_assignment" placeholder="assignment name.."
                         formControlName="assignmentName" />
                     <div *ngIf="addAssignment.get('assignmentName').hasError('pattern')" class="error">
@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="form-group mx-sm-3 mb-2 justify-content-between">
-                    <p>End date:</p>
+                    <p class="bold">End date:</p>
                     <form class="form-inline">
                         <div class="form-group">
                             <div class="input-group">
@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="form-group mx-sm-3 mb-2 justify-content-between">
-                    <p>Billable Time :</p>
+                    <p class="bold">Billable Time :</p>
                     <input type="number" class="form-control" id="input_billable_time" placeholder="0"
                         formControlName="billableTime" />
                     <div *ngIf="addAssignment.get('billableTime').hasError('pattern')" class="error">
@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="form-group mx-sm-3 mb-2 justify-content-between">
-                    <p>Estimate Time :</p>
+                    <p class="bold">Estimate Time :</p>
                     <input type="number" class="form-control" id="input_estimate_time" placeholder="0"
                         formControlName="estimateTime" />
                     <div *ngIf="addAssignment.get('estimateTime').hasError('pattern')" class="error">

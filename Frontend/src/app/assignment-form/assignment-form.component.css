@@ -2,6 +2,10 @@
   width: 94%;
   margin-left: 3%;
 }
+.create-assignment-header{
+  font-size: 25px;
+  font-weight: bolder;
+}
 #input_project{
   width: 207px;
 }
@@ -18,7 +22,7 @@
 
 .inner {
   padding-bottom: 2%;
-  margin-top: 7%;
+  margin-top: 5%;
 }
 .bold{
   font-weight: bold;
