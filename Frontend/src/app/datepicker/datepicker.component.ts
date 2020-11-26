@@ -1,6 +1,6 @@
 import { OnChanges } from '@angular/core';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalConfig, NgbModal, NgbModalRef, NgbCalendar, NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-datepicker',
@@ -15,6 +15,7 @@ export class DatepickerComponent implements OnInit , OnChanges{
   date = 8;
   weekdays = [0, 0, 0, 0, 0, 0, 0];
   DMY = this.calendar.getToday();
+  today = this.calendar.getToday();
   @Output() weekChange = new EventEmitter();
   @Output() dateChange = new EventEmitter();
 

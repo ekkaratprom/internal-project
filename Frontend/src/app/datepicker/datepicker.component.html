@@ -15,7 +15,7 @@
   <ng-template #footerTemplate>
     <hr class="my-0" />
     <button class="btn btn-primary btn-sm m-2 float-left form-control"
-      (click)="DMY = DMY; changeMonth(); weekdayfn1(); d.close()" [(ngModel)]="DMY"
+      (click)="DMY = today; changeMonth(); weekdayfn1(); d.close()" [(ngModel)]="DMY"
       (ngModelChange)="changeMonth(); weekdayfn1()">
       Today
     </button>
