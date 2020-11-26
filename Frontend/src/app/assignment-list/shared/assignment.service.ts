@@ -1,5 +1,5 @@
 import { environment } from './../../../environments/environment';
-import { Assignment, Project, AssignmentResponse, CardList, AssignmentList, CardForm, DeletedStatusAssignment, CompleteStatus, CardLists } from './assignment-model';
+import { Assignment, Project, AssignmentResponse, CardList, AssignmentList, CardForm, DeletedStatusAssignment, CompleteStatus, CardLists, ProjectSent } from './assignment-model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -21,6 +21,11 @@ export class AssignmentService {
   //POST
   addAssignment(assignmentForm: any): Observable<HttpResponse<Assignment>> {
     return this.http.post<Assignment>(`${environment.apiUrl}` + 'v1/addAssignment', assignmentForm, { observe: 'response' });
+  }
+
+  //POST /v1/addProject
+  addProject(projectName: any): Observable<HttpResponse<ProjectSent>> {
+    return this.http.post<ProjectSent>(`${environment.apiUrl}` + 'v1/addProject', projectName, { observe: 'response' });
   }
 
   //GET
@@ -66,5 +71,7 @@ export class AssignmentService {
       observe: 'response',
     });
   }
+
+
 
 }

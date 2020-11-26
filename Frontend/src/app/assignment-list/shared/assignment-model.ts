@@ -77,3 +77,7 @@ export type CompleteStatus = {
   completedStatus: boolean;
 }
 
+
+export type ProjectSent = {
+  projectName: string;
+}
