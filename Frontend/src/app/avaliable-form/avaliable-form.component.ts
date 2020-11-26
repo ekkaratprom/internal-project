@@ -1,4 +1,5 @@
-import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct, NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { map } from 'rxjs/operators';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct, NgbModal, NgbModalRef ,ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { AvailabilityService } from './../avaliable-time/shared/availability.service';
 import { Total } from './../avaliable-time/shared/availiability-model';
 import { AssignmentService } from './../assignment-list/shared/assignment.service';
@@ -13,7 +14,19 @@ import * as moment from 'moment';
   templateUrl: './avaliable-form.component.html',
   styleUrls: ['./avaliable-form.component.css']
 })
+
 export class AvaliableFormComponent implements OnInit {
+
+  constructor(private ngbmodal: NgbModal, private assignmentService: AssignmentService,
+    private router: Router, private availabilityService: AvailabilityService, private modalService: NgbModal,
+    private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
+
+
+    this.fromDate = new NgbDate(this.y, this.m, this.d);
+    console.log('this.fromDate ', this.fromDate);
+    this.toDate = this.calendar.getNext(this.fromDate, 'd', 10);
+    this.onDateUnselect();
+  }
   @Input() modalValue: any;
   @Output() itemCardChange = new EventEmitter<number>();
   @Output() assignmentcardChange = new EventEmitter();
@@ -35,22 +48,18 @@ export class AvaliableFormComponent implements OnInit {
   diffTimeDay;
   businessDays;
 
-  // cardId;""
-
   //period date
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate;
   toDate: NgbDate | null = null;
   sd;
   ed;
+  day;
+  fromDay;
 
-  constructor(private ngbmodal: NgbModal, private assignmentService: AssignmentService, private modalService: NgbModal,
-    private router: Router, private availabilityService: AvailabilityService,
-    private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
-    this.fromDate = calendar.getToday();
-    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
-    this.onDateUnselect();
-  }
+  y;
+  m;
+  d;
 
   public addCard = new FormGroup({
     assignmentId: new FormControl(null, Validators.compose([
@@ -81,12 +90,36 @@ export class AvaliableFormComponent implements OnInit {
     ])),
   });
 
+
+  // fromModel(date: Date): NgbDate {
+  //   return date ? {
+  //     year: date.getFullYear(),
+  //     month: date.getMonth() + 1,
+  //     day: date.getDate()
+  //   } : null;
+  // }
+
   ngOnInit(): void {
     this.getAllAssignment();
     // console.log('**********', this.modalValue);
     // console.log('**********', this.modalValue[0].cards);
     this.cardsData = [this.modalValue[0].cards];
     this.selectDate = this.modalValue[0].cards.cardDate;
+    console.log('selectdate', this.selectDate);
+
+    this.fromDay = new Date(this.selectDate);
+    // this.day = this.fromModel(date);
+
+    console.log('date ', this.fromDay);
+    this.y = this.fromDay.getFullYear();
+    console.log('year ', this.y);
+    this.m = this.fromDay.getMonth();
+    console.log('month ', this.m);
+    this.d = this.fromDay.getDate();
+    console.log('day', this.d);
+
+
+    console.log('this.fromModel(this.selectDate)', this.fromDay);
   }
 
   onSubmit(): void {

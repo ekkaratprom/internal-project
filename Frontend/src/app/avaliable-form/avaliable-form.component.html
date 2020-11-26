@@ -155,7 +155,7 @@
               {{ item.assignmentName }}
             </div>
           </div>
-          <span class="close" (click)="openclosemodal(content1)" title="Delete Card">&times;</span>
+          <span class="close" (click)="openclosemodal(content1) ;" title="Delete Card">&times;</span>
 
 
           <ng-template #content1 let-modal>
@@ -172,7 +172,7 @@
               <button type="button" class="btn-closemodal  btn-outline-dark"
                 (click)="modal.close('Save click')">Cancel</button>
               <button type="button" class="btn-closemodal  btn-outline-primary"
-                (click)="updateDeleteStatus(item.cardId)">Ok</button>
+                (click)="updateDeleteStatus(item.cardId); modal.dismiss('Cross click')">Ok</button>
             </div>
 
           </ng-template>

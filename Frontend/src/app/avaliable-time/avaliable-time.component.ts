@@ -37,6 +37,7 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
 
   // @Input() avaliable: Observable<any>;
 
+
   @Input()
   set date(val: any) {
     if (val.year !== undefined) {
@@ -158,7 +159,7 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
           user.isCollapsed = true;
           const userList = JSON.parse(JSON.stringify(user));
 
-          console.log('***userList', userList);
+          // console.log('***userList', userList);
           userList.cards = [];
           this.dateList.map(date => {
             const cardTemp = {
@@ -181,7 +182,7 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
           this.avaliableLists = [...this.avaliableLists, userList ];
           this.availableListFunc.emit();
         });
-        console.log('***avaliableList', this.avaliableLists);
+        // console.log('***avaliableList', this.avaliableLists);
 
       });
   }
