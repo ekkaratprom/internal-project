@@ -1,6 +1,6 @@
 import { QueueviewserviceService } from './../queueviewservice.service';
 import { AssignmentService } from './shared/assignment.service';
-import { Assignment, AssignmentResponse, CardList, CardObj } from './shared/assignment-model';
+import { Assignment, AssignmentResponse, CardList, CardObj, ProjectSent } from './shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -54,6 +54,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
   indexSelected;
   collapesdId;
   public isCollapsed: boolean = true;
+  project: ProjectSent;
 
   value;
   colorwarn: ThemePalette = 'warn';
@@ -62,6 +63,25 @@ export class AssignmentListComponent implements OnInit, DoCheck {
 
   constructor(private qv: QueueviewserviceService, private assignmentService: AssignmentService,
     private modalService: NgbModal, private router: Router) { }
+
+  public addProject = new FormGroup({
+    projectName: new FormControl(null, Validators.compose([
+      Validators.required,
+      Validators.pattern('[\\w\\-\\s\\/]+')
+    ]))
+  });
+
+  onSubmit(): void {
+    this.project = {
+      projectName: this.addProject.get('projectName').value,
+    };
+    console.log(this.project);
+
+    this.assignmentService.addProject(this.project)
+      .subscribe((r) => {
+        console.log(r);
+      });
+  }
 
   ngOnInit(): void {
     // this.getAllAssignmentCards();
@@ -101,6 +121,8 @@ export class AssignmentListComponent implements OnInit, DoCheck {
       return `with: ${reason}`;
     }
   }
+
+
 
 
 
@@ -244,7 +266,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
             };
             this.result.push(cardDetail);
           });
-          console.log('result', this.result);
+          // console.log('result', this.result);
           if (this.isReloadAssignment === true) {
             this.isReloadAssignment = false;
             this.isReloadAssignmentChange.emit(this.isReloadAssignment);

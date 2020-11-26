@@ -1,5 +1,6 @@
 import { environment } from './../../../environments/environment';
-import { Assignment, Project, AssignmentResponse, CardList, AssignmentList, CardForm, DeletedStatusAssignment, CompleteStatus, CardLists, ProjectSent } from './assignment-model';
+// tslint:disable-next-line: max-line-length
+import { Assignment, Project, AssignmentResponse, AssignmentList, CardForm, DeletedStatusAssignment, CompleteStatus, CardLists, ProjectSent } from './assignment-model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
