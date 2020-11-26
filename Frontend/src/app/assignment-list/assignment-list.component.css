@@ -76,6 +76,9 @@ hr {
 .card.childCard {
   margin-bottom: 0.2rem;
 }
+.add-project-header{
+  font-size: 20px;
+}
 
 .fox-say {
   background-color: #000;
@@ -130,7 +133,7 @@ hr {
   border: none;
 }
 .available-font{
-  font-weight: bold; 
+  font-weight: bold;
   font-size: 16px;
   color: #273240;
 }

@@ -168,16 +168,16 @@ export class AvaliableFormComponent implements OnInit {
     // const endDate = ${this.toDate.year}-${this.toDate.month}-${this.toDate.day};
     // const sd = new Date(startDate);
     // const ed = new Date(endDate);
-
+    // debugger;
     const resObjArray = Array();
     const day = this.sd;
-    let i = 0;
+    let i = 1;
 
 
     // const diffTime = this.ed.getTime() - this.sd.getTime();
     // const diffTimeDay = diffTime / (1000 * 3600 * 24);
 
-    while (i <= (this.businessDays - 1)) {
+    while (i <= (this.businessDays)) {
 
       if (day.getDay() !== 0 && day.getDay() !== 6) {
 
@@ -349,6 +349,7 @@ export class AvaliableFormComponent implements OnInit {
     while (day.isSameOrBefore(endDate, 'day')) {
       if (day.day() !== 0 && day.day() !== 6) { this.businessDays++; }
       day.add(1, 'd');
+
     }
     return this.businessDays;
 

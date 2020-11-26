@@ -47,12 +47,13 @@ export class AssignmentFormComponent implements OnInit {
 
   onSubmit(): void {
     const date = `${this.endDatePick.year}-${this.endDatePick.month}-${this.endDatePick.day}`;
+    const day = new Date(date);
     this.assignment = {
       assignmentName: this.addAssignment.get('assignmentName').value,
       billableTime: parseFloat(this.addAssignment.get('billableTime').value),
       estimateTime: parseFloat(this.addAssignment.get('estimateTime').value),
       completedStatus: false,
-      endDate: date,
+      endDate: day.toISOString().substr(0, 10),
       // tslint:disable-next-line: radix
       projectId: parseInt(this.addAssignment.get('projectId').value),
     };

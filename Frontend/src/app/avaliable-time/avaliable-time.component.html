@@ -98,7 +98,7 @@
           </div>
 
 
-          <div id="collapse" [ngbCollapse]="r.isCollapsed">
+          <div class="pl-3" id="collapse" [ngbCollapse]="r.isCollapsed">
             <span *ngFor="let index of r['skills'] ; index as i">
               <p *ngIf="i>=6" class="card-text">
                 <img class="image-skills-size" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
