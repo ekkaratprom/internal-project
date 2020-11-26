@@ -58,6 +58,8 @@ export class AvaliableFormComponent implements OnInit {
   m;
   d;
 
+  daySent;
+
   public addCard = new FormGroup({
     assignmentId: new FormControl(null, Validators.compose([
       Validators.required,
@@ -170,7 +172,7 @@ export class AvaliableFormComponent implements OnInit {
     // const ed = new Date(endDate);
     // debugger;
     const resObjArray = Array();
-    const day = this.sd;
+    const day = this.daySent;
     let i = 1;
 
 
@@ -360,6 +362,17 @@ export class AvaliableFormComponent implements OnInit {
     const startDate = `${this.fromDate.year}-${this.fromDate.month}-${this.fromDate.day}`;
     const endDate = `${this.toDate.year}-${this.toDate.month}-${this.toDate.day}`;
 
+    const day = new Date(startDate);
+    const fixDate = day.setDate(day.getDate() + 1);
+    const fixDay = new Date(fixDate );
+    // tslint:disable-next-line: no-unused-expression
+    this.daySent;
+    if(this.fromDate.day < 10){
+      this.daySent = new Date(fixDay.toISOString().substr(0, 10));
+    }else {
+      this.daySent = new Date(startDate);
+    }
+
     this.sd = new Date(startDate);
     this.ed = new Date(endDate);
 
@@ -397,6 +410,17 @@ export class AvaliableFormComponent implements OnInit {
     console.log('startDate', this.sd);
     console.log('endDate', this.ed);
     console.log('businessDays', this.businessDays);
+
+    const day = new Date(startDate);
+    const fixDate = day.setDate(day.getDate() + 1);
+    const fixDay = new Date(fixDate );
+    // tslint:disable-next-line: no-unused-expression
+    this.daySent;
+    if(this.fromDate.day < 10){
+      this.daySent = new Date(fixDay.toISOString().substr(0, 10));
+    }else {
+      this.daySent = new Date(startDate);
+    }
 
   }
 
