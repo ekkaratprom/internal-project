@@ -26,31 +26,32 @@
 
 
 <ng-template #content2 let-modal>
-  <Form  class="form-inline" [formGroup]="addProject" (ngSubmit)="onSubmit()">
-<div class="modal-header">
-  <h4 class="modal-title bold" id="modal-basic-title ">Add new project</h4>
+  <Form [formGroup]="addProject" (ngSubmit)="onSubmit()">
+    <div class="modal-header">
+      <h4 class="modal-title bold" id="modal-basic-title ">Add new project</h4>
 
-  <span (click)="modal.dismiss('Cross click')" class="closemodal" aria-hidden="false">&times;</span>
+      <span (click)="modal.dismiss('Cross click')" class="closemodal" aria-hidden="false">&times;</span>
 
-  <!-- <span class="close" (click)="modal.dismiss('Cross click')">&times;</span> -->
-</div>
-<div class="modal-body">
-
-  <div class="form-group mx-sm-3 mb-2 justify-content-between">
-    <p class="bold">Project name:</p>
-    <input type="text" class="form-control" id="input_project" placeholder="project name.."
-        formControlName="projectName" />
-    <div *ngIf="addProject.get('projectName').hasError('pattern')" class="error">
-        Project name has invalid characters
+      <!-- <span class="close" (click)="modal.dismiss('Cross click')">&times;</span> -->
     </div>
-</div>
+    <div class="modal-body">
 
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
-  <button type="button" class="btn btn-outline-primary" (click)="onSubmit(); modal.dismiss('Cross click')">Submit</button>
-</div>
-</Form>
+      <div class="form-group mx-sm-3 mb-2 justify-content-between">
+        <p class="bold">Project name:</p>
+        <input type="text" class="form-control" id="input_project" placeholder="project name.."
+          formControlName="projectName" />
+        <div *ngIf="addProject.get('projectName').hasError('pattern')" class="error">
+          Project name has invalid characters
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+      <button type="button" class="btn btn-outline-primary"
+        (click)="onSubmit(); modal.dismiss('Cross click')">Submit</button>
+    </div>
+  </Form>
 
 </ng-template>
 
@@ -59,7 +60,7 @@
 </ng-template>
 <div class="row">
   <div class="col-xs-6 col-md-6 col-lg-6 col-xl-6 pr-1">
-    <button  (click)="openclosemodal(content2)"class="form-control custom-button">+ Project</button>
+    <button (click)="openclosemodal(content2)" class="form-control custom-button">+ Project</button>
   </div>
   <div class="col-xs-6 col-md-6 col-lg-6 col-xl-6 pl-1">
     <button (click)="open(content)" class="form-control custom-button">+ Assignment</button>
@@ -85,7 +86,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
-        <button type="button" class="btn btn-outline-primary" (click)="updateDeleteStatus(r.assignmentId); modal.dismiss('Cross click')">Ok</button>
+        <button type="button" class="btn btn-outline-primary"
+          (click)="updateDeleteStatus(r.assignmentId); modal.dismiss('Cross click')">Ok</button>
       </div>
 
     </ng-template>

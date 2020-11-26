@@ -4,6 +4,7 @@ hr {
 }
 .bold{
   font-weight: bold;
+  color: #273240;
 }
 .cursor{
   cursor: pointer;
@@ -131,6 +132,7 @@ hr {
 .available-font{
   font-weight: bold; 
   font-size: 16px;
+  color: #273240;
 }
 .card-text-padding{
   padding: 0px;

@@ -1,5 +1,5 @@
 import { map } from 'rxjs/operators';
-import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct, NgbModal, NgbModalRef ,ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct, NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AvailabilityService } from './../avaliable-time/shared/availability.service';
 import { Total } from './../avaliable-time/shared/availiability-model';
 import { AssignmentService } from './../assignment-list/shared/assignment.service';
@@ -173,10 +173,11 @@ export class AvaliableFormComponent implements OnInit {
     const day = this.sd;
     let i = 0;
 
+
     // const diffTime = this.ed.getTime() - this.sd.getTime();
     // const diffTimeDay = diffTime / (1000 * 3600 * 24);
 
-    while (i <= this.businessDays) {
+    while (i <= (this.businessDays - 1)) {
 
       if (day.getDay() !== 0 && day.getDay() !== 6) {
 
@@ -191,10 +192,12 @@ export class AvaliableFormComponent implements OnInit {
           assignmentId: parseInt(this.addCard.get('assignmentId').value),
         };
         resObjArray.push(this.card);
-
+        day.setDate(day.getDate() + 1);
+        i++;
       }
-      day.setDate(day.getDate() + 1);
-      i++;
+      else {
+        day.setDate(day.getDate() + 1);
+      }
     }
 
     this.assignmentService.addCard(resObjArray)
