@@ -149,9 +149,11 @@
         </div>
 
         <div *ngIf="(r.totalActualTime / r.estimateTime)> 1">
-          <p class="card-text card-text-padding mt-2 mb-2 err">end date: {{ r.endDate | date: "dd/MM/yyyy" }}
+          <span class="card-text card-text-padding mt-2 mb-2 ">end date:
+          </span>
+          <span class="card-text card-text-padding mt-2 mb-2 err"> {{ r.endDate | date: "dd/MM/yyyy" }}
             (Overdue)
-          </p>
+          </span>
 
         </div>
 
