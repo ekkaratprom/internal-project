@@ -112,6 +112,9 @@ hr {
 .no {
   background-color: red;
 }
+.err{
+  color: red;
+}
 
 /* .btn {
   border: 1px solid #ced4da;
@@ -129,6 +132,14 @@ hr {
   margin: 0;
   padding: 0.2rem;
 } */
+.cursor:hover{
+  background: rgb(222, 241, 241);
+}
+
+.bi-chevron-down{
+  border-radius: 4px;
+}
+
 .card{
   border: none;
 }
@@ -143,4 +154,7 @@ hr {
 .car-background{
   border-radius: 10px;
   background-color: #1111;
+}
+.custom-button:hover{
+  background-color: rgb(222, 241, 241);
 }

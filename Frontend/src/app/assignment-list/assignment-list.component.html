@@ -130,6 +130,7 @@
           </div>
         </div>
 
+
         <div class="d-flex justify-content-between align-items-center"
           *ngIf="compareMoreThanEndDate(r.endDate) == false && r.totalActualTime <= r.estimateTime">
           <!-- <div>progress:</div> -->
@@ -142,10 +143,16 @@
             </mat-progress-bar>
           </div>
         </div>
+        <div *ngIf="(r.totalActualTime / r.estimateTime)<= 1">
+          <p class="card-text card-text-padding mt-2 mb-2">end date: {{ r.endDate | date: "dd/MM/yyyy" }}
+          </p>
+        </div>
 
+        <div *ngIf="(r.totalActualTime / r.estimateTime)> 1">
+          <p class="card-text card-text-padding mt-2 mb-2 err">end date: {{ r.endDate | date: "dd/MM/yyyy" }}
+            (Overdue)
+          </p>
 
-        <div>
-          <p class="card-text card-text-padding mt-2 mb-2">end date: {{ r.endDate | date: "dd/MM/yyyy" }} </p>
         </div>
 
 
@@ -189,8 +196,10 @@
               <path fill-rule="evenodd"
                 d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
             </svg>
-            <div class="ml-1">{{ r.totalActualTime }}</div>
-            <div class="ml-1">Hrs</div>
+            <div *ngIf=" r.totalActualTime>r.estimateTime" class="ml-1 err">{{ r.totalActualTime }}</div>
+            <div *ngIf=" r.totalActualTime<=r.estimateTime" class="ml-1">{{ r.totalActualTime }}</div>
+            <div *ngIf=" r.totalActualTime>r.estimateTime" class="ml-1 err">Hrs</div>
+            <div *ngIf=" r.totalActualTime<=r.estimateTime" class="ml-1">Hrs</div>
           </div>
 
 

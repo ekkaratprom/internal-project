@@ -127,6 +127,10 @@ button.calendar:active {
   padding-left: 0%;
 }
 
+#input_assignment_id:hover {
+  background-color: rgb(222, 241, 241);
+}
+
 .form-control {
   margin-left: 2rem;
   width: 10rem;
