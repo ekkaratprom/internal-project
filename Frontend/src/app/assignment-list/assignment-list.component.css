@@ -115,6 +115,9 @@ hr {
 .err{
   color: red;
 }
+.light-bold{
+font-weight: 550;
+}
 
 /* .btn {
   border: 1px solid #ced4da;

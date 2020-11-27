@@ -121,7 +121,7 @@
           *ngIf="compareMoreThanEndDate(r.endDate) == true || r.totalActualTime > r.estimateTime">
           <!-- <div>progress:</div> -->
           <div>
-            <p class="card-text card-text-padding ">progress:</p>
+            <p class="card-text card-text-padding light-bold">progress:</p>
           </div>
           <div class="ml-2 progress-bar1">
             <mat-progress-bar [color]="colorwarn" mode="determinate"
@@ -135,7 +135,7 @@
           *ngIf="compareMoreThanEndDate(r.endDate) == false && r.totalActualTime <= r.estimateTime">
           <!-- <div>progress:</div> -->
           <div>
-            <p class="card-text card-text-padding">progress:</p>
+            <p class="card-text card-text-padding light-bold">progress:</p>
           </div>
           <div class="ml-2 progress-bar1">
             <mat-progress-bar [color]="colorprim" mode="determinate"
@@ -144,12 +144,15 @@
           </div>
         </div>
         <div *ngIf="(r.totalActualTime / r.estimateTime)<= 1">
-          <p class="card-text card-text-padding mt-2 mb-2">end date: {{ r.endDate | date: "dd/MM/yyyy" }}
-          </p>
+          <span class="card-text card-text-padding mt-2 mb-2 light-bold">end date:
+          </span>
+          <span>
+            {{ r.endDate | date: "dd/MM/yyyy" }}
+          </span>
         </div>
 
         <div *ngIf="(r.totalActualTime / r.estimateTime)> 1">
-          <span class="card-text card-text-padding mt-2 mb-2 ">end date:
+          <span class="card-text card-text-padding mt-2 mb-2 light-bold">end date:
           </span>
           <span class="card-text card-text-padding mt-2 mb-2 err"> {{ r.endDate | date: "dd/MM/yyyy" }}
             (Overdue)
