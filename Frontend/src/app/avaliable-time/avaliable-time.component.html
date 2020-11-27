@@ -31,27 +31,27 @@
   <div class="col-xs-6 col-md-6 col-lg-7 col-xl-7 d-flex justify-content-end align-items-center">
     <span class="p-2"> Color chart:</span>
 
-    <li class=" mock-color-box mr-2" [ngStyle]="{ backgroundColor: 0 | color }">
+    <li class=" mock-color-box mr-2" [ngStyle]="{ backgroundColor: (0| color).bg , color: (0 | color).fc }">
       <div class="text-in-box">
         0
       </div>
     </li>
-    <li class=" mock-color-box mr-2" [ngStyle]="{ backgroundColor: 2 | color }">
+    <li class=" mock-color-box mr-2" [ngStyle]="{ backgroundColor: (3| color).bg , color: (3 | color).fc }">
       <div class="text-in-box">
         1-5
       </div>
     </li>
-    <li class=" mock-color-box mr-2" [ngStyle]="{ backgroundColor: 7 | color }">
+    <li class=" mock-color-box mr-2" [ngStyle]="{ backgroundColor: (7| color).bg , color: (7 | color).fc }">
       <div class="text-in-box">
         6-7
       </div>
     </li>
-    <li class=" mock-color-box mr-2" [ngStyle]="{ backgroundColor: 8 | color }">
+    <li class=" mock-color-box mr-2" [ngStyle]="{ backgroundColor: (8| color).bg , color: (8 | color).fc }">
       <div class="text-in-box">
         8
       </div>
     </li>
-    <li class=" mock-color-box" [ngStyle]="{ backgroundColor: 9 | color }">
+    <li class=" mock-color-box" [ngStyle]="{ backgroundColor: (9| color).bg , color: (9 | color).fc }">
       <div class="text-in-box">
         8+
       </div>
@@ -65,7 +65,7 @@
     <div class="d-flex bd-highlight justify-content-between mb-3 pl-2">
       <a (click)="previousweek()" href="#" class="previous round pr-1">&#8249;</a>
 
-      <div class="top-color-box" *ngFor="let day of dateList">
+      <div class="top-color-box pr-3" *ngFor="let day of dateList">
         {{ day | date: "EEE" }} <br />
         {{ day | date: "dd" }} <br />
         {{ day | date: "MMM" }}
@@ -115,7 +115,7 @@
 
           <div class="col " (click)="r.isCollapsed = !r.isCollapsed" [attr.aria-expanded]="!r.isCollapsed"
             aria-controls="collapse">
-            <svg class="dropdown-skill bi bi-chevron-down  cursor" width="1em" height="1em" viewBox="0 0 16 16"
+            <svg class="dropdown-skill bi bi-chevron-down cursor" width="1em" height="1em" viewBox="0 0 16 16"
               fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd"
                 d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
@@ -161,8 +161,8 @@
     <div class="row d-flex justify-content-around mb-2 mt-2 pr-2">
       <mat-icon class="list-icon align-self-center" title="actual time">alarm_on</mat-icon>
       <li class=" color-box" *ngFor="let item of r['cards']"
-        [ngStyle]="{ backgroundColor: item.totalActualTime | color }" title="actual time"
-        (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
+        [ngStyle]="{ backgroundColor: (item.totalActualTime | color).bg , color: (item.totalActualTime | color).fc }"
+        title="actual time" (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
         <ng-template #content let-modal>
           <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)" (submitCompleted)="close()"
             (submitUpdateCardCompleted)="updateCardList()">
