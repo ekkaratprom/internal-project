@@ -30,17 +30,22 @@
             <input type="text" class="form-control" id="input_card_name" placeholder="type your card..."
               formControlName="cardName" />
 
+
             <input type="number" class="form-control" id="input_estimate_time" placeholder="0"
-              formControlName="estimateTime" />
+              formControlName="estimateTime" (keyup)="estimateValidate($event)"/>
             <!-- <p>Actual Time</p> -->
+
             <div *ngIf="addCard.get('cardName').hasError('pattern')" class="error">
               Card name has invalid characters.
             </div>
             <div *ngIf="addCard.get('estimateTime').hasError('max')" class="error">
-              Estimate time must be 1 to 24.
+              Estimate time must be 1 to 8.
             </div>
             <div *ngIf="addCard.get('estimateTime').hasError('min')" class="error">
-              Estimate time must be 1 to 24.
+              Estimate time must be 1 to 8.
+            </div>
+            <div *ngIf="estimateStatus == true" class="error">
+              Total estimate time must not over than 8 hrs. per day.
             </div>
           </div>
 
@@ -136,7 +141,7 @@
         </div>
 
 
-        <div *ngIf="resultAvaliable.totalEstimateTime === 8" class="card-body inner">
+        <div *ngIf="resultAvaliable.totalEstimateTime >= 8" class="card-body inner">
           <div class="assignment" >Assignment</div>
           <div class="form-group mx-sm-3 mb-2">
             <div>
@@ -193,7 +198,7 @@
                   <input id="date" class="form-control" placeholder="{{ selectDate | date: 'yyyy-MM-dd' }}" name="dp"
                     [(ngModel)]="dayPick" ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker" disabled />
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"  disabled></button>
                   </div>
                 </div>
               </div>
@@ -235,7 +240,7 @@
                     " disabled/>
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()"
-                      type="button"></button>
+                      type="button"  disabled></button>
                   </div>
                 </div>
               </div>
@@ -245,7 +250,7 @@
                     [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)" disabled/>
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()"
-                      type="button"></button>
+                      type="button"  disabled></button>
                   </div>
                 </div>
               </div>
@@ -263,7 +268,7 @@
 
 
 
-          <div class="d-flex justify-content-center error" >
+          <div class="d-flex justify-content-center max-hour-error" >
             Maximum Hours.
           </div>
 
@@ -316,12 +321,12 @@
 
           </ng-template>
 
-          <form [formGroup]="editCard" (keydown)="keyDownFunction($event, item.cardId)">
+          <form [formGroup]="editCard" (keydown)="keyDownFunction($event, item.cardId)" (keyup)="cardEstimateValidate($event,item.estimateTime,item.cardId)">
             <div class="row mb-4">
               <div class="row">
                 <div class="txt estiamtetime mb-2">Estimate time</div>
-                <input type="number" class="form-control editInput" id="input_card_estimate_time_{{ i }}" max="16"
-                  maxlength="2" placeholder="{{ item.estimateTime }}" formControlName="cardEstimateTime" />
+                <input type="number"  class="form-control editInput" id="input_card_estimate_time_{{ i }}" max="16"
+                  maxlength="2" placeholder="{{ item.estimateTime }}" formControlName="cardEstimateTime"  />
               </div>
               <div class="row">
                 <label class="txt actualtime mb-2">Actual time</label>
@@ -332,15 +337,25 @@
                 (click)="updateFunction(item.cardId)">
                 Update
               </button>
+              <div *ngIf="cardEstimateStatus == true && item.cardId == cardId" class="error">
+                Total estimate time must not over than 8 hrs. per day.
+              </div>
+              <div *ngIf="editCard.get('cardActualTime').hasError('max')" class="error">
+                Actual time must be 1 to 24.
+              </div>
+              <div *ngIf="editCard.get('cardActualTime').hasError('min')" class="error">
+                Actual time must be 1 to 24.
+              </div>
+              <div *ngIf="editCard.get('cardEstimateTime').hasError('max')" class="error">
+                Estimate time must be 1 to 8.
+              </div>
+              <div *ngIf="editCard.get('cardEstimateTime').hasError('min')" class="error">
+                Estimate time must be 1 to 8.
+              </div>
             </div>
 
 
-            <div *ngIf="editCard.get('cardActualTime').hasError('max')" class="error">
-              Actual time must be 1 to 24.
-            </div>
-            <div *ngIf="editCard.get('cardActualTime').hasError('min')" class="error">
-              Actual time must be 1 to 24.
-            </div>
+
           </form>
         </div>
 
