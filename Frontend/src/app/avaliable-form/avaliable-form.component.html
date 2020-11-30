@@ -46,11 +46,13 @@
 
           <div class="btn-group mt-3 mb-2" role="group" aria-label="Basic example">
 
-            <button [ngClass]="{'btn-primary' : pickerDisplayDay, 'btn-secondary' : !pickerDisplayDay }" type="button" class="btn " (click)="calenderPicker(true)">
+            <button [ngClass]="{'btn-primary' : pickerDisplayDay, 'btn-secondary' : !pickerDisplayDay }" type="button"
+              class="btn " (click)="calenderPicker(true)">
 
               One day
             </button>
-            <button type="button" [ngClass]="{'btn-secondary' : pickerDisplayDay, 'btn-primary' : !pickerDisplayDay }" class="btn " (click)="calenderPicker(false)">
+            <button type="button" [ngClass]="{'btn-secondary' : pickerDisplayDay, 'btn-primary' : !pickerDisplayDay }"
+              class="btn " (click)="calenderPicker(false)">
               Period time
             </button>
           </div>
@@ -136,8 +138,8 @@
         </div>
 
 
-        <div *ngIf="resultAvaliable.totalEstimateTime === 8" class="card-body inner">
-          <div class="assignment" >Assignment</div>
+        <div *ngIf="resultAvaliable.totalEstimateTime >= 8" class="card-body inner">
+          <div class="assignment">Assignment</div>
           <div class="form-group mx-sm-3 mb-2">
             <div>
               <select class="form-control" id="input_assignment_id" formControlName="assignmentId"
@@ -156,10 +158,10 @@
             <label class="txt actualtimetop ">Estimate Time per day</label>
 
             <input type="text" class="form-control" id="input_card_name" placeholder="type your card..."
-              formControlName="cardName"  disabled />
+              formControlName="cardName" disabled />
 
             <input type="number" class="form-control" id="input_estimate_time" placeholder="0"
-              formControlName="estimateTime" disabled/>
+              formControlName="estimateTime" disabled />
             <!-- <p>Actual Time</p> -->
             <div *ngIf="addCard.get('cardName').hasError('pattern')" class="error">
               Card name has invalid characters.
@@ -174,11 +176,13 @@
 
           <div class="btn-group mt-3 mb-2" role="group" aria-label="Basic example">
 
-            <button [ngClass]="{'btn-primary' : pickerDisplayDay, 'btn-secondary' : !pickerDisplayDay }" type="button" class="btn " (click)="calenderPicker(true)" disabled>
+            <button [ngClass]="{'btn-primary' : pickerDisplayDay, 'btn-secondary' : !pickerDisplayDay }" type="button"
+              class="btn " (click)="calenderPicker(true)" disabled>
 
               One day
             </button>
-            <button type="button" [ngClass]="{'btn-secondary' : pickerDisplayDay, 'btn-primary' : !pickerDisplayDay }" class="btn " (click)="calenderPicker(false) "disabled>
+            <button type="button" [ngClass]="{'btn-secondary' : pickerDisplayDay, 'btn-primary' : !pickerDisplayDay }"
+              class="btn " (click)="calenderPicker(false) " disabled>
               Period time
             </button>
           </div>
@@ -217,7 +221,7 @@
                 <div class="input-group">
                   <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker"
                     [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t"
-                    outsideDays="hidden" [startDate]="fromDate!" tabindex="-1" disabled/>
+                    outsideDays="hidden" [startDate]="fromDate!" tabindex="-1" disabled />
                   <ng-template #t let-date let-focused="focused">
                     <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
                       [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
@@ -232,7 +236,7 @@
                   <input #dpFromDate class="form-control" placeholder="yyyy-mm-dd" name="dpFromDate"
                     [value]="formatter.format(fromDate)" (input)="
                       fromDate = validateInput(fromDate, dpFromDate.value)
-                    " disabled/>
+                    " disabled />
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()"
                       type="button"></button>
@@ -242,7 +246,8 @@
               <div class="form-group ml-2">
                 <div class="input-group">
                   <input #dpToDate class="form-control" placeholder="yyyy-mm-dd" name="dpToDate"
-                    [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)" disabled/>
+                    [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)"
+                    disabled />
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()"
                       type="button"></button>
@@ -263,7 +268,7 @@
 
 
 
-          <div class="d-flex justify-content-center error" >
+          <div class="d-flex justify-content-center error">
             Maximum Hours.
           </div>
 

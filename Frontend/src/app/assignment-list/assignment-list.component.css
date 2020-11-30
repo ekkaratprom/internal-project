@@ -9,6 +9,18 @@ hr {
 .cursor{
   cursor: pointer;
 }
+
+.cursor-complete-icon{
+  cursor: pointer;
+}
+.context-menu 
+{
+  cursor: context-menu;
+}
+
+.cursor-complete-icon:hover{
+  color: rgb(222, 241, 241);
+}
 .material-icons.md-18.cursor {
   font-size: 12px;
   justify-content: center;

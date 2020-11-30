@@ -97,12 +97,11 @@
     <div class="card">
       <div class="card-body">
         <p class="card-text font-weight-bold">
-          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-circle-fill mr-2 cursor  "
-            fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-            title="{{ r.completedStatus | titlecompletedStatusPipe}}"
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-circle-fill mr-2" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg" title="{{ r.completedStatus | titlecompletedStatusPipe}}"
             (click)="toggle(i,r.assignmentId,r.completedStatus)"
             [ngStyle]="{color:  r.completedStatus | colorcompletedStatusPipe :  r.completedStatus}">
-            <path fill-rule="evenodd"
+            <path fill-rule="evenodd" class="cursor-complete-icon" title="Complete Status"
               d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
           </svg>
           {{ r.assignmentName }}
@@ -143,7 +142,7 @@
             </mat-progress-bar>
           </div>
         </div>
-        <div *ngIf="(r.totalActualTime / r.estimateTime)<= 1">
+        <div *ngIf="(r.totalActualTime / r.estimateTime)<= 1 && compareMoreThanEndDate(r.endDate) == false">
           <span class="card-text card-text-padding mt-2 mb-2 light-bold">end date:
           </span>
           <span>
@@ -151,7 +150,7 @@
           </span>
         </div>
 
-        <div *ngIf="(r.totalActualTime / r.estimateTime)> 1">
+        <div *ngIf="(r.totalActualTime / r.estimateTime)> 1 || compareMoreThanEndDate(r.endDate) == true">
           <span class="card-text card-text-padding mt-2 mb-2 light-bold">end date:
           </span>
           <span class="card-text card-text-padding mt-2 mb-2 err"> {{ r.endDate | date: "dd/MM/yyyy" }}
@@ -165,15 +164,8 @@
         <div class="d-flex justify-content-around align-items-center">
 
           <!-- Billable Time: -->
-          <div class="d-flex justify-content-between align-items-center" title="billable time">
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cash-stack" fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg">
-              <path d="M14 3H1a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1h-1z" />
-              <path fill-rule="evenodd"
-                d="M15 5H1v8h14V5zM1 4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H1z" />
-              <path
-                d="M13 5a2 2 0 0 0 2 2V5h-2zM3 5a2 2 0 0 1-2 2V5h2zm10 8a2 2 0 0 1 2-2v2h-2zM3 13a2 2 0 0 0-2-2v2h2zm7-4a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />
-            </svg>
+          <div class="d-flex justify-content-between align-items-center context-menu" title="billable time">
+            <mat-icon>monetization_on</mat-icon>
 
             <div class="ml-1">: {{ r.billableTime }}</div>
 
@@ -181,34 +173,25 @@
             <!-- <i class="material-icons md-18">ic_monetization_on</i> -->
           </div>
           <!-- Estimate Time: -->
-          <div class="d-flex justify-content-between align-items-center" title="estimate time">
+          <div class="d-flex justify-content-between align-items-center context-menu" title="estimate time">
             <!-- <i class="material-icons md-18">ic_query_builder</i> -->
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z" />
-              <path fill-rule="evenodd"
-                d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z" />
-            </svg>
-            <div class="ml-1">{{ r.estimateTime }}</div>
+            <mat-icon class="list-icon align-self-center" title="estimate time">query_builder</mat-icon>
+            <div class="ml-1"> : {{ r.estimateTime }}</div>
             <div class="ml-1">Hrs</div>
           </div>
           <!-- Actual Time -->
-          <div class="d-flex justify-content-between align-items-center" title="actual time"
+          <div class="d-flex justify-content-between align-items-center context-menu" title="actual time"
             *ngIf="r.totalActualTime !== null && r.totalActualTime >= 0">
             <!-- <i class="material-icons md-18">ic_watch_later</i> -->
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock-fill " fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd"
-                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-            </svg>
-            <div *ngIf=" r.totalActualTime>r.estimateTime" class="ml-1 err">{{ r.totalActualTime }}</div>
-            <div *ngIf=" r.totalActualTime<=r.estimateTime" class="ml-1">{{ r.totalActualTime }}</div>
+            <mat-icon class="list-icon align-self-center" title="actual time">alarm_on</mat-icon>
+            <div *ngIf=" r.totalActualTime>r.estimateTime" class="ml-1 err"> : {{ r.totalActualTime }}</div>
+            <div *ngIf=" r.totalActualTime<=r.estimateTime" class="ml-1"> : {{ r.totalActualTime }}</div>
             <div *ngIf=" r.totalActualTime>r.estimateTime" class="ml-1 err">Hrs</div>
             <div *ngIf=" r.totalActualTime<=r.estimateTime" class="ml-1">Hrs</div>
           </div>
 
 
-          <div class="d-flex justify-content-between align-items-center" title="actual time"
+          <div class="d-flex justify-content-between align-items-center context-menu" title="actual time"
             *ngIf="r.totalActualTime == null && r.totalActualTime == 0">
             <!-- <i class="material-icons md-18">ic_watch_later</i> -->
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock-fill" fill="currentColor"
@@ -228,6 +211,7 @@
                 <path fill-rule="evenodd"
                   d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
               </svg>
+
               <!-- <i class="material-icons md-18 cursor">ic_expand_more</i> -->
             </p>
           </div>
