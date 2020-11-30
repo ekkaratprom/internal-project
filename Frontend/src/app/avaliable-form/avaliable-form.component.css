@@ -190,8 +190,12 @@ button.calendar:active {
     margin-bottom: 0rem;
   margin-left: 18%;
 }
+.max-hour-error{
+  color: red;
+}
 .error {
   color: red;
+  margin-left: 5rem;
 }
 
 .editInput {

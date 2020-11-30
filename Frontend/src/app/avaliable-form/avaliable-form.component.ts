@@ -19,11 +19,7 @@ export class AvaliableFormComponent implements OnInit {
 
   constructor(private ngbmodal: NgbModal, private assignmentService: AssignmentService,
     private router: Router, private availabilityService: AvailabilityService, private modalService: NgbModal,
-    private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
-
-
-
-  }
+    private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {}
   @Input() modalValue: any;
   @Output() itemCardChange = new EventEmitter<number>();
   @Output() assignmentcardChange = new EventEmitter();
@@ -45,6 +41,10 @@ export class AvaliableFormComponent implements OnInit {
   diffTimeDay;
   businessDays;
   resultAvaliable ;
+  totalEstimateValue;
+  estimateStatus = false;
+  cardEstimateStatus = false;
+  cardId;
 
   //period date
   hoveredDate: NgbDate | null = null;
@@ -68,8 +68,8 @@ export class AvaliableFormComponent implements OnInit {
     estimateTime: new FormControl(null, Validators.compose([
       Validators.required,
       Validators.pattern('^[1-9].*$'),
-      Validators.max(24),
-      Validators.min(1)
+      Validators.max(8),
+      Validators.min(1),
     ])),
     cardName: new FormControl(null, Validators.compose([
       Validators.required,
@@ -85,7 +85,7 @@ export class AvaliableFormComponent implements OnInit {
     ])),
     cardEstimateTime: new FormControl(null, Validators.compose([
       Validators.pattern('^[1-9].*$'),
-      Validators.max(24),
+      Validators.max(8),
       Validators.min(1)
     ])),
   });
@@ -127,6 +127,9 @@ export class AvaliableFormComponent implements OnInit {
     // console.log('this.fromDate ', this.fromDate);
     this.toDate = this.calendar.getNext(this.fromDate, 'd', 10);
     this.onDateUnselect();
+
+    const limit = (8 - this.resultAvaliable.totalEstimateTime);
+    console.log('limit', limit);
   }
 
   onSubmit(): void {
@@ -266,7 +269,7 @@ export class AvaliableFormComponent implements OnInit {
     this.assignmentcardChange.emit('cancel');
   }
 
-  calenderPicker(day: Boolean): void {
+  calenderPicker(day: boolean): void {
     if (day === true) {
       // tslint:disable-next-line: no-unused-expression
       this.pickerDisplayDay = true;
@@ -390,6 +393,29 @@ export class AvaliableFormComponent implements OnInit {
     console.log('startDate', this.sd);
     console.log('endDate', this.ed);
     console.log('businessDays', this.businessDays);
+
+  }
+
+  estimateValidate(event){
+
+    const limit = (8 - this.resultAvaliable.totalEstimateTime);
+    console.log('limit', limit);
+    console.log('event', event.key);
+    if (event.target.value > limit ){
+      console.log('true');
+      return this.estimateStatus = true;
+    }else { console.log('false'); return this.estimateStatus = false; }
+  }
+
+  cardEstimateValidate(event, estimateTime,id){
+    this.cardId = id;
+    const limit = (8 - (this.resultAvaliable.totalEstimateTime - estimateTime));
+    console.log('limit', limit);
+    console.log('event', event.key);
+    if (event.target.value > limit ){
+      console.log('true');
+      return this.cardEstimateStatus = true;
+    }else { console.log('false'); return this.cardEstimateStatus = false; }
   }
 
   // period date
