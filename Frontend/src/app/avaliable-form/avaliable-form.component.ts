@@ -44,6 +44,7 @@ export class AvaliableFormComponent implements OnInit {
   selectDate;
   diffTimeDay;
   businessDays;
+  resultAvaliable ;
 
   //period date
   hoveredDate: NgbDate | null = null;
@@ -104,7 +105,9 @@ export class AvaliableFormComponent implements OnInit {
     // console.log('**********', this.modalValue[0].cards);
     this.cardsData = [this.modalValue[0].cards];
     this.selectDate = this.modalValue[0].cards.cardDate;
-    // console.log('selectdate', this.selectDate);
+    this.resultAvaliable = this.modalValue[0].cards;
+
+    console.log('resultAvaliable', this.resultAvaliable.totalEstimateTime);
 
     this.fromDay = new Date(this.selectDate);
     // this.day = this.fromModel(date);
@@ -356,6 +359,12 @@ export class AvaliableFormComponent implements OnInit {
     return this.businessDays;
 
 
+  }
+
+  formStatusDisable(): boolean{
+    if(this.resultAvaliable.totalEstimateTime === 8){
+      return true;
+    } else {return false; }
   }
 
   onDateUnselect(): void {
