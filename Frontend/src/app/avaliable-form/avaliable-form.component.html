@@ -344,9 +344,7 @@
                 (click)="updateFunction(item.cardId)">
                 Update
               </button>
-              <div *ngIf="cardEstimateStatus == true && item.cardId == cardId" class="error">
-                Total estimate time must not over than 8 hrs. per day.
-              </div>
+
               <div *ngIf="editCard.get('cardActualTime').hasError('max')" class="error">
                 Actual time must be 1 to 24.
               </div>
@@ -359,6 +357,10 @@
               <div *ngIf="editCard.get('cardEstimateTime').hasError('min')" class="error">
                 Estimate time must be 1 to 8.
               </div>
+              <div *ngIf="cardEstimateStatus == true && item.cardId == cardId" class="error">
+                Total estimate time must not over than 8 hrs. per day.
+              </div>
+
             </div>
 
 
