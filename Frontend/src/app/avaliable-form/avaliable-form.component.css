@@ -85,8 +85,7 @@ button.calendar:active {
 }
 
 .date-txt{
-  margin-right: 82%;
-
+  margin-right: 80%;
   font-weight: bold;
   font-size: 1em;
 }
@@ -100,7 +99,7 @@ button.calendar:active {
   font-weight: bold;
   font-size: 1em;
   margin-left: 7%;
-  margin-top: 2%;
+  margin-top: 4%;
 }
 .card-body {
   padding: 0.5rem;
