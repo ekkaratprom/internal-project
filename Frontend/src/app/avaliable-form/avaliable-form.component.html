@@ -327,17 +327,17 @@
 
           </ng-template>
 
-          <form [formGroup]="editCard" (keydown)="keyDownFunction($event, item.cardId)"
-            (keyup)="cardEstimateValidate($event,item.estimateTime,item.cardId)">
+          <form [formGroup]="editCard" (keydown)="keyDownFunction($event, item.cardId)">
             <div class="row mb-4">
               <div class="row">
                 <div class="txt estiamtetime mb-2">Estimate time</div>
-                <input type="number" class="form-control editInput" id="input_card_estimate_time_{{ i }}" max="16"
-                  maxlength="2" placeholder="{{ item.estimateTime }}" formControlName="cardEstimateTime" />
+                <input type="number" class="form-control editInput" id="input_card_estimate_time_{{ i }}" max="8"
+                  maxlength="2" placeholder="{{ item.estimateTime }}" formControlName="cardEstimateTime"
+                  (keyup)="cardEstimateValidate($event,item.estimateTime,item.cardId)" />
               </div>
               <div class="row">
                 <label class="txt actualtime mb-2">Actual time</label>
-                <input type="number" class="form-control ml " id="input_card_actual_time_{{ i }}" max="16" maxlength="2"
+                <input type="number" class="form-control ml " id="input_card_actual_time_{{ i }}" max="24" maxlength="2"
                   placeholder="{{ item.actualTime }}" formControlName="cardActualTime" />
               </div>
               <button class="btn btn-primary bottom editbtn" [disabled]="editCard.status === 'INVALID'"
