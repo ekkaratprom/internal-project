@@ -19,7 +19,11 @@ export class AvaliableFormComponent implements OnInit {
 
   constructor(private ngbmodal: NgbModal, private assignmentService: AssignmentService,
     private router: Router, private availabilityService: AvailabilityService, private modalService: NgbModal,
-    private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) { }
+    private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
+
+      this.markDisabled = (date: NgbDate) => calendar.getWeekday(date) >= 6;
+
+  }
   @Input() modalValue: any;
   @Output() itemCardChange = new EventEmitter<number>();
   @Output() assignmentcardChange = new EventEmitter();
@@ -45,6 +49,9 @@ export class AvaliableFormComponent implements OnInit {
   estimateStatus = false;
   cardEstimateStatus = false;
   cardId;
+  cardActualId;
+  markDisabled;
+
 
   //period date
   hoveredDate: NgbDate | null = null;
@@ -128,8 +135,7 @@ export class AvaliableFormComponent implements OnInit {
     this.toDate = this.calendar.getNext(this.fromDate, 'd', 10);
     this.onDateUnselect();
 
-    const limit = (8 - this.resultAvaliable.totalEstimateTime);
-    console.log('limit', limit);
+
   }
 
   onSubmit(): void {
@@ -414,6 +420,10 @@ export class AvaliableFormComponent implements OnInit {
       console.log('true');
       return this.estimateStatus = true;
     } else { console.log('false'); return this.estimateStatus = false; }
+  }
+
+  cardActualValidate(event, id) {
+    this.cardActualId = id;
   }
 
   cardEstimateValidate(event, estimateTime, id) {

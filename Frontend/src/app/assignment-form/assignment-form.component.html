@@ -18,7 +18,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="endDatePick"
-                                    ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker" />
+                                    ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker"  [markDisabled]="markDisabled" />
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
                                         type="button"></button>

@@ -198,6 +198,10 @@ button.calendar:active {
   margin-left: 5rem;
 }
 
+.btn-width{
+  width: auto;
+}
+
 .editInput {
   display: inline-block;
     margin-left: 30%;
