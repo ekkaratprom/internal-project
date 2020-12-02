@@ -302,7 +302,7 @@
           <div class="row">
             <div class="bold col-5">Assignment name :</div>
             <div class="card-body listt col-7">
-              {{ item.assignmentName }}
+              {{item.projectName}} /{{ item.assignmentName }}
             </div>
           </div>
           <span class="close" (click)="openclosemodal(content1) ;" title="Delete Card">&times;</span>
@@ -340,10 +340,10 @@
                 <input type="number" class="form-control ml " id="input_card_actual_time_{{ i }}" max="24" maxlength="2"
                   placeholder="{{ item.actualTime }}" formControlName="cardActualTime" />
               </div>
-              <button class="btn btn-primary bottom editbtn" [disabled]="editCard.status === 'INVALID'"
+              <!-- <button class="btn btn-primary bottom editbtn" [disabled]="editCard.status === 'INVALID'"
                 (click)="updateFunction(item.cardId)">
                 Update
-              </button>
+              </button> -->
               <div *ngIf="cardEstimateStatus == true && item.cardId == cardId" class="error">
                 Total estimate time must not over than 8 hrs. per day.
               </div>

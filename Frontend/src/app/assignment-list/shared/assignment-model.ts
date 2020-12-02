@@ -33,6 +33,7 @@ export type CardList = {
 }
 
 export type CardLists = {
+  projectName: string;
   assignmentId: number;
   assignmentName?: string;
   billableTime?: number;
