@@ -19,7 +19,11 @@ export class AvaliableFormComponent implements OnInit {
 
   constructor(private ngbmodal: NgbModal, private assignmentService: AssignmentService,
     private router: Router, private availabilityService: AvailabilityService, private modalService: NgbModal,
-    private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {}
+    private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
+
+      this.markDisabled = (date: NgbDate) => calendar.getWeekday(date) >= 6;
+
+  }
   @Input() modalValue: any;
   @Output() itemCardChange = new EventEmitter<number>();
   @Output() assignmentcardChange = new EventEmitter();
@@ -40,11 +44,14 @@ export class AvaliableFormComponent implements OnInit {
   selectDate;
   diffTimeDay;
   businessDays;
-  resultAvaliable ;
+  resultAvaliable;
   totalEstimateValue;
   estimateStatus = false;
   cardEstimateStatus = false;
   cardId;
+  cardActualId;
+  markDisabled;
+
 
   //period date
   hoveredDate: NgbDate | null = null;
@@ -128,8 +135,7 @@ export class AvaliableFormComponent implements OnInit {
     this.toDate = this.calendar.getNext(this.fromDate, 'd', 10);
     this.onDateUnselect();
 
-    const limit = (8 - this.resultAvaliable.totalEstimateTime);
-    console.log('limit', limit);
+
   }
 
   onSubmit(): void {
@@ -142,7 +148,16 @@ export class AvaliableFormComponent implements OnInit {
       if (this.dayPick === undefined) {
         date = this.selectDate;
       } else {
-        date = `${this.dayPick.year}-${this.dayPick.month}-${this.dayPick.day}`;
+        const d = `${this.dayPick.year}-${this.dayPick.month}-${this.dayPick.day}`;
+        const day = new Date(d);
+        const fixDate = day.setDate(day.getDate());
+        const fixDay = new Date(fixDate);
+
+        if (this.fromDate.day < 10) {
+          date = new Date(fixDay.toISOString().substr(0, 10));
+        } else {
+          date = new Date(day);
+        }
       }
       this.card = {
         userId: this.modalValue[1].userId,
@@ -364,10 +379,10 @@ export class AvaliableFormComponent implements OnInit {
 
   }
 
-  formStatusDisable(): boolean{
-    if(this.resultAvaliable.totalEstimateTime === 8){
+  formStatusDisable(): boolean {
+    if (this.resultAvaliable.totalEstimateTime === 8) {
       return true;
-    } else {return false; }
+    } else { return false; }
   }
 
   onDateUnselect(): void {
@@ -376,12 +391,12 @@ export class AvaliableFormComponent implements OnInit {
 
     const day = new Date(startDate);
     const fixDate = day.setDate(day.getDate() + 1);
-    const fixDay = new Date(fixDate );
+    const fixDay = new Date(fixDate);
     // tslint:disable-next-line: no-unused-expression
     this.daySent;
-    if(this.fromDate.day < 10){
+    if (this.fromDate.day < 10) {
       this.daySent = new Date(fixDay.toISOString().substr(0, 10));
-    }else {
+    } else {
       this.daySent = new Date(startDate);
     }
 
@@ -396,26 +411,30 @@ export class AvaliableFormComponent implements OnInit {
 
   }
 
-  estimateValidate(event){
+  estimateValidate(event) {
 
     const limit = (8 - this.resultAvaliable.totalEstimateTime);
     console.log('limit', limit);
     console.log('event', event.key);
-    if (event.target.value > limit ){
+    if (event.target.value > limit) {
       console.log('true');
       return this.estimateStatus = true;
-    }else { console.log('false'); return this.estimateStatus = false; }
+    } else { console.log('false'); return this.estimateStatus = false; }
   }
 
-  cardEstimateValidate(event, estimateTime,id){
+  cardActualValidate(event, id) {
+    this.cardActualId = id;
+  }
+
+  cardEstimateValidate(event, estimateTime, id) {
     this.cardId = id;
     const limit = (8 - (this.resultAvaliable.totalEstimateTime - estimateTime));
     console.log('limit', limit);
     console.log('event', event.key);
-    if (event.target.value > limit ){
+    if (event.target.value > limit) {
       console.log('true');
       return this.cardEstimateStatus = true;
-    }else { console.log('false'); return this.cardEstimateStatus = false; }
+    } else { console.log('false'); return this.cardEstimateStatus = false; }
   }
 
   // period date
@@ -448,12 +467,12 @@ export class AvaliableFormComponent implements OnInit {
 
     const day = new Date(startDate);
     const fixDate = day.setDate(day.getDate() + 1);
-    const fixDay = new Date(fixDate );
+    const fixDay = new Date(fixDate);
     // tslint:disable-next-line: no-unused-expression
     this.daySent;
-    if(this.fromDate.day < 10){
+    if (this.fromDate.day < 10) {
       this.daySent = new Date(fixDay.toISOString().substr(0, 10));
-    }else {
+    } else {
       this.daySent = new Date(startDate);
     }
 

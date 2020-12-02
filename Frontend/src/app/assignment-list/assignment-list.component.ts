@@ -3,7 +3,7 @@ import { AssignmentService } from './shared/assignment.service';
 import { Assignment, AssignmentResponse, CardList, CardObj, ProjectSent } from './shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef, ModalDismissReasons, NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { ThemePalette } from '@angular/material/core';
 
@@ -56,13 +56,16 @@ export class AssignmentListComponent implements OnInit, DoCheck {
   public isCollapsed: boolean = true;
   project: ProjectSent;
 
+
   value;
   colorwarn: ThemePalette = 'warn';
   today;
   colorprim: ThemePalette = 'primary';
 
   constructor(private qv: QueueviewserviceService, private assignmentService: AssignmentService,
-    private modalService: NgbModal, private router: Router) { }
+    private modalService: NgbModal, private router: Router, private calendar: NgbCalendar) {
+
+     }
 
   public addProject = new FormGroup({
     projectName: new FormControl(null, Validators.compose([

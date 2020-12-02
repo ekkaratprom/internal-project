@@ -3,7 +3,7 @@ import { Assignment } from './../assignment-list/shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-assignment-form',
@@ -18,9 +18,13 @@ export class AssignmentFormComponent implements OnInit {
   projectList = [];
   endDatePick: NgbDateStruct;
   today = this.calendar.getToday();
+  markDisabled ;
 
 
-  constructor(private assignmentService: AssignmentService, private router: Router, private calendar: NgbCalendar) { }
+  constructor(private assignmentService: AssignmentService, private router: Router, private calendar: NgbCalendar) {
+    this.markDisabled = (date: NgbDate) => calendar.getWeekday(date) >= 6;
+
+  }
 
 
   public addAssignment = new FormGroup({

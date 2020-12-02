@@ -13,7 +13,7 @@ hr {
 .cursor-complete-icon{
   cursor: pointer;
 }
-.context-menu 
+.context-menu
 {
   cursor: context-menu;
 }
@@ -125,6 +125,10 @@ hr {
   background-color: red;
 }
 .err{
+  color: red;
+}
+
+.error {
   color: red;
 }
 .light-bold{
