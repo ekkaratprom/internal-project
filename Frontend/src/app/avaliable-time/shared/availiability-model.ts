@@ -13,6 +13,7 @@ export type Cards = {
 }
 
 export type Card = {
+    projectName: string;
     cardName: string;
     actualTime: number;
     cardId: number;

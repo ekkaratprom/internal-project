@@ -70,7 +70,8 @@
 
                   <br>
                   <input id="date" class="form-control" placeholder="{{ selectDate | date: 'yyyy-MM-dd' }}" name="dp"
-                    [(ngModel)]="dayPick"  [markDisabled]="markDisabled" ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker"/>
+                    [(ngModel)]="dayPick" [markDisabled]="markDisabled" ngbDatepicker [footerTemplate]="footerTemplate"
+                    #d="ngbDatepicker" />
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
                   </div>
@@ -96,7 +97,7 @@
                 <div class="input-group">
                   <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker"
                     [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t"
-                    outsideDays="hidden" [startDate]="fromDate!" tabindex="-1"  [markDisabled]="markDisabled"/>
+                    outsideDays="hidden" [startDate]="fromDate!" tabindex="-1" [markDisabled]="markDisabled" />
                   <ng-template #t let-date let-focused="focused">
                     <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
                       [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
@@ -108,7 +109,7 @@
               </div>
               <div class="form-group">
                 <div class="input-group">
-                  <input #dpFromDate class="form-control"   placeholder="yyyy-mm-dd" name="dpFromDate"
+                  <input #dpFromDate class="form-control" placeholder="yyyy-mm-dd" name="dpFromDate"
                     [value]="formatter.format(fromDate)" (input)="
                       fromDate = validateInput(fromDate, dpFromDate.value)
                     " />
@@ -302,7 +303,7 @@
           <div class="row">
             <div class="bold col-5">Assignment name :</div>
             <div class="card-body listt col-7">
-              {{ item.assignmentName }}
+              {{item.projectName}} /{{ item.assignmentName }}
             </div>
           </div>
           <span class="close" (click)="openclosemodal(content1) ;" title="Delete Card">&times;</span>
@@ -339,12 +340,12 @@
                 <label class="txt actualtime mb-2">Actual time</label>
                 <input type="number" class="form-control ml " id="input_card_actual_time_{{ i }}" max="24" maxlength="2"
                   placeholder="{{ item.actualTime }}" formControlName="cardActualTime"
-                  (keyup)="cardActualValidate($event,item.cardId)"/>
+                  (keyup)="cardActualValidate($event,item.cardId)" />
               </div>
-              <button class="btn btn-primary bottom editbtn" [disabled]="editCard.status === 'INVALID'"
+              <!-- <button class="btn btn-primary bottom editbtn" [disabled]="editCard.status === 'INVALID'"
                 (click)="updateFunction(item.cardId)">
                 Update
-              </button>
+                </button> -->
 
               <div *ngIf="editCard.get('cardActualTime').hasError('max') && item.cardId == cardActualId" class="error">
                 Actual time must be 1 to 24.

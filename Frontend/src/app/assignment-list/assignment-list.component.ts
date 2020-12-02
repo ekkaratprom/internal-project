@@ -256,6 +256,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
               this.cObj.push(cardObj);
             });
             const cardDetail = {
+              projectName: element.projectName,
               assignmentId: element.assignmentId,
               assignmentName: element.assignmentName,
               billableTime: element.billableTime,
