@@ -147,16 +147,25 @@ export class AvaliableFormComponent implements OnInit {
       // tslint:disable-next-line: triple-equals
       if (this.dayPick === undefined) {
         date = this.selectDate;
+        console.log('this.selectDate onSubmit',this.selectDate)
+
       } else {
         const d = `${this.dayPick.year}-${this.dayPick.month}-${this.dayPick.day}`;
+        console.log('d',d)
         const day = new Date(d);
-        const fixDate = day.setDate(day.getDate());
+        console.log('day ',day )
+        const fixDate = day.setDate(day.getDate() +1 );
+        console.log('fixDate',fixDate)
+        const fixDateOverTen = day.setDate(day.getDate());
+        console.log('fixDateOverTen',fixDateOverTen)
         const fixDay = new Date(fixDate);
+        console.log('fixDay',fixDay)
+
 
         if (this.fromDate.day < 10) {
           date = new Date(fixDay.toISOString().substr(0, 10));
         } else {
-          date = new Date(day);
+          date = new Date(fixDateOverTen);
         }
       }
       this.card = {
