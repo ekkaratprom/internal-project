@@ -179,10 +179,10 @@ export class AvaliableFormComponent implements OnInit {
           }
         }
 
-        console.log('Date', date);
-        console.log('Day', day);
-        console.log('fixDate', fixDate);
-        console.log('fixDay', fixDay);
+        // console.log('Date', date);
+        // console.log('Day', day);
+        // console.log('fixDate', fixDate);
+        // console.log('fixDay', fixDay);
       }
 
       this.card = {

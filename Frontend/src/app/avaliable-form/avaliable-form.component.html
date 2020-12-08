@@ -332,13 +332,13 @@
                 <div class="txt estiamtetime mb-2">Estimate time</div>
                 <input type="number" class="form-control editInput" id="input_card_estimate_time_{{ i }}" max="8"
                   maxlength="2" placeholder="{{ item.estimateTime }}" formControlName="cardEstimateTime"
-                  (keyup)="cardEstimateValidate($event,item.estimateTime,item.cardId)" />
+                  (keyup)="cardEstimateValidate($event,item.estimateTime,item.cardId) ; updateFunction($event,item.cardId)" />
               </div>
               <div class="col">
                 <label class=" row txt actualtime mb-2">Actual time</label>
                 <input type="number" class="row form-control ml " id="input_card_actual_time_{{ i }}" max="24"
                   maxlength="2" placeholder="{{ item.actualTime }}" formControlName="cardActualTime"
-                  (keyup)="cardActualValidate($event,item.cardId)" />
+                  (keyup)="cardActualValidate($event,item.cardId) ; updateFunction($event,item.cardId)" />
               </div>
               <!-- <button class="btn btn-primary bottom editbtn" [disabled]="editCard.status === 'INVALID'"
                 (click)="updateFunction(item.cardId)">
@@ -369,11 +369,13 @@
         </div>
 
         <div *ngIf="c.card.length > 0">
-          <button class="btn btn-primary complete" (click)="updateComplete()">
+          <button class="complete btn btn-primary " (click)="updateComplete()">
             Update Complete
           </button>
         </div>
         <div *ngIf="c.card.length <= 0">Don't have card.</div>
+
+
       </div>
     </div>
   </div>

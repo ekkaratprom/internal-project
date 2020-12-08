@@ -1,5 +1,5 @@
 import { environment } from './../../../environments/environment';
-import { Actual, UserResponse, Skill, Skills,DeleteStatus } from './availiability-model';
+import { Actual, UserResponse, Skill, Skills,DeleteStatus, UpdateCards } from './availiability-model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -23,6 +23,13 @@ export class AvailabilityService {
 
   updateCard(id: any, actual: any): Observable<HttpResponse<Actual[]>> {
     return this.http.patch<Actual[]>(`${environment.apiUrl}v1/${id}/updatecard`, actual, {
+      observe: 'response',
+    });
+  }
+
+  //more than one card /siesta/api/v2/updatecards
+  updateCards(card: any): Observable<HttpResponse<UpdateCards[]>> {
+    return this.http.patch<UpdateCards[]>(`${environment.apiUrl}/v2/updatecards`, card, {
       observe: 'response',
     });
   }
