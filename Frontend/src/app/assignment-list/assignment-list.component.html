@@ -6,17 +6,28 @@
   </div>
 </div>
 <div class="row mb-3 d-flex align-items-center">
-  <div class="col-xs-12 col-md-12 col-lg-6 col-xl-6 pr-1">
-    <div class="input-group input-group-sm">
+
+  <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12 pr-3 pl-3 mb-3">
+    <div class="input-group input-group-md">
       <input type="text" class="form-control custom-button" aria-label="Sizing example input"
         aria-describedby="inputGroup-sizing-sm" id="search-text" [(ngModel)]="assignmentsearchText"
-        placeholder="All Assignment">
+        placeholder="Search Assignment">
+    </div>
+  </div>
+  <div class="col-xs-6 col-md-6 col-lg-6 col-xl-6 pr-1 ">
+    <div class="input-group input-group-md">
+      <select class="form-control custom-button" id="input_project" placeholder="All project" [(ngModel)]="ProjectName">
+        <option [ngValue]="undefined">All Project</option>
+        <option *ngFor="let c of projectList" value="{{ c.projectName }}">
+          {{ c.projectName }}
+        </option>
+      </select>
     </div>
   </div>
   <div class="col-xs-12 col-md-12 col-lg-6 col-xl-6 pl-1">
-    <div class="input-group input-group-sm">
+    <div class="input-group input-group-md">
       <select class="form-control custom-button" [(ngModel)]="completedStatusCheck">
-        <option [ngValue]="undefined">All</option>
+        <option [ngValue]="undefined">All Status</option>
         <option [ngValue]="true">Complete</option>
         <option [ngValue]="false">Incomplete</option>
       </select>
@@ -48,8 +59,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
-      <button type="button" class="btn btn-outline-primary"
-        (click)="onSubmit(); modal.dismiss('Cross click')">Submit</button>
+      <button type="button" class="btn btn-primary" (click)="onSubmit(); modal.dismiss('Cross click')">Submit</button>
     </div>
   </Form>
 
@@ -71,6 +81,7 @@
   let r of result
     | completedstatusFilter: completedStatusCheck
     | assignmentFilter: assignmentsearchText
+    | projectFilter : ProjectName
     ; index as i">
 
     <ng-template #content1 let-modal>
@@ -181,11 +192,12 @@
           </div>
           <!-- Actual Time -->
           <div class="d-flex justify-content-between align-items-center context-menu" title="actual time"
-            *ngIf="r.totalActualTime !== null && r.totalActualTime >= 0">
+            *ngIf="r.totalActualTime !== null && r.totalActualTime >= 0 || r.totalActualTime === null">
             <!-- <i class="material-icons md-18">ic_watch_later</i> -->
             <mat-icon class="list-icon align-self-center" title="actual time">alarm_on</mat-icon>
             <div *ngIf=" r.totalActualTime>r.estimateTime" class="ml-1 err"> : {{ r.totalActualTime }}</div>
             <div *ngIf=" r.totalActualTime<=r.estimateTime" class="ml-1"> : {{ r.totalActualTime }}</div>
+            <div *ngIf=" r.totalActualTime === null" class="ml-1"> 0</div>
             <div *ngIf=" r.totalActualTime>r.estimateTime" class="ml-1 err">Hrs</div>
             <div *ngIf=" r.totalActualTime<=r.estimateTime" class="ml-1">Hrs</div>
           </div>
