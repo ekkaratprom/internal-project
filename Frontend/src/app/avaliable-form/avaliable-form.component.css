@@ -158,7 +158,7 @@ button.calendar:active {
   margin-top: 5%;
 }
 .txt.actualtime {
-  margin-left: 19%;
+  margin-left: 22%;
     font-weight: bold;
     font-size: 1em;
     margin-bottom: 0;
@@ -189,7 +189,7 @@ button.calendar:active {
   display: inline-block;
     width: 7rem;
     margin-bottom: 0rem;
-  margin-left: 18%;
+  margin-left: 21%;
 }
 .max-hour-error{
   color: red;
