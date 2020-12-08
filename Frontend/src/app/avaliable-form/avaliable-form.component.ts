@@ -21,7 +21,7 @@ export class AvaliableFormComponent implements OnInit {
     private router: Router, private availabilityService: AvailabilityService, private modalService: NgbModal,
     private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
 
-      this.markDisabled = (date: NgbDate) => calendar.getWeekday(date) >= 6;
+    this.markDisabled = (date: NgbDate) => calendar.getWeekday(date) >= 6;
 
   }
   @Input() modalValue: any;
@@ -285,6 +285,7 @@ export class AvaliableFormComponent implements OnInit {
   }
 
   calenderPicker(day: boolean): void {
+    console.log('day before do the method', day);
     if (day === true) {
       // tslint:disable-next-line: no-unused-expression
       this.pickerDisplayDay = true;
@@ -293,6 +294,7 @@ export class AvaliableFormComponent implements OnInit {
       // tslint:disable-next-line: no-unused-expression
       this.pickerDisplayDay = false;
     }
+    console.log('pickerDisplay', this.pickerDisplayDay);
 
   }
 
