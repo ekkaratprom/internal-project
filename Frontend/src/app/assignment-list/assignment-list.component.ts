@@ -34,6 +34,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
   @Output() isReloadAssignmentChange = new EventEmitter<boolean>();
   @Output() updateDelete = new EventEmitter<any>();
   assignmentsearchText = '';
+  ProjectName = undefined;
   completedStatusCheck = undefined;
   assignments: AssignmentResponse[] = [];
   cardLists: CardList;
@@ -49,6 +50,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
   kevin = false;
   completeStatus = false;
   assigmentId;
+  projectList;
   status;
   completedStatus;
   indexSelected;
@@ -65,7 +67,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
   constructor(private qv: QueueviewserviceService, private assignmentService: AssignmentService,
     private modalService: NgbModal, private router: Router, private calendar: NgbCalendar) {
 
-     }
+  }
 
   public addProject = new FormGroup({
     projectName: new FormControl(null, Validators.compose([
@@ -91,6 +93,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
     // console.log('ngOnInit');
     this.getAllCards();
     this.today = new Date();
+    this.getAllProject();
     console.log('Today', this.today);
 
   }
@@ -106,6 +109,16 @@ export class AssignmentListComponent implements OnInit, DoCheck {
 
   open(content): void {
     this.modalReference = this.modalService.open(content, { size: 'md' });
+  }
+
+  getAllProject(): void {
+    try {
+      this.assignmentService.getAllProject().subscribe((res) => {
+        this.projectList = res;
+      });
+    } catch (error) {
+      console.error('GET all project fail');
+    }
   }
 
   openclosemodal(content) {

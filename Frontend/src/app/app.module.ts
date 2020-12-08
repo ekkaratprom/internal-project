@@ -1,3 +1,4 @@
+import { ProjectPipe } from './assignment-list/shared/projectfilter.pipe';
 import { DeleteStatusPipe } from './assignment-list/deletestatus.pipe';
 import { LongNamePipe } from './avaliable-time/longname.pipe';
 import { TitleCompletedStatusPipe } from './assignment-list/titlecompletestatus.pipe';
@@ -18,6 +19,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { MatIconModule } from '@angular/material/icon';
 import { CardComponent } from './card/card.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -45,6 +47,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ColorCompletedStatusPipe,
     NavbarComponent,
     LongNamePipe,
+    ProjectPipe,
     SkillPipe,
     AvaliableTimeComponent,
     CompleteStatusPipe,
