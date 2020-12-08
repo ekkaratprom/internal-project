@@ -179,7 +179,7 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
             });
             if (!status) { userList.cards = [...userList.cards, cardTemp]; }
           });
-          this.avaliableLists = [...this.avaliableLists, userList ];
+          this.avaliableLists = [...this.avaliableLists, userList];
           this.availableListFunc.emit();
         });
         // console.log('***avaliableList', this.avaliableLists);
