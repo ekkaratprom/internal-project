@@ -269,6 +269,7 @@ export class AssignmentListComponent implements OnInit, DoCheck {
               cardObj: this.cObj,
             };
             this.result.push(cardDetail);
+
           });
           // console.log('result', this.result);
           if (this.isReloadAssignment === true) {
