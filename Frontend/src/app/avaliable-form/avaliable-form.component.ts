@@ -21,7 +21,7 @@ export class AvaliableFormComponent implements OnInit {
     private router: Router, private availabilityService: AvailabilityService, private modalService: NgbModal,
     private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
 
-      this.markDisabled = (date: NgbDate) => calendar.getWeekday(date) >= 6;
+    this.markDisabled = (date: NgbDate) => calendar.getWeekday(date) >= 6;
 
   }
   @Input() modalValue: any;
@@ -127,6 +127,8 @@ export class AvaliableFormComponent implements OnInit {
     this.d = this.fromDay.getDate();
     // console.log('day', this.d);
 
+    console.log('selectDate', this.selectDate)
+
 
     // console.log('this.fromModel(this.selectDate)', this.fromDay);
 
@@ -142,36 +144,51 @@ export class AvaliableFormComponent implements OnInit {
     // const dateFormat = new Date('2020-10-30T03:48:49.759Z').toLocaleString('en-GB').substring(0, 10).split('/').join('-');
 
     if (this.pickerDisplayDay === true) {
-      let date: any;
-
-      // tslint:disable-next-line: triple-equals
+      let daySent;
       if (this.dayPick === undefined) {
-        date = this.selectDate;
-        console.log('this.selectDate onSubmit',this.selectDate)
+        daySent = this.selectDate;
+        console.log('this.selectDate onSubmit', this.selectDate);
 
       } else {
-        const d = `${this.dayPick.year}-${this.dayPick.month}-${this.dayPick.day}`;
-        console.log('d',d)
-        const day = new Date(d);
-        console.log('day ',day )
-        const fixDate = day.setDate(day.getDate() +1 );
-        console.log('fixDate',fixDate)
-        const fixDateOverTen = day.setDate(day.getDate());
-        console.log('fixDateOverTen',fixDateOverTen)
+        const date = `${this.dayPick.year}-${this.dayPick.month}-${this.dayPick.day}`;
+        const day = new Date(date);
+        const fixDate = day.setDate(day.getDate() + 1);
         const fixDay = new Date(fixDate);
-        console.log('fixDay',fixDay)
-
-
-        if (this.fromDate.day < 10) {
-          date = new Date(fixDay.toISOString().substr(0, 10));
+        if (this.dayPick.day < 10) {
+          if (this.dayPick.month < 10) {
+            daySent = fixDay.toISOString().substr(0, 10);
+          }
+          else if (this.dayPick.month >= 10) {
+            const dayOverMonth = new Date(date);
+            const fixDateOverMonth = dayOverMonth.setDate(dayOverMonth.getDate() + 1);
+            const fixDayOverMonth = new Date(fixDateOverMonth);
+            daySent = fixDayOverMonth.toISOString().substr(0, 10);
+          }
         } else {
-          date = new Date(fixDateOverTen);
+          if (this.dayPick.month < 10) {
+            const dayOverMonth = new Date(date);
+            const fixDateOverMonth = dayOverMonth.setDate(dayOverMonth.getDate() + 1);
+            const fixDayOverMonth = new Date(fixDateOverMonth);
+            daySent = fixDayOverMonth.toISOString().substr(0, 10);
+          }
+          else if (this.dayPick.month >= 10) {
+            const dayOverMonth = new Date(date);
+            const fixDateOverMonth = dayOverMonth.setDate(dayOverMonth.getDate());
+            const fixDayOverMonth = new Date(fixDateOverMonth);
+            daySent = fixDayOverMonth.toISOString().substr(0, 10);
+          }
         }
+
+        console.log('Date', date);
+        console.log('Day', day);
+        console.log('fixDate', fixDate);
+        console.log('fixDay', fixDay);
       }
+
       this.card = {
         userId: this.modalValue[1].userId,
         // cardDate: this.modalValue[0].cards.cardDate,
-        cardDate: date,
+        cardDate: daySent,
         cardName: this.addCard.get('cardName').value,
         estimateTime: parseFloat(this.addCard.get('estimateTime').value),
         // tslint:disable-next-line: radix

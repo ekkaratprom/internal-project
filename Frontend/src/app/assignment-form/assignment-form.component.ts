@@ -81,10 +81,10 @@ export class AssignmentFormComponent implements OnInit {
       }
     }
 
-    console.log('Date', date);
-    console.log('Day', day);
-    console.log('fixDate', fixDate);
-    console.log('fixDay', fixDay);
+    // console.log('Date', date);
+    // console.log('Day', day);
+    // console.log('fixDate', fixDate);
+    // console.log('fixDay', fixDay);
 
     this.assignment = {
       assignmentName: this.addAssignment.get('assignmentName').value,
