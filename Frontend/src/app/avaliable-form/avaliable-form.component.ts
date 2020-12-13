@@ -1,7 +1,7 @@
 import { map } from 'rxjs/operators';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct, NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AvailabilityService } from './../avaliable-time/shared/availability.service';
-import { Total } from './../avaliable-time/shared/availiability-model';
+import { Total, UpdateCards } from './../avaliable-time/shared/availiability-model';
 import { AssignmentService } from './../assignment-list/shared/assignment.service';
 import { Assignment, CardForm, CardList } from './../assignment-list/shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -23,6 +23,7 @@ export class AvaliableFormComponent implements OnInit {
 
     this.markDisabled = (date: NgbDate) => calendar.getWeekday(date) >= 6;
 
+
   }
   @Input() modalValue: any;
   @Output() itemCardChange = new EventEmitter<number>();
@@ -37,6 +38,10 @@ export class AvaliableFormComponent implements OnInit {
   assignmentList = [];
   rAssignmentList = [];
   cardsData = [];
+  cardsBeforeEdit = [];
+  cardsDataToEdit = [];
+  cardsDataEdited = [];
+  cardsDataSent = [];
   status;
   pickerDisplayDay = true;
   dayPick: NgbDateStruct;
@@ -111,10 +116,13 @@ export class AvaliableFormComponent implements OnInit {
     // console.log('**********', this.modalValue);
     // console.log('**********', this.modalValue[0].cards);
     this.cardsData = [this.modalValue[0].cards];
+    this.cardsDataToEdit = this.modalValue[0].cards.card;
+    this.setCardsDataBeforeEdit();
+
     this.selectDate = this.modalValue[0].cards.cardDate;
     this.resultAvaliable = this.modalValue[0].cards;
 
-    console.log('resultAvaliable', this.resultAvaliable.totalEstimateTime);
+    // console.log('resultAvaliable', this.resultAvaliable.totalEstimateTime);
 
     this.fromDay = new Date(this.selectDate);
     // this.day = this.fromModel(date);
@@ -136,6 +144,31 @@ export class AvaliableFormComponent implements OnInit {
     // console.log('this.fromDate ', this.fromDate);
     this.toDate = this.calendar.getNext(this.fromDate, 'd', 10);
     this.onDateUnselect();
+
+
+  }
+
+  setCardsDataBeforeEdit(): void {
+    let data = [];
+    data = this.cardsDataToEdit;
+    console.log('data', data);
+    this.cardsBeforeEdit = [];
+    this.cardsDataEdited = [];
+    data.forEach(element => {
+      const cardDetail = {
+        cardId: element.cardId,
+        actualTime: element.actualTime,
+        estimateTime: element.estimateTime,
+      }
+      this.cardsBeforeEdit.push(cardDetail);
+
+    })
+    console.log('this.cardsBeforeEdit', this.cardsBeforeEdit)
+    this.cardsDataEdited = this.cardsBeforeEdit;
+
+    console.log('this.cardsDataEdited', this.cardsDataEdited)
+    console.log('this.cardsDataEdited id', this.cardsDataEdited[0].cardId)
+    console.log('this.cardsDataEdited L', this.cardsDataEdited.length)
 
 
   }
@@ -345,6 +378,32 @@ export class AvaliableFormComponent implements OnInit {
         });
     }
   }
+
+  updateEstimateKeyUp(event, id) {
+
+    let objIndex = this.cardsDataEdited.findIndex((obj => obj.cardId == id));
+    this.cardsDataEdited[objIndex].estimateTime = parseFloat(event.key);
+    console.log('cardsDataEdited after', this.cardsDataEdited)
+
+  }
+
+  updateActualKeyUp(event, id) {
+
+    let objIndex = this.cardsDataEdited.findIndex((obj => obj.cardId == id));
+    this.cardsDataEdited[objIndex].actualTime = parseFloat(event.key);
+    console.log('cardsDataEdited after', this.cardsDataEdited)
+
+  }
+
+  updateCardsFunction(){
+    this.availabilityService.updateCards(this.cardsDataEdited)
+      .subscribe((r) => {
+        console.log(r);
+        this.submitCompleted.emit();
+      });
+  }
+
+
 
   // tslint:disable-next-line: typedef
   updateFunction(card: string) {
