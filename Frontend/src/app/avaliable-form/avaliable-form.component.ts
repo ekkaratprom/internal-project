@@ -358,27 +358,6 @@ export class AvaliableFormComponent implements OnInit {
 
   }
 
-  // tslint:disable-next-line: typedef
-  keyDownFunction(event, card: string) {
-    if (event.keyCode === 13) {
-      alert('Edit Success');
-      const cardId = card;
-
-      this.total = {
-        actualTime: parseFloat(this.editCard.get('cardActualTime').value),
-        estimateTime: parseFloat(this.editCard.get('cardEstimateTime').value),
-      };
-      console.log('Total :', this.total);
-      console.log('cardId :', cardId);
-
-      this.availabilityService.updateCard(cardId, this.total)
-        .subscribe((r) => {
-          console.log(r);
-          console.log('***Total time:', this.total);
-        });
-    }
-  }
-
   updateEstimateKeyUp(event, id) {
 
     let objIndex = this.cardsDataEdited.findIndex((obj => obj.cardId == id));
