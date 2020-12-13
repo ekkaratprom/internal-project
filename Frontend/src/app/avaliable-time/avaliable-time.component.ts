@@ -196,11 +196,13 @@ export class AvaliableTimeComponent implements OnInit, DoCheck {
 
   close(): void {
     this.modalReference.close();
-    this.avaliableList();
+    // this.avaliableList();
     this.submitedLeft.emit();
+    this.avaliableList();
   }
 
   updateCardList(): void {
+    this.submitedLeft.emit();
     this.avaliableList();
   }
 

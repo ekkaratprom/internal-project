@@ -205,6 +205,7 @@ export class AvaliableFormComponent implements OnInit {
           console.log(r);
           // this.router.navigateByUrl('/available-form');
           this.submitCompleted.emit();
+
         });
 
     } else { this.onSubmitPeriod(); }
@@ -364,11 +365,12 @@ export class AvaliableFormComponent implements OnInit {
       });
   }
 
+
+
   // tslint:disable-next-line: typedef
   updateComplete() {
     this.submitCompleted.emit();
   }
-
 
   updateDeleteStatus(id: string): void {
     const deleteStatus = true;
@@ -381,11 +383,12 @@ export class AvaliableFormComponent implements OnInit {
       this.availabilityService.updateDeleteStatusCard(cardId, this.status)
         .subscribe((r) => {
           console.log(r);
+          this.submitCompleted.emit();
         });
       console.log('id', id);
       console.log(' Delete status', this.status);
       // this.submitUpdateCardCompleted.emit();
-      this.submitCompleted.emit();
+
 
     } catch (error) {
       alert('Delete fail');
