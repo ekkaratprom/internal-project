@@ -6,12 +6,12 @@
   </div>
 </div>
 <div class="row mb-3">
-  <div class="col-xs-6 col-md-6 col-lg-5 col-xl-5 d-flex align-items-center">
-    <div class="input-group input-group-sm mr-2">
+  <div class="col-xs-6 col-md-6 col-lg-5 col-xl-5 d-flex align-items-center mt-2">
+    <div class="input-group input-group-md mr-2">
       <input type="text" class="form-control custom-button" id="assignment-search-text" [(ngModel)]="searchText"
         placeholder="All Person" />
     </div>
-    <div class="input-group input-group-sm mr-2">
+    <div class="input-group input-group-md mr-2">
       <select class="form-control custom-button" [(ngModel)]="positionCheck">
         <option [ngValue]="undefined">All Position</option>
         <option *ngFor="let c of position" value="{{c.positionName }}">
@@ -19,7 +19,7 @@
         </option>
       </select>
     </div>
-    <div class="input-group input-group-sm">
+    <div class="input-group input-group-md">
       <select class="form-control custom-button" [(ngModel)]="skillsetCheck">
         <option [ngValue]="undefined">All Skillset</option>
         <option *ngFor="let c of skill" value="{{c.skillName }}">
