@@ -167,7 +167,7 @@ export class AvaliableFormComponent implements OnInit {
     this.cardsDataEdited = this.cardsBeforeEdit;
 
     console.log('this.cardsDataEdited', this.cardsDataEdited)
-    console.log('this.cardsDataEdited id', this.cardsDataEdited[0].cardId)
+    // console.log('this.cardsDataEdited id', this.cardsDataEdited[0].cardId)
     console.log('this.cardsDataEdited L', this.cardsDataEdited.length)
 
 
