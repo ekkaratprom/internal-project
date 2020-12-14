@@ -52,7 +52,8 @@ button.calendar:active {
 }
 
 .btn-closemodal{
-  display: inline-block;
+   display: inline-block;
+    width: auto;
     font-weight: 400;
     text-align: center;
     vertical-align: middle;
@@ -67,7 +68,13 @@ button.calendar:active {
     border-radius: .25rem;
 }
 
+.btn-outline-dark{
+  width: auto !important; 
+}
 
+.btn-outline-primary{
+width: auto !important;
+}
 .btn {
   border: 1px solid #ced4da;
   width: 80%;

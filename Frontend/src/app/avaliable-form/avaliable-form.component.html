@@ -199,9 +199,8 @@
               Do you want to Delete <span class="closemodal-bold">{{ item.cardName }} </span> Card?
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn-closemodal  btn-outline-dark"
-                (click)="modal.close('Save click')">Cancel</button>
-              <button type="button" class="btn-closemodal  btn-outline-primary"
+              <button type="button" class="  btn-outline-dark btn" (click)="modal.close('Save click')">Cancel</button>
+              <button type="button" class="  btn-outline-primary btn ml-1"
                 (click)="updateDeleteStatus(item.cardId); modal.dismiss('Cross click')">Ok</button>
             </div>
 
@@ -249,11 +248,13 @@
           </form>
         </div>
 
-        <div *ngIf="c.card.length > 0">
-          <button class="btn btn-primary complete" (click)="updateCardsFunction() ;updateComplete()">
+        <div *ngIf="c.card.length > 0 ">
+          <button [disabled]="editCard.status === 'INVALID'" class="btn btn-primary complete"
+            (click)="updateCardsFunction() ;updateComplete()">
             Update Complete
           </button>
         </div>
+
         <div *ngIf="c.card.length <= 0">Don't have card.</div>
       </div>
     </div>

@@ -56,6 +56,7 @@ export class AvaliableFormComponent implements OnInit {
   cardId;
   cardActualId;
   markDisabled;
+  isCardChange = false;
 
 
   //period date
@@ -358,8 +359,8 @@ export class AvaliableFormComponent implements OnInit {
 
   }
 
-  updateEstimateKeyUp(event, id) {
-
+  updateEstimateKeyUp(event, id, status) {
+    this.isCardChange = status;
     let objIndex = this.cardsDataEdited.findIndex((obj => obj.cardId == id));
     this.cardsDataEdited[objIndex].estimateTime = parseFloat(event.key);
     console.log('cardsDataEdited after', this.cardsDataEdited)
@@ -374,7 +375,7 @@ export class AvaliableFormComponent implements OnInit {
 
   }
 
-  updateCardsFunction(){
+  updateCardsFunction() {
     this.availabilityService.updateCards(this.cardsDataEdited)
       .subscribe((r) => {
         console.log(r);
