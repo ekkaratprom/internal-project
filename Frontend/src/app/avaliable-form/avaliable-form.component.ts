@@ -362,12 +362,9 @@ export class AvaliableFormComponent implements OnInit {
   }
 
   updateEstimateKeyUp(event, id, status) {
-    console.log(event.key);
+    console.log(event);
     this.isCardChange = status;
     let objIndex = this.cardsDataEdited.findIndex((obj => obj.cardId == id));
-    if(event.key == NaN){
-      this.cardsDataEdited[objIndex].estimateTime = 0;
-    }
     this.cardsDataEdited[objIndex].estimateTime = parseFloat(event.key);
     console.log('cardsDataEdited after', this.cardsDataEdited)
 
