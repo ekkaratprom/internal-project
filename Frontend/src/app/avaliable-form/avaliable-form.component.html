@@ -182,7 +182,11 @@
           <div class="row">
             <div class="bold col-6">Assignment name :</div>
             <div class="card-body listt col-6">
-              {{item.projectName}} /{{ item.assignmentName }}
+              {{ item.assignmentName }}
+            </div>
+            <div class="bold col-6">Project name :</div>
+            <div class="card-body listt col-6">
+              {{item.projectName}}
             </div>
           </div>
           <span class="close" (click)="openclosemodal(content1) ;" title="Delete Card">&times;</span>
