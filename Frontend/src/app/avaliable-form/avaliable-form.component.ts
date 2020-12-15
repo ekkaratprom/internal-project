@@ -55,8 +55,10 @@ export class AvaliableFormComponent implements OnInit {
   cardEstimateStatus = false;
   cardId;
   cardActualId;
+  cardEstimateId;
   markDisabled;
   isCardChange = false;
+
 
 
   //period date
@@ -80,9 +82,9 @@ export class AvaliableFormComponent implements OnInit {
     ])),
     estimateTime: new FormControl(null, Validators.compose([
       Validators.required,
-      Validators.pattern('^[1-9].*$'),
+      Validators.pattern('^[0-9].*$'),
       Validators.max(8),
-      Validators.min(1),
+      Validators.min(0),
     ])),
     cardName: new FormControl(null, Validators.compose([
       Validators.required,
@@ -92,14 +94,14 @@ export class AvaliableFormComponent implements OnInit {
 
   public editCard = new FormGroup({
     cardActualTime: new FormControl(null, Validators.compose([
-      Validators.pattern('^[1-9].*$'),
+      Validators.pattern('^[0-9].*$'),
       Validators.max(24),
-      Validators.min(1)
+      Validators.min(0)
     ])),
     cardEstimateTime: new FormControl(null, Validators.compose([
-      Validators.pattern('^[1-9].*$'),
+      Validators.pattern('^[0-9].*$'),
       Validators.max(8),
-      Validators.min(1)
+      Validators.min(0)
     ])),
   });
 
@@ -360,15 +362,19 @@ export class AvaliableFormComponent implements OnInit {
   }
 
   updateEstimateKeyUp(event, id, status) {
+    console.log(event.key);
     this.isCardChange = status;
     let objIndex = this.cardsDataEdited.findIndex((obj => obj.cardId == id));
+    if(event.key == NaN){
+      this.cardsDataEdited[objIndex].estimateTime = 0;
+    }
     this.cardsDataEdited[objIndex].estimateTime = parseFloat(event.key);
     console.log('cardsDataEdited after', this.cardsDataEdited)
 
   }
 
-  updateActualKeyUp(event, id) {
-
+  updateActualKeyUp(event, id, status) {
+    this.isCardChange = status;
     let objIndex = this.cardsDataEdited.findIndex((obj => obj.cardId == id));
     this.cardsDataEdited[objIndex].actualTime = parseFloat(event.key);
     console.log('cardsDataEdited after', this.cardsDataEdited)
@@ -379,6 +385,7 @@ export class AvaliableFormComponent implements OnInit {
     this.availabilityService.updateCards(this.cardsDataEdited)
       .subscribe((r) => {
         console.log(r);
+        this.isCardChange = false;
         this.submitCompleted.emit();
       });
   }
@@ -498,6 +505,7 @@ export class AvaliableFormComponent implements OnInit {
 
   cardEstimateValidate(event, estimateTime, id) {
     this.cardId = id;
+    this.cardEstimateId = id;
     const limit = (8 - (this.resultAvaliable.totalEstimateTime - estimateTime));
     console.log('limit', limit);
     console.log('event', event.key);

@@ -42,10 +42,10 @@
                 Card name has invalid characters.
               </div>
               <div *ngIf="addCard.get('estimateTime').hasError('max')" class="error">
-                Estimate time must be 1 to 8.
+                Estimate time must be 0 to 8.
               </div>
               <div *ngIf="addCard.get('estimateTime').hasError('min')" class="error">
-                Estimate time must be 1 to 8.
+                Estimate time must be 0 to 8.
               </div>
               <div *ngIf="estimateStatus == true" class="error">
                 Total estimate time must not over than 8 hrs. per day.
@@ -226,16 +226,16 @@
                 </button> -->
 
               <div *ngIf="editCard.get('cardActualTime').hasError('max') && item.cardId == cardActualId" class="error">
-                Actual time must be 1 to 24.
+                Actual time must be 0 to 24.
               </div>
               <div *ngIf="editCard.get('cardActualTime').hasError('min') && item.cardId == cardActualId" class="error">
-                Actual time must be 1 to 24.
+                Actual time must be 0 to 24.
               </div>
-              <div *ngIf="editCard.get('cardEstimateTime').hasError('max')" class="error">
-                Estimate time must be 1 to 8.
+              <div *ngIf="editCard.get('cardEstimateTime').hasError('max') && item.cardId == cardEstimateId" class="error">
+                Estimate time must be 0 to 8.
               </div>
-              <div *ngIf="editCard.get('cardEstimateTime').hasError('min')" class="error">
-                Estimate time must be 1 to 8.
+              <div *ngIf="editCard.get('cardEstimateTime').hasError('min') && item.cardId == cardEstimateId" class="error">
+                Estimate time must be 0 to 8.
               </div>
               <div *ngIf="cardEstimateStatus == true && item.cardId == cardId" class="error">
                 Total estimate time must not over than 8 hrs. per day.
@@ -251,7 +251,7 @@
         <div *ngIf="c.card.length > 0">
           <button [disabled]="editCard.status === 'INVALID'" class="btn btn-primary complete"
             (click)="updateCardsFunction() ;updateComplete()">
-            Update Complete
+            Update
           </button>
         </div>
 

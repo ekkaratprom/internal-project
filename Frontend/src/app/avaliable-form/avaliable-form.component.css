@@ -69,7 +69,7 @@ button.calendar:active {
 }
 
 .btn-outline-dark{
-  width: auto !important; 
+  width: auto !important;
 }
 
 .btn-outline-primary{
@@ -259,4 +259,15 @@ width: auto !important;
 }
 .custom-day.faded {
   background-color: rgba(2, 117, 216, 0.5);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input {
+  height: 30px;
+  line-height: 45px;
 }
