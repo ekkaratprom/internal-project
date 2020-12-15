@@ -134,7 +134,14 @@ hr {
 .light-bold{
 font-weight: 550;
 }
-
+.project-name{
+  position: absolute;
+  right: 23px;
+  top:5px;
+  background-color: lightblue;
+  border-radius: 6px;
+  padding: 5px;
+}
 /* .btn {
   border: 1px solid #ced4da;
   height: 40px;
