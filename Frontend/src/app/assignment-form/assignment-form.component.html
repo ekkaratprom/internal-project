@@ -1,89 +1,217 @@
 <div class="card">
-    <form class="form-inline" [formGroup]="addAssignment" (ngSubmit)="onSubmit()">
-        <div class="card-body">
-            <h6 class="create-assignment-header">Create Assignment :</h6>
-            <div class="card inner">
-                <div class="form-group mx-sm-3 mb-2 justify-content-between">
-                    <p class="bold">Assignment name:</p>
-                    <input type="text" class="form-control" id="input_assignment" placeholder="assignment name.."
-                        formControlName="assignmentName" />
-                    <div *ngIf="addAssignment.get('assignmentName').hasError('pattern')" class="error">
-                        Assignment name has invalid characters
-                    </div>
+  <form class="form-inline" [formGroup]="addAssignment" (ngSubmit)="onSubmit()">
+    <div class="card-body">
+      <h6 class="create-assignment-header">Create Assignment :</h6>
+      <div class="card inner">
+        <div class="form-group mx-sm-3 mb-2 justify-content-between">
+          <p class="bold">Assignment name</p>
+          <p class="text-danger">*</p>
+
+          <input
+            type="text"
+            class="form-control"
+            id="input_assignment"
+            placeholder="assignment name.."
+            formControlName="assignmentName"
+            [class.valid]="
+              addAssignment.get('assignmentName').valid &&
+              (addAssignment.get('assignmentName').dirty ||
+                addAssignment.get('assignmentName').touched)
+            "
+            [class.invalid]="
+              addAssignment.get('assignmentName').invalid &&
+              (addAssignment.get('assignmentName').dirty ||
+                addAssignment.get('assignmentName').touched)
+            "
+          />
+          <div
+            *ngIf="addAssignment.get('assignmentName').hasError('pattern')"
+            class="error"
+          >
+            Assignment name has invalid characters
+          </div>
+
+          <div
+            *ngIf="
+              addAssignment.get('assignmentName').invalid &&
+              addAssignment.get('assignmentName').errors &&
+              (addAssignment.get('assignmentName').dirty ||
+                addAssignment.get('assignmentName').touched)
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="addAssignment.get('assignmentName').hasError('required')"
+            >
+              This field is required.
+            </small>
+            <small
+              class="text-danger"
+              *ngIf="addAssignment.get('assignmentName').hasError('minlength')"
+            >
+              The minimum length for this field is
+              {{
+                addAssignment.get("assignmentName").errors.minlength
+                  .requiredLength
+              }}
+              characters.
+            </small>
+            <small
+              class="text-danger"
+              *ngIf="addAssignment.get('assignmentName').hasError('maxlength')"
+            >
+              The maximum length for this field is
+              {{
+                addAssignment.get("assignmentName").errors.maxlength
+                  .requiredLength
+              }}
+              characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2 justify-content-between">
+          <p class="bold">End date:</p>
+          <form class="form-inline">
+            <div class="form-group">
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  name="dp"
+                  [(ngModel)]="endDatePick"
+                  ngbDatepicker
+                  [footerTemplate]="footerTemplate"
+                  #d="ngbDatepicker"
+                  [markDisabled]="markDisabled"
+                  [formControl]="formControl"
+                  [class.is-invalid]="formControl.invalid"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary calendar"
+                    (click)="d.toggle()"
+                    type="button"
+                  ></button>
+                  <div class="invalid-tooltip">
+                    {{ formControl.invalid ? "Date is invalid" : undefined }}
+                  </div>
                 </div>
+              </div>
+            </div>
+          </form>
 
-                <div class="form-group mx-sm-3 mb-2 justify-content-between">
-                    <p class="bold">End date:</p>
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="endDatePick"
-                                    ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker"
-                                    [markDisabled]="markDisabled" />
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
-                                        type="button"></button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+          <ng-template #footerTemplate>
+            <hr class="my-0" />
+            <button
+              class="btn btn-primary btn-sm m-2 float-left"
+              (click)="endDatePick = today; d.close()"
+            >
+              Today
+            </button>
+            <button
+              class="btn btn-secondary btn-sm m-2 float-right"
+              (click)="d.close()"
+            >
+              Close
+            </button>
+          </ng-template>
+        </div>
 
-                    <ng-template #footerTemplate>
-                        <hr class="my-0" />
-                        <button class="btn btn-primary btn-sm m-2 float-left" (click)="endDatePick = today; d.close()">
-                            Today
-                        </button>
-                        <button class="btn btn-secondary btn-sm m-2 float-right" (click)="d.close()">
-                            Close
-                        </button>
-                    </ng-template>
+        <div class="form-group mx-sm-3 mb-2 justify-content-between">
+          <h4 class="bold">Project name:</h4>
+
+          <select
+            class="form-control"
+            id="input_project"
+            formControlName="projectId"
+          >
+            <option *ngFor="let c of projectList" value="{{ c.projectId }}">
+              {{ c.projectName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2 justify-content-between">
+          <p class="bold">Billable Time :</p>
+          <input
+            type="number"
+            class="form-control"
+            id="input_billable_time"
+            placeholder="0"
+            formControlName="billableTime"
+            [class.valid]="
+              addAssignment.get('billableTime').valid &&
+              (addAssignment.get('billableTime').dirty ||
+                addAssignment.get('billableTime').touched)
+            "
+            [class.invalid]="
+              addAssignment.get('billableTime').invalid &&
+              (addAssignment.get('billableTime').dirty ||
+                addAssignment.get('billableTime').touched)
+            "
+          />
 
 
-                </div>
+          <div
+            *ngIf="
+              addAssignment.get('billableTime').invalid &&
+              addAssignment.get('billableTime').errors &&
+              (addAssignment.get('billableTime').dirty ||
+                addAssignment.get('billableTime').touched)
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="addAssignment.get('billableTime').hasError('required')"
+            >
+              Billable time is required.
+            </small>
+            <small
+              class="text-danger"
+              *ngIf="addAssignment.get('billableTime').hasError('pattern')"
+            >
+              Billable time should be more than 0.
+            </small>
+          </div>
+        </div>
 
-                <div class="form-group mx-sm-3 mb-2 justify-content-between">
-                    <h4 class="bold">Project name:</h4>
+        <div class="form-group mx-sm-3 mb-2 justify-content-between">
+          <p class="bold">Estimate Time :</p>
+          <input
+            type="number"
+            class="form-control"
+            id="input_estimate_time"
+            placeholder="0"
+            formControlName="estimateTime"
+          />
+          <div
+            *ngIf="addAssignment.get('estimateTime').hasError('pattern')"
+            class="error"
+          >
+            Estimate Time should be positive number.
+          </div>
+        </div>
 
-                    <select class="form-control" id="input_project" formControlName="projectId">
-                        <option *ngFor="let c of projectList" value="{{ c.projectId }}">
-                            {{ c.projectName }}
-                        </option>
-                    </select>
-                </div>
+        <!-- bug -->
+        <!-- <div class="btn mb-2" (onClick)="onCancel()">cancel</div> -->
 
-                <div class="form-group mx-sm-3 mb-2 justify-content-between">
-                    <p class="bold">Billable Time :</p>
-                    <input type="number" class="form-control" id="input_billable_time" placeholder="0"
-                        formControlName="billableTime" />
-                    <div *ngIf="addAssignment.get('billableTime').hasError('pattern')" class="error">
-                        Billable Time should be positive number.
-                    </div>
-                </div>
-
-                <div class="form-group mx-sm-3 mb-2 justify-content-between">
-                    <p class="bold">Estimate Time :</p>
-                    <input type="number" class="form-control" id="input_estimate_time" placeholder="0"
-                        formControlName="estimateTime" />
-                    <div *ngIf="addAssignment.get('estimateTime').hasError('pattern')" class="error">
-                        Estimate Time should be positive number.
-                    </div>
-                </div>
-
-                <!-- bug -->
-                <!-- <div class="btn mb-2" (onClick)="onCancel()">cancel</div> -->
-
-                <!-- [disabled]="addForm.status === 'INVALID'" -->
-                <!-- <div class="modal-footer">
+        <!-- [disabled]="addForm.status === 'INVALID'" -->
+        <!-- <div class="modal-footer">
                     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
                     <button type="button" class="btn btn-outline-primary"
                       (click)="onSubmit()">Submit</button>
                   </div> -->
-                <button [disabled]="addAssignment.status === 'INVALID'" class="btn btn-primary bottonx" type="submit"
-                    (onClick)="onSubmit()">
-                    Submit
-                </button>
-                <!-- <p>{{ card | json }}</p> -->
-            </div>
-        </div>
-    </form>
+        <button
+          [disabled]="addAssignment.status === 'INVALID'"
+          class="btn btn-primary bottonx"
+          type="submit"
+          (onClick)="onSubmit()"
+        >
+          Submit
+        </button>
+        <!-- <p>{{ card | json }}</p> -->
+      </div>
+    </div>
+  </form>
 </div>

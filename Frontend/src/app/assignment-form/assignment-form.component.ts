@@ -1,6 +1,6 @@
 import { AssignmentService } from './../assignment-list/shared/assignment.service';
 import { Assignment } from './../assignment-list/shared/assignment-model';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
@@ -19,18 +19,25 @@ export class AssignmentFormComponent implements OnInit {
   endDatePick: NgbDateStruct;
   today = this.calendar.getToday();
   markDisabled;
+  assignmentForm: FormGroup;
+
+  submitted = false;
+
+  public formControl: FormControl = new FormControl(null);
+  // public assignmentName: FormControl = new FormControl(null);
 
 
-  constructor(private assignmentService: AssignmentService, private router: Router, private calendar: NgbCalendar) {
+
+  constructor(private form: FormBuilder, private assignmentService: AssignmentService, private router: Router, private calendar: NgbCalendar) {
     this.markDisabled = (date: NgbDate) => calendar.getWeekday(date) >= 6;
-
+    this.assignmentFormValidation();
   }
 
 
   public addAssignment = new FormGroup({
     assignmentName: new FormControl(null, Validators.compose([
       Validators.required,
-      Validators.pattern('[\\w\\-\\s\\/]+')
+      Validators.pattern('[\\w\\-\\s\\/]+'), Validators.minLength(3), Validators.maxLength(30)
     ])),
     billableTime: new FormControl(null, Validators.compose([
       Validators.required,
@@ -47,6 +54,8 @@ export class AssignmentFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProject();
+    this.endDatePick = this.today;
+
   }
 
   onSubmit(): void {
@@ -54,6 +63,8 @@ export class AssignmentFormComponent implements OnInit {
     const day = new Date(date);
     const fixDate = day.setDate(day.getDate() + 1);
     const fixDay = new Date(fixDate);
+
+
 
     let daySent;
     if (this.endDatePick.day < 10) {
@@ -106,6 +117,21 @@ export class AssignmentFormComponent implements OnInit {
       });
   }
 
+  onSubmitNotComplete() {
+    this.submitted = true;
+    this.submitCompleted.emit();
+  }
+
+  assignmentFormValidation() {
+    this.assignmentForm = this.form.group({
+      assignmentName: ['', Validators.compose([Validators.required, Validators.minLength(3)]), Validators.pattern('[\\w\\-\\s\\/]+')],
+      billableTime: [null, Validators.compose([Validators.required, Validators.pattern('^[1-9].*$')])],
+      estimateTime: [null, Validators.compose([Validators.required, Validators.pattern('^[1-9].*$')])],
+      projectId: [1, Validators.compose([Validators.required])]
+    })
+  }
+
+
   getAllProject(): void {
     try {
       this.assignmentService.getAllProject().subscribe((res) => {
@@ -119,5 +145,18 @@ export class AssignmentFormComponent implements OnInit {
   onCancel(): void {
     this.assignmentcardChange.emit('cancel');
   }
+
+  // clicked(input, status) {
+  //   let inputCheck = input;
+  //   if (inputCheck == 'estimate' && status == true) {
+  //     this.estimateInput = true;
+  //   }
+  //   if (inputCheck == 'actual' && status == true) {
+  //     this.billableInput = true;
+  //   }
+  //   if (inputCheck == 'assignment' && status == true) {
+  //     this.assignmentInput = true;
+  //   }
+  // }
 
 }
