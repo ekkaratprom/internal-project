@@ -12,7 +12,6 @@ export interface CardData {
   cardActualTime: number;
   cardDate: string;
 }
-
 export interface CardDetail {
   assignmentId: number;
   assignmentName: string;
