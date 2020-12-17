@@ -1,178 +1,181 @@
-<div class="row">
-  <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
-    <span class="form-group available-font">
-      <label for="search-text ">Available Time</label>
-    </span>
-  </div>
-</div>
-<div class="row mb-3">
-  <div class="col-xs-6 col-md-6 col-lg-5 col-xl-5 d-flex align-items-center mt-2">
-    <div class="input-group input-group-md mr-2">
-      <input type="text" class="form-control custom-button" id="assignment-search-text" [(ngModel)]="searchText"
-        placeholder="All Person" />
-    </div>
-    <div class="input-group input-group-md mr-2">
-      <select class="form-control custom-button" [(ngModel)]="positionCheck">
-        <option [ngValue]="undefined">All Position</option>
-        <option *ngFor="let c of position" value="{{c.positionName }}">
-          {{ c.positionName }}
-        </option>
-      </select>
-    </div>
-    <div class="input-group input-group-md">
-      <select class="form-control custom-button" [(ngModel)]="skillsetCheck">
-        <option [ngValue]="undefined">All Skillset</option>
-        <option *ngFor="let c of skill" value="{{c.skillName }}">
-          {{ c.skillName }}
-        </option>
-      </select>
+<span class="fixed-nav">
+  <div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
+      <span class="form-group available-font">
+        <label for="search-text ">Available Time</label>
+      </span>
     </div>
   </div>
-  <div class="col-xs-6 col-md-6 col-lg-7 col-xl-7 d-flex justify-content-end align-items-center">
-    <span class="p-2"> Color chart:</span>
+  <div class="row mb-3">
+    <div class="col-xs-6 col-md-6 col-lg-5 col-xl-5 d-flex align-items-center mt-2">
+      <div class="input-group input-group-md mr-2">
+        <input type="text" class="custom-button form-control " id="assignment-search-text" [(ngModel)]="searchText"
+          placeholder="All Person" />
+      </div>
+      <div class="input-group input-group-md mr-2">
+        <select class="custom-button form-control " [(ngModel)]="positionCheck">
+          <option [ngValue]="undefined">All Position</option>
+          <option *ngFor="let c of position" value="{{c.positionName }}">
+            {{ c.positionName }}
+          </option>
+        </select>
+      </div>
+      <div class="input-group input-group-md">
+        <select class="custom-button form-control " [(ngModel)]="skillsetCheck">
+          <option [ngValue]="undefined">All Skillset</option>
+          <option *ngFor="let c of skill" value="{{c.skillName }}">
+            {{ c.skillName }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-6 col-lg-7 col-xl-7 d-flex justify-content-end align-items-center">
+      <span class="p-2"> Color chart:</span>
 
-    <li class=" mock-color-box mr-2" [ngStyle]="{ backgroundColor: (0| color).bg , color: (0 | color).fc }">
-      <div class="text-in-box">
-        0
-      </div>
-    </li>
-    <li class=" mock-color-box mr-2" [ngStyle]="{ backgroundColor: (3| color).bg , color: (3 | color).fc }">
-      <div class="text-in-box">
-        1-5
-      </div>
-    </li>
-    <li class=" mock-color-box mr-2" [ngStyle]="{ backgroundColor: (7| color).bg , color: (7 | color).fc }">
-      <div class="text-in-box">
-        6-7
-      </div>
-    </li>
-    <li class=" mock-color-box mr-2" [ngStyle]="{ backgroundColor: (8| color).bg , color: (8 | color).fc }">
-      <div class="text-in-box">
-        8
-      </div>
-    </li>
-    <li class=" mock-color-box" [ngStyle]="{ backgroundColor: (9| color).bg , color: (9 | color).fc }">
-      <div class="text-in-box">
-        8+
-      </div>
-    </li>
+      <li class=" mock-color-box mr-2" [ngStyle]="{ backgroundColor: (0| color).bg , color: (0 | color).fc }">
+        <div class="text-in-box">
+          0
+        </div>
+      </li>
+      <li class=" mock-color-box mr-2" [ngStyle]="{ backgroundColor: (3| color).bg , color: (3 | color).fc }">
+        <div class="text-in-box">
+          1-5
+        </div>
+      </li>
+      <li class=" mock-color-box mr-2" [ngStyle]="{ backgroundColor: (7| color).bg , color: (7 | color).fc }">
+        <div class="text-in-box">
+          6-7
+        </div>
+      </li>
+      <li class=" mock-color-box mr-2" [ngStyle]="{ backgroundColor: (8| color).bg , color: (8 | color).fc }">
+        <div class="text-in-box">
+          8
+        </div>
+      </li>
+      <li class=" mock-color-box" [ngStyle]="{ backgroundColor: (9| color).bg , color: (9 | color).fc }">
+        <div class="text-in-box">
+          8+
+        </div>
+      </li>
 
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3"></div>
-  <div class="col-xs-9 col-md-9 col-lg-9 col-xl-9 pr-0">
-    <div class="d-flex bd-highlight justify-content-between mb-3 pl-2">
-      <a (click)="previousweek()" href="#" class="previous round pr-1">&#8249;</a>
-
-      <div class="top-color-box pr-3" *ngFor="let day of dateList">
-        {{ day | date: "EEE" }} <br />
-        {{ day | date: "dd" }} <br />
-        {{ day | date: "MMM" }}
-      </div>
-
-      <a (click)="nextweek()" href="#" class="next round">&#8250;</a>
     </div>
   </div>
-</div>
-<div *ngIf="isLoading === true" class="col col-loading" >
-  <div >
+  <div class="row">
+    <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3"></div>
+    <div class="col-xs-9 col-md-9 col-lg-9 col-xl-9 pr-2">
+      <div class="d-flex bd-highlight justify-content-between mb-3 pl-2">
+        <a (click)="previousweek()" href="#" class="previous round pr-1">&#8249;</a>
+
+        <div class="top-color-box pr-3" *ngFor="let day of dateList">
+          {{ day | date: "EEE" }} <br />
+          {{ day | date: "dd" }} <br />
+          {{ day | date: "MMM" }}
+        </div>
+
+        <a (click)="nextweek()" href="#" class="next round">&#8250;</a>
+      </div>
+    </div>
+  </div>
+</span>
+<div *ngIf="isLoading === true" class="col col-loading">
+  <div>
     <img class="loading" src="../../assets/images/Double Ring-1s-200px.gif" />
   </div>
 </div>
-
-<div class="row person-list mt-3" *ngFor=" let r of avaliableLists | nameFilter: searchText | positionFilter: positionCheck | skillFilter:
+<div class="person-lists">
+  <div class="row person-list mt-3" *ngFor=" let r of avaliableLists | nameFilter: searchText | positionFilter: positionCheck | skillFilter:
   skillsetCheck">
-  <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3 d-flex align-items-center">
-    <div class=" card">
-      <div class="card-body">
-        <div class="card-title">
-          <i class="fas mt-2">&#xf2bd;</i>
-          <span title={{r.fullName}}>
-            {{ r.fullName | longnameFilter: 12 }}
-          </span>
-        </div>
-        <h6 class="position">{{ r.position }}</h6>
-        <br />
-
-        <!-- skillset -->
-
-        <div *ngIf="r['skills'].length <= 6">
-          <p *ngFor="let index of r['skills']" class="card-text">
-            <img class="image-skills-size" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
-          </p>
-        </div>
-
-        <div class="row" *ngIf="r['skills'].length > 6">
-          <div class="col-xs-10 col-md-10 col-lg-10 col-xl-10 pl-3">
-            <span *ngFor="let index of r['skills'] ; index as i">
-              <p *ngIf="i<6" class="card-text">
-                <img class="image-skills-size" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
-              </p>
+    <div class="col-xs-3 col-md-3 col-lg-3 col-xl-3 d-flex align-items-center">
+      <div class=" card">
+        <div class="card-body">
+          <div class="card-title">
+            <i class="fas mt-2">&#xf2bd;</i>
+            <span title={{r.fullName}}>
+              {{ r.fullName | longnameFilter: 12 }}
             </span>
           </div>
+          <h6 class="position">{{ r.position }}</h6>
+          <br />
 
+          <!-- skillset -->
 
-          <div class="col " (click)="r.isCollapsed = !r.isCollapsed" [attr.aria-expanded]="!r.isCollapsed"
-            aria-controls="collapse">
-            <svg class="dropdown-skill bi bi-chevron-down cursor" width="1em" height="1em" viewBox="0 0 16 16"
-              fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd"
-                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-            </svg>
-            <!-- <i class="material-icons md-18 cursor">ic_expand_more</i> -->
+          <div *ngIf="r['skills'].length <= 6">
+            <p *ngFor="let index of r['skills']" class="card-text">
+              <img class="image-skills-size" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
+            </p>
           </div>
 
+          <div class="row" *ngIf="r['skills'].length > 6">
+            <div class="col-xs-10 col-md-10 col-lg-10 col-xl-10 pl-3">
+              <span *ngFor="let index of r['skills'] ; index as i">
+                <p *ngIf="i<6" class="card-text">
+                  <img class="image-skills-size" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
+                </p>
+              </span>
+            </div>
 
-          <div class="pl-3" id="collapse" [ngbCollapse]="r.isCollapsed">
-            <span *ngFor="let index of r['skills'] ; index as i">
-              <p *ngIf="i>=6" class="card-text">
-                <img class="image-skills-size" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
-              </p>
-            </span>
+
+            <div class="col " (click)="r.isCollapsed = !r.isCollapsed" [attr.aria-expanded]="!r.isCollapsed"
+              aria-controls="collapse">
+              <svg class="dropdown-skill bi bi-chevron-down cursor" width="1em" height="1em" viewBox="0 0 16 16"
+                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+              </svg>
+              <!-- <i class="material-icons md-18 cursor">ic_expand_more</i> -->
+            </div>
+
+
+            <div class="pl-3" id="collapse" [ngbCollapse]="r.isCollapsed">
+              <span *ngFor="let index of r['skills'] ; index as i">
+                <p *ngIf="i>=6" class="card-text">
+                  <img class="image-skills-size" src="{{ index.iconPath }}" title="{{ index.skillName }}" />
+                </p>
+              </span>
+
+            </div>
+
+
 
           </div>
 
 
 
         </div>
-
-
-
       </div>
     </div>
-  </div>
-  <div class="col-xs-9 col-md-9 col-lg-9 col-xl-9 ">
-    <div class="row d-flex justify-content-around mb-2 mt-2 pr-2">
-      <mat-icon class="list-icon align-self-center" title="estimate time">query_builder</mat-icon>
-      <li class="color-box-top" *ngFor="let item of r['cards']" title="estimate time"
-        (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
-        <ng-template #content let-modal>
-          <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)" (submitCompleted)="close()"
-            (submitUpdateCardCompleted)="updateCardList()">
-          </app-avaliable-form>
-        </ng-template>
-        <div class="text-in-box">
-          {{ item.totalEstimateTime }}
-        </div>
-      </li>
-    </div>
-    <div class="row border-bottom"></div>
-    <div class="row d-flex justify-content-around mb-2 mt-2 pr-2">
-      <mat-icon class="list-icon align-self-center" title="actual time">alarm_on</mat-icon>
-      <li class=" color-box" *ngFor="let item of r['cards']"
-        [ngStyle]="{ backgroundColor: (item.totalActualTime | color).bg , color: (item.totalActualTime | color).fc }"
-        title="actual time" (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
-        <ng-template #content let-modal>
-          <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)" (submitCompleted)="close()"
-            (submitUpdateCardCompleted)="updateCardList()">
-          </app-avaliable-form>
-        </ng-template>
-        <div class="text-in-box">
-          {{ item.totalActualTime }}
-          <!-- {{ index }} -->
-        </div>
-      </li>
+    <div class="col-xs-9 col-md-9 col-lg-9 col-xl-9 ">
+      <div class="row d-flex justify-content-around mb-2 mt-2 pr-2">
+        <mat-icon class="list-icon align-self-center" title="estimate time">query_builder</mat-icon>
+        <li class="color-box-top" *ngFor="let item of r['cards']" title="estimate time"
+          (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
+          <ng-template #content let-modal>
+            <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)" (submitCompleted)="close()"
+              (submitUpdateCardCompleted)="updateCardList()">
+            </app-avaliable-form>
+          </ng-template>
+          <div class="text-in-box">
+            {{ item.totalEstimateTime }}
+          </div>
+        </li>
+      </div>
+      <div class="row border-bottom"></div>
+      <div class="row d-flex justify-content-around mb-2 mt-2 pr-2">
+        <mat-icon class="list-icon align-self-center" title="actual time">alarm_on</mat-icon>
+        <li class=" color-box" *ngFor="let item of r['cards']"
+          [ngStyle]="{ backgroundColor: (item.totalActualTime | color).bg , color: (item.totalActualTime | color).fc }"
+          title="actual time" (click)="open(content, [{ 'userId': r.userId, 'cards': item }, r])">
+          <ng-template #content let-modal>
+            <app-avaliable-form [modalValue]="data" (itemCardChange)="updateItem($event)" (submitCompleted)="close()"
+              (submitUpdateCardCompleted)="updateCardList()">
+            </app-avaliable-form>
+          </ng-template>
+          <div class="text-in-box">
+            {{ item.totalActualTime }}
+            <!-- {{ index }} -->
+          </div>
+        </li>
+      </div>
     </div>
   </div>
 </div>

@@ -1,7 +1,11 @@
 <div class="card">
     <form class="form-inline" [formGroup]="addAssignment" (ngSubmit)="onSubmit()">
         <div class="card-body">
-            <h6 class="create-assignment-header">Create Assignment :</h6>
+            <h6 class="create-assignment-header">Create Assignment
+
+            </h6>
+            <span class="closemodal" aria-hidden="false">&times;</span>
+
             <div class="card inner">
                 <div class="form-group mx-sm-3 mb-2 justify-content-between">
                     <p class="bold">Assignment name:</p>
@@ -16,14 +20,14 @@
                     <p class="bold">End date:</p>
                     <form class="form-inline">
                         <div class="form-group">
-                            <div class="input-group">
+                            <div class="input-group" (click)="d.toggle()">
                                 <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="endDatePick"
                                     ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker"
                                     [markDisabled]="markDisabled" />
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
-                                        type="button"></button>
+                                    <button class="btn btn-outline-secondary calendar" type="button"></button>
                                 </div>
+
                             </div>
                         </div>
                     </form>

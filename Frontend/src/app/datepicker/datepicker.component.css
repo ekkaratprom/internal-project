@@ -12,8 +12,11 @@ button.calendar:active {
 
 .navbar-light {
   justify-content: center;
-  padding: 30px 0;
+  padding: 15px 0;
   background-color: white;
+  position: fixed;
+  z-index: 2;
+  width: 100%;
 }
 
 

@@ -1,82 +1,86 @@
-<div class="row mb-2">
-  <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
-    <span class="form-group available-font">
-      <label for="search-text ">Assignment List</label>
-    </span>
-  </div>
-</div>
-<div class="row mb-3 d-flex align-items-center">
-
-  <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12 pr-3 pl-3 mb-3">
-    <div class="input-group input-group-md">
-      <input type="text" class="form-control custom-button" aria-label="Sizing example input"
-        aria-describedby="inputGroup-sizing-sm" id="search-text" [(ngModel)]="assignmentsearchText"
-        placeholder="Search Assignment">
+<div class="fixed-navbar">
+  <div class="row mb-2">
+    <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
+      <span class="form-group available-font">
+        <label for="search-text ">Assignment List</label>
+      </span>
     </div>
   </div>
-  <div class="col-xs-6 col-md-6 col-lg-6 col-xl-6 pr-1 ">
-    <div class="input-group input-group-md">
-      <select class="form-control custom-button" id="input_project" placeholder="All project" [(ngModel)]="ProjectName">
-        <option [ngValue]="undefined">All Project</option>
-        <option *ngFor="let c of projectList" value="{{ c.projectName }}">
-          {{ c.projectName }}
-        </option>
-      </select>
-    </div>
-  </div>
-  <div class="col-xs-12 col-md-12 col-lg-6 col-xl-6 pl-1">
-    <div class="input-group input-group-md">
-      <select class="form-control custom-button" [(ngModel)]="completedStatusCheck">
-        <option [ngValue]="undefined">All Status</option>
-        <option [ngValue]="true">Complete</option>
-        <option [ngValue]="false">Incomplete</option>
-      </select>
-    </div>
-  </div>
-</div>
 
+  <div class="row mb-3 d-flex align-items-center">
 
-<ng-template #content2 let-modal>
-  <Form [formGroup]="addProject" (ngSubmit)="onSubmit()">
-    <div class="modal-header">
-      <h4 class="modal-title bold add-project-header mb-0" id="modal-basic-title ">Add new project</h4>
-
-      <span (click)="modal.dismiss('Cross click')" class="closemodal" aria-hidden="false">&times;</span>
-
-      <!-- <span class="close" (click)="modal.dismiss('Cross click')">&times;</span> -->
-    </div>
-    <div class="modal-body">
-
-      <div class="form-group mx-sm-3 mb-2 justify-content-between">
-        <p class="bold">Project name:</p>
-        <input type="text" class="form-control" id="input_project" placeholder="project name.."
-          formControlName="projectName" />
-        <div *ngIf="addProject.get('projectName').hasError('pattern')" class="error">
-          Project name has invalid characters
-        </div>
+    <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12 pr-3 pl-3 mb-3">
+      <div class="input-group input-group-md">
+        <input type="text" class="form-control custom-button" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-sm" id="search-text" [(ngModel)]="assignmentsearchText"
+          placeholder="Search Assignment">
       </div>
-
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
-      <button type="button" class="btn btn-primary" (click)="onSubmit(); modal.dismiss('Cross click')">Submit</button>
+    <div class="col-xs-6 col-md-6 col-lg-6 col-xl-6 pr-1 ">
+      <div class="input-group input-group-md">
+        <select class="form-control custom-button" id="input_project" placeholder="All project"
+          [(ngModel)]="ProjectName">
+          <option [ngValue]="undefined">All Project</option>
+          <option *ngFor="let c of projectList" value="{{ c.projectName }}">
+            {{ c.projectName }}
+          </option>
+        </select>
+      </div>
     </div>
-  </Form>
-
-</ng-template>
-
-<ng-template #content let-modal>
-  <app-assignment-form (submitCompleted)="close(); submit()"></app-assignment-form>
-</ng-template>
-<div class="row">
-  <div class="col-xs-6 col-md-6 col-lg-6 col-xl-6 pr-1">
-    <button (click)="openclosemodal(content2)" class="form-control custom-button">+ Project</button>
+    <div class="col-xs-12 col-md-12 col-lg-6 col-xl-6 pl-1">
+      <div class="input-group input-group-md">
+        <select class="form-control custom-button" [(ngModel)]="completedStatusCheck">
+          <option [ngValue]="undefined">All Status</option>
+          <option [ngValue]="true">Complete</option>
+          <option [ngValue]="false">Incomplete</option>
+        </select>
+      </div>
+    </div>
   </div>
-  <div class="col-xs-6 col-md-6 col-lg-6 col-xl-6 pl-1">
-    <button (click)="open(content)" class="form-control custom-button">+ Assignment</button>
+
+
+  <ng-template #content2 let-modal>
+    <Form [formGroup]="addProject" (ngSubmit)="onSubmit()">
+      <div class="modal-header">
+        <h4 class="modal-title bold add-project-header mb-0" id="modal-basic-title ">Add new project</h4>
+
+        <span (click)="modal.dismiss('Cross click')" class="closemodal" aria-hidden="false">&times;</span>
+
+        <!-- <span class="close" (click)="modal.dismiss('Cross click')">&times;</span> -->
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group mx-sm-3 mb-2 justify-content-between">
+          <p class="bold">Project name:</p>
+          <input type="text" class="form-control" id="input_project" placeholder="project name.."
+            formControlName="projectName" />
+          <div *ngIf="addProject.get('projectName').hasError('pattern')" class="error">
+            Project name has invalid characters
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmit(); modal.dismiss('Cross click')">Submit</button>
+      </div>
+    </Form>
+
+  </ng-template>
+
+  <ng-template #content let-modal>
+    <app-assignment-form (submitCompleted)="close(); submit()"></app-assignment-form>
+  </ng-template>
+  <div class="row">
+    <div class="col-xs-6 col-md-6 col-lg-6 col-xl-6 pr-1">
+      <button (click)="openclosemodal(content2)" class="form-control custom-button">+ Project</button>
+    </div>
+    <div class="col-xs-6 col-md-6 col-lg-6 col-xl-6 pl-1">
+      <button (click)="open(content)" class="form-control custom-button">+ Assignment</button>
+    </div>
   </div>
 </div>
-<div class="row mt-3">
+<div class="row assignment-lists mt-3">
   <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12 mb-3" *ngFor="
   let r of result
     | completedstatusFilter: completedStatusCheck
@@ -104,144 +108,152 @@
     </ng-template>
 
 
-
-    <div class="card">
-      <div class="card-body">
-        <p class="card-text font-weight-bold">
-          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-circle-fill mr-2" fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg" title="{{ r.completedStatus | titlecompletedStatusPipe}}"
-            (click)="toggle(i,r.assignmentId,r.completedStatus)"
-            [ngStyle]="{color:  r.completedStatus | colorcompletedStatusPipe :  r.completedStatus}">
-            <path fill-rule="evenodd" class="cursor-complete-icon" title="Complete Status"
-              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-          </svg>
-         <span title="Assignment name" >{{ r.assignmentName }}</span>  <span title="Project name" class ='project-name'> {{r.projectName}} </span>
-          <span class="close" (click)="openclosemodal(content1)">&times;</span>
-          <!-- <span class="close" (click)="updateDeleteStatus(r.assignmentId)">&times;</span> -->
-        </p>
-        <hr />
-
-        <div class="d-flex justify-content-between align-items-center"
-          *ngIf="compareMoreThanEndDate(r.endDate) == true || r.totalActualTime > r.estimateTime">
-          <!-- <div>progress:</div> -->
-          <div>
-            <p class="card-text card-text-padding light-bold">Progress:</p>
-          </div>
-          <div class="ml-2 progress-bar1">
-            <mat-progress-bar [color]="colorwarn" mode="determinate"
-              value="{{r.totalActualTime / r.estimateTime *100 }}">
-            </mat-progress-bar>
-          </div>
-        </div>
-
-
-        <div class="d-flex justify-content-between align-items-center"
-          *ngIf="compareMoreThanEndDate(r.endDate) == false && r.totalActualTime <= r.estimateTime">
-          <!-- <div>progress:</div> -->
-          <div>
-            <p class="card-text card-text-padding light-bold">Progress:</p>
-          </div>
-          <div class="ml-2 progress-bar1">
-            <mat-progress-bar [color]="colorprim" mode="determinate"
-              value="{{r.totalActualTime / r.estimateTime *100 }}">
-            </mat-progress-bar>
-          </div>
-        </div>
-        <div *ngIf="(r.totalActualTime / r.estimateTime)<= 1 && compareMoreThanEndDate(r.endDate) == false">
-          <span class="card-text card-text-padding mt-2 mb-2 light-bold">End date:
-          </span>
-          <span>
-            {{ r.endDate | date: "dd/MM/yyyy" }}
-          </span>
-        </div>
-
-        <div *ngIf="(r.totalActualTime / r.estimateTime)> 1 || compareMoreThanEndDate(r.endDate) == true">
-          <span class="card-text card-text-padding mt-2 mb-2 light-bold">End date:
-          </span>
-          <span class="card-text card-text-padding mt-2 mb-2 err"> {{ r.endDate | date: "dd/MM/yyyy" }}
-            (Overdue)
-          </span>
-
-        </div>
-
-
-
-        <div class="d-flex justify-content-around align-items-center">
-
-          <!-- Billable Time: -->
-          <div class="d-flex justify-content-between align-items-center context-menu" title="billable time">
-            <mat-icon>monetization_on</mat-icon>
-
-            <div class="ml-1">: {{ r.billableTime }}</div>
-
-            <div class="ml-1">Hrs</div>
-            <!-- <i class="material-icons md-18">ic_monetization_on</i> -->
-          </div>
-          <!-- Estimate Time: -->
-          <div class="d-flex justify-content-between align-items-center context-menu" title="estimate time">
-            <!-- <i class="material-icons md-18">ic_query_builder</i> -->
-            <mat-icon class="list-icon align-self-center" title="estimate time">query_builder</mat-icon>
-            <div class="ml-1"> : {{ r.estimateTime }}</div>
-            <div class="ml-1">Hrs</div>
-          </div>
-          <!-- Actual Time -->
-          <div class="d-flex justify-content-between align-items-center context-menu" title="actual time"
-            *ngIf="r.totalActualTime !== null && r.totalActualTime >= 0 || r.totalActualTime === null">
-            <!-- <i class="material-icons md-18">ic_watch_later</i> -->
-            <mat-icon class="list-icon align-self-center" title="actual time">alarm_on</mat-icon>
-            <div *ngIf=" r.totalActualTime>r.estimateTime" class="ml-1 err"> : {{ r.totalActualTime }}</div>
-            <div *ngIf=" r.totalActualTime<=r.estimateTime" class="ml-1"> : {{ r.totalActualTime }}</div>
-            <div *ngIf=" r.totalActualTime === null" class="ml-1"> 0</div>
-            <div *ngIf=" r.totalActualTime>r.estimateTime" class="ml-1 err">Hrs</div>
-            <div *ngIf=" r.totalActualTime<=r.estimateTime" class="ml-1">Hrs</div>
-          </div>
-
-
-          <div class="d-flex justify-content-between align-items-center context-menu" title="actual time"
-            *ngIf="r.totalActualTime == null && r.totalActualTime == 0">
-            <!-- <i class="material-icons md-18">ic_watch_later</i> -->
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock-fill" fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd"
-                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+    <div class="ad">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-text font-weight-bold">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-circle-fill mr-2" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg" title="{{ r.completedStatus | titlecompletedStatusPipe}}"
+              (click)="toggle(i,r.assignmentId,r.completedStatus)"
+              [ngStyle]="{color:  r.completedStatus | colorcompletedStatusPipe :  r.completedStatus}">
+              <path fill-rule="evenodd" class="cursor-complete-icon" title="Complete Status"
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
             </svg>
-            <div class="ml-1">0</div>
-            <div class="ml-1">Hrs</div>
+            <span title="Assignment name">{{ r.assignmentName }}</span> <span title="Project name" class='project-name'>
+              {{r.projectName}} </span>
+            <span class="close" (click)="openclosemodal(content1)">&times;</span>
+            <!-- <span class="close" (click)="updateDeleteStatus(r.assignmentId)">&times;</span> -->
+          </p>
+          <hr />
+
+          <div class="d-flex justify-content-between align-items-center"
+            *ngIf="compareMoreThanEndDate(r.endDate-1) == true || r.totalActualTime > r.estimateTime">
+            <!-- <div>progress:</div> -->
+            <div>
+              <p class="card-text card-text-padding light-bold">Progress:</p>
+            </div>
+            <div class="ml-2 progress-bar1">
+              <mat-progress-bar [color]="colorwarn" mode="determinate"
+                value="{{r.totalActualTime / r.estimateTime *100 }}">
+              </mat-progress-bar>
+            </div>
           </div>
 
 
-          <div class="d-flex justify-content-end" *ngIf="r['cardObj'].length > 0">
-            <p (click)="r.isCollapsed = !r.isCollapsed" [attr.aria-expanded]="!r.isCollapsed" aria-controls="collapse">
-              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down cursor mt-2"
-                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <div class="d-flex justify-content-between align-items-center"
+            *ngIf="compareMoreThanEndDate(r.endDate-1) == false && r.totalActualTime <= r.estimateTime">
+            <!-- <div>progress:</div> -->
+            <div>
+              <p class="card-text card-text-padding light-bold">Progress:</p>
+            </div>
+            <div class="ml-2 progress-bar1">
+              <mat-progress-bar [color]="colorprim" mode="determinate"
+                value="{{r.totalActualTime / r.estimateTime *100 }}">
+              </mat-progress-bar>
+            </div>
+          </div>
+          <div *ngIf="(r.totalActualTime / r.estimateTime)<= 1 && compareMoreThanEndDate(r.endDate-1) == false">
+            <span class="card-text card-text-padding mt-2 mb-2 light-bold">End date:
+            </span>
+            <span>
+              {{ r.endDate | date: "dd/MM/yyyy" }}
+            </span>
+          </div>
+
+          <div *ngIf="(r.totalActualTime / r.estimateTime)> 1 || compareMoreThanEndDate(r.endDate-1) == true">
+            <span class="card-text card-text-padding mt-2 mb-2 light-bold">End date:
+            </span>
+            <span class="card-text card-text-padding mt-2 mb-2 err"> {{ r.endDate | date: "dd/MM/yyyy" }}
+              (Overdue)
+            </span>
+
+          </div>
+
+
+
+          <div class="d-flex justify-content-around align-items-center">
+
+            <!-- Billable Time: -->
+            <div class="d-flex justify-content-between align-items-center context-menu" title="billable time">
+              <mat-icon>monetization_on</mat-icon>
+              <span>:</span>
+              <div class="ml-1"> {{ r.billableTime }}</div>
+
+              <div class="ml-1">Hrs</div>
+
+            </div>
+            <!-- Estimate Time: -->
+            <div class="d-flex justify-content-between align-items-center context-menu" title="estimate time">
+
+              <mat-icon class="list-icon align-self-center" title="estimate time">query_builder</mat-icon>
+              <span>:</span>
+              <div class="ml-1"> {{ r.estimateTime }}</div>
+              <div class="ml-1">Hrs</div>
+            </div>
+            <!-- Actual Time -->
+            <div class="d-flex justify-content-between align-items-center context-menu" title="actual time"
+              *ngIf="r.totalActualTime !== null && r.totalActualTime >= 0 || r.totalActualTime === null">
+
+              <mat-icon class="list-icon align-self-center" title="actual time">alarm_on</mat-icon>
+              <span>:</span>
+              <div *ngIf=" r.totalActualTime>r.estimateTime" class="ml-1 err"> {{ r.totalActualTime }}</div>
+              <div *ngIf=" r.totalActualTime<=r.estimateTime" class="ml-1"> {{ r.totalActualTime }}</div>
+              <div *ngIf=" r.totalActualTime === null" class="ml-1"> 0</div>
+              <div *ngIf=" r.totalActualTime>r.estimateTime" class="ml-1 err">Hrs</div>
+              <div *ngIf=" r.totalActualTime<=r.estimateTime" class="ml-1">Hrs</div>
+            </div>
+
+
+            <div class="d-flex justify-content-between align-items-center context-menu" title="actual time"
+              *ngIf="r.totalActualTime == null && r.totalActualTime == 0">
+
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock-fill" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
-                  d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                  d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
               </svg>
+              <div class="ml-1">0</div>
+              <div class="ml-1">Hrs</div>
+            </div>
 
-              <!-- <i class="material-icons md-18 cursor">ic_expand_more</i> -->
-            </p>
+
+            <div class="d-flex justify-content-end" *ngIf="r['cardObj'].length > 0">
+              <p (click)="r.isCollapsed = !r.isCollapsed" [attr.aria-expanded]="!r.isCollapsed"
+                aria-controls="collapse">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down cursor mt-2"
+                  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                </svg>
+
+
+              </p>
+            </div>
           </div>
-        </div>
 
-        <!-- row -->
+          <!-- row -->
 
-        <!-- check -->
-        <div id="collapse" [ngbCollapse]="r.isCollapsed">
-          <div>
-            <div class="card childCard" *ngFor="let co of r['cardObj']">
-              <div class="card-body mb-2 car-background">
-                <div class="d-flex justify-content-between d-flex flex-wrap">
-                  <div>
-                    <div>Card: {{ co.cardName }}</div>
-                    <div>Date: {{ co.cardDate | date: "dd/MM/yyyy" }}</div>
+          <!-- check -->
+          <div id="collapse" [ngbCollapse]="r.isCollapsed">
+            <div>
+              <div class="card childCard" *ngFor="let co of r['cardObj']">
+                <div class="card-body mb-2 car-background">
+                  <div class="d-flex justify-content-between d-flex flex-wrap">
+                    <div>
+                      <div>Card: {{ co.cardName }}</div>
+                      <div>Date: {{ co.cardDate | date: "dd/MM/yyyy" }}</div>
+                    </div>
+                    <div class="d-flex align-items-end">Actual Time: {{ co.cardActualTime }} Hrs.</div>
                   </div>
-                  <div class="d-flex align-items-end">Actual Time: {{ co.cardActualTime }} Hrs.</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
-  </div>
-</div>
+
+    <!-- </div>
+  <div class="vl"></div>
+</div> -->

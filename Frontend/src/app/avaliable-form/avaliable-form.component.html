@@ -7,7 +7,8 @@
         <span class="close head" title="Exit" (click)="updateComplete()">&times;</span>
       </div>
       <div class="card-body" style="border: none">
-        <h4 class="font-weight-bold mb-1 ">Create Card :</h4>
+        <h4 class="font-weight-bold mb-1 ">Create Card </h4>
+
         <div class="card">
 
 
@@ -53,12 +54,6 @@
             </div>
 
             <div class="btn-group mt-3 mb-2" role="group" aria-label="Basic example">
-
-              <!-- <button  [ngClass]="{'btn-secondary' : pickerDisplayDay, 'btn-secondary opacity' : !pickerDisplayDay }"
-                class="btn " (click)="calenderPicker(true)">
-
-                One day
-              </button> -->
               <button type="button"
                 [ngClass]="{' btn-secondary' : pickerDisplayDay, 'bg opacityzz' : !pickerDisplayDay }" class="btn"
                 (click)="calenderPicker(true)">
@@ -235,10 +230,12 @@
               <div *ngIf="editCard.get('cardActualTime').hasError('min') && item.cardId == cardActualId" class="error">
                 Actual time must be 0 to 24.
               </div>
-              <div *ngIf="editCard.get('cardEstimateTime').hasError('max') && item.cardId == cardEstimateId" class="error">
+              <div *ngIf="editCard.get('cardEstimateTime').hasError('max') && item.cardId == cardEstimateId"
+                class="error">
                 Estimate time must be 0 to 8.
               </div>
-              <div *ngIf="editCard.get('cardEstimateTime').hasError('min') && item.cardId == cardEstimateId" class="error">
+              <div *ngIf="editCard.get('cardEstimateTime').hasError('min') && item.cardId == cardEstimateId"
+                class="error">
                 Estimate time must be 0 to 8.
               </div>
               <div *ngIf="cardEstimateStatus == true && item.cardId == cardId" class="error">
