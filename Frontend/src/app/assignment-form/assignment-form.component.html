@@ -8,8 +8,8 @@
 
             <div class="card inner">
                 <div class="form-group mx-sm-3 mb-2 justify-content-between">
-                    <p class="bold">Assignment name:</p>
-                    <input type="text" class="form-control" id="input_assignment" placeholder="assignment name.."
+                    <p class="bold">Assignment name</p>
+                    <input type="text" class="form-control " id="input_assignment" placeholder="assignment name.."
                         formControlName="assignmentName" />
                     <div *ngIf="addAssignment.get('assignmentName').hasError('pattern')" class="error">
                         Assignment name has invalid characters
@@ -17,13 +17,13 @@
                 </div>
 
                 <div class="form-group mx-sm-3 mb-2 justify-content-between">
-                    <p class="bold">End date:</p>
+                    <p class="bold">End date</p>
                     <form class="form-inline">
                         <div class="form-group">
                             <div class="input-group" (click)="d.toggle()">
-                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="endDatePick"
-                                    ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker"
-                                    [markDisabled]="markDisabled" />
+                                <input class="form-control " placeholder="yyyy-mm-dd" name="dp"
+                                    [(ngModel)]="endDatePick" ngbDatepicker [footerTemplate]="footerTemplate"
+                                    #d="ngbDatepicker" [markDisabled]="markDisabled" />
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary calendar" type="button"></button>
                                 </div>
@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="form-group mx-sm-3 mb-2 justify-content-between">
-                    <h4 class="bold">Project name:</h4>
+                    <h4 class="bold">Project name</h4>
 
                     <select class="form-control" id="input_project" formControlName="projectId">
                         <option *ngFor="let c of projectList" value="{{ c.projectId }}">
@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="form-group mx-sm-3 mb-2 justify-content-between">
-                    <p class="bold">Billable Time :</p>
+                    <p class="bold">Billable Time </p>
                     <input type="number" class="form-control" id="input_billable_time" placeholder="0"
                         formControlName="billableTime" />
                     <div *ngIf="addAssignment.get('billableTime').hasError('pattern')" class="error">
@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="form-group mx-sm-3 mb-2 justify-content-between">
-                    <p class="bold">Estimate Time :</p>
+                    <p class="bold">Estimate Time </p>
                     <input type="number" class="form-control" id="input_estimate_time" placeholder="0"
                         formControlName="estimateTime" />
                     <div *ngIf="addAssignment.get('estimateTime').hasError('pattern')" class="error">

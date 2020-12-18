@@ -113,7 +113,7 @@ hr {
     position: fixed;
       padding: 3.5rem 12px 0px 12px;
       z-index: 1;
-      width: 15.5rem;
+      width: 24%;
       background-color: white;
   }
 .material-icons{
@@ -132,7 +132,7 @@ hr {
     position: fixed;
       padding: 3.5rem 12px 0px 12px;
       z-index: 1;
-      width: 23.5rem;
+      width: 24%;
       background-color: white;
   }
   .material-icons{
