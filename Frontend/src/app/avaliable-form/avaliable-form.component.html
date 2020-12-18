@@ -9,45 +9,64 @@
 
         <div class="card">
           <div *ngIf="resultAvaliable.totalEstimateTime < 8" class="card-body inner">
-            <div class="assignment">Assignment</div>
-            <div class="form-group mx-sm-3 mb-2">
-              <div>
-                <select class="form-control" id="input_assignment_id" formControlName="assignmentId"
-                  placeholder="choose your assignment" [class.valid]="
+            <div class="row">
+              <div class="col">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="assignment">Assignment</div>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-12">
+                    <select class="form-control input_assignment_id" id="input_assignment_id"
+                      formControlName="assignmentId" placeholder="choose your assignment" [class.valid]="
                     addCard.get('assignmentId').valid &&
                     (addCard.get('assignmentId').dirty ||
                       addCard.get('assignmentId').touched)
                   " [class.invalid]="
                     addCard.get('assignmentId').invalid &&
                     (addCard.get('assignmentId').dirty ||
-                      addCard.get('assignmentId').touched)
-                  ">
-                  <option [ngValue]="null">choose your assignment</option>
-                  <option *ngFor="let c of rAssignmentList" value="{{ c.assignmentId }}">
-                    {{ c.assignmentName }}
-                  </option>
-                </select>
+                      addCard.get('assignmentId').touched)">
+
+                      <option [ngValue]="null">choose your assignment</option>
+                      <option *ngFor="let c of rAssignmentList" value="{{ c.assignmentId }}">
+                        {{ c.assignmentName }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12 ">
+                    <div *ngIf="
+                  addCard.get('assignmentId').invalid &&
+                  addCard.get('assignmentId').errors &&
+                  (addCard.get('assignmentId').dirty ||
+                    addCard.get('assignmentId').touched)
+                ">
+                      <small class="text-danger input_assignment_id"
+                        *ngIf="addCard.get('assignmentId').hasError('required')">
+                        Assignment name is required.
+                      </small>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div *ngIf="
-                addCard.get('assignmentId').invalid &&
-                addCard.get('assignmentId').errors &&
-                (addCard.get('assignmentId').dirty ||
-                  addCard.get('assignmentId').touched)
-              ">
-              <small class="text-danger" *ngIf="addCard.get('assignmentId').hasError('required')">
-                Assignment name is required.
-              </small>
-            </div>
 
-            <div class="row-12 form-group mx-sm-3 mb-2">
 
-              <div class="col-7 txt cardd ml-0 mt-2 mb-1">Card</div>
-              <!-- <div>Actual time</div> -->
-              <label class="col-5 txt actualtimetop mt-2 mb-1">Estimate Time per day</label>
 
-              <input type="text" class="col-7 form-control" id="input_card_name" placeholder="type your card..."
-                formControlName="cardName" [class.valid]="
+            <div class="row form-group mx-sm-3 mb-2">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-7 txt cardd ml-0 mt-2 mb-1">Card</div>
+                  <!-- <div>Actual time</div> -->
+                  <label class="col-5 txt actualtimetop mt-2 mb-1">Estimate Time per day</label>
+                </div>
+                <input type="text" class="col-7 form-control ml-0" id="input_card_name" placeholder="type your card..."
+                  formControlName="cardName" [class.valid]="
                   addCard.get('cardName').valid &&
                   (addCard.get('cardName').dirty ||
                     addCard.get('cardName').touched)
@@ -57,8 +76,8 @@
                     addCard.get('cardName').touched)
                 " />
 
-              <input type="number" class="col-5 form-control" id="input_estimate_time" placeholder="0"
-                formControlName="estimateTime" (keyup)="estimateValidate($event)" [class.valid]="
+                <input type="number" class="col-4 form-control" id="input_estimate_time" placeholder="0"
+                  formControlName="estimateTime" (keyup)="estimateValidate($event)" [class.valid]="
                   addCard.get('estimateTime').valid &&
                   (addCard.get('estimateTime').dirty ||
                     addCard.get('estimateTime').touched)
@@ -67,133 +86,135 @@
                   (addCard.get('estimateTime').dirty ||
                     addCard.get('estimateTime').touched)
                 " />
-              <!-- <p>Actual Time</p> -->
-              <div class="row">
-                <div *ngIf="
+                <!-- <p>Actual Time</p> -->
+                <div class="row">
+                  <div class="col-7">
+                    <div *ngIf="
                   addCard.get('cardName').invalid &&
                   addCard.get('cardName').errors &&
                   (addCard.get('cardName').dirty ||
-                    addCard.get('cardName').touched)
-                ">
-                  <small *ngIf="addCard.get('cardName').hasError('pattern')" class="pl-0 col-8 text-danger">
-                    Card name has invalid character.
-                  </small>
-                  <small class="col-8 pl-0  text-danger" *ngIf="addCard.get('cardName').hasError('required')">
-                    Card name is required.
-                  </small>
-                </div>
-
-                <div *ngIf="
-                  addCard.get('estimateTime').invalid &&
-                  addCard.get('estimateTime').errors &&
-                  (addCard.get('estimateTime').dirty ||
-                    addCard.get('estimateTime').touched)
-                ">
-                  <small *ngIf="addCard.get('estimateTime').hasError('max')" class="col-4 text-danger">
-                    Estimate time must be 0 to 8.
-                  </small>
-                  <small *ngIf="addCard.get('estimateTime').hasError('min')" class="col-4 text-danger">
-                    Estimate time must be 0 to 8.
-                  </small>
-                  <small class="col-4 text-danger" *ngIf="addCard.get('estimateTime').hasError('required')">
-                    Estimate time is required.
-                  </small>
+                    addCard.get('cardName').touched)">
+                      <small *ngIf="addCard.get('cardName').hasError('pattern')" class=" pl-0 text-danger">
+                        Card name has invalid character.
+                      </small>
+                      <small class=" pl-0  text-danger" *ngIf="addCard.get('cardName').hasError('required')">
+                        Card name is required.
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <div *ngIf="
+                    addCard.get('estimateTime').invalid &&
+                    addCard.get('estimateTime').errors &&
+                    (addCard.get('estimateTime').dirty ||
+                      addCard.get('estimateTime').touched)">
+                      <small *ngIf="addCard.get('estimateTime').hasError('max')" class=" text-danger">
+                        Estimate time must be 0 to 8.
+                      </small>
+                      <small *ngIf="addCard.get('estimateTime').hasError('min')" class=" text-danger">
+                        Estimate time must be 0 to 8.
+                      </small>
+                      <small class=" text-danger" *ngIf="addCard.get('estimateTime').hasError('required')">
+                        Estimate time is required.
+                      </small>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="btn-group mt-3 mb-2" role="group" aria-label="Basic example">
-              <button type="button" [ngClass]="{
+              <div class="btn-group mt-3 mb-2" role="group" aria-label="Basic example">
+                <button type="button" [ngClass]="{
                   ' btn-secondary': pickerDisplayDay,
                   'bg opacityzz': !pickerDisplayDay
                 }" class="btn" (click)="calenderPicker(true)">
-                One day
-              </button>
-              <button type="button" [ngClass]="{
+                  One day
+                </button>
+                <button type="button" [ngClass]="{
                   'bg opacity': pickerDisplayDay,
                   'btn-secondary': !pickerDisplayDay
                 }" class="btn" (click)="calenderPicker(false)">
-                Period time
-              </button>
-            </div>
-            <label for="date" class="date-txt mt-1 mb-1">Date</label>
+                  Period time
+                </button>
+              </div>
+              <label for="date" class="date-txt mt-1 mb-1">Date</label>
 
-            <div *ngIf="pickerDisplayDay">
-              <form class="form-inline">
-                <div class="form-group">
-                  <div class="input-group">
-                    <br />
-                    <input id="date" class="form-control" placeholder="{{ selectDate | date: 'yyyy-MM-dd' }}" name="dp"
-                      [(ngModel)]="dayPick" [markDisabled]="markDisabled" ngbDatepicker
-                      [footerTemplate]="footerTemplate" #d="ngbDatepicker" [formControl]="formControl"
-                      [class.is-invalid]="formControl.invalid" />
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-                    </div>
-                    <div class="invalid-tooltip">
-                      {{ formControl.invalid ? "Date is invalid" : undefined }}
+              <div *ngIf="pickerDisplayDay">
+                <form class="form-inline">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <br />
+                      <input id="date" class="form-control" placeholder="{{ selectDate | date: 'yyyy-MM-dd' }}"
+                        name="dp" [(ngModel)]="dayPick" [markDisabled]="markDisabled" ngbDatepicker
+                        [footerTemplate]="footerTemplate" #d="ngbDatepicker" [formControl]="formControl"
+                        [class.is-invalid]="formControl.invalid" />
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                      </div>
+                      <div class="invalid-tooltip">
+                        {{ formControl.invalid ? "Date is invalid" : undefined }}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </form>
+                </form>
 
-              <ng-template #footerTemplate>
-                <hr class="my-0" />
-                <button class="btn-width btn btn-primary btn-sm m-2 float-left" (click)="dayPick = today; d.close()">
-                  Today
-                </button>
-                <button class="btn-width btn btn-secondary btn-sm m-2 float-right" (click)="d.close()">
-                  Close
-                </button>
-              </ng-template>
-            </div>
+                <ng-template #footerTemplate>
+                  <hr class="my-0" />
+                  <button class="btn-width btn btn-primary btn-sm m-2 float-left" (click)="dayPick = today; d.close()">
+                    Today
+                  </button>
+                  <button class="btn-width btn btn-secondary btn-sm m-2 float-right" (click)="d.close()">
+                    Close
+                  </button>
+                </ng-template>
+              </div>
 
-            <div *ngIf="!pickerDisplayDay">
-              <form class="form-inline">
-                <div class="form-group hidden">
-                  <div class="input-group">
-                    <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker"
-                      [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2"
-                      [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1"
-                      [markDisabled]="markDisabled" />
-                    <ng-template #t let-date let-focused="focused">
-                      <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
-                        [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
-                        (mouseleave)="hoveredDate = null">
-                        {{ date.day }}
-                      </span>
-                    </ng-template>
+              <div *ngIf="!pickerDisplayDay">
+                <form class="form-inline">
+                  <div class="form-group hidden">
+                    <div class="input-group">
+                      <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker"
+                        [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2"
+                        [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1"
+                        [markDisabled]="markDisabled" />
+                      <ng-template #t let-date let-focused="focused">
+                        <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                          [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                          (mouseleave)="hoveredDate = null">
+                          {{ date.day }}
+                        </span>
+                      </ng-template>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <div class="input-group">
-                    <input #dpFromDate class="form-control" placeholder="yyyy-mm-dd" name="dpFromDate"
-                      [value]="formatter.format(fromDate)" (input)="
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input #dpFromDate class="form-control" placeholder="yyyy-mm-dd" name="dpFromDate"
+                        [value]="formatter.format(fromDate)" (input)="
                         fromDate = validateInput(fromDate, dpFromDate.value)
                       " />
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()"
-                        type="button"></button>
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()"
+                          type="button"></button>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="form-group ml-2">
-                  <div class="input-group">
-                    <input #dpToDate class="form-control" placeholder="yyyy-mm-dd" name="dpToDate"
-                      [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)" />
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()"
-                        type="button"></button>
+                  <div class="form-group ml-2">
+                    <div class="input-group">
+                      <input #dpToDate class="form-control" placeholder="yyyy-mm-dd" name="dpToDate"
+                        [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)" />
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()"
+                          type="button"></button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </form>
-            </div>
+                </form>
+              </div>
 
-            <button [disabled]="addCard.status === 'INVALID'" type="submit" class="btn btn-primary bottom"
-              (onClick)="onSubmit()">
-              Submit
-            </button>
+              <button [disabled]="addCard.status === 'INVALID'" type="submit" class="btn btn-primary bottom"
+                (onClick)="onSubmit()">
+                Submit
+              </button>
+            </div>
           </div>
 
           <div *ngIf="resultAvaliable.totalEstimateTime >= 8" class="card-body inner">

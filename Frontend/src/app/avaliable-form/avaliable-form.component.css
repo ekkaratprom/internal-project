@@ -83,7 +83,6 @@ width: auto !important;
 }
 
 #input_estimate_time {
-  width: 20%;
   margin-left: 0%;
 }
 
@@ -93,6 +92,7 @@ width: auto !important;
 }
 
 .date-txt{
+  padding-left: 8%;
   margin-right: 80%;
   font-weight: bold;
   font-size: 1em;
@@ -130,13 +130,13 @@ width: auto !important;
   margin-left: 6%;
 }
 
-#input_assignment_id {
+.input_assignment_id {
   margin-left: 7%;
-  width: 197%;
+  width: 83%;
   padding-left: 0%;
 }
 
-#input_assignment_id:hover {
+.input_assignment_id:hover {
   background-color: rgb(222, 241, 241);
 }
 
@@ -183,6 +183,7 @@ width: auto !important;
 }
 
 .txt.actualtimetop {
+  padding-left: 0%;
   margin-left: 0;
     font-weight: bold;
     font-size: 1em;
