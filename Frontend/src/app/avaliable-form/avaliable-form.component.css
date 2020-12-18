@@ -18,6 +18,7 @@
 }
 
 .bold {
+  
   font-weight: bolder;
   margin-bottom: 10px;
   display: inline-flex;
@@ -82,7 +83,7 @@ width: auto !important;
 }
 
 #input_estimate_time {
-  width: 30%;
+  width: 20%;
   margin-left: 0%;
 }
 
@@ -182,7 +183,7 @@ width: auto !important;
 }
 
 .txt.actualtimetop {
-  margin-left: 55%;
+  margin-left: 0;
     font-weight: bold;
     font-size: 1em;
 
@@ -270,4 +271,7 @@ input[type=number]::-webkit-outer-spin-button {
 input {
   height: 30px;
   line-height: 45px;
+}
+.closemodal:hover{
+  cursor: pointer;
 }

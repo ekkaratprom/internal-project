@@ -2,184 +2,117 @@
   <div class="col">
     <form class="form-inline" [formGroup]="addCard" (ngSubmit)="onSubmit()">
       <div>
-        <span class="close head" title="Exit" (click)="updateComplete()"
-          >&times;</span
-        >
+        <span class="close head" title="Exit" (click)="updateComplete()">&times;</span>
       </div>
       <div class="card-body" style="border: none">
         <h4 class="font-weight-bold mb-1">Create Card</h4>
 
         <div class="card">
-          <div
-            *ngIf="resultAvaliable.totalEstimateTime < 8"
-            class="card-body inner"
-          >
+          <div *ngIf="resultAvaliable.totalEstimateTime < 8" class="card-body inner">
             <div class="assignment">Assignment</div>
             <div class="form-group mx-sm-3 mb-2">
               <div>
-                <select
-                  class="form-control"
-                  id="input_assignment_id"
-                  formControlName="assignmentId"
-                  placeholder="choose your assignment"
-                  [class.valid]="
+                <select class="form-control" id="input_assignment_id" formControlName="assignmentId"
+                  placeholder="choose your assignment" [class.valid]="
                     addCard.get('assignmentId').valid &&
                     (addCard.get('assignmentId').dirty ||
                       addCard.get('assignmentId').touched)
-                  "
-                  [class.invalid]="
+                  " [class.invalid]="
                     addCard.get('assignmentId').invalid &&
                     (addCard.get('assignmentId').dirty ||
                       addCard.get('assignmentId').touched)
-                  "
-                >
+                  ">
                   <option [ngValue]="null">choose your assignment</option>
-                  <option
-                    *ngFor="let c of rAssignmentList"
-                    value="{{ c.assignmentId }}"
-                  >
+                  <option *ngFor="let c of rAssignmentList" value="{{ c.assignmentId }}">
                     {{ c.assignmentName }}
                   </option>
                 </select>
               </div>
             </div>
-            <div
-              *ngIf="
+            <div *ngIf="
                 addCard.get('assignmentId').invalid &&
                 addCard.get('assignmentId').errors &&
                 (addCard.get('assignmentId').dirty ||
                   addCard.get('assignmentId').touched)
-              "
-            >
-              <small
-                class="text-danger"
-                *ngIf="addCard.get('assignmentId').hasError('required')"
-              >
+              ">
+              <small class="text-danger" *ngIf="addCard.get('assignmentId').hasError('required')">
                 Assignment name is required.
               </small>
             </div>
 
-            <div class="form-group mx-sm-3 mb-2">
-              <div class="txt cardd mt-2 mb-1">Card</div>
-              <!-- <div>Actual time</div> -->
-              <label class="txt actualtimetop mt-2 mb-1"
-                >Estimate Time per day</label
-              >
+            <div class="row-12 form-group mx-sm-3 mb-2">
 
-              <input
-                type="text"
-                class="form-control"
-                id="input_card_name"
-                placeholder="type your card..."
-                formControlName="cardName"
-                [class.valid]="
+              <div class="col-7 txt cardd ml-0 mt-2 mb-1">Card</div>
+              <!-- <div>Actual time</div> -->
+              <label class="col-5 txt actualtimetop mt-2 mb-1">Estimate Time per day</label>
+
+              <input type="text" class="col-7 form-control" id="input_card_name" placeholder="type your card..."
+                formControlName="cardName" [class.valid]="
                   addCard.get('cardName').valid &&
                   (addCard.get('cardName').dirty ||
                     addCard.get('cardName').touched)
-                "
-                [class.invalid]="
+                " [class.invalid]="
                   addCard.get('cardName').invalid &&
                   (addCard.get('cardName').dirty ||
                     addCard.get('cardName').touched)
-                "
-              />
+                " />
 
-              <input
-                type="number"
-                class="form-control"
-                id="input_estimate_time"
-                placeholder="0"
-                formControlName="estimateTime"
-                (keyup)="estimateValidate($event)"
-                [class.valid]="
+              <input type="number" class="col-5 form-control" id="input_estimate_time" placeholder="0"
+                formControlName="estimateTime" (keyup)="estimateValidate($event)" [class.valid]="
                   addCard.get('estimateTime').valid &&
                   (addCard.get('estimateTime').dirty ||
                     addCard.get('estimateTime').touched)
-                "
-                [class.invalid]="
+                " [class.invalid]="
                   addCard.get('estimateTime').invalid &&
                   (addCard.get('estimateTime').dirty ||
                     addCard.get('estimateTime').touched)
-                "
-              />
+                " />
               <!-- <p>Actual Time</p> -->
-
-              <div
-                *ngIf="
+              <div class="row">
+                <div *ngIf="
                   addCard.get('cardName').invalid &&
                   addCard.get('cardName').errors &&
                   (addCard.get('cardName').dirty ||
                     addCard.get('cardName').touched)
-                "
-              >
-                <small
-                  *ngIf="addCard.get('cardName').hasError('pattern')"
-                  class="text-danger"
-                >
-                  Card name has invalid character.
-                </small>
-                <small
-                  class="text-danger"
-                  *ngIf="addCard.get('cardName').hasError('required')"
-                >
-                  Card name is required.
-                </small>
-              </div>
+                ">
+                  <small *ngIf="addCard.get('cardName').hasError('pattern')" class="pl-0 col-8 text-danger">
+                    Card name has invalid character.
+                  </small>
+                  <small class="col-8 pl-0  text-danger" *ngIf="addCard.get('cardName').hasError('required')">
+                    Card name is required.
+                  </small>
+                </div>
 
-              <div
-                *ngIf="
+                <div *ngIf="
                   addCard.get('estimateTime').invalid &&
                   addCard.get('estimateTime').errors &&
                   (addCard.get('estimateTime').dirty ||
                     addCard.get('estimateTime').touched)
-                "
-              >
-                <small
-                  *ngIf="addCard.get('estimateTime').hasError('max')"
-                  class="text-danger"
-                >
-                  Estimate time must be 0 to 8.
-                </small>
-                <small
-                  *ngIf="addCard.get('estimateTime').hasError('min')"
-                  class="text-danger"
-                >
-                  Estimate time must be 0 to 8.
-                </small>
-                <small
-                  class="text-danger"
-                  *ngIf="addCard.get('estimateTime').hasError('required')"
-                >
-                  Estimate time is required.
-                </small>
+                ">
+                  <small *ngIf="addCard.get('estimateTime').hasError('max')" class="col-4 text-danger">
+                    Estimate time must be 0 to 8.
+                  </small>
+                  <small *ngIf="addCard.get('estimateTime').hasError('min')" class="col-4 text-danger">
+                    Estimate time must be 0 to 8.
+                  </small>
+                  <small class="col-4 text-danger" *ngIf="addCard.get('estimateTime').hasError('required')">
+                    Estimate time is required.
+                  </small>
+                </div>
               </div>
             </div>
 
-            <div
-              class="btn-group mt-3 mb-2"
-              role="group"
-              aria-label="Basic example"
-            >
-              <button
-                type="button"
-                [ngClass]="{
+            <div class="btn-group mt-3 mb-2" role="group" aria-label="Basic example">
+              <button type="button" [ngClass]="{
                   ' btn-secondary': pickerDisplayDay,
                   'bg opacityzz': !pickerDisplayDay
-                }"
-                class="btn"
-                (click)="calenderPicker(true)"
-              >
+                }" class="btn" (click)="calenderPicker(true)">
                 One day
               </button>
-              <button
-                type="button"
-                [ngClass]="{
+              <button type="button" [ngClass]="{
                   'bg opacity': pickerDisplayDay,
                   'btn-secondary': !pickerDisplayDay
-                }"
-                class="btn"
-                (click)="calenderPicker(false)"
-              >
+                }" class="btn" (click)="calenderPicker(false)">
                 Period time
               </button>
             </div>
@@ -190,25 +123,12 @@
                 <div class="form-group">
                   <div class="input-group">
                     <br />
-                    <input
-                      id="date"
-                      class="form-control"
-                      placeholder="{{ selectDate | date: 'yyyy-MM-dd' }}"
-                      name="dp"
-                      [(ngModel)]="dayPick"
-                      [markDisabled]="markDisabled"
-                      ngbDatepicker
-                      [footerTemplate]="footerTemplate"
-                      #d="ngbDatepicker"
-                      [formControl]="formControl"
-                      [class.is-invalid]="formControl.invalid"
-                    />
+                    <input id="date" class="form-control" placeholder="{{ selectDate | date: 'yyyy-MM-dd' }}" name="dp"
+                      [(ngModel)]="dayPick" [markDisabled]="markDisabled" ngbDatepicker
+                      [footerTemplate]="footerTemplate" #d="ngbDatepicker" [formControl]="formControl"
+                      [class.is-invalid]="formControl.invalid" />
                     <div class="input-group-append">
-                      <button
-                        class="btn btn-outline-secondary calendar"
-                        (click)="d.toggle()"
-                        type="button"
-                      ></button>
+                      <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
                     </div>
                     <div class="invalid-tooltip">
                       {{ formControl.invalid ? "Date is invalid" : undefined }}
@@ -219,16 +139,10 @@
 
               <ng-template #footerTemplate>
                 <hr class="my-0" />
-                <button
-                  class="btn-width btn btn-primary btn-sm m-2 float-left"
-                  (click)="dayPick = today; d.close()"
-                >
+                <button class="btn-width btn btn-primary btn-sm m-2 float-left" (click)="dayPick = today; d.close()">
                   Today
                 </button>
-                <button
-                  class="btn-width btn btn-secondary btn-sm m-2 float-right"
-                  (click)="d.close()"
-                >
+                <button class="btn-width btn btn-secondary btn-sm m-2 float-right" (click)="d.close()">
                   Close
                 </button>
               </ng-template>
@@ -238,29 +152,14 @@
               <form class="form-inline">
                 <div class="form-group hidden">
                   <div class="input-group">
-                    <input
-                      name="datepicker"
-                      class="form-control"
-                      ngbDatepicker
-                      #datepicker="ngbDatepicker"
-                      [autoClose]="'outside'"
-                      (dateSelect)="onDateSelection($event)"
-                      [displayMonths]="2"
-                      [dayTemplate]="t"
-                      outsideDays="hidden"
-                      [startDate]="fromDate!"
-                      tabindex="-1"
-                      [markDisabled]="markDisabled"
-                    />
+                    <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker"
+                      [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2"
+                      [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1"
+                      [markDisabled]="markDisabled" />
                     <ng-template #t let-date let-focused="focused">
-                      <span
-                        class="custom-day"
-                        [class.focused]="focused"
-                        [class.range]="isRange(date)"
-                        [class.faded]="isHovered(date) || isInside(date)"
-                        (mouseenter)="hoveredDate = date"
-                        (mouseleave)="hoveredDate = null"
-                      >
+                      <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                        [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                        (mouseleave)="hoveredDate = null">
                         {{ date.day }}
                       </span>
                     </ng-template>
@@ -268,61 +167,36 @@
                 </div>
                 <div class="form-group">
                   <div class="input-group">
-                    <input
-                      #dpFromDate
-                      class="form-control"
-                      placeholder="yyyy-mm-dd"
-                      name="dpFromDate"
-                      [value]="formatter.format(fromDate)"
-                      (input)="
+                    <input #dpFromDate class="form-control" placeholder="yyyy-mm-dd" name="dpFromDate"
+                      [value]="formatter.format(fromDate)" (input)="
                         fromDate = validateInput(fromDate, dpFromDate.value)
-                      "
-                    />
+                      " />
                     <div class="input-group-append">
-                      <button
-                        class="btn btn-outline-secondary calendar"
-                        (click)="datepicker.toggle()"
-                        type="button"
-                      ></button>
+                      <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()"
+                        type="button"></button>
                     </div>
                   </div>
                 </div>
                 <div class="form-group ml-2">
                   <div class="input-group">
-                    <input
-                      #dpToDate
-                      class="form-control"
-                      placeholder="yyyy-mm-dd"
-                      name="dpToDate"
-                      [value]="formatter.format(toDate)"
-                      (input)="toDate = validateInput(toDate, dpToDate.value)"
-                    />
+                    <input #dpToDate class="form-control" placeholder="yyyy-mm-dd" name="dpToDate"
+                      [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)" />
                     <div class="input-group-append">
-                      <button
-                        class="btn btn-outline-secondary calendar"
-                        (click)="datepicker.toggle()"
-                        type="button"
-                      ></button>
+                      <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()"
+                        type="button"></button>
                     </div>
                   </div>
                 </div>
               </form>
             </div>
 
-            <button
-              [disabled]="addCard.status === 'INVALID'"
-              type="submit"
-              class="btn btn-primary bottom"
-              (onClick)="onSubmit()"
-            >
+            <button [disabled]="addCard.status === 'INVALID'" type="submit" class="btn btn-primary bottom"
+              (onClick)="onSubmit()">
               Submit
             </button>
           </div>
 
-          <div
-            *ngIf="resultAvaliable.totalEstimateTime >= 8"
-            class="card-body inner"
-          >
+          <div *ngIf="resultAvaliable.totalEstimateTime >= 8" class="card-body inner">
             <div class="d-flex justify-content-center max-hour-error">
               Maximum Hours.
             </div>
@@ -333,37 +207,29 @@
   </div>
   <div class="col">
     <div>
-      <h4 class="font-weight-bold ml-4 mb-0 mt-5">Card List :</h4>
+      <h4 class="font-weight-bold ml-4 mb-0 mt-5">Card List </h4>
     </div>
 
     <div class="form-group mx-sm-3 mb-2 d-flex">
       <div *ngFor="let c of cardsData" class="card-list">
-        <div
-          class="card list mt-3 mb-3"
-          *ngFor="let item of c.card; index as i"
-        >
+        <div class="card list mt-3 mb-3" *ngFor="let item of c.card; index as i">
           <div class="row mt-3">
-            <div class="bold col-6">Card name :</div>
+            <div class="bold col-6 ">Card name </div>
             <div class="card-body listt col-6">
               {{ item.cardName }}
             </div>
           </div>
           <div class="row">
-            <div class="bold col-6">Assignment name :</div>
+            <div class="bold col-6">Assignment name </div>
             <div class="card-body listt col-6">
               {{ item.assignmentName }}
             </div>
-            <div class="bold col-6">Project name :</div>
+            <div class="bold col-6">Project name </div>
             <div class="card-body project-name listt col-6">
               {{ item.projectName }}
             </div>
           </div>
-          <span
-            class="close"
-            (click)="openclosemodal(content1)"
-            title="Delete Card"
-            >&times;</span
-          >
+          <span class="close" (click)="openclosemodal(content1)" title="Delete Card">&times;</span>
 
           <ng-template #content1 let-modal>
             <div class="modal-header">
@@ -371,32 +237,19 @@
                 Delete confirmation
               </h4>
 
-              <span
-                (click)="modal.dismiss('Cross click')"
-                class="closemodal"
-                aria-hidden="false"
-                >&times;</span
-              >
+              <span (click)="modal.dismiss('Cross click')" class="closemodal" aria-hidden="false">&times;</span>
             </div>
             <div class="modal-body">
               Do you want to Delete
               <span class="closemodal-bold">{{ item.cardName }} </span> Card?
             </div>
             <div class="modal-footer">
-              <button
-                type="button"
-                class="btn-outline-dark btn"
-                (click)="modal.close('Save click')"
-              >
+              <button type="button" class="btn-outline-dark btn" (click)="modal.close('Save click')">
                 Cancel
               </button>
-              <button
-                type="button"
-                class="btn-outline-primary btn ml-1"
-                (click)="
+              <button type="button" class="btn-outline-primary btn ml-1" (click)="
                   updateDeleteStatus(item.cardId); modal.dismiss('Cross click')
-                "
-              >
+                ">
                 Ok
               </button>
             </div>
@@ -406,85 +259,54 @@
             <div class="row mb-4">
               <div class="row">
                 <div class="txt estiamtetime mb-2">Estimate time</div>
-                <input
-                  type="number"
-                  class="form-control editInput"
-                  id="input_card_estimate_time_{{ i }}"
-                  max="8"
-                  maxlength="2"
-                  [(ngModel)]="item.estimateTime"
-                  formControlName="cardEstimateTime"
-                  (keyup)="
+                <input type="number" class="form-control editInput" id="input_card_estimate_time_{{ i }}" max="8"
+                  maxlength="2" [(ngModel)]="item.estimateTime" formControlName="cardEstimateTime" (keyup)="
                     cardEstimateValidate(
                       $event,
                       item.estimateTime,
                       item.cardId
                     );
                     updateEstimateKeyUp($event, item.cardId)
-                  "
-                />
+                  " />
               </div>
               <div class="col">
                 <label class="row txt actualtime mb-2">Actual time</label>
-                <input
-                  type="number"
-                  class="row form-control ml"
-                  id="input_card_actual_time_{{ i }}"
-                  max="24"
-                  maxlength="2"
-                  [(ngModel)]="item.actualTime"
-                  formControlName="cardActualTime"
-                  (keyup)="
+                <input type="number" class="row form-control ml" id="input_card_actual_time_{{ i }}" max="24"
+                  maxlength="2" [(ngModel)]="item.actualTime" formControlName="cardActualTime" (keyup)="
                     cardActualValidate($event, item.cardId);
                     updateActualKeyUp($event, item.cardId)
-                  "
-                />
+                  " />
               </div>
               <!-- <button class="btn btn-primary bottom editbtn" [disabled]="editCard.status === 'INVALID'"
                 (click)="updateFunction(item.cardId)">
                 Update
                 </button> -->
 
-              <div
-                *ngIf="
+              <div *ngIf="
                   editCard.get('cardActualTime').hasError('max') &&
                   item.cardId == cardActualId
-                "
-                class="error"
-              >
+                " class="error">
                 Actual time must be 0 to 24.
               </div>
-              <div
-                *ngIf="
+              <div *ngIf="
                   editCard.get('cardActualTime').hasError('min') &&
                   item.cardId == cardActualId
-                "
-                class="error"
-              >
+                " class="error">
                 Actual time must be 0 to 24.
               </div>
-              <div
-                *ngIf="
+              <div *ngIf="
                   editCard.get('cardEstimateTime').hasError('max') &&
                   item.cardId == cardEstimateId
-                "
-                class="error"
-              >
+                " class="error">
                 Estimate time must be 0 to 8.
               </div>
-              <div
-                *ngIf="
+              <div *ngIf="
                   editCard.get('cardEstimateTime').hasError('min') &&
                   item.cardId == cardEstimateId
-                "
-                class="error"
-              >
+                " class="error">
                 Estimate time must be 0 to 8.
               </div>
-              <div
-                *ngIf="cardEstimateStatus == true && item.cardId == cardId"
-                class="error"
-              >
+              <div *ngIf="cardEstimateStatus == true && item.cardId == cardId" class="error">
                 Total estimate time must not over than 8 hrs per day.
               </div>
             </div>
@@ -492,11 +314,8 @@
         </div>
 
         <div *ngIf="c.card.length > 0">
-          <button
-            [disabled]="editCard.status === 'INVALID'"
-            class="btn btn-primary complete"
-            (click)="updateCardsFunction(); updateComplete()"
-          >
+          <button [disabled]="editCard.status === 'INVALID'" class="btn btn-primary complete"
+            (click)="updateCardsFunction(); updateComplete()">
             Update
           </button>
         </div>
