@@ -162,24 +162,24 @@
   </div>
   <div class="col">
     <div>
-      <h4 class="font-weight-bold ml-4 mb-0 mt-5">Card List :</h4>
+      <h4 class="font-weight-bold ml-4 mb-0 mt-5">Card List </h4>
     </div>
 
     <div class="form-group mx-sm-3 mb-2 d-flex">
       <div *ngFor="let c of cardsData" class="card-list">
         <div class="card list  mt-3 mb-3" *ngFor="let item of c.card; index as i">
           <div class="row mt-3">
-            <div class="bold col-6 ">Card name :</div>
+            <div class="bold col-6 ">Card name </div>
             <div class="card-body listt col-6">
               {{ item.cardName }}
             </div>
           </div>
           <div class="row">
-            <div class="bold col-6">Assignment name :</div>
+            <div class="bold col-6">Assignment name </div>
             <div class="card-body listt col-6">
               {{ item.assignmentName }}
             </div>
-            <div class="bold col-6">Project name :</div>
+            <div class="bold col-6">Project name </div>
             <div class="card-body project-name listt col-6">
               {{item.projectName}}
             </div>

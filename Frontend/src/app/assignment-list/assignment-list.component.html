@@ -51,7 +51,7 @@
       <div class="modal-body">
 
         <div class="form-group mx-sm-3 mb-2 justify-content-between">
-          <p class="bold">Project name:</p>
+          <p class="bold">Project name</p>
           <input type="text" class="form-control" id="input_project" placeholder="project name.."
             formControlName="projectName" />
           <div *ngIf="addProject.get('projectName').hasError('pattern')" class="error">
@@ -130,7 +130,7 @@
             *ngIf="compareMoreThanEndDate(r.endDate-1) == true || r.totalActualTime > r.estimateTime">
             <!-- <div>progress:</div> -->
             <div>
-              <p class="card-text card-text-padding light-bold">Progress:</p>
+              <p class="card-text card-text-padding light-bold">Progress</p>
             </div>
             <div class="ml-2 progress-bar1">
               <mat-progress-bar [color]="colorwarn" mode="determinate"
@@ -144,7 +144,7 @@
             *ngIf="compareMoreThanEndDate(r.endDate-1) == false && r.totalActualTime <= r.estimateTime">
             <!-- <div>progress:</div> -->
             <div>
-              <p class="card-text card-text-padding light-bold">Progress:</p>
+              <p class="card-text card-text-padding light-bold">Progress</p>
             </div>
             <div class="ml-2 progress-bar1">
               <mat-progress-bar [color]="colorprim" mode="determinate"
@@ -176,7 +176,7 @@
             <!-- Billable Time: -->
             <div class="d-flex justify-content-between align-items-center context-menu" title="billable time">
               <mat-icon>monetization_on</mat-icon>
-              <span>:</span>
+
               <div class="ml-1"> {{ r.billableTime }}</div>
 
               <div class="ml-1">Hrs</div>
@@ -186,7 +186,7 @@
             <div class="d-flex justify-content-between align-items-center context-menu" title="estimate time">
 
               <mat-icon class="list-icon align-self-center" title="estimate time">query_builder</mat-icon>
-              <span>:</span>
+
               <div class="ml-1"> {{ r.estimateTime }}</div>
               <div class="ml-1">Hrs</div>
             </div>
@@ -195,7 +195,6 @@
               *ngIf="r.totalActualTime !== null && r.totalActualTime >= 0 || r.totalActualTime === null">
 
               <mat-icon class="list-icon align-self-center" title="actual time">alarm_on</mat-icon>
-              <span>:</span>
               <div *ngIf=" r.totalActualTime>r.estimateTime" class="ml-1 err"> {{ r.totalActualTime }}</div>
               <div *ngIf=" r.totalActualTime<=r.estimateTime" class="ml-1"> {{ r.totalActualTime }}</div>
               <div *ngIf=" r.totalActualTime === null" class="ml-1"> 0</div>
