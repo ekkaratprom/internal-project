@@ -41,7 +41,7 @@
               *ngIf="addAssignment.get('assignmentName').hasError('pattern')"
               class="text-danger"
             >
-              Assignment name has invalid characters
+              Assignment name has invalid character.
             </small>
             <small
               class="text-danger"
@@ -49,7 +49,7 @@
             >
               Assignment name is required.
             </small>
-            <small
+            <!-- <small
               class="text-danger"
               *ngIf="addAssignment.get('assignmentName').hasError('minlength')"
             >
@@ -59,7 +59,7 @@
                   .requiredLength
               }}
               characters.
-            </small>
+            </small> -->
             <small
               class="text-danger"
               *ngIf="addAssignment.get('assignmentName').hasError('maxlength')"
