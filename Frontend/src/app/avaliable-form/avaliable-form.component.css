@@ -130,13 +130,13 @@ width: auto !important;
   margin-left: 6%;
 }
 
-#input_assignment_id {
+.input_assignment_id {
   margin-left: 7%;
-  width: 197%;
+  width: 83%;
   padding-left: 0%;
 }
 
-#input_assignment_id:hover {
+.input_assignment_id:hover {
   background-color: rgb(222, 241, 241);
 }
 
