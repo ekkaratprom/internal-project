@@ -118,7 +118,6 @@ export class AssignmentFormComponent implements OnInit {
   }
 
   onSubmitNotComplete() {
-    this.submitted = true;
     this.submitCompleted.emit();
   }
 

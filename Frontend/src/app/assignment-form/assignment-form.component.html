@@ -1,8 +1,11 @@
 <div class="card">
   <form class="form-inline" [formGroup]="addAssignment" (ngSubmit)="onSubmit()">
+    <div>
+        <span (click)="onSubmitNotComplete()" class="closemodal" aria-hidden="false">&times;</span>
+    </div>
     <div class="card-body">
       <h6 class="create-assignment-header">Create Assignment :</h6>
-      <span class="closemodal" aria-hidden="false">&times;</span>
+
       <div class="card inner">
         <div class="form-group mx-sm-3 mb-2 justify-content-between">
           <p class="bold">Assignment name</p>
@@ -25,12 +28,6 @@
                 addAssignment.get('assignmentName').touched)
             "
           />
-          <div
-            *ngIf="addAssignment.get('assignmentName').hasError('pattern')"
-            class="error"
-          >
-            Assignment name has invalid characters
-          </div>
 
           <div
             *ngIf="
@@ -41,16 +38,22 @@
             "
           >
             <small
+              *ngIf="addAssignment.get('assignmentName').hasError('pattern')"
+              class="text-danger"
+            >
+              Assignment name has invalid characters
+            </small>
+            <small
               class="text-danger"
               *ngIf="addAssignment.get('assignmentName').hasError('required')"
             >
-              This field is required.
+              Assignment name is required.
             </small>
             <small
               class="text-danger"
               *ngIf="addAssignment.get('assignmentName').hasError('minlength')"
             >
-              The minimum length for this field is
+              The minimum length for assignment name is
               {{
                 addAssignment.get("assignmentName").errors.minlength
                   .requiredLength
@@ -61,7 +64,7 @@
               class="text-danger"
               *ngIf="addAssignment.get('assignmentName').hasError('maxlength')"
             >
-              The maximum length for this field is
+              The maximum length for assignment name is
               {{
                 addAssignment.get("assignmentName").errors.maxlength
                   .requiredLength
@@ -153,7 +156,6 @@
             "
           />
 
-
           <div
             *ngIf="
               addAssignment.get('billableTime').invalid &&
@@ -185,12 +187,37 @@
             id="input_estimate_time"
             placeholder="0"
             formControlName="estimateTime"
+            [class.valid]="
+              addAssignment.get('estimateTime').valid &&
+              (addAssignment.get('estimateTime').dirty ||
+                addAssignment.get('estimateTime').touched)
+            "
+            [class.invalid]="
+              addAssignment.get('estimateTime').invalid &&
+              (addAssignment.get('estimateTime').dirty ||
+                addAssignment.get('estimateTime').touched)
+            "
           />
           <div
-            *ngIf="addAssignment.get('estimateTime').hasError('pattern')"
-            class="error"
+            *ngIf="
+              addAssignment.get('estimateTime').invalid &&
+              addAssignment.get('estimateTime').errors &&
+              (addAssignment.get('estimateTime').dirty ||
+                addAssignment.get('estimateTime').touched)
+            "
           >
-            Estimate Time should be positive number.
+            <small
+              class="text-danger"
+              *ngIf="addAssignment.get('estimateTime').hasError('required')"
+            >
+              Estimate time is required.
+            </small>
+            <small
+              class="text-danger"
+              *ngIf="addAssignment.get('estimateTime').hasError('pattern')"
+            >
+              Estimate time should be more than 0.
+            </small>
           </div>
         </div>
 
