@@ -83,7 +83,7 @@ width: auto !important;
 }
 
 #input_estimate_time {
-  width: 30%;
+  width: 20%;
   margin-left: 0%;
 }
 
@@ -183,7 +183,7 @@ width: auto !important;
 }
 
 .txt.actualtimetop {
-  margin-left: 55%;
+  margin-left: 0;
     font-weight: bold;
     font-size: 1em;
 

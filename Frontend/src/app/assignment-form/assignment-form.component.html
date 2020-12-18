@@ -24,27 +24,23 @@
                 addAssignment.get('assignmentName').touched)
             " />
 
-                    <div class="col-6" *ngIf="
+                    <div class="col-12" *ngIf="
               addAssignment.get('assignmentName').invalid &&
               addAssignment.get('assignmentName').errors &&
               (addAssignment.get('assignmentName').dirty ||
                 addAssignment.get('assignmentName').touched)
             ">
-                        <small *ngIf="addAssignment.get('assignmentName').hasError('pattern')" class="text-danger">
-                            Assignment name has invalid characters
+                        <small *ngIf="addAssignment.get('assignmentName').hasError('pattern')"
+                            class="d-flex  col-12 pl-0 text-danger">
+                            Assignment name has invalid character.
                         </small>
-                        <small class="text-danger" *ngIf="addAssignment.get('assignmentName').hasError('required')">
+                        <small class="d-flex  col-12 pl-0 text-danger"
+                            *ngIf="addAssignment.get('assignmentName').hasError('required')">
                             Assignment name is required.
                         </small>
-                        <small class="text-danger" *ngIf="addAssignment.get('assignmentName').hasError('minlength')">
-                            The minimum length for assignment name is
-                            {{
-                            addAssignment.get("assignmentName").errors.minlength
-                            .requiredLength
-                            }}
-                            characters.
-                        </small>
-                        <small class="text-danger" *ngIf="addAssignment.get('assignmentName').hasError('maxlength')">
+
+                        <small class="d-flex pl-0 col-12 text-danger"
+                            *ngIf="addAssignment.get('assignmentName').hasError('maxlength')">
                             The maximum length for assignment name is
                             {{
                             addAssignment.get("assignmentName").errors.maxlength
@@ -123,10 +119,10 @@
               (addAssignment.get('billableTime').dirty ||
                 addAssignment.get('billableTime').touched)
             ">
-                        <small class="col-6 text-danger" *ngIf="addAssignment.get('billableTime').hasError('required')">
+                        <small class="col text-danger" *ngIf="addAssignment.get('billableTime').hasError('required')">
                             Billable time is required.
                         </small>
-                        <small class="col-6 text-danger" *ngIf="addAssignment.get('billableTime').hasError('pattern')">
+                        <small class="col text-danger" *ngIf="addAssignment.get('billableTime').hasError('pattern')">
                             Billable time should be more than 0.
                         </small>
                     </div>
@@ -153,10 +149,10 @@
               (addAssignment.get('estimateTime').dirty ||
                 addAssignment.get('estimateTime').touched)
             ">
-                        <small class="col-6 text-danger" *ngIf="addAssignment.get('estimateTime').hasError('required')">
+                        <small class="col text-danger" *ngIf="addAssignment.get('estimateTime').hasError('required')">
                             Estimate time is required.
                         </small>
-                        <small class="col-6 text-danger" *ngIf="addAssignment.get('estimateTime').hasError('pattern')">
+                        <small class="col text-danger" *ngIf="addAssignment.get('estimateTime').hasError('pattern')">
                             Estimate time should be more than 0.
                         </small>
                     </div>

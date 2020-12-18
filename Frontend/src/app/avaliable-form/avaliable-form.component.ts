@@ -76,6 +76,12 @@ export class AvaliableFormComponent implements OnInit {
 
   daySent;
 
+  public formControl: FormControl = new FormControl(null);
+  public formControlPeriodStart: FormControl = new FormControl(null);
+  public formControlPeriodEnd: FormControl = new FormControl(null);
+
+
+
   public addCard = new FormGroup({
     assignmentId: new FormControl(null, Validators.compose([
       Validators.required,
@@ -172,8 +178,6 @@ export class AvaliableFormComponent implements OnInit {
     console.log('this.cardsDataEdited', this.cardsDataEdited)
     // console.log('this.cardsDataEdited id', this.cardsDataEdited[0].cardId)
     console.log('this.cardsDataEdited L', this.cardsDataEdited.length)
-
-
   }
 
   onSubmit(): void {
