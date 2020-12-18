@@ -1,12 +1,12 @@
 package com.allianz.siesta.assignment;
 
+import com.allianz.siesta.assignment.exception.AssignmentIdException;
 import com.allianz.siesta.assignment.exception.AssignmentNotFoundException;
 import com.allianz.siesta.assignment.request.AssignmentRequest;
 import com.allianz.siesta.assignment.request.DeleteStatusRequest;
 import com.allianz.siesta.assignment.service.AssignmentService;
 import com.allianz.siesta.project.exception.ProjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,11 +18,13 @@ public class AssignmentController {
     @Autowired
     private AssignmentService assignmentService;
 
-    @ResponseStatus(HttpStatus.CREATED)
+
     @PostMapping(value = "/v1/addAssignment")
-    public Assignment addAssignment(@RequestBody AssignmentRequest assignmentRequest) {
-        return assignmentService.addAssignment(assignmentRequest);
+    public ResponseEntity<Assignment> addAssignment(@RequestBody AssignmentRequest assignmentRequest) throws ProjectNotFoundException {
+        return ResponseEntity.accepted().body(assignmentService.addAssignment(assignmentRequest));
     }
+
+
 
 
     @GetMapping(path = "/v1/assignment")
@@ -40,13 +42,13 @@ public class AssignmentController {
 
 
     @PatchMapping(value = "/v1/{id}/deleteassignment")
-    public ResponseEntity<Assignment> deleteAssignment (@PathVariable(value = "id") Long id, @RequestBody DeleteStatusRequest deleteStatusRequest) throws AssignmentNotFoundException {
+    public ResponseEntity<Assignment> deleteAssignment (@PathVariable(value = "id") String id, @RequestBody DeleteStatusRequest deleteStatusRequest) throws AssignmentIdException, AssignmentNotFoundException {
         return ResponseEntity.accepted().body(assignmentService.deleteAssignment(deleteStatusRequest, id));
     }
 
 
     @PatchMapping(value = "/v1/{id}/updateassignment")
-    public ResponseEntity<Assignment> updateAssignment(@PathVariable(value = "id") Long id, @RequestBody AssignmentRequest assignmentRequest) throws AssignmentNotFoundException, ProjectNotFoundException {
+    public ResponseEntity<Assignment> updateAssignment(@PathVariable(value = "id") String id, @RequestBody AssignmentRequest assignmentRequest) throws AssignmentIdException, ProjectNotFoundException, AssignmentNotFoundException {
         return ResponseEntity.accepted().body(assignmentService.updateAssignment(assignmentRequest, id));
     }
 }

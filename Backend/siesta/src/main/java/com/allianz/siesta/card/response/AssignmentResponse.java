@@ -1,22 +1,51 @@
 package com.allianz.siesta.card.response;
 
-
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 public class AssignmentResponse {
+    private Long assignmentId;
     private String assignmentName;
     private Double billableTime;
     private Double estimateTime;
     private Boolean completedStatus;
+    private Date endDate;
     private Double totalActualTime;
+    private Double totalEstimateTime;
     private List cardObj;
 
-    public AssignmentResponse(String assignmentName, Double billableTime, Double estimateTime, Boolean completedStatus, Double totalActualTime) {
+    public AssignmentResponse(Long assignmentId, String assignmentName, Double billableTime, Double estimateTime, Boolean completedStatus, Date endDate) {
+        this.assignmentId = assignmentId;
         this.assignmentName = assignmentName;
         this.billableTime = billableTime;
         this.estimateTime = estimateTime;
         this.completedStatus = completedStatus;
-        this.totalActualTime = totalActualTime;
+        this.endDate = endDate;
+    }
+
+    public Double getTotalEstimateTime() {
+        return totalEstimateTime;
+    }
+
+    public void setTotalEstimateTime(Double totalEstimateTime) {
+        this.totalEstimateTime = totalEstimateTime;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Long getAssignmentId() {
+        return assignmentId;
+    }
+
+    public void setAssignmentId(Long assignmentId) {
+        this.assignmentId = assignmentId;
     }
 
     public Boolean getCompletedStatus() {

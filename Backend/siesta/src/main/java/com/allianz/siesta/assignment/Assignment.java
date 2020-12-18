@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -29,6 +30,9 @@ public class Assignment {
 
     @Column(nullable = true, name = "actual_time")
     private Double actualTime;
+
+    @Column(nullable = true, name = "end_date")
+    private Date endDate;
 
     @Column(nullable = true, name = "completed_status")
     private Boolean completedStatus;
@@ -115,6 +119,14 @@ public class Assignment {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public Assignment() {

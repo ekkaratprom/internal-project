@@ -22,6 +22,9 @@ public class Card {
     @Column( name = "card_description")
     private String cardDescription;
 
+    @Column( name = "estimate_time")
+    private Double estimateTime;
+
     @Column( name = "actual_time")
     private Double actualTime;
 
@@ -52,6 +55,14 @@ public class Card {
     @JoinColumn(name = "assignment_id", nullable = true)
     @JsonManagedReference
     private Assignment assignment;
+
+    public Double getEstimateTime() {
+        return estimateTime;
+    }
+
+    public void setEstimateTime(Double estimateTime) {
+        this.estimateTime = estimateTime;
+    }
 
     public Long getId() {
         return id;

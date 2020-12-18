@@ -1,8 +1,8 @@
 package com.allianz.siesta.card.request;
 
 public class UpdateCardRequest {
+    private Double estimateTime;
     private Double actualTime;
-//    private Boolean completedStatus;
 
     public Double getActualTime() {
         return actualTime;
@@ -12,14 +12,14 @@ public class UpdateCardRequest {
         this.actualTime = actualTime;
     }
 
-//    public Boolean getCompletedStatus() {
-//        return completedStatus;
-//    }
-//
-//    public void setCompletedStatus(Boolean completedStatus) {
-//        this.completedStatus = completedStatus;
-//    }
 
+    public Double getEstimateTime() {
+        return estimateTime;
+    }
+
+    public void setEstimateTime(Double estimateTime) {
+        this.estimateTime = estimateTime;
+    }
 
     public UpdateCardRequest() {
     }

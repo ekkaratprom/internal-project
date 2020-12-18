@@ -6,14 +6,34 @@ import java.util.Date;
 public class CardUserResponse {
     private BigInteger cardId;
     private String cardName;
+    private Double estimateTime;
     private Double actualTime;
     private Date createDate;
+    private String assignmentName;
 
-    public CardUserResponse(BigInteger cardId, String cardName, Double actualTime, Date createDate) {
+    public CardUserResponse(BigInteger cardId, String cardName, Double estimateTime, Double actualTime, Date createDate, String assignmentName) {
         this.cardId = cardId;
         this.cardName = cardName;
+        this.estimateTime = estimateTime;
         this.actualTime = actualTime;
         this.createDate = createDate;
+        this.assignmentName = assignmentName;
+    }
+
+    public Double getEstimateTime() {
+        return estimateTime;
+    }
+
+    public void setEstimateTime(Double estimateTime) {
+        this.estimateTime = estimateTime;
+    }
+
+    public String getAssignmentName() {
+        return assignmentName;
+    }
+
+    public void setAssignmentName(String assignmentName) {
+        this.assignmentName = assignmentName;
     }
 
     public BigInteger getCardId() {
