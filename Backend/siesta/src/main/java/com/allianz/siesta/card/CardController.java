@@ -1,5 +1,7 @@
 package com.allianz.siesta.card;
 
+import com.allianz.siesta.assignment.exception.AssignmentNotFoundException;
+import com.allianz.siesta.card.exception.CardIdException;
 import com.allianz.siesta.card.exception.CardNotFoundException;
 import com.allianz.siesta.card.request.CardRequest;
 import com.allianz.siesta.card.request.DeleteStatusRequest;
@@ -10,6 +12,8 @@ import com.allianz.siesta.card.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -26,8 +30,13 @@ public class CardController {
 
 
     @PostMapping(path = "/v1/addcard")
-    public Card addCard(@RequestBody CardRequest cardRequest) {
-        return cardService.addCard(cardRequest);
+    public ResponseEntity<Card> addCard(@RequestBody CardRequest cardRequest) throws AssignmentNotFoundException {
+        return ResponseEntity.accepted().body(cardService.addCard(cardRequest));
+    }
+
+    @PostMapping(path = "/v2/addcards")
+    public ResponseEntity<List<CardRequest>> addCards(@RequestBody List<CardRequest> cardRequestList) throws AssignmentNotFoundException {
+        return ResponseEntity.accepted().body(cardService.addCards(cardRequestList));
     }
 
     @GetMapping(path = "/v1/availabletime")
@@ -37,13 +46,13 @@ public class CardController {
 
 
     @PatchMapping(path = "/v1/{id}/updatecard")
-    public ResponseEntity<Card> updateCard(@PathVariable (value = "id") Long id, @RequestBody UpdateCardRequest updateCardRequest) throws CardNotFoundException {
+    public ResponseEntity<Card> updateCard(@PathVariable (value = "id") String id, @RequestBody UpdateCardRequest updateCardRequest) throws CardIdException, CardNotFoundException {
         return ResponseEntity.accepted().body(cardService.updateCard(updateCardRequest, id));
     }
 
 
     @PatchMapping(path = "/v1/{id}/updatedeletestatus")
-    public ResponseEntity<Card> deleteCard(@PathVariable (value = "id") Long id, @RequestBody DeleteStatusRequest deleteStatusRequest) throws CardNotFoundException{
+    public ResponseEntity<Card> deleteCard(@PathVariable (value = "id") String id, @RequestBody DeleteStatusRequest deleteStatusRequest) throws CardIdException, CardNotFoundException{
         return ResponseEntity.accepted().body(cardService.deleteCard(deleteStatusRequest, id));
     }
 

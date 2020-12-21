@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class CardNotFoundException extends Exception{
 
     public CardNotFoundException(String message) {
-        super("Card not found!");
+        super (message);
     }
 }

@@ -1,6 +1,5 @@
 package com.allianz.siesta.assignment.exception;
 
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -8,8 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class AssignmentNotFoundException extends Exception {
 
     public AssignmentNotFoundException(String message) {
-        super("Assignment not found!");
+        super(message);
     }
-
-
 }

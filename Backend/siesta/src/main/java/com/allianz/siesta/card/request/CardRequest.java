@@ -10,14 +10,14 @@ public class CardRequest {
     private Long assignmentId;
     private Long userId;
     private String cardName;
-    private Double actualTime;
+    private Double estimateTime;
     private Date cardDate;
 
-    public CardRequest(Long assignmentId, Long userId, String cardName, Double actualTime, Date cardDate) {
+    public CardRequest(Long assignmentId, Long userId, String cardName, Double estimateTime, Date cardDate) {
         this.assignmentId = assignmentId;
         this.userId = userId;
         this.cardName = cardName;
-        this.actualTime = actualTime;
+        this.estimateTime = estimateTime;
         this.cardDate = cardDate;
     }
 
@@ -45,12 +45,12 @@ public class CardRequest {
         this.cardName = cardName;
     }
 
-    public Double getActualTime() {
-        return actualTime;
+    public Double getEstimateTime() {
+        return estimateTime;
     }
 
-    public void setActualTime(Double actualTime) {
-        this.actualTime = actualTime;
+    public void setEstimateTime(Double estimateTime) {
+        this.estimateTime = estimateTime;
     }
 
     public Date getCardDate() {
@@ -65,7 +65,7 @@ public class CardRequest {
         Card card = new Card();
         card.setAssignment(new Assignment(assignmentId));
         card.setUser(new User(userId));
-        card.setActualTime(actualTime);
+        card.setEstimateTime(estimateTime);
         card.setCardName(cardName);
         card.setCardDate(cardDate);
 

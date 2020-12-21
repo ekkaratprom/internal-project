@@ -66,7 +66,7 @@
       <div class="d-flex bd-highlight justify-content-between mb-3 pl-2">
         <a (click)="previousweek()" href="#" class="previous round pr-1">&#8249;</a>
 
-        <div class="top-color-box pr-3" *ngFor="let day of dateList">
+        <div class="top-color-box" *ngFor="let day of dateList">
           {{ day | date: "EEE" }} <br />
           {{ day | date: "dd" }} <br />
           {{ day | date: "MMM" }}
