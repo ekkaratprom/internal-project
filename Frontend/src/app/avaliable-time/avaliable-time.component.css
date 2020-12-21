@@ -116,6 +116,7 @@ a {
     margin: 0 4x;
     border-radius: 12%;
     display: flex;
+    align-content: center;
     cursor: pointer;
     background: #FFFFFF;
     flex-wrap: wrap;
