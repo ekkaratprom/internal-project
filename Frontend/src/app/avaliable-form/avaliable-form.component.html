@@ -123,40 +123,46 @@
               </div>
 
               <div class="btn-group mt-3 mb-2" role="group" aria-label="Basic example">
-                <button type="button" [ngClass]="{
+                <button type="button " [ngClass]="{
                   ' btn-secondary': pickerDisplayDay,
                   'bg opacityzz': !pickerDisplayDay
-                }" class="btn" (click)="calenderPicker(true)">
+                }" class="btn ml-0" (click)="calenderPicker(true)">
                   One day
                 </button>
                 <button type="button" [ngClass]="{
-                  'bg opacity': pickerDisplayDay,
+                  'bg opacity ': pickerDisplayDay,
                   'btn-secondary': !pickerDisplayDay
-                }" class="btn" (click)="calenderPicker(false)">
+                }" class="btn ml-0" (click)="calenderPicker(false)">
                   Period time
                 </button>
               </div>
               <label for="date" class="date-txt mt-1 mb-1">Date</label>
 
-              <div *ngIf="pickerDisplayDay">
-                <form class="form-inline">
-                  <div class="form-group">
-                    <div class="input-group">
-                      <br />
-                      <input id="date" class="form-control" placeholder="{{ selectDate | date: 'yyyy-MM-dd' }}"
-                        name="dp" [(ngModel)]="dayPick" [markDisabled]="markDisabled" ngbDatepicker
-                        [footerTemplate]="footerTemplate" #d="ngbDatepicker" [formControl]="formControl"
-                        [class.is-invalid]="formControl.invalid" />
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-                      </div>
-                      <div class="invalid-tooltip">
-                        {{ formControl.invalid ? "Date is invalid" : undefined }}
-                      </div>
-                    </div>
-                  </div>
-                </form>
 
+              <div *ngIf="pickerDisplayDay">
+                <div class="row">
+                  <div class="col-12">
+                    <form class="form-inline">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <br />
+
+                          <input id="date" class="form-control ml-3 input_date_group"
+                            placeholder="{{ selectDate | date: 'yyyy-MM-dd' }}" name="dp" [(ngModel)]="dayPick"
+                            [markDisabled]="markDisabled" ngbDatepicker [footerTemplate]="footerTemplate"
+                            #d="ngbDatepicker" [formControl]="formControl" [class.is-invalid]="formControl.invalid" />
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                              type="button"></button>
+                          </div>
+                          <div class="invalid-tooltip">
+                            {{ formControl.invalid ? "Date is invalid" : undefined }}
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
                 <ng-template #footerTemplate>
                   <hr class="my-0" />
                   <button class="btn-width btn btn-primary btn-sm m-2 float-left" (click)="dayPick = today; d.close()">
@@ -168,13 +174,14 @@
                 </ng-template>
               </div>
 
+
               <div *ngIf="!pickerDisplayDay">
                 <form class="form-inline">
                   <div class="form-group hidden">
                     <div class="input-group">
-                      <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker"
-                        [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2"
-                        [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1"
+                      <input name="datepicker" class="ml-3 form-control input_date_group" ngbDatepicker
+                        #datepicker="ngbDatepicker" [autoClose]="'outside'" (dateSelect)="onDateSelection($event)"
+                        [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1"
                         [markDisabled]="markDisabled" />
                       <ng-template #t let-date let-focused="focused">
                         <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
@@ -187,8 +194,8 @@
                   </div>
                   <div class="form-group">
                     <div class="input-group">
-                      <input #dpFromDate class="form-control" placeholder="yyyy-mm-dd" name="dpFromDate"
-                        [value]="formatter.format(fromDate)" (input)="
+                      <input #dpFromDate class="ml-3 form-control input_date_group" placeholder="yyyy-mm-dd"
+                        name="dpFromDate" [value]="formatter.format(fromDate)" (input)="
                         fromDate = validateInput(fromDate, dpFromDate.value)
                       " />
                       <div class="input-group-append">
@@ -199,7 +206,7 @@
                   </div>
                   <div class="form-group ml-2">
                     <div class="input-group">
-                      <input #dpToDate class="form-control" placeholder="yyyy-mm-dd" name="dpToDate"
+                      <input #dpToDate class="form-control input_date_group" placeholder="yyyy-mm-dd" name="dpToDate"
                         [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)" />
                       <div class="input-group-append">
                         <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()"
