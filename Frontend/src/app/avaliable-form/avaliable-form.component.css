@@ -81,6 +81,7 @@ width: auto !important;
   width: 80%;
   margin-left: 6%;
 }
+.input_assignment_id
 
 #input_estimate_time {
   margin-left: 0%;
@@ -92,7 +93,7 @@ width: auto !important;
 }
 
 .date-txt{
-  padding-left: 8%;
+  padding-left: 4%;
   margin-right: 80%;
   font-weight: bold;
   font-size: 1em;
@@ -125,9 +126,18 @@ width: auto !important;
 .card-list {
   width: 100%;
 }
-
+.todate{
+margin-left: 1.5rem;
+}
+.border-datepicker{
+  border-top-right-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+}
 .card-list-header {
   margin-left: 6%;
+}
+input{
+  height: 2.3rem;
 }
 
 .input_assignment_id {
@@ -140,10 +150,9 @@ width: auto !important;
   background-color: rgb(222, 241, 241);
 }
 .input_date_group{
-  width: 8rem;
+  width: 9rem;
 }
 .form-control {
-  margin-left: 2rem;
   box-shadow: 0px 4px 8px rgba(69, 69, 67, 0.14);
   border: none;
 }

@@ -152,7 +152,7 @@
                             [markDisabled]="markDisabled" ngbDatepicker [footerTemplate]="footerTemplate"
                             #d="ngbDatepicker" [formControl]="formControl" [class.is-invalid]="formControl.invalid" />
                           <div class="input-group-append">
-                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                            <button class="btn border-datepicker btn-outline-secondary calendar" (click)="d.toggle()"
                               type="button"></button>
                           </div>
                           <div class="invalid-tooltip">
@@ -206,8 +206,9 @@
                   </div>
                   <div class="form-group ml-2">
                     <div class="input-group">
-                      <input #dpToDate class="form-control input_date_group" placeholder="yyyy-mm-dd" name="dpToDate"
-                        [value]="formatter.format(toDate)" (input)="toDate = validateInput(toDate, dpToDate.value)" />
+                      <input #dpToDate class="form-control input_date_group todate" placeholder="yyyy-mm-dd"
+                        name="dpToDate" [value]="formatter.format(toDate)"
+                        (input)="toDate = validateInput(toDate, dpToDate.value)" />
                       <div class="input-group-append">
                         <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()"
                           type="button"></button>
