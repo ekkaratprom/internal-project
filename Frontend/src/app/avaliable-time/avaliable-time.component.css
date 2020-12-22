@@ -101,6 +101,10 @@ a {
 
 
 @media screen and  ( max-width: 1400px){
+  .image-skills-size {
+    width: 9%;
+    margin-right: 4px;
+  }
   .custom-button{
     width: 120px;
     font-size: smaller;
@@ -184,6 +188,10 @@ a {
 
 
 @media screen and  (min-width: 1400px) {
+  .image-skills-size {
+    width: 11%;
+    margin-right: 8px;
+  }
 
   .top-color-box {
     border: 0;
@@ -318,10 +326,7 @@ a {
   padding-left: 3.5%;
   padding-right: 1px;
 }
-.image-skills-size {
-  width: 23px;
-  margin-right: 8px;
-}
+
 .available-font{
   font-weight: bold;
   font-size: 16px;
