@@ -179,7 +179,7 @@ a {
     width: 10px;
     height: 10px;
     align-self: center;
-    font-size: 1px;
+    font-size: 10px;
     display: flex;
     align-self: center;
   }
@@ -189,7 +189,7 @@ a {
 
 @media screen and  (min-width: 1400px) {
   .image-skills-size {
-    width: 11%;
+    width: 10%;
     margin-right: 8px;
   }
 
