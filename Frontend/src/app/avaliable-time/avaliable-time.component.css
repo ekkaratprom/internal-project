@@ -84,9 +84,9 @@ a {
   font-size: 12px
 }
 .person-lists{
-  top: 13rem;
+  top: 15rem;
   overflow-y: scroll;
-  height: 72vh;
+  height: 67vh;
   position: relative;
   padding: 0px 2rem;
 }
