@@ -104,6 +104,7 @@ hr {
 
 @media screen and  ( max-width: 1400px){
   .assignment-lists{
+    margin-top: 0 !important;
     position: relative;
     align-content: flex-start;
     top:15rem;

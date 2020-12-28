@@ -97,10 +97,14 @@ a {
 
 
 @media screen and  ( max-width: 1400px){
+  .person-list {
+    background-color: #f7f7f7;
+    margin-top: 0 !important;
+  }
   .person-lists{
     top: 15rem;
     overflow-y: scroll;
-    height: 80%;
+    height: 70%;
     position: relative;
     padding: 0px 2rem;
   }
@@ -191,6 +195,10 @@ a {
 
 
 @media screen and  (min-width: 1400px) {
+  .person-list {
+    background-color: #f7f7f7;
+  }
+  
   .person-lists{
     top: 15rem;
     overflow-y: scroll;
@@ -275,9 +283,6 @@ a {
 
 
 
-.person-list {
-  background-color: #f7f7f7;
-}
 
 .dropdown-skill:hover{
   background: rgb(222, 241, 241);
