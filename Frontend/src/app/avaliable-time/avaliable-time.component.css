@@ -83,13 +83,7 @@ a {
   margin-right: 2px;
   font-size: 12px
 }
-.person-lists{
-  top: 15rem;
-  overflow-y: scroll;
-  height: 67vh;
-  position: relative;
-  padding: 0px 2rem;
-}
+
 .fixed-nav{
   width: 73vw;
   position: fixed;
@@ -100,7 +94,16 @@ a {
 
 
 
+
+
 @media screen and  ( max-width: 1400px){
+  .person-lists{
+    top: 15rem;
+    overflow-y: scroll;
+    height: 80%;
+    position: relative;
+    padding: 0px 2rem;
+  }
   .image-skills-size {
     width: 9%;
     margin-right: 4px;
@@ -188,6 +191,13 @@ a {
 
 
 @media screen and  (min-width: 1400px) {
+  .person-lists{
+    top: 15rem;
+    overflow-y: scroll;
+    height: 100%;
+    position: relative;
+    padding: 0px 2rem;
+  }
   .image-skills-size {
     width: 10%;
     margin-right: 8px;
