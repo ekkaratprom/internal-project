@@ -101,9 +101,46 @@ hr {
   justify-content: flex-start;
 }
 
+@media screen and  ( min-height: 600px){
+  .assignment-lists{
+    margin-top: 1rem !important;
+    position: relative;
+    align-content: flex-start;
+    top:15rem;
+    height:100%;
+    overflow-y: scroll;
+    padding: 0 2px 0 12px;
+  }
+}
+
+
+@media screen and  ( max-height: 600px){
+  .assignment-lists{
+    margin-top: 0 !important;
+    position: relative;
+    align-content: flex-start;
+    top:15rem;
+    height:22rem;
+    overflow-y: scroll;
+    padding: 0 2px 0 12px;
+  }
+}
+@media screen and  ( max-height: 550px){
+  .assignment-lists{
+    
+    position: relative;
+    align-content: flex-start;
+    top:15rem;
+    height: 17rem;
+    overflow-y: scroll;
+    padding: 0 2px 0 12px;
+  }
+}
+
+
 
 @media screen and  ( max-width: 1400px){
-  .assignment-lists{
+  /* .assignment-lists{
     margin-top: 0 !important;
     position: relative;
     align-content: flex-start;
@@ -111,7 +148,7 @@ hr {
     height: 22rem;
     overflow-y: scroll;
     padding: 0 2px 0 12px;
-  }
+  } */
   .fixed-navbar{
     position: fixed;
       padding: 3.5rem 12px 0px 12px;
@@ -131,14 +168,14 @@ hr {
 }
 }
 @media screen and  ( min-width: 1400px){
-  .assignment-lists{
+  /* .assignment-lists{
     position: relative;
     align-content: flex-start;
     top:15rem;
     height: 100%;
     overflow-y: scroll;
     padding: 0 2px 0 12px;
-  }
+  } */
   .fixed-navbar{
     position: fixed;
       padding: 3.5rem 12px 0px 12px;
