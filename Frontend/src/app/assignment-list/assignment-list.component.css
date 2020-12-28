@@ -82,6 +82,7 @@ hr {
 }
 .assignment-lists{
   position: relative;
+  align-content: flex-start;
   top:15rem;
   height: 65vh;
   overflow-y: scroll;
