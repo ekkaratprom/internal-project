@@ -104,7 +104,7 @@ a {
   .person-lists{
     top: 15rem;
     overflow-y: scroll;
-    height: 70%;
+    height: 22rem;
     position: relative;
     padding: 0px 2rem;
   }
