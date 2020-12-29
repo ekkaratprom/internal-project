@@ -107,7 +107,7 @@ hr {
     position: relative;
     align-content: flex-start;
     top:15rem;
-    height:100%;
+    height:65vh;
     overflow-y: scroll;
     padding: 0 2px 0 12px;
   }
