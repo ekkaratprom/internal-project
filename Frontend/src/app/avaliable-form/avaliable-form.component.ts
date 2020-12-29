@@ -5,7 +5,7 @@ import { Total, UpdateCards } from './../avaliable-time/shared/availiability-mod
 import { AssignmentService } from './../assignment-list/shared/assignment.service';
 import { Assignment, CardForm, CardList } from './../assignment-list/shared/assignment-model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 
@@ -19,7 +19,7 @@ export class AvaliableFormComponent implements OnInit {
 
   constructor(private ngbmodal: NgbModal, private assignmentService: AssignmentService,
     private router: Router, private availabilityService: AvailabilityService, private modalService: NgbModal,
-    private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
+    private calendar: NgbCalendar, public formatter: NgbDateParserFormatter, private cdr : ChangeDetectorRef) {
 
     this.markDisabled = (date: NgbDate) => calendar.getWeekday(date) >= 6;
 
@@ -178,6 +178,11 @@ export class AvaliableFormComponent implements OnInit {
     console.log('this.cardsDataEdited', this.cardsDataEdited)
     // console.log('this.cardsDataEdited id', this.cardsDataEdited[0].cardId)
     console.log('this.cardsDataEdited L', this.cardsDataEdited.length)
+  }
+
+  ngAfterViewChecked() {
+    //your code to update the model
+    this.cdr.detectChanges();
   }
 
   onSubmit(): void {
