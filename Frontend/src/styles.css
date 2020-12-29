@@ -54,19 +54,21 @@ html, body { height: 100%;}
 @media screen and  ( min-height: 550px){
   body {
     overflow: hidden; 
+    overflow-x: hidden;
     margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 @media screen and  ( max-height: 550px){
   body {
     overflow: scroll; 
+    overflow-x: hidden;
     margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
   }
   ::-webkit-scrollbar-button {
-  width: 8px;
+  width: 6px;
   height:5px;
   }
   ::-webkit-scrollbar-track {
