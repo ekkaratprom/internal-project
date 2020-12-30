@@ -19,7 +19,7 @@ export class AvaliableFormComponent implements OnInit {
 
   constructor(private ngbmodal: NgbModal, private assignmentService: AssignmentService,
     private router: Router, private availabilityService: AvailabilityService, private modalService: NgbModal,
-    private calendar: NgbCalendar, public formatter: NgbDateParserFormatter, private cdr : ChangeDetectorRef) {
+    private calendar: NgbCalendar, public formatter: NgbDateParserFormatter, private cdr: ChangeDetectorRef) {
 
     this.markDisabled = (date: NgbDate) => calendar.getWeekday(date) >= 6;
 
@@ -42,6 +42,7 @@ export class AvaliableFormComponent implements OnInit {
   cardsDataToEdit = [];
   cardsDataEdited = [];
   cardsDataSent = [];
+  dataBeforeEdited = [];
   status;
   pickerDisplayDay = true;
   dayPick: NgbDateStruct;
@@ -59,7 +60,8 @@ export class AvaliableFormComponent implements OnInit {
   markDisabled;
   isCardChange = false;
 
-
+  inputEstimate: number = 0;
+  inputActual: number = 0;
 
   //period date
   hoveredDate: NgbDate | null = null;
@@ -128,10 +130,12 @@ export class AvaliableFormComponent implements OnInit {
     this.cardsDataToEdit = this.modalValue[0].cards.card;
     this.setCardsDataBeforeEdit();
 
+    console.log('this.cardsDataToEdit', this.cardsDataToEdit);
+
     this.selectDate = this.modalValue[0].cards.cardDate;
     this.resultAvaliable = this.modalValue[0].cards;
 
-    // console.log('resultAvaliable', this.resultAvaliable.totalEstimateTime);
+    // console.log('resultAvaliable', this.resultAvaliable);
 
     this.fromDay = new Date(this.selectDate);
     // this.day = this.fromModel(date);
@@ -163,6 +167,21 @@ export class AvaliableFormComponent implements OnInit {
     console.log('data', data);
     this.cardsBeforeEdit = [];
     this.cardsDataEdited = [];
+    this.dataBeforeEdited = [];
+    data.forEach(element => {
+      // this.dataBeforeEdited = [];
+      const cardDetail = {
+        cardId: element.cardId,
+        assignmentName: element.assignmentName,
+        projectName: element.projectName,
+        actualTime: element.actualTime,
+        estimateTime: element.estimateTime,
+        cardName: element.cardName,
+      }
+      this.dataBeforeEdited.push(cardDetail);
+      console.log('dataBeforeEdited', this.dataBeforeEdited)
+
+    })
     data.forEach(element => {
       const cardDetail = {
         cardId: element.cardId,

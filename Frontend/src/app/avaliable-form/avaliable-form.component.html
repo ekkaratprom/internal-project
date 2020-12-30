@@ -241,7 +241,7 @@
 
     <div class="form-group mx-sm-3 mb-2 d-flex">
       <div *ngFor="let c of cardsData" class="card-list">
-        <div class="card list mt-3 mb-3" *ngFor="let item of c.card; index as i">
+        <div class="card list mt-3 mb-3" *ngFor="let item of dataBeforeEdited; index as i">
           <div class="row mt-3">
             <div class="bold col-6 ">Card name </div>
             <div class="card-body listt col-6">
@@ -287,10 +287,10 @@
           <form [formGroup]="editCard">
             <div class="row mb-4">
               <div class="row">
-                <span>{{item | json}}</span>
+                <span>{{ item | json}}</span>
                 <div class="txt estiamtetime mb-2">Estimate time</div>
                 <input type="number" class="form-control editInput" id="input_card_estimate_time_{{ i }}" max="8"
-                  maxlength="2" [(ngModel)]="item.estimateTime" formControlName="cardEstimateTime" (keyup)="
+                  maxlength="2" placeholder="{{ item.estimateTime }}" formControlName="cardEstimateTime" (keyup)="
                     cardEstimateValidate(
                       $event,
                       item.estimateTime,
@@ -302,7 +302,7 @@
               <div class="col">
                 <label class="row txt actualtime mb-2">Actual time</label>
                 <input type="number" class="row form-control ml" id="input_card_actual_time_{{ i }}" max="24"
-                  maxlength="2" [(ngModel)]="item.actualTime" formControlName="cardActualTime" (keyup)="
+                  maxlength="2" placeholder="{{ item.actualTime }}" formControlName="cardActualTime" (keyup)="
                     cardActualValidate($event, item.cardId);
                     updateActualKeyUp($event, item.cardId)
                   " />
