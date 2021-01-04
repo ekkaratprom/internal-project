@@ -241,7 +241,7 @@
 
     <div class="form-group mx-sm-3 mb-2 d-flex">
       <div *ngFor="let c of cardsData" class="card-list">
-        <div class="card list mt-3 mb-3" *ngFor="let item of dataBeforeEdited; index as i">
+        <div class="card list mt-3 mb-3" *ngFor="let item of dataBeforeEdited; index as i " >
           <div class="row mt-3">
             <div class="bold col-6 ">Card name </div>
             <div class="card-body listt col-6">
@@ -257,6 +257,69 @@
             <div class="card-body project-name listt col-6">
               {{ item.projectName }}
             </div>
+
+            <div>
+              <form [formGroup]="editCard">
+                <div class="row mb-4" >
+                  <div class="row">
+                    <label class="txt estiamtetime mb-2">Estimate time</label>
+                  <input type="number" class="form-control editInput" id="input_card_estimate_time_{{ i }}" max="8"
+                      maxlength="2" formControlName="cardEstimateTime" (keyup)="
+                        cardEstimateValidate(
+                          $event,
+                          item.estimateTime,
+                          item.cardId
+                        );
+                        updateEstimateKeyUp($event, item.cardId)
+                      " />
+                  </div>
+                  <div class="col">
+                    <label class="row txt actualtime mb-2">Actual time</label>
+                    <input type="number" class="row form-control ml" id="input_card_actual_time_{{ i }}" max="24"
+                      maxlength="2"formControlName="cardActualTime" (keyup)="
+                        cardActualValidate($event, item.cardId);
+                        updateActualKeyUp($event, item.cardId)
+                      " />
+                  </div>
+                  <span>{{ item | json}}</span>
+                  <span>{{ i}}</span>
+
+                  <!-- <button class="btn btn-primary bottom editbtn" [disabled]="editCard.status === 'INVALID'"
+                    (click)="updateFunction(item.cardId)">
+                    Update
+                    </button> -->
+
+                  <div *ngIf="
+                      editCard.get('cardActualTime').hasError('max') &&
+                      item.cardId == cardActualId
+                    " class="error">
+                    Actual time must be 0 to 24.
+                  </div>
+                  <div *ngIf="
+                      editCard.get('cardActualTime').hasError('min') &&
+                      item.cardId == cardActualId
+                    " class="error">
+                    Actual time must be 0 to 24.
+                  </div>
+                  <div *ngIf="
+                      editCard.get('cardEstimateTime').hasError('max') &&
+                      item.cardId == cardEstimateId
+                    " class="error">
+                    Estimate time must be 0 to 8.
+                  </div>
+                  <div *ngIf="
+                      editCard.get('cardEstimateTime').hasError('min') &&
+                      item.cardId == cardEstimateId
+                    " class="error">
+                    Estimate time must be 0 to 8.
+                  </div>
+                  <div *ngIf="cardEstimateStatus == true && item.cardId == cardId" class="error">
+                    Total estimate time must not over than 8 hrs per day.
+                  </div>
+                </div>
+              </form>
+            </div>
+
           </div>
           <span class="close" (click)="openclosemodal(content1)" title="Delete Card">&times;</span>
 
@@ -284,63 +347,7 @@
             </div>
           </ng-template>
 
-          <form [formGroup]="editCard">
-            <div class="row mb-4">
-              <div class="row">
-                <span>{{ item | json}}</span>
-                <div class="txt estiamtetime mb-2">Estimate time</div>
-                <input type="number" class="form-control editInput" id="input_card_estimate_time_{{ i }}" max="8"
-                  maxlength="2" placeholder="{{ item.estimateTime }}" formControlName="cardEstimateTime" (keyup)="
-                    cardEstimateValidate(
-                      $event,
-                      item.estimateTime,
-                      item.cardId
-                    );
-                    updateEstimateKeyUp($event, item.cardId)
-                  " />
-              </div>
-              <div class="col">
-                <label class="row txt actualtime mb-2">Actual time</label>
-                <input type="number" class="row form-control ml" id="input_card_actual_time_{{ i }}" max="24"
-                  maxlength="2" placeholder="{{ item.actualTime }}" formControlName="cardActualTime" (keyup)="
-                    cardActualValidate($event, item.cardId);
-                    updateActualKeyUp($event, item.cardId)
-                  " />
-              </div>
-              <!-- <button class="btn btn-primary bottom editbtn" [disabled]="editCard.status === 'INVALID'"
-                (click)="updateFunction(item.cardId)">
-                Update
-                </button> -->
 
-              <div *ngIf="
-                  editCard.get('cardActualTime').hasError('max') &&
-                  item.cardId == cardActualId
-                " class="error">
-                Actual time must be 0 to 24.
-              </div>
-              <div *ngIf="
-                  editCard.get('cardActualTime').hasError('min') &&
-                  item.cardId == cardActualId
-                " class="error">
-                Actual time must be 0 to 24.
-              </div>
-              <div *ngIf="
-                  editCard.get('cardEstimateTime').hasError('max') &&
-                  item.cardId == cardEstimateId
-                " class="error">
-                Estimate time must be 0 to 8.
-              </div>
-              <div *ngIf="
-                  editCard.get('cardEstimateTime').hasError('min') &&
-                  item.cardId == cardEstimateId
-                " class="error">
-                Estimate time must be 0 to 8.
-              </div>
-              <div *ngIf="cardEstimateStatus == true && item.cardId == cardId" class="error">
-                Total estimate time must not over than 8 hrs per day.
-              </div>
-            </div>
-          </form>
         </div>
 
         <div *ngIf="c.card.length > 0">

@@ -39,6 +39,7 @@ export class AvaliableFormComponent implements OnInit {
   rAssignmentList = [];
   cardsData = [];
   cardsBeforeEdit = [];
+  data = [];
   cardsDataToEdit = [];
   cardsDataEdited = [];
   cardsDataSent = [];
@@ -124,10 +125,12 @@ export class AvaliableFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllAssignment();
-    // console.log('**********', this.modalValue);
-    // console.log('**********', this.modalValue[0].cards);
+
     this.cardsData = [this.modalValue[0].cards];
+
+    //for Edit more than one card
     this.cardsDataToEdit = this.modalValue[0].cards.card;
+    this.setValue();
     this.setCardsDataBeforeEdit();
 
     console.log('this.cardsDataToEdit', this.cardsDataToEdit);
@@ -135,41 +138,39 @@ export class AvaliableFormComponent implements OnInit {
     this.selectDate = this.modalValue[0].cards.cardDate;
     this.resultAvaliable = this.modalValue[0].cards;
 
-    // console.log('resultAvaliable', this.resultAvaliable);
-
     this.fromDay = new Date(this.selectDate);
-    // this.day = this.fromModel(date);
 
-    // console.log('date ', this.fromDay);
+
+    // period date
     this.y = this.fromDay.getFullYear();
-    // console.log('year ', this.y);
     this.m = this.fromDay.getMonth() + 1;
-    // console.log('month ', this.m);
     this.d = this.fromDay.getDate();
-    // console.log('day', this.d);
-
-    console.log('selectDate', this.selectDate)
-
-
-    // console.log('this.fromModel(this.selectDate)', this.fromDay);
+    // console.log('selectDate', this.selectDate)
 
     this.fromDate = new NgbDate(this.y, this.m, this.d);
-    // console.log('this.fromDate ', this.fromDate);
     this.toDate = this.calendar.getNext(this.fromDate, 'd', 10);
     this.onDateUnselect();
 
 
   }
 
+  setValue() {
+    this.editCard.setValue({cardActualTime: 0 , cardEstimateTime: 0});
+  }
+
   setCardsDataBeforeEdit(): void {
-    let data = [];
-    data = this.cardsDataToEdit;
-    console.log('data', data);
+    this.setValue();
+    this.data = [];
+    this.data = this.cardsDataToEdit;
+    console.log('data', this.data);
+
     this.cardsBeforeEdit = [];
     this.cardsDataEdited = [];
     this.dataBeforeEdited = [];
-    data.forEach(element => {
+
+    this.data.forEach(element => {
       // this.dataBeforeEdited = [];
+      this.setValue();
       const cardDetail = {
         cardId: element.cardId,
         assignmentName: element.assignmentName,
@@ -178,11 +179,19 @@ export class AvaliableFormComponent implements OnInit {
         estimateTime: element.estimateTime,
         cardName: element.cardName,
       }
+      //set JSON card to show card details
       this.dataBeforeEdited.push(cardDetail);
       console.log('dataBeforeEdited', this.dataBeforeEdited)
 
+      //set form control actual time , estimate time
+      this.editCard.setValue({cardActualTime: element.actualTime , cardEstimateTime: element.estimateTime});
+
+
     })
-    data.forEach(element => {
+
+
+    // to sent edited card
+    this.data.forEach(element => {
       const cardDetail = {
         cardId: element.cardId,
         actualTime: element.actualTime,
@@ -361,6 +370,7 @@ export class AvaliableFormComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
