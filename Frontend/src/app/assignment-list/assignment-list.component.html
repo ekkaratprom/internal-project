@@ -127,7 +127,7 @@
           <hr />
 
           <div class="d-flex justify-content-between align-items-center"
-            *ngIf="compareMoreThanEndDate(r.endDate-1) == true || r.totalActualTime > r.estimateTime">
+            *ngIf="compareMoreThanEndDate(r.endDate) === true || r.totalActualTime > r.estimateTime">
             <!-- <div>progress:</div> -->
             <div>
               <p class="card-text card-text-padding light-bold">Progress</p>
@@ -141,7 +141,7 @@
 
 
           <div class="d-flex justify-content-between align-items-center"
-            *ngIf="compareMoreThanEndDate(r.endDate-1) == false && r.totalActualTime <= r.estimateTime">
+            *ngIf="compareMoreThanEndDate(r.endDate) === false && r.totalActualTime <= r.estimateTime">
             <!-- <div>progress:</div> -->
             <div>
               <p class="card-text card-text-padding light-bold">Progress</p>
@@ -152,7 +152,7 @@
               </mat-progress-bar>
             </div>
           </div>
-          <div *ngIf="(r.totalActualTime / r.estimateTime)<= 1 && compareMoreThanEndDate(r.endDate-1) == false">
+          <div *ngIf="(r.totalActualTime / r.estimateTime)<= 1 && compareMoreThanEndDate(r.endDate) == false">
             <span class="card-text card-text-padding mt-2 mb-2 light-bold">End date:
             </span>
             <span>
@@ -160,7 +160,7 @@
             </span>
           </div>
 
-          <div *ngIf="(r.totalActualTime / r.estimateTime)> 1 || compareMoreThanEndDate(r.endDate-1) == true">
+          <div *ngIf="(r.totalActualTime / r.estimateTime)> 1 || compareMoreThanEndDate(r.endDate) == true">
             <span class="card-text card-text-padding mt-2 mb-2 light-bold">End date:
             </span>
             <span class="card-text card-text-padding mt-2 mb-2 err"> {{ r.endDate | date: "dd/MM/yyyy" }}
