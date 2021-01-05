@@ -77,7 +77,7 @@
                 " />
 
                 <input type="number" class="col-4 form-control" id="input_estimate_time" placeholder="0"
-                  formControlName="estimateTime" (keyup)="estimateValidate($event)" [class.valid]="
+                  formControlName="estimateTime" (input)="estimateValidate($event.target.value)" [class.valid]="
                   addCard.get('estimateTime').valid &&
                   (addCard.get('estimateTime').dirty ||
                     addCard.get('estimateTime').touched)
@@ -222,7 +222,7 @@
                 </form>
               </div>
 
-              <button [disabled]="addCard.status === 'INVALID'" type="submit" class="btn btn-primary bottom"
+              <button [disabled]="addCard.status === 'INVALID' || estimateStatus === true" type="submit" class="btn btn-primary bottom"
                 (onClick)="onSubmit()">
                 Submit
               </button>
@@ -297,21 +297,21 @@
                 <div class="row">
                   <label class="txt estiamtetime mb-2">Estimate time</label>
                 <input type="number" class="form-control editInput" id="input_card_estimate_time_{{ i }}" max="8"
-                    maxlength="2" formControlName="{{item.keyEstimate}}" (keyup)="
+                    maxlength="2" formControlName="{{item.keyEstimate}}" (input)="
                       cardEstimateValidate(
                         $event,
                         item.estimateTime,
                         item.cardId
                       );
-                      updateEstimateKeyUp($event, item.cardId)
+                      updateEstimateKeyUp($event.target.value, item.cardId)
                     " />
                 </div>
                 <div class="col">
                   <label class="row txt actualtime mb-2">Actual time</label>
                   <input type="number" class="row form-control ml" id="input_card_actual_time_{{ i }}" max="24"
-                    maxlength="2" formControlName="{{item.keyActual}}" (keyup)="
+                    maxlength="2" formControlName="{{item.keyActual}}" (input)="
                       cardActualValidate($event, item.cardId);
-                      updateActualKeyUp($event, item.cardId)
+                      updateActualKeyUp($event.target.value, item.cardId)
                     " />
                 </div>
                 <!-- <span>{{ item | json}}</span>

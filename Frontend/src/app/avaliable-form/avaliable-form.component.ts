@@ -432,7 +432,7 @@ export class AvaliableFormComponent implements OnInit {
     console.log(event);
     this.isCardChange = status;
     let objIndex = this.cardsDataEdited.findIndex((obj => obj.cardId == id));
-    this.cardsDataEdited[objIndex].estimateTime = parseFloat(event.key);
+    this.cardsDataEdited[objIndex].estimateTime = parseFloat(event);
     console.log('cardsDataEdited after', this.cardsDataEdited)
 
   }
@@ -440,7 +440,7 @@ export class AvaliableFormComponent implements OnInit {
   updateActualKeyUp(event, id, status) {
     this.isCardChange = status;
     let objIndex = this.cardsDataEdited.findIndex((obj => obj.cardId == id));
-    this.cardsDataEdited[objIndex].actualTime = parseFloat(event.key);
+    this.cardsDataEdited[objIndex].actualTime = parseFloat(event);
     console.log('cardsDataEdited after', this.cardsDataEdited)
 
   }
@@ -556,8 +556,8 @@ export class AvaliableFormComponent implements OnInit {
 
     const limit = (8 - this.resultAvaliable.totalEstimateTime);
     console.log('limit', limit);
-    console.log('event', event.key);
-    if (event.target.value > limit) {
+    console.log('event', event);
+    if (event > limit) {
       console.log('true');
       return this.estimateStatus = true;
     } else { console.log('false'); return this.estimateStatus = false; }
