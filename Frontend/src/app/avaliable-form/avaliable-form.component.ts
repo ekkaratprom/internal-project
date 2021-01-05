@@ -1,3 +1,4 @@
+import { CardDetail } from './../assignment-list/assignment-list.component';
 import { map } from 'rxjs/operators';
 import { NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct, NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AvailabilityService } from './../avaliable-time/shared/availability.service';
@@ -79,11 +80,14 @@ export class AvaliableFormComponent implements OnInit {
 
   daySent;
 
+  //dynamic form
+  editCard:FormGroup;
+  formTemplate = [this.dataBeforeEdited];
+
+
   public formControl: FormControl = new FormControl(null);
   public formControlPeriodStart: FormControl = new FormControl(null);
   public formControlPeriodEnd: FormControl = new FormControl(null);
-
-
 
   public addCard = new FormGroup({
     assignmentId: new FormControl(null, Validators.compose([
@@ -101,7 +105,7 @@ export class AvaliableFormComponent implements OnInit {
     ])),
   });
 
-  public editCard = new FormGroup({
+  public editCard1 = new FormGroup({
     cardActualTime: new FormControl(null, Validators.compose([
       Validators.pattern('^[0-9].*$'),
       Validators.max(24),
@@ -130,8 +134,28 @@ export class AvaliableFormComponent implements OnInit {
 
     //for Edit more than one card
     this.cardsDataToEdit = this.modalValue[0].cards.card;
-    this.setValue();
+
     this.setCardsDataBeforeEdit();
+
+    let group={}
+    this.dataBeforeEdited.forEach(element=>{
+
+      group[element.keyEstimate]=new FormControl(element.estimateTime, Validators.compose([
+        Validators.pattern('^[0-9].*$'),
+        Validators.max(8),
+        Validators.min(0)
+      ]));
+      group[element.keyActual]=new FormControl(element.actualTime, Validators.compose([
+        Validators.pattern('^[0-9].*$'),
+        Validators.max(24),
+        Validators.min(0)
+      ]));
+    })
+    this.editCard = new FormGroup(group);
+    console.log(this.editCard);
+    // console.log('editcard1',this.editCard1);
+
+
 
     console.log('this.cardsDataToEdit', this.cardsDataToEdit);
 
@@ -155,11 +179,11 @@ export class AvaliableFormComponent implements OnInit {
   }
 
   setValue() {
-    this.editCard.setValue({cardActualTime: 0 , cardEstimateTime: 0});
+    this.editCard.setValue({ cardActualTime: 0, cardEstimateTime: 0 });
   }
 
   setCardsDataBeforeEdit(): void {
-    this.setValue();
+    // this.setValue();
     this.data = [];
     this.data = this.cardsDataToEdit;
     console.log('data', this.data);
@@ -170,22 +194,27 @@ export class AvaliableFormComponent implements OnInit {
 
     this.data.forEach(element => {
       // this.dataBeforeEdited = [];
-      this.setValue();
+
+      // this.setValue();
       const cardDetail = {
+        index: this.dataBeforeEdited.length,
+        keyEstimate: 'cardEstimateTime'+element.cardId,
+        keyActual: 'cardActualTime'+element.cardId,
         cardId: element.cardId,
         assignmentName: element.assignmentName,
         projectName: element.projectName,
         actualTime: element.actualTime,
         estimateTime: element.estimateTime,
         cardName: element.cardName,
+
       }
       //set JSON card to show card details
+
       this.dataBeforeEdited.push(cardDetail);
       console.log('dataBeforeEdited', this.dataBeforeEdited)
 
       //set form control actual time , estimate time
-      this.editCard.setValue({cardActualTime: element.actualTime , cardEstimateTime: element.estimateTime});
-
+      // this.editCard.setValue({ cardActualTime: element.actualTime, cardEstimateTime: element.estimateTime });
 
     })
 
