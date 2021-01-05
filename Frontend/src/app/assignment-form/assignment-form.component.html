@@ -252,7 +252,7 @@
                       (click)="onSubmit()">Submit</button>
                   </div> -->
         <button
-          [disabled]="addAssignment.status === 'INVALID'"
+          [disabled]="addAssignment.status === 'INVALID' || formControl.status === 'INVALID'"
           class="btn btn-primary bottonx mb-3"
           type="submit"
           (onClick)="onSubmit()"
