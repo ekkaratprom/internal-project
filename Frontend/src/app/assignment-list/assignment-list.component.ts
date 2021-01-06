@@ -240,9 +240,27 @@ export class AssignmentListComponent implements OnInit, DoCheck {
   }
 
   compareMoreThanEndDate(endDate: any): boolean {
-    const date1 = new Date(this.today);
+    const date1 = new Date();
     const date2 = new Date(endDate);
-    if (date2.getTime() <= date1.getTime()) {
+    const date3 = date2.setDate(date2.getDate() + 1);
+    const date4 = new Date(date3);
+
+    if (date4.getTime() < date1.getTime()) {
+
+      return true;
+
+    } else { return false; }
+  }
+
+  isTODAY(endDate: any): boolean {
+    const date1 = new Date();
+    const date2 = new Date(endDate);
+    date1.setHours(0,0,0,0)
+    date2.setHours(0,0,0,0)
+    console.log('date1' ,date1)
+    console.log('date2' ,date2)
+
+    if (date1.getTime() === date2.getTime()) {
       return true;
     } else { return false; }
   }

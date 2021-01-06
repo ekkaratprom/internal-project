@@ -152,7 +152,7 @@
               </mat-progress-bar>
             </div>
           </div>
-          <div *ngIf="(r.totalActualTime / r.estimateTime)<= 1 && compareMoreThanEndDate(r.endDate) == false">
+          <div *ngIf="(r.totalActualTime / r.estimateTime)<= 1 && compareMoreThanEndDate(r.endDate) == false  && isTODAY(r.endDate) == false">
             <span class="card-text card-text-padding mt-2 mb-2 light-bold">End date:
             </span>
             <span>
@@ -164,7 +164,16 @@
             <span class="card-text card-text-padding mt-2 mb-2 light-bold">End date:
             </span>
             <span class="card-text card-text-padding mt-2 mb-2 err"> {{ r.endDate | date: "dd/MM/yyyy" }}
-              (Overdue)
+              (Exceeding estimate)
+            </span>
+
+          </div>
+
+          <div *ngIf="(r.totalActualTime / r.estimateTime) <= 1 &&  compareMoreThanEndDate(r.endDate) == false && isTODAY(r.endDate) == true" >
+            <span class="card-text card-text-padding mt-2 mb-2 light-bold">End date:
+            </span>
+            <span class="card-text card-text-padding mt-2 mb-2"> {{ r.endDate | date: "dd/MM/yyyy" }}
+              (Last day!)
             </span>
 
           </div>
